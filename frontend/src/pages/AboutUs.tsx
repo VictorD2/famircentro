@@ -15,13 +15,13 @@ class AboutUs extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {/* NAVBAR */}
+                
                 <Badge name="About Us" />
 
                 <div className="Main__container">
                     <div className="container text-center mt-5">
                         <div className="row">
-                            <span className="fw-light fs-6 text-secondary">THE BEST</span><br /><div />
+                            <span className="fw-light fs-6 text-secondary">THE BEST</span><br />
                             <h3 className="fw-bold fs-1">We are the Academy</h3>
                         </div>
                         <div className="row text__container lh-lg text-start">
