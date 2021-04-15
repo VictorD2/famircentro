@@ -1,17 +1,32 @@
-import React from 'react';
+import React from "react";
+
+import Carrusel from "../components/Carrusel";
 
 const Home = () => {
-    return (
-        <div className="h-100 bg-dark text-white">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo molestiae quis eveniet laudantium, sunt reiciendis nisi quidem neque dolorum fugiat a veritatis voluptates fugit, suscipit accusamus rem eos necessitatibus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo molestiae quis eveniet laudantium, sunt reiciendis nisi quidem neque dolorum fugiat a veritatis voluptates fugit, suscipit accusamus rem eos necessitatibus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo molestiae quis eveniet laudantium, sunt reiciendis nisi quidem neque dolorum fugiat a veritatis voluptates fugit, suscipit accusamus rem eos necessitatibus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo molestiae quis eveniet laudantium, sunt reiciendis nisi quidem neque dolorum fugiat a veritatis voluptates fugit, suscipit accusamus rem eos necessitatibus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo molestiae quis eveniet laudantium, sunt reiciendis nisi quidem neque dolorum fugiat a veritatis voluptates fugit, suscipit accusamus rem eos necessitatibus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo molestiae quis eveniet laudantium, sunt reiciendis nisi quidem neque dolorum fugiat a veritatis voluptates fugit, suscipit accusamus rem eos necessitatibus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo molestiae quis eveniet laudantium, sunt reiciendis nisi quidem neque dolorum fugiat a veritatis voluptates fugit, suscipit accusamus rem eos necessitatibus.
-        </div>
-    )
-}
+  return (
+    <React.Fragment>
+      <section className="w-100">
+        <Carrusel />
+      </section>
+      <div className="bg-dark">
+        {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit animi
+        possimus necessitatibus incidunt praesentium alias numquam eos deserunt
+        omnis cumque fugiat et, quaerat sed! Sit doloremque vitae autem omnis
+        cumque fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        fugiat et, quaerat sed! Sit doloremque vitae autem omnis cumque fugiat
+        et, quaerat sed! Sit doloremque vitae autem consequuntur unde!
+        consequuntur unde! consequuntur unde! */}
+      </div>
+    </React.Fragment>
+  );
+};
 
 export default Home;
