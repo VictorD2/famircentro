@@ -6,13 +6,13 @@
   --azul-oscuro: #0a3269;
   --azul-claro: #0049af;
 }
+
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -169,11 +169,11 @@ code {
     background-color: #fff;
     border: #000 solid 1px;
   }
-  .navigation-left .navigation-list{
+  .navigation-left .navigation-list {
     padding: 0;
     list-style: none;
   }
-  .navigation-left .navigation-list .item-list{
+  .navigation-left .navigation-list .item-list {
     padding: 20px 10px 20px 20px;
   }
 
