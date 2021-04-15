@@ -14,12 +14,12 @@ const Footer = () => {
     <footer className="footer p-4 p-md-5 p-lg-5 row">
       {/* Primera Fila */}
       <div className="col-12 col-md-6 col-lg-3 my-4 my-md-2 my-lg-3 footer-section">
-        <div className="img-logo mx-auto">
+        <div className="img-logo mx-auto mb-5">
           <Link to="#">
-            <img className="img-fluid" src={logo} alt="Logo Famir Centro" />
+            <img className="img-fluid sombra-blanca" src={logo} alt="Logo Famir Centro" />
           </Link>
         </div>
-        <p className="footer-text text-white-50 mt-4 mt-md-4 mt-lg-3">
+        <p className="footer-text text-white-50 mt-5 mt-md-4 mt-lg-3 lh-lg">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. A, Lorem
           ipsum dolor sit amet consectetur adipisicing elit. A, Lorem ipsum
           dolor sit amet consectetur adipisicing elit. A, recusandae.
