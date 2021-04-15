@@ -7,6 +7,7 @@ import { Switch, BrowserRouter, Route } from "react-router-dom";
 //Pages
 import Home from "./pages/Home";
 import NavBar from "./pages/NavBar";
+import Footer from "./pages/Footer";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
