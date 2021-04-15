@@ -183,6 +183,52 @@ code {
     text-transform: uppercase;
   }
 }
+
+/* Footer */
+
+.footer {
+  background-color: var(--azul-oscuro);
+  background: -webkit-linear-gradient(
+    to left,
+    var(--azul-claro),
+    var(--azul-claro)
+  );
+  background: linear-gradient(to left, var(--azul-claro), var(--azul-oscuro));
+  display: flex;
+  margin: 0;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.footer .img-logo {
+  width: 100px;
+}
+.footer-social-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.footer-social-list a,
+.footer-contact svg {
+  color: var(--verde-oscuro);
+}
+.footer-social-list a:hover,
+.footer-contact svg:hover {
+  color: var(--verde-claro);
+}
+.footer-links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footer-links-list .footer-links-list-item a {
+  text-decoration: none;
+  color: #fff;
+}
+.footer-subtitle {
+  margin-bottom: 40px;
+}
+
 /*Inicio de estilos de Sobre Nosotros y Contactanos*/
 .Badge__container {
   width: 100%;
@@ -226,7 +272,7 @@ code {
   margin: 0 auto;
 }
 
-.btn{
+.btn {
   padding: 15px 45px;
   text-align: center;
   text-transform: uppercase;
@@ -235,7 +281,12 @@ code {
   color: white;
   box-shadow: 0 0 20px #eee;
   border-radius: 10px;
-  background-image: linear-gradient(to right, var(--verde-oscuro) 0%, var(--amarillo-claro) 51%, var(--verde-oscuro) 100%);
+  background-image: linear-gradient(
+    to right,
+    var(--verde-oscuro) 0%,
+    var(--amarillo-claro) 51%,
+    var(--verde-oscuro) 100%
+  );
   outline: none;
   font-weight: bold;
 }
