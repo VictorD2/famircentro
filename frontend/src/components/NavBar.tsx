@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../images/logoFamir.jpg";
+import logo from "../images/logoFamir.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 const NavBar = () => {
