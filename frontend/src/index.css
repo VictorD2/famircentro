@@ -183,3 +183,79 @@ code {
     text-transform: uppercase;
   }
 }
+/*Inicio de estilos de Sobre Nosotros y Contactanos*/
+.Badge__container {
+  width: 100%;
+  height: 12.5rem;
+  background: url("./images/breadcumb.jpg"), #1b1b25;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 9rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.Box {
+  width: 17.5rem;
+  height: 6.85rem;
+  color: #ffffff;
+  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+  position: absolute;
+  top: 21.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text__container {
+  font-size: 14px;
+  color: #606060;
+  margin-top: 4.5rem;
+}
+
+.Main__container {
+  margin-left: 11.5rem;
+  margin-right: 11.5rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.card__teacher {
+  width: 17.6rem;
+  margin: 0 auto;
+}
+
+.btn{
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, var(--verde-oscuro) 0%, var(--amarillo-claro) 51%, var(--verde-oscuro) 100%);
+  outline: none;
+  font-weight: bold;
+}
+.btn:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 767px) {
+  .Box {
+    width: 31.25rem;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .Main__container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/*Fin de estilos de Sobre Nosotros y Contactanos*/

@@ -1,26 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import { Switch, BrowserRouter, Route } from "react-router-dom";
+
+//Components
+import App from './components/App';
 
 //Pages
-import Home from "./pages/Home";
-import NavBar from "./pages/NavBar";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-      </Switch>
-    </BrowserRouter>
-  </React.StrictMode>,
+ReactDOM.render(<App />,
   document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
