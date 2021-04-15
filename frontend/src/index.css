@@ -272,7 +272,7 @@ code {
   margin: 0 auto;
 }
 
-.btn {
+.btn__more {
   padding: 15px 45px;
   text-align: center;
   text-transform: uppercase;
@@ -290,7 +290,7 @@ code {
   outline: none;
   font-weight: bold;
 }
-.btn:hover {
+.btn__more:hover {
   background-position: right center;
   color: #fff;
   text-decoration: none;
