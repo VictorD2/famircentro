@@ -7,7 +7,7 @@ interface Props {
 const CarruselItem = (props: Props) => {
   return (
     <div className="carousel-item"
-     >
+    >
       <img src={props.img} className="d-block w-100" alt="..." />
       <div className="carrousel-text row h-100 align-items-center">
         <div className="col-12">

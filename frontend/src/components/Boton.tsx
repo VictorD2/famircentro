@@ -1,9 +1,11 @@
 import React from 'react';
 
-function Boton() {
+type nameButton = {name: string}
+
+const Boton: React.FC<nameButton> = props => {
     return(
         <a href="/" className="btn btn__more mt-5" style={{marginBottom: "5rem"}}>
-            All Teachers
+            {props.name}
         </a>
     );
 }

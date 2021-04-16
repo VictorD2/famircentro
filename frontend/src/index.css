@@ -128,7 +128,7 @@ code {
   text-transform: uppercase;
 }
 .navigation .left-side .lista-enlace .lista-item .item-link:hover {
-  color: var(--azul-oscuro);
+  color: var(--azul-claro);
 }
 /* Navigation Responsive */
 .navigation-responsive {
@@ -297,7 +297,7 @@ code {
 }
 
 .btn__more {
-  padding: 15px 45px;
+  padding: 10px 20px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
@@ -320,9 +320,72 @@ code {
   text-decoration: none;
 }
 
+.map__contact {
+  height: 15rem;
+}
+
+.content__icons {
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cts__icons {
+  color: var(--verde-oscuro);
+  margin-right: 1.5rem;
+}
+
+.cts__icons-unique {
+  color: var(--verde-oscuro);
+  margin-right: 1rem;
+}
+
+.cts__icons:hover {
+  color: var(--azul-claro);
+}
+
+.cts__parrafo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cts__content {
+  padding: 3rem 1rem;
+  background: #EEF3F6;
+}
+
+.cts__form {
+  padding: 2.7rem 1rem 0 1rem;
+  height: 600px;
+  background: #ffffff;
+  border: 4px double var(--amarillo-oscuro);
+}
+
+.form-control {
+  background: #EEF3F6;
+  padding: 0.8rem;
+}
+
+.form-control:focus {
+  background: #EEF3F6;
+}
+
 @media only screen and (min-width: 767px) {
   .Box {
     width: 31.25rem;
+  }
+  .map__contact {
+    height: 28.125rem;
+  }
+  .cts__content {
+    padding: 6.5rem 2rem;
+  }
+  .cts__icons {
+    margin-right: 3rem;
+  }
+  .btn__more {
+    padding: 15px 45px;
   }
 }
 
