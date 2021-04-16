@@ -8,7 +8,7 @@ import {
   faInstagram,
   faWhatsapp
 } from "@fortawesome/free-brands-svg-icons";
-import {faPhone,faClipboardCheck,faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
+import {faPhoneAlt,faEnvelopeOpenText,faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
   return (
     <footer className="footer p-4 p-md-5 p-lg-5 row">
@@ -115,7 +115,7 @@ const Footer = () => {
         </div>
         <div className="footer-contact">
           <p className="text-white-50 d-flex justify-content-start align-items-center">
-            <FontAwesomeIcon className="mx-2 fs-5" icon={faPhone} />
+            <FontAwesomeIcon className="mx-2 fs-5" icon={faPhoneAlt} />
             Main: 203-808-8613
             <br />
             Office: 203-808-8648
@@ -123,7 +123,7 @@ const Footer = () => {
         </div>
         <div className="footer-contact">
           <p className="text-white-50 d-flex justify-content-start align-items-center">
-            <FontAwesomeIcon className="mx-2 fs-5" icon={faClipboardCheck} />
+            <FontAwesomeIcon className="mx-2 fs-5" icon={faEnvelopeOpenText} />
             office@yourbusiness.com
           </p>
         </div>

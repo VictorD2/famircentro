@@ -15,14 +15,13 @@ class AboutUs extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {/* NAVBAR */}
                 <Badge name="About Us" />
 
                 <div className="Main__container">
                     <div className="container text-center mt-5">
                         <div className="row">
-                            <span className="fw-light fs-6 text-secondary">THE BEST</span><br /><div />
-                            <h3 className="fw-bold fs-1">We are the Academy</h3>
+                            <span className="fw-light fs-6 text-secondary">THE BEST</span><br />
+                            <h3 className="fw-bold fs-1 mt-3">We are the Academy</h3>
                         </div>
                         <div className="row text__container lh-lg text-start">
                             <div className="col-md-6">
@@ -38,32 +37,33 @@ class AboutUs extends React.Component {
                         </div>
                         <Slider />
                         <div className="row mt-5">
-                            <span className="fw-light fs-6 text-secondary">THE BEST</span><br /><div />
-                            <h3 className="fw-bold fs-1">Meet the Teachers</h3>
+                            <span className="fw-light fs-6 text-secondary">THE BEST</span>
+                            <br />
+                            <h3 className="fw-bold fs-1 mt-3">Meet the Teachers</h3>
                         </div>
-                        <div className="row" style={{marginTop: "4.5rem"}}>
-                            <CardTeacher 
-                            img={tea1}
-                            name="Maria teresa"
-                            job="Ingeniera"
+                        <div className="row" style={{ marginTop: "4.5rem" }}>
+                            <CardTeacher
+                                img={tea1}
+                                name="Maria teresa"
+                                job="Ingeniera"
                             />
-                            <CardTeacher 
-                            img={tea2}
-                            name="Simon Duval"
-                            job="Digital Proffesor"
+                            <CardTeacher
+                                img={tea2}
+                                name="Simon Duval"
+                                job="Digital Proffesor"
                             />
-                            <CardTeacher 
-                            img={tea3}
-                            name="James Hogan"
-                            job="HTML Proffesor"
+                            <CardTeacher
+                                img={tea3}
+                                name="James Hogan"
+                                job="HTML Proffesor"
                             />
-                            <CardTeacher 
-                            img={tea4}
-                            name="Claudia Williams"
-                            job="Marketing Proffesor"
+                            <CardTeacher
+                                img={tea4}
+                                name="Claudia Williams"
+                                job="Marketing Proffesor"
                             />
                         </div>
-                        <Boton />
+                        <Boton name="All Teachers"/>
                     </div>
                 </div>
             </React.Fragment>
