@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Badge from '../components/Badge';
-import Boton from '../components/Boton';
 import CardTeacher from '../components/CardTeacher';
 import Slider from '../components/Slider';
 
@@ -18,7 +17,7 @@ class AboutUs extends React.Component {
                 <Badge name="About Us" />
 
                 <div className="Main__container">
-                    <div className="container text-center mt-5">
+                    <div className="container text-center mt-5" style={{marginBottom: "4.5rem"}}>
                         <div className="row">
                             <span className="fw-light fs-6 text-secondary">THE BEST</span><br />
                             <h3 className="fw-bold fs-1 mt-3">We are the Academy</h3>
@@ -63,7 +62,6 @@ class AboutUs extends React.Component {
                                 job="Marketing Proffesor"
                             />
                         </div>
-                        <Boton name="All Teachers"/>
                     </div>
                 </div>
             </React.Fragment>

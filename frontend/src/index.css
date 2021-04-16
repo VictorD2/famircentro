@@ -297,7 +297,7 @@ code {
   color: #ffffff;
   background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
   position: absolute;
-  top: 21.5rem;
+  top: 19.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
