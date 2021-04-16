@@ -2,10 +2,11 @@ import React from "react";
 
 import Carrusel from "../components/Carrusel";
 import ListaCursos from "../components/ListaCursos";
+import ListaOpiniones from "../components/ListaOpiniones";
+import ListaTopCursos from "../components/ListaTopCursos";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
-
 
 const Home = () => {
   return (
@@ -29,8 +30,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-    <ListaCursos/>
-
+      <ListaCursos />
+      <ListaOpiniones />
+      <ListaTopCursos />
     </React.Fragment>
   );
 };

@@ -416,6 +416,7 @@ code {
 }
 .carrousel-item {
   background-position: center;
+  background-size: cover;
 }
 .carrousel-title {
   font-size: 1.5rem;
@@ -426,7 +427,7 @@ code {
   font-size: 3.75rem;
   width: 50%;
 }
-
+/* Caracteristicas */
 .caracteristicas {
   position: absolute;
   top: 44rem;
@@ -461,7 +462,11 @@ code {
 .caracteristicas-item:last-child {
   border-left: #fff solid 2px;
 }
+
+/* Cursos */
+
 .icon-curso-container {
+  font-size: 40px;
   padding: 20px;
   margin-right: 20px;
   border-radius: 50%;
@@ -483,22 +488,164 @@ code {
   margin-top: 40px;
   margin-bottom: 40px;
 }
-.curso-title{
+.curso-title {
   font-size: 24px;
-  color:#242424;
+  width: 100%;
+  color: #242424;
   font-weight: 700;
-  transition: all .5s;
+  transition: all 0.5s;
 }
-.curso-title:hover{
-  color:var(--verde-oscuro);
-  transition: all .5s;
+.curso-title:hover {
+  color: var(--verde-oscuro);
+  transition: all 0.5s;
 }
-.curso-descripcion{
-  color:#606060;
+.curso-descripcion {
+  color: #606060;
   font-size: 14px;
   font-weight: 500;
   line-height: 2;
 }
+
+/* Opiniones */
+.opinions {
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+  z-index: 2;
+}
+.opinions::after {
+  background-color: rgba(0, 0, 0, 0.88);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+}
+
+.opinions-heading {
+  margin-bottom: 80px;
+  color: #fff;
+  text-align: center;
+  justify-self: center;
+}
+
+.opinions-heading h3 {
+  font-size: 34px;
+  font-weight: 600;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.opinions-heading span {
+  display: block;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.opinion-item {
+  color: #fff;
+  margin-bottom: 10rem;
+  transition: all 0.5s;
+}
+
+.opinion-item:hover .avatar {
+  transition: all 0.5s;
+  border: var(--verde-claro) solid 2px;
+}
+.opinion-item:hover h4 {
+  transition: all 0.5s;
+  color: var(--verde-claro);
+}
+.opinion-item h4 {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.opinion-item p {
+  font-size: 14;
+  line-height: 2;
+  font-weight: 500;
+}
+.opinion-item h6 {
+  font-size: 15px;
+  font-weight: 500;
+}
+.opinion-item h6 span {
+  color: var(--verde-oscuro);
+  font-size: 15px;
+  font-weight: 500;
+}
+.avatar {
+  border-radius: 50%;
+  height: 0%;
+  width: 4rem;
+  margin-right: 50px;
+}
+/* Fin opiniones */
+/* Top Cursos */
+.top-cursos{
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+}
+.top-cursos-heading{
+  color: #000;
+  margin-bottom: 80px;
+  text-align: center;
+  justify-self: center;
+}
+.top-cursos-heading h3 {
+  font-size: 34px;
+  font-weight: 600;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.top-cursos-heading span {
+  display: block;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.top-cursos-item{
+  margin-bottom: 30px;
+  background-color: #eef3f6;
+}
+.top-cursos-item .info{
+  width: 54%;
+  padding: 30px;
+}
+.top-cursos-item .info h5{
+  font-size: 18px;
+  font-weight: 500;
+  color:#242424;
+}
+.top-cursos-item .info .autor{
+  font-size: 12px;
+  color:var(--verde-claro);
+}
+.top-cursos-item .info .curso-description{
+  margin-top: 30px;
+  font-size: 14px;
+  line-height: 2;
+  font-weight: 500;
+  color:#606060;
+}
+.top-cursos-item .img{
+  width: 46%;
+  height: 360px;
+  background-position: center;
+  background-size: cover;
+}
+/* Fin Top Cursos */
 @media only screen and (max-width: 1024px) {
   .caracteristicas-text {
     margin: 0 10px;
@@ -594,5 +741,20 @@ code {
     border-left: none;
     border-top: #fff solid 2px;
   }
+  .curso-title{
+    font-size: 16px;
+  }
+  .top-cursos-item{
+    flex-direction: column;
+    width: 100%;
+  }
+  .top-cursos-item .info{
+    width: 100%;
+  }
+  .top-cursos-item .img{
+    width: 100%;
+    height: 250px;
+  }
 }
+
 /* Fin de Estilos del Home */

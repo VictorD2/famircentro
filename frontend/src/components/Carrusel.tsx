@@ -6,6 +6,7 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import CarruselItem from "../components/CarruselItem";
 
 const Carrusel = () => {
+  
   // Para esconder y mostrar las flechas
   const desaparecerFlechas = (e: React.MouseEvent<HTMLDivElement>) => {
     document.querySelectorAll(".icon__carrusel")?.forEach((elemento) => {
@@ -28,7 +29,7 @@ const Carrusel = () => {
           {/* Items */}
           <div
             className="carousel-item carrousel-item active"
-            style={{ backgroundImage: `url(${fondo1})`,height:600 }}
+            style={{ backgroundImage: `url(${fondo1})`, height: 600 }}
           >
             <div className="carrousel-text row h-100 align-items-center">
               <div className="col-12">
