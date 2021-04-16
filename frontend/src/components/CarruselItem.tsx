@@ -6,9 +6,10 @@ interface Props {
 }
 const CarruselItem = (props: Props) => {
   return (
-    <div className="carousel-item"
+    <div
+      className="carousel-item carrousel-item"
+      style={{ backgroundImage: `url(${props.img})`,height:600}}
     >
-      <img src={props.img} className="d-block w-100" alt="..." />
       <div className="carrousel-text row h-100 align-items-center">
         <div className="col-12">
           <h5 className="carrousel-title">{props.title}</h5>

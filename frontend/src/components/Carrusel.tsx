@@ -3,11 +3,9 @@ import fondo1 from "../images/bg-1.jpg";
 import fondo2 from "../images/bg-2.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-
 import CarruselItem from "../components/CarruselItem";
 
 const Carrusel = () => {
-
   // Para esconder y mostrar las flechas
   const desaparecerFlechas = (e: React.MouseEvent<HTMLDivElement>) => {
     document.querySelectorAll(".icon__carrusel")?.forEach((elemento) => {
@@ -27,8 +25,11 @@ const Carrusel = () => {
         data-bs-ride="carousel"
       >
         <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src={fondo1} className="d-block w-100" alt="..." />
+          {/* Items */}
+          <div
+            className="carousel-item carrousel-item active"
+            style={{ backgroundImage: `url(${fondo1})`,height:600 }}
+          >
             <div className="carrousel-text row h-100 align-items-center">
               <div className="col-12">
                 <h5 className="carrousel-title">All the courses you need</h5>
@@ -36,6 +37,7 @@ const Carrusel = () => {
               </div>
             </div>
           </div>
+
           <CarruselItem
             img={fondo2}
             title={"All the courses you need"}
@@ -47,6 +49,8 @@ const Carrusel = () => {
             subtitle={`Welcome to our university`}
           />
         </div>
+
+        {/* Botones */}
         <button
           className="btn__carrusel-prev"
           type="button"

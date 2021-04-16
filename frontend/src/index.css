@@ -160,69 +160,6 @@ code {
 .fijar-nav .left-side {
   width: 60%;
 }
-@media only screen and (max-width: 992px) {
-  .navigation {
-    display: none;
-  }
-  .navigation-responsive {
-    display: flex;
-    position: absolute;
-    top: 121px;
-    left: 0;
-    right: 0;
-  }
-  .navigation-responsive .right-side .phone {
-    display: none;
-  }
-  .navigation-responsive .right-side {
-    width: 40%;
-  }
-  .navigation-responsive .left-side {
-    width: 40%;
-  }
-  .fijar-nav .right-side {
-    width: 40%;
-  }
-
-  .fijar-nav .left-side {
-    width: 60%;
-  }
-  .navigation-left {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    width: 200px;
-    height: 100%;
-    z-index: 100;
-    background-color: #fff;
-  }
-  .navigation-left .navigation-list {
-    padding: 0;
-    list-style: none;
-  }
-  .navigation-left .navigation-list .item-list {
-    padding: 20px 10px 20px 20px;
-  }
-
-  .navigation-left .navigation-list .item-list .item-link {
-    text-decoration: none;
-    color: #000;
-    text-transform: uppercase;
-  }
-  .icon__carrusel {
-    width: 20px !important;
-    height: 20px !important;
-  }
-  .carrousel-title {
-    font-size: 0.7rem !important;
-    font-weight: 700;
-  }
-  .carrousel-subtitle {
-    font-weight: 700;
-    font-size: 1.5rem !important;
-  }
-}
 
 /* Footer */
 
@@ -286,7 +223,6 @@ code {
   background-position: center;
   background-size: cover;
   margin-bottom: 9rem;
-
   display: flex;
   justify-content: center;
 }
@@ -297,7 +233,7 @@ code {
   color: #ffffff;
   background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
   position: absolute;
-  top: 21.5rem;
+  top: 19.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -376,7 +312,7 @@ code {
 
 .cts__content {
   padding: 3rem 1rem;
-  background: #EEF3F6;
+  background: #eef3f6;
 }
 
 .cts__form {
@@ -387,12 +323,12 @@ code {
 }
 
 .form-control {
-  background: #EEF3F6;
+  background: #eef3f6;
   padding: 0.8rem;
 }
 
 .form-control:focus {
-  background: #EEF3F6;
+  background: #eef3f6;
 }
 
 @media only screen and (min-width: 767px) {
@@ -478,6 +414,9 @@ code {
   bottom: 0%;
   color: #fff;
 }
+.carrousel-item {
+  background-position: center;
+}
 .carrousel-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -489,10 +428,9 @@ code {
 }
 
 .caracteristicas {
-  top:inherit;
-  bottom: -120px;
-  height: 120px;
   position: absolute;
+  top: 44rem;
+  height: 120px;
   display: flex;
   width: 60%;
   align-items: center;
@@ -508,13 +446,153 @@ code {
 .caracteristicas-item {
   display: flex;
   align-items: center;
-  align-content: center;
-  justify-items: center;
+  justify-content: center;
   color: #fff;
+  height: 40%;
 }
-.caracteristicas-text{
+.caracteristicas-text {
   margin: 0 10px;
   font-size: 18px;
   font-weight: 600;
+}
+.caracteristicas-item:first-child {
+  border-right: #fff solid 2px;
+}
+.caracteristicas-item:last-child {
+  border-left: #fff solid 2px;
+}
+.icon-curso-container {
+  padding: 20px;
+  margin-right: 20px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  background: -webkit-linear-gradient(
+    to left,
+    var(--verde-claro),
+    var(--verde-claro)
+  );
+  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+}
+.lista-cursos {
+  margin-top: 90px;
+  margin-bottom: 90px;
+}
+.curso-item {
+  justify-items: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.curso-title{
+  font-size: 24px;
+  color:#242424;
+  font-weight: 700;
+  transition: all .5s;
+}
+.curso-title:hover{
+  color:var(--verde-oscuro);
+  transition: all .5s;
+}
+.curso-descripcion{
+  color:#606060;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 2;
+}
+@media only screen and (max-width: 1024px) {
+  .caracteristicas-text {
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .navigation {
+    display: none;
+  }
+  .navigation-responsive {
+    display: flex;
+    position: absolute;
+    top: 121px;
+    left: 0;
+    right: 0;
+  }
+  .navigation-responsive .right-side .phone {
+    display: none;
+  }
+  .navigation-responsive .right-side {
+    width: 40%;
+  }
+  .navigation-responsive .left-side {
+    width: 40%;
+  }
+  .fijar-nav .right-side {
+    width: 40%;
+  }
+
+  .fijar-nav .left-side {
+    width: 60%;
+  }
+  .navigation-left {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    z-index: 100;
+    background-color: #fff;
+  }
+  .navigation-left .navigation-list {
+    padding: 0;
+    list-style: none;
+  }
+  .navigation-left .navigation-list .item-list {
+    padding: 20px 10px 20px 20px;
+  }
+
+  .navigation-left .navigation-list .item-list .item-link {
+    text-decoration: none;
+    color: #000;
+    text-transform: uppercase;
+  }
+  .icon__carrusel {
+    width: 35px;
+    height: 35px;
+  }
+  .carrousel-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .carrousel-subtitle {
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  .caracteristicas {
+    height: 180px;
+    top: 42rem;
+  }
+  .fila {
+    flex-direction: column;
+  }
+  .caracteristicas-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .caracteristicas-text {
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .caracteristicas-item:first-child {
+    border-right: none;
+    border-bottom: #fff solid 2px;
+  }
+  .caracteristicas-item:last-child {
+    border-left: none;
+    border-top: #fff solid 2px;
+  }
 }
 /* Fin de Estilos del Home */
