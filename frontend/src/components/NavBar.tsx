@@ -5,12 +5,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 const NavBar = () => {
 
+  // Para fijar el nav al scrollear la pagina
+  window.onscroll = () => {
+    if (window.scrollY >= 117) {
+      document.querySelector("#navPrincipal")?.classList.add("fijar-nav");
+      document.querySelector(".navigation-responsive")?.classList.add("fijar-nav");
+    } else {
+      document.querySelector("#navPrincipal")?.classList.remove("fijar-nav");
+      document.querySelector(".navigation-responsive")?.classList.remove("fijar-nav");
+    }
+  };
+
+  // Para mostrar o ocultar la barra lateral
   const moverNavLateral = () => {
-    const panel = document.querySelector('.navigation-left');
-    panel?.classList.toggle('moverDerecha');
-    panel?.classList.toggle('moverIzquierda');
-    // document.querySelector('.navigation-left')?.classList.toggle('moverDerecha');
-  }
+    const panel = document.querySelector(".navigation-left");
+    panel?.classList.toggle("moverDerecha");
+    panel?.classList.toggle("moverIzquierda");
+  };
 
   return (
     <React.Fragment>
@@ -38,7 +49,7 @@ const NavBar = () => {
         </div>
       </header>
       {/* NavBar */}
-      <nav className="navigation">
+      <nav id="navPrincipal" className="navigation justify-content-center">
         <div className="left-side">
           <ul className="lista-enlace">
             <li className="lista-item">
@@ -87,22 +98,33 @@ const NavBar = () => {
       {/* Nav Lateral */}
       <nav className="navigation-left moverIzquierda">
         <div className="w-100 d-flex justify-content-end">
-          <button onClick={moverNavLateral} className="btn justify-content-end fs-3">
+          <button
+            onClick={moverNavLateral}
+            className="btn justify-content-end fs-3"
+          >
             <FontAwesomeIcon icon={faTimes} />
           </button>
         </div>
         <ul className="d-flex flex-column pt-5 navigation-list">
           <li className="item-list">
-            <Link className="item-link" to="/">Inicio</Link>
+            <Link className="item-link" to="/">
+              Inicio
+            </Link>
           </li>
           <li className="item-list">
-            <Link className="item-link" to="/Nosotros">¿Quienes Somos?</Link>
+            <Link className="item-link" to="/Nosotros">
+              ¿Quienes Somos?
+            </Link>
           </li>
           <li className="item-list">
-            <Link className="item-link" to="/Contactanos">Contáctanos</Link>
+            <Link className="item-link" to="/Contactanos">
+              Contáctanos
+            </Link>
           </li>
           <li className="item-list">
-            <Link className="item-link" to="/Programas">Programa</Link>
+            <Link className="item-link" to="/Programas">
+              Programa
+            </Link>
           </li>
         </ul>
       </nav>
