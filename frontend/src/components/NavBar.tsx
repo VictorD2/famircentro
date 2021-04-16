@@ -4,15 +4,18 @@ import logo from "../images/logoFamir.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 const NavBar = () => {
-
   // Para fijar el nav al scrollear la pagina
   window.onscroll = () => {
     if (window.scrollY >= 117) {
       document.querySelector("#navPrincipal")?.classList.add("fijar-nav");
-      document.querySelector(".navigation-responsive")?.classList.add("fijar-nav");
+      document
+        .querySelector(".navigation-responsive")
+        ?.classList.add("fijar-nav");
     } else {
       document.querySelector("#navPrincipal")?.classList.remove("fijar-nav");
-      document.querySelector(".navigation-responsive")?.classList.remove("fijar-nav");
+      document
+        .querySelector(".navigation-responsive")
+        ?.classList.remove("fijar-nav");
     }
   };
 
@@ -38,8 +41,11 @@ const NavBar = () => {
                     </Link>
                   </div>
                   <div className="align-self-center justify-content-end">
-                    <Link className="login-button" to="#">
-                      Register / Login
+                    <Link className="login-button" to="/Login">
+                      Login /
+                    </Link>
+                    <Link className="login-button" to="/Registrarse">
+                      / Register
                     </Link>
                   </div>
                 </div>
