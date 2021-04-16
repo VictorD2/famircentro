@@ -148,7 +148,7 @@ code {
   left: -200px;
   transition: all 0.5s;
 }
-.fijar-nav{
+.fijar-nav {
   position: fixed !important;
   top: 0 !important;
 }
@@ -183,7 +183,7 @@ code {
   .fijar-nav .right-side {
     width: 40%;
   }
-  
+
   .fijar-nav .left-side {
     width: 60%;
   }
@@ -425,4 +425,33 @@ code {
   width: 50%;
 }
 
+.caracteristicas {
+  top:inherit;
+  bottom: -120px;
+  height: 120px;
+  position: absolute;
+  display: flex;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  background: var(--verde-claro);
+  background: -webkit-linear-gradient(
+    to left,
+    var(--verde-claro),
+    var(--verde-claro)
+  );
+  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+}
+.caracteristicas-item {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  color: #fff;
+}
+.caracteristicas-text{
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
 /* Fin de Estilos del Home */

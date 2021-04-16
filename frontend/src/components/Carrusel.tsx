@@ -7,6 +7,8 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import CarruselItem from "../components/CarruselItem";
 
 const Carrusel = () => {
+
+  // Para esconder y mostrar las flechas
   const desaparecerFlechas = (e: React.MouseEvent<HTMLDivElement>) => {
     document.querySelectorAll(".icon__carrusel")?.forEach((elemento) => {
       elemento.classList.toggle("desaparecer");
