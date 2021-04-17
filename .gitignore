@@ -12,6 +12,7 @@
 
 # production
 /frontend/build
+/backend/src/build
 
 # misc
 /frontend/.DS_Store
