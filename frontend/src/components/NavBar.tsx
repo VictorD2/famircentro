@@ -44,7 +44,7 @@ const NavBar = () => {
                     <Link className="login-button" to="/Login">
                       Login /
                     </Link>
-                    <Link className="login-button" to="/Registrarse">
+                    <Link className="login-button" to="/Register">
                       / Register
                     </Link>
                   </div>

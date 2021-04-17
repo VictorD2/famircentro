@@ -11,11 +11,15 @@ import React from "react";
 import Badge from "../components/Badge";
 import { faEnvelopeOpenText, faMapMarkerAlt, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import FormContact from "../components/FormContact";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 class Contactanos extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <NavBar />
+
                 <Badge name="Contact" />
 
                 <div className="Main__container">
@@ -119,6 +123,7 @@ class Contactanos extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </React.Fragment>
         );
     }

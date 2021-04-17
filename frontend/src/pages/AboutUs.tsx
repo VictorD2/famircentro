@@ -2,6 +2,8 @@ import React from 'react';
 
 import Badge from '../components/Badge';
 import CardTeacher from '../components/CardTeacher';
+import Footer from '../components/Footer';
+import NavBar from '../components/NavBar';
 import Slider from '../components/Slider';
 
 //Import de img de ejemplo
@@ -14,6 +16,8 @@ class AboutUs extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <NavBar />
+
                 <Badge name="About Us" />
 
                 <div className="Main__container">
@@ -64,6 +68,7 @@ class AboutUs extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </React.Fragment>
         );
     }

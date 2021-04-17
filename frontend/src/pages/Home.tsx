@@ -7,10 +7,14 @@ import ListaTopCursos from "../components/ListaTopCursos";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
     <React.Fragment>
+      <NavBar />
+
       <Carrusel />
       <div className="position-static w-100 h-100 d-flex justify-content-center">
         <div className="caracteristicas">
@@ -33,6 +37,7 @@ const Home = () => {
       <ListaCursos />
       <ListaOpiniones />
       <ListaTopCursos />
+      <Footer />
     </React.Fragment>
   );
 };

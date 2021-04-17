@@ -214,7 +214,7 @@ code {
   margin-bottom: 40px;
 }
 
-/*Inicio de estilos de Sobre Nosotros y Contactanos*/
+/*Inicio de estilos de Sobre Nosotros, Contactanos, Register and Login*/
 .Badge__container {
   width: 100%;
   height: 12.5rem;
@@ -322,13 +322,65 @@ code {
   border: 4px double var(--amarillo-oscuro);
 }
 
-.form-control {
+.cts__form-control {
   background: #eef3f6;
   padding: 0.8rem;
 }
 
-.form-control:focus {
+.cts__form-control:focus {
   background: #eef3f6;
+}
+/**
+* Estilos de Register
+*/
+.rgt__main {
+  background: var(--azul-claro);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content__form {
+  width: 55rem;
+  height: 28rem;
+  overflow: auto;
+}
+
+.rgt__img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.rgt__header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.rgt__title {
+  margin-bottom: 0;
+  margin-left: 0.5rem;
+}
+
+.rgt__form-control {
+  background: #eef3f6;
+}
+
+.rgt__form-control:focus {
+  background: #eef3f6;
+}
+
+.rgt__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rgt__form {
+  border-bottom: 2px solid black;
+  padding-bottom: 2.5rem;
 }
 
 @media only screen and (min-width: 767px) {
@@ -347,6 +399,11 @@ code {
   .btn__more {
     padding: 15px 45px;
   }
+  .rgt__form {
+    border-right: 2px solid black;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 }
 
 @media only screen and (max-width: 1300px) {
@@ -356,7 +413,7 @@ code {
   }
 }
 
-/*Fin de estilos de Sobre Nosotros y Contactanos*/
+/*Fin de estilos de Sobre Nosotros, Contactanos, Register and Login*/
 
 /* Estilos del Home */
 
