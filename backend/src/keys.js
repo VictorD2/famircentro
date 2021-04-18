@@ -2,7 +2,7 @@ module.exports = {
     database: {
         host: 'localhost',
         user: 'root',
-        database: 'adicción_burger',
+        database: 'bd_famir',
         dateStrings: true
     }
 }

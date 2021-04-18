@@ -394,6 +394,7 @@ code {
 }
 
 .btn-instagram {
+  transition: all 5s;
   background: -moz-linear-gradient(
     45deg,
     #f09433 0%,

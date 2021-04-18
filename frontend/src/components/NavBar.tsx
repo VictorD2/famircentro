@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import logo from "../images/logoFamir.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -36,17 +35,17 @@ const NavBar = () => {
               <div className="col-12 h-100">
                 <div className="header-content h-100 d-flex align-items-center justify-content-between">
                   <div className="logo-content align-self-cemter justify-content-start">
-                    <Link className="logo-link" to="index.html">
+                    <a className="logo-link" href="index.html">
                       <img className="logo" src={logo} alt="Logo FamirCentro" />
-                    </Link>
+                    </a>
                   </div>
                   <div className="align-self-center justify-content-end">
-                    <Link className="login-button" to="/Login">
+                    <a className="login-button" href="/Login">
                       Login /
-                    </Link>
-                    <Link className="login-button" to="/Register">
+                    </a>
+                    <a className="login-button" href="/Register">
                       / Register
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -59,24 +58,24 @@ const NavBar = () => {
         <div className="left-side">
           <ul className="lista-enlace">
             <li className="lista-item">
-              <Link className="item-link" to="/">
+              <a className="item-link" href="/">
                 Inicio
-              </Link>
+              </a>
             </li>
             <li className="lista-item">
-              <Link className="item-link" to="/Nosotros">
+              <a className="item-link" href="/Nosotros">
                 Nosotros
-              </Link>
+              </a>
             </li>
             <li className="lista-item">
-              <Link className="item-link" to="/Contactanos">
+              <a className="item-link" href="/Contactanos">
                 Contáctanos
-              </Link>
+              </a>
             </li>
             <li className="lista-item">
-              <Link className="item-link" to="/Programa">
+              <a className="item-link" href="/Programa">
                 Programa
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
@@ -113,24 +112,24 @@ const NavBar = () => {
         </div>
         <ul className="d-flex flex-column pt-5 navigation-list">
           <li className="item-list">
-            <Link className="item-link" to="/">
+            <a className="item-link" href="/">
               Inicio
-            </Link>
+            </a>
           </li>
           <li className="item-list">
-            <Link className="item-link" to="/Nosotros">
+            <a className="item-link" href="/Nosotros">
               ¿Quienes Somos?
-            </Link>
+            </a>
           </li>
           <li className="item-list">
-            <Link className="item-link" to="/Contactanos">
+            <a className="item-link" href="/Contactanos">
               Contáctanos
-            </Link>
+            </a>
           </li>
           <li className="item-list">
-            <Link className="item-link" to="/Programas">
+            <a className="item-link" href="/Programas">
               Programa
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>
