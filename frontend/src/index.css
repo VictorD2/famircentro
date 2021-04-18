@@ -379,8 +379,14 @@ code {
 }
 
 .rgt__form {
-  border-bottom: 2px solid black;
+  border-bottom: 2.2px solid #b5b8b9;
   padding-bottom: 2.5rem;
+}
+
+.icon__social {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 @media only screen and (min-width: 767px) {
@@ -400,7 +406,7 @@ code {
     padding: 15px 45px;
   }
   .rgt__form {
-    border-right: 2px solid black;
+    border-right: 2.2px solid #b5b8b9;
     border-bottom: none;
     padding-bottom: 0;
   }

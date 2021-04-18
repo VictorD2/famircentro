@@ -1,5 +1,12 @@
 import React from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faFacebook,
+    faGoogle,
+    faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+
 import logoRegister from "../images/Logo.svg";
 
 class Register extends React.Component {
@@ -92,7 +99,25 @@ class Register extends React.Component {
                                     </div>
                                 </form>
                             </div>
-                            <div className="col-md-5">Redes Sociales</div>
+                            <div className="col-md-5">
+                                <div className="row px-4 pt-4">
+                                    <div className="col-12">
+                                        <a href="https://facebook.com" className="btn btn-primary icon__social">
+                                            <FontAwesomeIcon icon={faFacebook} className="fs-3" /> <span className="ms-3">Iniciar con Facebook</span>
+                                        </a>
+                                    </div>
+                                    <div className="col-12 mt-4">
+                                        <a href="https://instagram.com" className="btn btn-secondary icon__social">
+                                            <FontAwesomeIcon icon={faInstagram} className="fs-3" /> <span className="ms-3">Iniciar con Instagram</span>
+                                        </a>
+                                    </div>
+                                    <div className="col-12 mt-4">
+                                        <a href="https://instagram.com" className="btn btn-danger icon__social">
+                                            <FontAwesomeIcon icon={faGoogle} className="fs-3" /> <span className="ms-3">Iniciar con Google</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

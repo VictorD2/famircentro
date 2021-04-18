@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+//import React, { useEffect, useState } from "react";
 import CursoItem from "./CursoItem";
-import axios from "axios";
+//import axios from "axios";
 import {
   faAddressCard,
   faGlobe,
