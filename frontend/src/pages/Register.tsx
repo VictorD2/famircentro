@@ -70,20 +70,24 @@ class Register extends React.Component {
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <label className="form-label">Contraseña</label>
-                                            <input
-                                                className="form-control rgt__form-control"
-                                                type="password"
-                                                name="password"
-                                            />
+                                            <div className="mb-3">
+                                                <label className="form-label">Contraseña</label>
+                                                <input
+                                                    className="form-control rgt__form-control"
+                                                    type="password"
+                                                    name="password"
+                                                />
+                                            </div>
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">Confirmar contraseña</label>
-                                            <input
-                                                className="form-control rgt__form-control"
-                                                type="password"
-                                                name="verifyPassword"
-                                            />
+                                            <div className="mb-3">
+                                                <label className="form-label">Confirmar contraseña</label>
+                                                <input
+                                                    className="form-control rgt__form-control"
+                                                    type="password"
+                                                    name="verifyPassword"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="row rgt__button">
@@ -100,14 +104,14 @@ class Register extends React.Component {
                                 </form>
                             </div>
                             <div className="col-md-5">
-                                <div className="row px-4 pt-4">
+                                <div className="row px-4 pt-5">
                                     <div className="col-12">
                                         <a href="https://facebook.com" className="btn btn-primary icon__social">
                                             <FontAwesomeIcon icon={faFacebook} className="fs-3" /> <span className="ms-3">Iniciar con Facebook</span>
                                         </a>
                                     </div>
                                     <div className="col-12 mt-4">
-                                        <a href="https://instagram.com" className="btn btn-secondary icon__social">
+                                        <a href="https://instagram.com" className="btn btn-instagram icon__social">
                                             <FontAwesomeIcon icon={faInstagram} className="fs-3" /> <span className="ms-3">Iniciar con Instagram</span>
                                         </a>
                                     </div>

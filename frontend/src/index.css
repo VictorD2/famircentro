@@ -334,7 +334,11 @@ code {
 * Estilos de Register
 */
 .rgt__main {
-  background: var(--azul-claro);
+  background: linear-gradient(
+    to bottom right,
+    var(--azul-oscuro),
+    var(--azul-claro)
+  );
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -387,6 +391,62 @@ code {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.btn-instagram {
+  background: -moz-linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  color: #ffffff;
+}
+
+.btn-instagram:hover {
+  color: #ffffff;
+  background: -moz-linear-gradient(
+    45deg,
+    #b97327 0%,
+    #bd532d 25%,
+    #ad2035 50%,
+    #a51d53 75%,
+    #a11675 100%
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    #b97327 0%,
+    #bd532d 25%,
+    #ad2035 50%,
+    #a51d53 75%,
+    #a11675 100%
+  );
+  background: linear-gradient(
+    45deg,
+    #b97327 0%,
+    #bd532d 25%,
+    #ad2035 50%,
+    #a51d53 75%,
+    #a11675 100%
+  );
 }
 
 @media only screen and (min-width: 767px) {
@@ -652,13 +712,13 @@ code {
 }
 /* Fin opiniones */
 /* Top Cursos */
-.top-cursos{
+.top-cursos {
   width: 100%;
   padding-top: 100px;
   padding-bottom: 100px;
   position: relative;
 }
-.top-cursos-heading{
+.top-cursos-heading {
   color: #000;
   margin-bottom: 80px;
   text-align: center;
@@ -678,31 +738,31 @@ code {
   text-transform: uppercase;
   font-size: 12px;
 }
-.top-cursos-item{
+.top-cursos-item {
   margin-bottom: 30px;
   background-color: #eef3f6;
 }
-.top-cursos-item .info{
+.top-cursos-item .info {
   width: 54%;
   padding: 30px;
 }
-.top-cursos-item .info h5{
+.top-cursos-item .info h5 {
   font-size: 18px;
   font-weight: 500;
-  color:#242424;
+  color: #242424;
 }
-.top-cursos-item .info .autor{
+.top-cursos-item .info .autor {
   font-size: 12px;
-  color:var(--verde-claro);
+  color: var(--verde-claro);
 }
-.top-cursos-item .info .curso-description{
+.top-cursos-item .info .curso-description {
   margin-top: 30px;
   font-size: 14px;
   line-height: 2;
   font-weight: 500;
-  color:#606060;
+  color: #606060;
 }
-.top-cursos-item .img{
+.top-cursos-item .img {
   width: 46%;
   height: 360px;
   background-position: center;
@@ -804,17 +864,17 @@ code {
     border-left: none;
     border-top: #fff solid 2px;
   }
-  .curso-title{
+  .curso-title {
     font-size: 16px;
   }
-  .top-cursos-item{
+  .top-cursos-item {
     flex-direction: column;
     width: 100%;
   }
-  .top-cursos-item .info{
+  .top-cursos-item .info {
     width: 100%;
   }
-  .top-cursos-item .img{
+  .top-cursos-item .img {
     width: 100%;
     height: 250px;
   }
