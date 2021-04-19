@@ -2,9 +2,14 @@ const pool = require('../database');
 const ctrlUsuarios = {};
 
 
-ctrlUsuarios.createUser = (req, res) => {}
+ctrlUsuarios.createUser = (req, res) => {
 
-ctrlUsuarios.getUsers = (req, res) => {}
+}
+
+ctrlUsuarios.getUsers = async(req, res) => {
+    const data = await pool.query('SELECT * FROM usuarios');
+    res.json(data);
+}
 
 ctrlUsuarios.getUserById = (req, res) => {}
 
