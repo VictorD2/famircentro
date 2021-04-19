@@ -35,7 +35,7 @@ const NavBar = () => {
               <div className="col-12 h-100">
                 <div className="header-content h-100 d-flex align-items-center justify-content-between">
                   <div className="logo-content align-self-cemter justify-content-start">
-                    <a className="logo-link" href="index.html">
+                    <a className="logo-link" href="/">
                       <img className="logo" src={logo} alt="Logo FamirCentro" />
                     </a>
                   </div>

@@ -1,12 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faGoogle,
-  faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
 
 import logoRegister from "../images/Logo.svg";
 
@@ -45,13 +39,13 @@ const Register = () => {
   return (
     <div className="rgt__main">
       <div className="card content__form">
-        <div className="card-header rgt__header">
+        <a href="/" className="card-header rgt__header">
           <img className="rgt__img" src={logoRegister} alt="logo-register" />
           <h5 className="rgt__title">FAMIR CENTRO</h5>
-        </div>
+        </a>
         <div className="card-body">
           <div className="row">
-            <div className="col-md-7 rgt__form">
+            <div className="col-12 rgt__form">
               <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
@@ -86,6 +80,7 @@ const Register = () => {
                         className="form-control rgt__form-control"
                         type="email"
                         name="email"
+                        placeholder="name@example.com"
                       />
                     </div>
                   </div>
@@ -138,37 +133,6 @@ const Register = () => {
                   </div>
                 </div>
               </form>
-            </div>
-            <div className="col-md-5">
-              <div className="row px-4 pt-5">
-                <div className="col-12">
-                  <a
-                    href="https://facebook.com"
-                    className="btn btn-primary icon__social"
-                  >
-                    <FontAwesomeIcon icon={faFacebook} className="fs-3" />{" "}
-                    <span className="ms-3">Iniciar con Facebook</span>
-                  </a>
-                </div>
-                <div className="col-12 mt-4">
-                  <a
-                    href="https://instagram.com"
-                    className="btn btn-instagram icon__social"
-                  >
-                    <FontAwesomeIcon icon={faInstagram} className="fs-3" />{" "}
-                    <span className="ms-3">Iniciar con Instagram</span>
-                  </a>
-                </div>
-                <div className="col-12 mt-4">
-                  <a
-                    href="https://instagram.com"
-                    className="btn btn-danger icon__social"
-                  >
-                    <FontAwesomeIcon icon={faGoogle} className="fs-3" />{" "}
-                    <span className="ms-3">Iniciar con Google</span>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
