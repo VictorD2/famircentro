@@ -1,12 +1,5 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faFacebook,
-    faGoogle,
-    faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
-
 import logoRegister from "../images/Logo.svg";
 
 class Register extends React.Component {
@@ -14,13 +7,13 @@ class Register extends React.Component {
         return (
             <div className="rgt__main">
                 <div className="card content__form">
-                    <div className="card-header rgt__header">
+                    <a href="/" className="card-header rgt__header">
                         <img className="rgt__img" src={logoRegister} alt="logo-register" />
                         <h5 className="rgt__title">FAMIR CENTRO</h5>
-                    </div>
+                    </a>
                     <div className="card-body">
                         <div className="row">
-                            <div className="col-md-7 rgt__form">
+                            <div className="col-12">
                                 <form action="">
                                     <div className="row">
                                         <div className="col-md-6">
@@ -30,6 +23,7 @@ class Register extends React.Component {
                                                     className="form-control rgt__form-control"
                                                     type="text"
                                                     name="name"
+                                                    required
                                                 />
                                             </div>
                                         </div>
@@ -40,6 +34,7 @@ class Register extends React.Component {
                                                     className="form-control rgt__form-control"
                                                     type="text"
                                                     name="surname"
+                                                    required
                                                 />
                                             </div>
                                         </div>
@@ -47,11 +42,13 @@ class Register extends React.Component {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="mb-3">
-                                                <label className="form-label">Nombre de Usuario</label>
+                                                <label className="form-label">Correo</label>
                                                 <input
                                                     className="form-control rgt__form-control"
-                                                    type="text"
+                                                    type="email"
                                                     name="userName"
+                                                    required
+                                                    placeholder="name@example.com"
                                                 />
                                             </div>
                                         </div>
@@ -76,6 +73,7 @@ class Register extends React.Component {
                                                     className="form-control rgt__form-control"
                                                     type="password"
                                                     name="password"
+                                                    required
                                                 />
                                             </div>
                                         </div>
@@ -86,6 +84,7 @@ class Register extends React.Component {
                                                     className="form-control rgt__form-control"
                                                     type="password"
                                                     name="verifyPassword"
+                                                    required
                                                 />
                                             </div>
                                         </div>
@@ -102,25 +101,6 @@ class Register extends React.Component {
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                            <div className="col-md-5">
-                                <div className="row px-4 pt-5">
-                                    <div className="col-12">
-                                        <a href="https://facebook.com" className="btn btn-primary icon__social">
-                                            <FontAwesomeIcon icon={faFacebook} className="fs-3" /> <span className="ms-3">Iniciar con Facebook</span>
-                                        </a>
-                                    </div>
-                                    <div className="col-12 mt-4">
-                                        <a href="https://instagram.com" className="btn btn-instagram icon__social">
-                                            <FontAwesomeIcon icon={faInstagram} className="fs-3" /> <span className="ms-3">Iniciar con Instagram</span>
-                                        </a>
-                                    </div>
-                                    <div className="col-12 mt-4">
-                                        <a href="https://instagram.com" className="btn btn-danger icon__social">
-                                            <FontAwesomeIcon icon={faGoogle} className="fs-3" /> <span className="ms-3">Iniciar con Google</span>
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

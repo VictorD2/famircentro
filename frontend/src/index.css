@@ -347,9 +347,15 @@ code {
 }
 
 .content__form {
-  width: 55rem;
-  height: 28rem;
+  width: 30rem;
+  height: 30rem;
   overflow: auto;
+}
+
+.content__Login {
+  width: 25rem;
+  height: 37rem;
+  overflow-x: hidden;
 }
 
 .rgt__img {
@@ -361,6 +367,12 @@ code {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  text-decoration: none;
+  color: #000000;
+}
+
+.rgt__header:hover {
+  color: #000000;
 }
 
 .rgt__title {
@@ -380,11 +392,6 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.rgt__form {
-  border-bottom: 2.2px solid #b5b8b9;
-  padding-bottom: 2.5rem;
 }
 
 .icon__social {
@@ -449,7 +456,34 @@ code {
   );
 }
 
-@media only screen and (min-width: 767px) {
+.line__login {
+    position: relative;
+    font-family: 'cooper_hewittmedium';
+    padding: 5px 12px;
+    font-weight: 600;
+    color: #273b47;
+    font-size: 20px;
+}
+
+.line__login::before {
+  content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 5000px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.line__login::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 5000px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+@media only screen and (min-width: 769px) {
   .Box {
     width: 31.25rem;
   }
@@ -465,10 +499,18 @@ code {
   .btn__more {
     padding: 15px 45px;
   }
-  .rgt__form {
-    border-right: 2.2px solid #b5b8b9;
-    border-bottom: none;
-    padding-bottom: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+  .content__Login {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+  }
+  .content__form {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
   }
 }
 
