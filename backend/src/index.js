@@ -37,22 +37,21 @@ app.use(passport.initialize()); /* Inicializa passport */
 app.use(passport.session());
 
 
-
 //Public
 app.use(express.static(path.join(__dirname, "/build")));
 
 // Global Variables
 app.use(async(req, res, next) => {
     app.locals.user = req.user;
-    // console.log(req);
+    console.log(req.user);
     next();
 });
 
 
 //Routes
-app.use(require('./routes/index.routes'));
-app.use(require('./routes/usuarios.routes'));
+app.use('/api/usuarios',require('./routes/usuarios.routes'));
 app.use(require('./routes/auth.routes'));
+app.use(require('./routes/index.routes'));//<- siempre al ultimo
 
 //Starting the server
 app.listen(app.get('port'), () => {

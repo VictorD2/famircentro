@@ -2,8 +2,11 @@ const pool = require('../database');
 const helpers = require('./helpers');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
-
+// const InstagramStrategy = require('passport-instagram').Strategy;
+// const INSTAGRAM = {
+//     clientID: "0d517fd22d63445181091e63578caf92",
+//     clientSecret: "3ea8588c8f7f43ebb4ff89fd5519b1fc"
+// };
 passport.use('local.signin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -44,7 +47,17 @@ passport.use('local.signup', new LocalStrategy({
     return done(null, user);
 }));
 
-
+// passport.use(new InstagramStrategy({
+//     clientID: INSTAGRAM.INSTAGRAM_CLIENT_ID,
+//     clientSecret: INSTAGRAM.INSTAGRAM_CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:4000/auth/instagram/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     User.findOrCreate({ instagramId: profile.id }, function (err, user) {
+//       return done(err, user);
+//     });
+//   }
+// ));
 passport.serializeUser((user, done) => {
     done(null, user);
 });

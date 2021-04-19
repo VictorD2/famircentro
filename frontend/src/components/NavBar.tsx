@@ -44,7 +44,10 @@ const NavBar = () => {
                       Login /
                     </a>
                     <a className="login-button" href="/Register">
-                      / Register
+                      / Register /
+                    </a>
+                    <a className="login-button" href="/Logout">
+                      / Salir
                     </a>
                   </div>
                 </div>

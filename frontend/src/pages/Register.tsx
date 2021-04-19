@@ -36,8 +36,8 @@ const Register = () => {
     e.preventDefault();
     const datos = await axios.post("http://localhost:4000/signup", usuario);
     if (datos.status === 200) {
-      history.push("/");
       console.log(datos);
+      // history.push("/");
       return;
     }
   };
