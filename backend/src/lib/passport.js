@@ -2,67 +2,107 @@ const pool = require('../database');
 const helpers = require('./helpers');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-// const InstagramStrategy = require('passport-instagram').Strategy;
-// const INSTAGRAM = {
-//     clientID: "0d517fd22d63445181091e63578caf92",
-//     clientSecret: "3ea8588c8f7f43ebb4ff89fd5519b1fc"
-// };
+const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FACEBOOK = {
+    clientID: "2970891296478501",
+    clientSecret: "fd4bd2d5dd781edde534732440143e97"
+};
+const GOOGLE = {
+    clientID: "273786638957-48ob5nklg1iv09qls3a1ihnbea1me0j1.apps.googleusercontent.com",
+    clientSecret: "zZPU5xVhos4q4_mECto3x1wT"
+};
+
+//Configuración de passport al iniciar sesion
 passport.use('local.signin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, email, password, done) => {
-    const rows = await pool.query('SELECT * FROM usuarios WHERE  Correo = ?', [email]);
-    if (rows.length > 0) {
-        const user = rows[0];
-        const validPassword = await helpers.matchPassword(password, user.Password);
-        if (validPassword) {
-            done(null, user, req.flash('success', 'Bienvenido ' + user.Nombre));
-        } else {
-            done(null, false, req.flash('failure', 'Contraseña incorrecta'));
-        }
-    } else {
-        return done(null, false, req.flash('failure', 'El usuario no existe'));
+    const rows = await pool.query('SELECT * FROM usuarios WHERE  Correo = ?', [email]); //<- Buscamos al usuario
 
-    }
+    if (!rows.length > 0) return done(null, false); //El usuario no existe
+
+    const validPassword = await helpers.matchPassword(password, rows[0].Contrasenia); //<- Verificando la contraseña
+
+    if (validPassword) return done(null, rows[0]); //<- Contraseña correcta
+    done(null, false); //<-Contraseña incorrecta
+
 }));
 
+//Configuración de passport al registrarse
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, user, pass, done) => {
     const rows = await pool.query('SELECT * FROM usuarios WHERE  Correo = ?', [user]);
-    if (rows.length > 0) return done(null, false); //Por si existe un correo ya
+    if (rows.length > 0) return done(null, false, { message: "El correo ya está en uso" }); //Por si existe un correo ya
     const { name, surname, email, password } = req.body;
     const newUser = {
         Nombres: name,
         Apellidos: surname,
         Rango: "user",
         Correo: email,
-        Contrasenia: password
+        Contrasenia: password,
+        Url_Foto: "/defaultProfile.PNG"
     }
     newUser.Contrasenia = await helpers.encrypPassword(newUser.Contrasenia); //<- Encripta la contraseña
     await pool.query('INSERT INTO usuarios set ?', [newUser]);
-    return done(null, user);
+    return done(null, newUser);
 }));
 
-// passport.use(new InstagramStrategy({
-//     clientID: INSTAGRAM.INSTAGRAM_CLIENT_ID,
-//     clientSecret: INSTAGRAM.INSTAGRAM_CLIENT_SECRET,
-//     callbackURL: "http://127.0.0.1:4000/auth/instagram/callback"
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     User.findOrCreate({ instagramId: profile.id }, function (err, user) {
-//       return done(err, user);
-//     });
-//   }
-// ));
+
+// Facebook
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK.clientID,
+    clientSecret: FACEBOOK.clientSecret,
+    callbackURL: "/auth/facebook/callback",
+    profileFields: ['name', 'photos', 'email'],
+    passReqToCallback: true
+}, async(request, accessToken, refreshToken, profile, cb) => {
+    const email = profile.emails[0].value; //<- Email
+    const rows = await pool.query('SELECT * FROM usuarios WHERE Correo = ?', [email]);
+    if (rows.length > 0) return cb(null, profile); //Ya está guardado el correo en la bd
+    const newUser = { //Creando nuevo usuario
+        Nombres: profile.name.givenName,
+        Apellidos: profile.name.familyName,
+        Rango: "user",
+        Correo: email,
+        Contrasenia: "",
+        Url_Foto: profile.photos[0].value
+    }
+    await pool.query('INSERT INTO usuarios set ?', [newUser]); //Guardando en la bd
+    return cb(null, profile);
+}));
+
+// Google
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE.clientID,
+    clientSecret: GOOGLE.clientSecret,
+    callbackURL: "/auth/google/callback",
+    passReqToCallback: true
+}, async(request, accessToken, refreshToken, profile, done) => {
+    const email = profile.emails[0].value; //<- Email
+    const rows = await pool.query('SELECT * FROM usuarios WHERE Correo = ?', [email]);
+    if (rows.length > 0) return done(null, profile); //Ya está guardado el correo en la bd
+    const newUser = { //Creando nuevo usuario
+        Nombres: profile.name.givenName,
+        Apellidos: profile.name.familyName,
+        Rango: "user",
+        Correo: email,
+        Contrasenia: "",
+        Url_Foto: profile.photos[0].value
+    }
+    await pool.query('INSERT INTO usuarios set ?', [newUser]); //Guardando en la bd
+    return done(null, profile);
+}));
+
+
 passport.serializeUser((user, done) => {
     done(null, user);
 });
 
-passport.deserializeUser(async(id, done) => {
-    const rows = await pool.query('SELECT * FROM usuarios Where Correo = ?', [id]);
-    done(null, rows[0]);
+passport.deserializeUser(async(user, done) => {
+    done(null, user);
 });

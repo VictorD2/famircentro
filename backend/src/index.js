@@ -7,7 +7,6 @@ const MySQLStore = require('express-mysql-session');
 const passport = require('passport');
 const { database } = require('./keys');
 
-
 //Initialization
 const app = express();
 require('./lib/passport');
@@ -24,6 +23,7 @@ app.use(session({ /*Guarda la session en la BD*/
     saveUninitialized: false,
     store: new MySQLStore(database)
 }))
+
 app.use(express.json()); /* El servidor accepta json */
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
@@ -34,8 +34,7 @@ app.use(
     })
 );
 app.use(passport.initialize()); /* Inicializa passport */
-app.use(passport.session());
-
+app.use(passport.session({ cookie: { maxAge: 3600 }}));
 
 //Public
 app.use(express.static(path.join(__dirname, "/build")));
@@ -43,15 +42,14 @@ app.use(express.static(path.join(__dirname, "/build")));
 // Global Variables
 app.use(async(req, res, next) => {
     app.locals.user = req.user;
-    console.log(req.user);
     next();
 });
 
 
 //Routes
-app.use('/api/usuarios',require('./routes/usuarios.routes'));
+app.use('/api/usuarios', require('./routes/usuarios.routes'));
 app.use(require('./routes/auth.routes'));
-app.use(require('./routes/index.routes'));//<- siempre al ultimo
+app.use(require('./routes/index.routes')); //<- siempre al ultimo
 
 //Starting the server
 app.listen(app.get('port'), () => {

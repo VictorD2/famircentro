@@ -1,8 +1,22 @@
 import React from "react";
 import logo from "../images/logoFamir.svg";
+import Axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhone,
+  faBars,
+  faTimes,
+  faDoorOpen,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { useUsuario } from "../context-user/UsuarioProvider";
+
+
 const NavBar = () => {
+
+  const {usuario} = useUsuario();
+  console.log(usuario);
   // Para fijar el nav al scrollear la pagina
   window.onscroll = () => {
     if (window.scrollY >= 117) {
@@ -25,6 +39,14 @@ const NavBar = () => {
     panel?.classList.toggle("moverIzquierda");
   };
 
+  //Desconectar
+  const logout = async () => {
+    const res = await Axios.get("http://localhost:4000/logout", {
+      withCredentials: true,
+    });
+    if (res.data.message === "success") window.location.href = "/"; //<- Te regresa a la pagina principal
+  };
+
   return (
     <React.Fragment>
       <header className="header-area">
@@ -40,14 +62,22 @@ const NavBar = () => {
                     </a>
                   </div>
                   <div className="align-self-center justify-content-end">
+                    <a className="login-button p-3 fs-3" href="/Perfil">
+                      <FontAwesomeIcon icon={faUser} />
+                    </a>
+                    <a
+                      onClick={logout}
+                      className="login-button p-3 fs-3"
+                      href="/logout"
+                    >
+                      <FontAwesomeIcon icon={faDoorOpen} />
+                    </a>
+                    {/* //Cuando no lo está */}
                     <a className="login-button" href="/Login">
                       Login /
                     </a>
                     <a className="login-button" href="/Register">
-                      / Register /
-                    </a>
-                    <a className="login-button" href="/Logout">
-                      / Salir
+                      / Register
                     </a>
                   </div>
                 </div>
