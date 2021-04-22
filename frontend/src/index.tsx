@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-//Components
+// Components
 import App from './components/App';
 
-//Pages
+// Pages
 
 ReactDOM.render(<App />,
   document.getElementById("root")

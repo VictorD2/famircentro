@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faFacebook,
     faGoogle,
-    faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
 class Login extends React.Component {
@@ -22,11 +21,6 @@ class Login extends React.Component {
                             <div className="col-12">
                                 <a href="https://facebook.com" className="btn btn-primary icon__social">
                                     <FontAwesomeIcon icon={faFacebook} className="fs-3" /> <span className="ms-3">Iniciar sesión con Facebook</span>
-                                </a>
-                            </div>
-                            <div className="col-12 mt-2">
-                                <a href="https://instagram.com" className="btn btn-instagram icon__social">
-                                    <FontAwesomeIcon icon={faInstagram} className="fs-3" /> <span className="ms-3">Iniciar sesión con Instagram</span>
                                 </a>
                             </div>
                             <div className="col-12 mt-2">

@@ -214,6 +214,11 @@ code {
   margin-bottom: 40px;
 }
 
+.ftr__list {
+  list-style: none;
+  padding-left: 0;
+}
+
 /*Inicio de estilos de Sobre Nosotros, Contactanos, Register and Login*/
 .Badge__container {
   width: 100%;
@@ -924,3 +929,36 @@ code {
 }
 
 /* Fin de Estilos del Home */
+
+/* ESTILOS LOADER */
+.loader {
+  border: 16px solid #000000;
+  border-radius: 50%;
+  border-top: 16px solid var(--azul-claro);
+  border-right: 16px solid var(--verde-oscuro);
+  border-bottom: 16px solid var(--amarillo-oscuro);
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin .8s linear infinite;
+  animation: spin .8s linear infinite;
+}
+
+.PageLoading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* FIN ESTILOS LOADER */
