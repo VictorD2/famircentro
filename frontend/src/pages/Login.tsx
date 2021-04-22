@@ -7,16 +7,6 @@ import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 class Login extends React.Component {
 
-  async getUser() {
-    const res = await axios.get("http://localhost:4000/sucessfulLogin");
-    console.log(res);
-  }
-  
-  componentWillUnmount() {
-    this.getUser();
-  }
-  
-
   //Set state
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({

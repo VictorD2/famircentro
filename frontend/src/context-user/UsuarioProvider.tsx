@@ -20,7 +20,6 @@ export function UsuarioProvider(props: any) {
   useEffect(() => {
     async function cargarUsuario() {
       if (usuario.isAuth) {
-        console.log(usuario);
         return;
       }
       const datos = await axios.get(
@@ -36,8 +35,6 @@ export function UsuarioProvider(props: any) {
       usuario.correo = datos.data.user.Correo;
       if (datos.data.user.Rango !== "user") usuario.isAdmin = true;
       usuario.url_foto = datos.data.user.Url_Foto;
-      console.log("XDDDDD");
-      console.log(usuario);
     }
     cargarUsuario();
   });
