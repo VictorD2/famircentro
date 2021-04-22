@@ -4,14 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const FACEBOOK = {
-    clientID: "2970891296478501",
-    clientSecret: "fd4bd2d5dd781edde534732440143e97"
-};
-const GOOGLE = {
-    clientID: "273786638957-48ob5nklg1iv09qls3a1ihnbea1me0j1.apps.googleusercontent.com",
-    clientSecret: "zZPU5xVhos4q4_mECto3x1wT"
-};
+const llaves = require('../config');
 
 //Configuración de passport al iniciar sesion
 passport.use('local.signin', new LocalStrategy({
@@ -55,8 +48,8 @@ passport.use('local.signup', new LocalStrategy({
 
 // Facebook
 passport.use(new FacebookStrategy({
-    clientID: FACEBOOK.clientID,
-    clientSecret: FACEBOOK.clientSecret,
+    clientID: llaves.FACEBOOK.clientID,
+    clientSecret: llaves.FACEBOOK.clientSecret,
     callbackURL: "/auth/facebook/callback",
     profileFields: ['name', 'photos', 'email'],
     passReqToCallback: true
@@ -78,8 +71,8 @@ passport.use(new FacebookStrategy({
 
 // Google
 passport.use(new GoogleStrategy({
-    clientID: GOOGLE.clientID,
-    clientSecret: GOOGLE.clientSecret,
+    clientID: llaves.GOOGLE.clientID,
+    clientSecret: llaves.GOOGLE.clientSecret,
     callbackURL: "/auth/google/callback",
     passReqToCallback: true
 }, async(request, accessToken, refreshToken, profile, done) => {
