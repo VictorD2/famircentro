@@ -7,6 +7,4 @@ import App from './components/App';
 
 // Pages
 
-ReactDOM.render(<App />,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
