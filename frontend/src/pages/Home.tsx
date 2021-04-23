@@ -9,15 +9,24 @@ import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
+import ScrollReveal from "scrollreveal";
 class Home extends React.Component {
-  
+  componentDidMount(){
+     //Para los efectos de aparicion
+     const config = {
+      duration: 1000,
+      delay: 150,
+      easing: 'ease',
+    };
+    ScrollReveal().reveal(".show", config);
+  }
   render() {
     return (
       <React.Fragment>
         <NavBar />
 
         <Carrusel />
-        <div className="position-static w-100 h-100 d-flex justify-content-center">
+        <div className="w-100 h-100 d-flex justify-content-center">
           <div className="caracteristicas">
             <div className="d-flex justify-content-around align-items-center w-100 h-100 fila">
               <div className="w-100 caracteristicas-item">

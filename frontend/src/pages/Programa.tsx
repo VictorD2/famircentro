@@ -10,8 +10,17 @@ import tea3 from '../images/tea3.jpg';
 import tea4 from '../images/tea4.jpg';
 import Footer from '../components/Footer';
 
+import ScrollReveal from "scrollreveal";
 class Programa extends React.Component {
-
+    componentDidMount(){
+        //Para los efectos de aparicion
+        const config = {
+         duration: 1000,
+         delay: 150,
+         easing: 'ease',
+       };
+       ScrollReveal().reveal(".show", config);
+     }
     render() {
         return(
             <React.Fragment>
@@ -22,8 +31,8 @@ class Programa extends React.Component {
                 <div className="Main__container">
                     <div className="container text-center mt-5" style={{marginBottom: "4.5rem"}}>
                         <div className="row">
-                            <span className="fw-light fs-6 text-secondary">CURSOS</span><br />
-                            <h3 className="fw-bold fs-1 mt-3">Asincronos</h3>
+                            <span className="fw-light fs-6 text-secondary show">CURSOS</span><br />
+                            <h3 className="fw-bold fs-1 mt-3 show">Asincronos</h3>
                         </div>
                         <div className="row" style={{ marginTop: "4.5rem" }}>
                             <CardCursos
@@ -44,8 +53,8 @@ class Programa extends React.Component {
                             />
                         </div>
                         <div className="row mt-5">
-                            <span className="fw-light fs-6 text-secondary">CURSOS</span><br />
-                            <h3 className="fw-bold fs-1 mt-3">Sincronos</h3>
+                            <span className="fw-light fs-6 text-secondary show">CURSOS</span><br />
+                            <h3 className="fw-bold fs-1 mt-3 show">Sincronos</h3>
                         </div>
                         <div className="row" style={{ marginTop: "4.5rem" }}>
                             <CardCursos

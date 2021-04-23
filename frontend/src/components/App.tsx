@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { UsuarioProvider } from './../context-user/UsuarioProvider';
+import { UsuarioProvider } from "./../context-user/UsuarioProvider";
 
 import AboutUs from "./../pages/AboutUs";
 import NotFound from "./../pages/NotFound";
@@ -18,7 +18,8 @@ function App() {
     setLoading(true);
     window.onload = () => {
       setLoading(false);
-    }
+    };
+   
   }, []);
 
   return (
@@ -43,7 +44,7 @@ function App() {
 export default function userPrev() {
   return (
     <UsuarioProvider>
-    <App></App>
-  </UsuarioProvider>
+      <App></App>
+    </UsuarioProvider>
   );
-};
+}

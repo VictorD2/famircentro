@@ -3,14 +3,15 @@ import imagen from "../images/pc-2.jpg";
 import TopCursosItem from "./TopCursosItem";
 
 const ListaTopCursos = () => {
+  
   return (
     <section className="top-cursos">
       <div className="container">
         <div className="row">
           <div className="col-12">
             <div className="top-cursos-heading">
-              <span>The best</span>
-              <h3>Top Popular Courses</h3>
+              <span className="show">The best</span>
+              <h3 className="show">Top Popular Courses</h3>
             </div>
           </div>
         </div>

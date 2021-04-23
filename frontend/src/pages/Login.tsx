@@ -17,7 +17,7 @@ class Login extends React.Component {
   //On submit login
   handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:4000/signin", this.state);
+    await axios.post("http://localhost:4000/signin", this.state);
     window.location.href="/";
   };
 
