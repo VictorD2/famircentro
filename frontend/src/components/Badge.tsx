@@ -4,7 +4,7 @@ type myProps = {name: string}
 
 const Badge: React.FC<myProps> = (props) => {
     return (
-        <div className="Badge__container">
+        <div className="Badge__container show">
             <div className="Box">
                 <span className="fw-bold fs-1">{props.name}</span>
             </div>

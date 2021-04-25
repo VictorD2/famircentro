@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { UsuarioProvider } from './../context-user/UsuarioProvider';
+import { UsuarioProvider } from "./../context-user/UsuarioProvider";
 
 import AboutUs from "./../pages/AboutUs";
 import NotFound from "./../pages/NotFound";
@@ -11,6 +11,8 @@ import Login from "./../pages/Login";
 import Programa from "./../pages/Programa";
 import PageLoading from "./PageLoading";
 import Perfil from './../pages/Perfil';
+import DashBoard from "../pages/DashBoard/DashBoard";
+import Usuarios from "./UsuariosDash/Usuarios";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,8 @@ function App() {
     setLoading(true);
     window.onload = () => {
       setLoading(false);
-    }
+    };
+
   }, []);
 
   return (
@@ -30,6 +33,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/perfil" component={Perfil} />
+          <Route exact path="/DashBoard" component={DashBoard} />
+          <Route exact path="/DashBoard/Usuarios" component={Usuarios} />
           <Route exact path="/Programa" component={Programa} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Register" component={Register} />
@@ -45,7 +50,7 @@ function App() {
 export default function userPrev() {
   return (
     <UsuarioProvider>
-    <App></App>
-  </UsuarioProvider>
+      <App></App>
+    </UsuarioProvider>
   );
-};
+}

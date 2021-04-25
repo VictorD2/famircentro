@@ -12,11 +12,10 @@ import {
 
 import { useUsuario } from "../context-user/UsuarioProvider";
 
-
 const NavBar = () => {
-
-  const {usuario} = useUsuario();
+  const { usuario } = useUsuario();
   console.log(usuario);
+  console.log("xd");
   // Para fijar el nav al scrollear la pagina
   window.onscroll = () => {
     if (window.scrollY >= 117) {
@@ -62,23 +61,30 @@ const NavBar = () => {
                     </a>
                   </div>
                   <div className="align-self-center justify-content-end">
-                    <a className="login-button p-3 fs-3" href="/Perfil">
-                      <FontAwesomeIcon icon={faUser} />
-                    </a>
-                    <a
-                      onClick={logout}
-                      className="login-button p-3 fs-3"
-                      href="/logout"
-                    >
-                      <FontAwesomeIcon icon={faDoorOpen} />
-                    </a>
-                    {/* //Cuando no lo está */}
-                    <a className="login-button" href="/Login">
-                      Login /
-                    </a>
-                    <a className="login-button" href="/Register">
-                      / Register
-                    </a>
+                    {usuario.isAuth ? (
+                      <>
+                        <a className="login-button p-3 fs-3" href="/Perfil">
+                          <FontAwesomeIcon icon={faUser} />
+                        </a>
+                        <a
+                          onClick={logout}
+                          className="login-button p-3 fs-3"
+                          href="/logout"
+                        >
+                          <FontAwesomeIcon icon={faDoorOpen} />
+                        </a>
+                      </>
+                    ) : (
+                      // {/* //Cuando no lo está */}
+                      <>
+                        <a className="login-button" href="/Login">
+                          Login /
+                        </a>
+                        <a className="login-button" href="/Register">
+                          / Register
+                        </a>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

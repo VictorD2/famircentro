@@ -1,9 +1,9 @@
 import React from "react";
-import fondo1 from "../images/bg-1.jpg";
-import fondo2 from "../images/bg-2.jpg";
+import fondo1 from "../../images/bg-1.jpg";
+import fondo2 from "../../images/bg-2.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import CarruselItem from "../components/CarruselItem";
+import CarruselItem from "./CarruselItem";
 
 const Carrusel = () => {
   

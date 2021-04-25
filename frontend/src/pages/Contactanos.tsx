@@ -14,7 +14,17 @@ import FormContact from "../components/FormContact";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
+import ScrollReveal from "scrollreveal";
 class Contactanos extends React.Component {
+    componentDidMount() {
+        //Para los efectos de aparicion
+        const config = {
+            duration: 1000,
+            delay: 150,
+            easing: 'ease',
+        };
+        ScrollReveal().reveal(".show", config);
+    }
     render() {
         return (
             <React.Fragment>
@@ -25,7 +35,7 @@ class Contactanos extends React.Component {
                 <div className="Main__container">
                     <div className="container text-center mt-5">
                         <div className="row">
-                            <div className="col-md-12">
+                            <div className="col-md-12 show">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15798.994774179579!2d-79.04023037587308!3d-8.127048606393345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3d6fc22bad99%3A0x9c81b5d832c8370!2sUniversidad%20Privada%20Antenor%20Orrego%20(UPAO)!5e0!3m2!1ses!2spe!4v1618519244878!5m2!1ses!2spe"
                                     style={{ border: 0 }}
@@ -47,7 +57,7 @@ class Contactanos extends React.Component {
                                     amet maximus nisl sagittis. Ut in iaculis enim, et pulvinar
                                     mauris.
                                 </p>
-                                <div className="content__icons">
+                                <div className="content__icons show">
                                     <a
                                         href="https://www.pinterest.ca/"
                                         target="blank"
@@ -117,7 +127,7 @@ class Contactanos extends React.Component {
                                     centrofamir@gmail.com
                                 </p>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 show">
                                 <FormContact />
                             </div>
                         </div>

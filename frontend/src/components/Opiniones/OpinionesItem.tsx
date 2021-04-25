@@ -1,5 +1,4 @@
 import React from "react";
-
 interface Props {
   title: string;
   comentario: string;
@@ -10,7 +9,7 @@ interface Props {
 
 const OpinionesItem = (props: Props) => {
   return (
-    <div className="col-12 col-lg-6">
+    <div className="col-12 col-lg-6 show">
       <div className="d-flex opinion-item">
         <img className="avatar" src={props.avatar} alt="Foto" />
         <div>

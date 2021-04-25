@@ -10,7 +10,7 @@ interface Props {
 }
 const TopCursosItem = (props: Props) => {
   return (
-    <div className="col-12 col-lg-6">
+    <div className="col-12 col-lg-6 show">
       <div className="d-flex top-cursos-item">
         <div className="info">
           <h5>{props.title}</h5>
@@ -18,8 +18,8 @@ const TopCursosItem = (props: Props) => {
             By {props.nombre_profesor} | {props.fecha}
           </p>
           <p className="curso-description">{props.descripcion}</p>
-          <Link to={props.url}className="btn btn__more mt-5">
-              Ver más
+          <Link to={props.url} className="btn btn__more mt-5">
+            Ver más
           </Link>
         </div>
         <div

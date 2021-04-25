@@ -1,6 +1,7 @@
-//import React, { useEffect, useState } from "react";
+import React from "react";
 import CursoItem from "./CursoItem";
 //import axios from "axios";
+
 import {
   faAddressCard,
   faGlobe,
@@ -20,7 +21,7 @@ const ListaCursos = () => {
   // };
 
   // useEffect(() => {
-  //   loadEmpleados();
+   
   // }, []);
   return (
     <div className="w-100 lista-cursos">

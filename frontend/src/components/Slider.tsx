@@ -9,7 +9,7 @@ function Slider() {
   return (
     <div
       id="carouselExampleInterval"
-      className="carousel slide mt-5 py-5"
+      className="carousel slide mt-5 py-5 show"
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">

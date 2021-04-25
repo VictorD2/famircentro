@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Badge from '../components/Badge';
-import CardTeacher from '../components/CardTeacher';
+import CardTeacher from '../components/Teacher/CardTeacher';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import Slider from '../components/Slider';
@@ -12,8 +12,17 @@ import tea2 from '../images/tea2.jpg';
 import tea3 from '../images/tea3.jpg';
 import tea4 from '../images/tea4.jpg';
 
+import ScrollReveal from "scrollreveal";
 class AboutUs extends React.Component {
-
+    componentDidMount() {
+        //Para los efectos de aparicion
+        const config = {
+            duration: 1000,
+            delay: 150,
+            easing: 'ease',
+        };
+        ScrollReveal().reveal(".show", config);
+    }
     render() {
         return (
             <React.Fragment>

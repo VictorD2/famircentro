@@ -8,7 +8,7 @@ interface myProps {
 class CardCursos extends React.Component<myProps>{
     render() {
         return (
-            <div className="card__teacher">
+            <div className="card__teacher show">
                 <a href={`Programa/${this.props.curso}`} className="text-decoration-none link-dark">
                     <img src={this.props.img} className="card-img-top" alt={`Curso ${this.props.curso}`} />
                     <div className="card-body">
