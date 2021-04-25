@@ -1,5 +1,5 @@
 import React from "react";
-import imagen from "../images/pc-2.jpg";
+import imagen from "../../images/pc-2.jpg";
 import TopCursosItem from "./TopCursosItem";
 
 const ListaTopCursos = () => {

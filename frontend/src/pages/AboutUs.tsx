@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Badge from '../components/Badge';
-import CardTeacher from '../components/CardTeacher';
+import CardTeacher from '../components/Teacher/CardTeacher';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import Slider from '../components/Slider';

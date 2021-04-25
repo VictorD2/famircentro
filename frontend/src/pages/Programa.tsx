@@ -1,7 +1,7 @@
 import React from 'react';
 
 import NavBar from '../components/NavBar';
-import CardCursos from './../components/CardCursos';
+import CardCursos from '../components/Cursos/CardCursos';
 import Badge from './../components/Badge';
 
 import tea1 from '../images/tea1.jpg';

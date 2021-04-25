@@ -1,9 +1,9 @@
 import React from "react";
 
-import Carrusel from "../components/Carrusel";
-import ListaCursos from "../components/ListaCursos";
-import ListaOpiniones from "../components/ListaOpiniones";
-import ListaTopCursos from "../components/ListaTopCursos";
+import Carrusel from "../components/Carrousel/Carrusel";
+import ListaCursos from "../components/Cursos/ListaCursos";
+import ListaOpiniones from "../components/Opiniones/ListaOpiniones";
+import ListaTopCursos from "../components/TopCursos/ListaTopCursos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";

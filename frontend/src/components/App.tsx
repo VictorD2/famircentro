@@ -10,6 +10,8 @@ import Register from "./../pages/Register";
 import Login from "./../pages/Login";
 import Programa from "./../pages/Programa";
 import PageLoading from "./PageLoading";
+import DashBoard from "../pages/DashBoard/DashBoard";
+import Usuarios from "./UsuariosDash/Usuarios";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -29,6 +31,8 @@ function App() {
       ) : (
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/DashBoard" component={DashBoard} />
+          <Route exact path="/DashBoard/Usuarios" component={Usuarios} />
           <Route exact path="/Programa" component={Programa} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Register" component={Register} />
