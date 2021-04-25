@@ -10,6 +10,7 @@ import Register from "./../pages/Register";
 import Login from "./../pages/Login";
 import Programa from "./../pages/Programa";
 import PageLoading from "./PageLoading";
+import Perfil from './../pages/Perfil';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,7 @@ function App() {
       ) : (
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/perfil" component={Perfil} />
           <Route exact path="/Programa" component={Programa} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Register" component={Register} />

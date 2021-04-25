@@ -20,7 +20,7 @@ class Contactanos extends React.Component {
             <React.Fragment>
                 <NavBar />
 
-                <Badge name="Contact" />
+                <Badge name="Contáctanos" />
 
                 <div className="Main__container">
                     <div className="container text-center mt-5">
@@ -35,11 +35,11 @@ class Contactanos extends React.Component {
                                 ></iframe>
                             </div>
                         </div>
-                        <div className="row mt-5 cts__content" style={{marginBottom: "5rem"}}>
+                        <div className="row mt-5 cts__content" style={{ marginBottom: "5rem" }}>
                             <div className="col-md-6 text-start">
-                                <span className="fw-light fs-6 text-secondary">THE BEST</span>
+                                <span className="fw-light fs-6 text-secondary">PUEDES</span>
                                 <br />
-                                <h3 className="fw-bold fs-1 mt-3">Contact Us</h3>
+                                <h3 className="fw-bold fs-1 mt-3">Contactarnos</h3>
                                 <p className="mt-4 lh-lg" style={{ fontSize: "0.875rem" }}>
                                     Lacinia, lacinia la cus non, fermen tum nisi. Donec et
                                     sollicitudin. Morbi vel arcu gravida, iaculis lacus vel,
@@ -114,7 +114,7 @@ class Contactanos extends React.Component {
                                     className="cts__icons-unique"
                                 />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
-                                    office@yourbusiness.com
+                                    centrofamir@gmail.com
                                 </p>
                             </div>
                             <div className="col-md-6">

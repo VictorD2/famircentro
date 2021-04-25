@@ -247,7 +247,7 @@ code {
 .text__container {
   font-size: 14px;
   color: #606060;
-  margin-top: 4.5rem;
+  margin-top: 1.5rem;
 }
 
 .Main__container {
@@ -334,6 +334,14 @@ code {
 
 .cts__form-control:focus {
   background: #eef3f6;
+}
+
+.vision-pLeft {
+  padding-left: auto;
+}
+
+.vision-pRight {
+  padding-right: auto;
 }
 /**
 * Estilos de Register
@@ -489,6 +497,50 @@ code {
     border-bottom: 1px solid #e4e4e4;
 }
 
+/* ESTILOS DE PERFIL */
+.BadgesListItem {
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+}
+
+.BadgesListItem__avatar {
+  border-radius: 50%;
+  background: #a3a3a3;
+  margin-right: 0.5rem;
+  width: 70px;
+  height: 70px;
+  border-style: solid;
+  border-color: var(--verde-oscuro);
+}
+
+.img__pais {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.link-unstyled {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-unstyled:hover {
+  color: inherit;
+}
+
+.content__items-Perfil {
+  padding-left: 5.7rem;
+  padding-right: 6rem;
+}
+
+.content__Card-Perfil {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 @media only screen and (min-width: 769px) {
   .Box {
     width: 31.25rem;
@@ -505,6 +557,16 @@ code {
   .btn__more {
     padding: 15px 45px;
   }
+  .vision-pLeft {
+    padding-left: 3rem;
+  }
+  .vision-pRight {
+    padding-right: 3rem;
+  }
+  .BadgesListItem__avatar {
+    width: 130px;
+    height: 130px;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -517,6 +579,14 @@ code {
     width: 100vw;
     height: 100vh;
     overflow: auto;
+  }
+  .content__items-Perfil {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .content__Card-Perfil {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 

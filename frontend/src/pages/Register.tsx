@@ -50,7 +50,7 @@ class Register extends React.Component {
   render() {
     return (
       <div className="rgt__main">
-        <div className="card content__form">
+        <div className="card content__form animate__animated animate__flipInY">
           <a href="/" className="card-header rgt__header">
             <img className="rgt__img" src={logoRegister} alt="logo-register" />
             <h5 className="rgt__title">FAMIR CENTRO</h5>
