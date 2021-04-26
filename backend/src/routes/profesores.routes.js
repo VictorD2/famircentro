@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const ctrlProfesores = require('../controllers/profesores.controllers');
-
-router.get('/', ctrlProfesores.getUsers);
-router.get('/:id', ctrlProfesores.getUserById);
-router.post('/', ctrlProfesores.createUser);
-router.put('/:id', ctrlProfesores.updateUser);
-router.delete('/:id', ctrlProfesores.deleteUser);
+const { isAdmin,isLoggedIn } = require('../lib/auth');
+router.get('/', ctrlProfesores.getProfesores);
+router.get('/:id', ctrlProfesores.getProfesorById);
+router.post('/', ctrlProfesores.createProfesor);
+router.put('/:id', ctrlProfesores.updateProfesor);
+router.delete('/:id', ctrlProfesores.deleteProfesor);
 
 
 

@@ -12,6 +12,10 @@ import Programa from "./../pages/Programa";
 import PageLoading from "./PageLoading";
 import DashBoard from "../pages/DashBoard/DashBoard";
 import Usuarios from "./UsuariosDash/Usuarios";
+import Profesores from "./ProfesoresDash/Profesores";
+import FormProfesor from "./ProfesoresDash/FormProfesor";
+
+
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -21,7 +25,6 @@ function App() {
     window.onload = () => {
       setLoading(false);
     };
-   
   }, []);
 
   return (
@@ -31,8 +34,16 @@ function App() {
       ) : (
         <Switch>
           <Route exact path="/" component={Home} />
+          {/* Dashboard */}
           <Route exact path="/DashBoard" component={DashBoard} />
+          {/* Usuarios */}
           <Route exact path="/DashBoard/Usuarios" component={Usuarios} />
+          {/* Profesores */}
+          <Route exact path="/DashBoard/Profesores" component={Profesores} />
+          <Route exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
+          <Route exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
+
+          {/* Vistas */}
           <Route exact path="/Programa" component={Programa} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Register" component={Register} />
@@ -40,7 +51,9 @@ function App() {
           <Route exact path="/Contactanos" component={Contact} />
           <Route component={NotFound} />
         </Switch>
+        
       )}
+      
     </BrowserRouter>
   );
 }
