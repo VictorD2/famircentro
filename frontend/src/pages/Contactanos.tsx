@@ -16,21 +16,21 @@ import Footer from "../components/Footer";
 
 import ScrollReveal from "scrollreveal";
 class Contactanos extends React.Component {
-    componentDidMount(){
+    componentDidMount() {
         //Para los efectos de aparicion
         const config = {
-         duration: 1000,
-         delay: 150,
-         easing: 'ease',
-       };
-       ScrollReveal().reveal(".show", config);
-     }
+            duration: 1000,
+            delay: 150,
+            easing: 'ease',
+        };
+        ScrollReveal().reveal(".show", config);
+    }
     render() {
         return (
             <React.Fragment>
                 <NavBar />
 
-                <Badge name="Contact" />
+                <Badge name="Contáctanos" />
 
                 <div className="Main__container">
                     <div className="container text-center mt-5">
@@ -45,12 +45,12 @@ class Contactanos extends React.Component {
                                 ></iframe>
                             </div>
                         </div>
-                        <div className="row mt-5 cts__content" style={{marginBottom: "5rem"}}>
-                            <div className="col-md-6 text-start show">
-                                <span className="fw-light fs-6 text-secondary show">THE BEST</span>
+                        <div className="row mt-5 cts__content" style={{ marginBottom: "5rem" }}>
+                            <div className="col-md-6 text-start">
+                                <span className="fw-light fs-6 text-secondary">PUEDES</span>
                                 <br />
-                                <h3 className="fw-bold fs-1 mt-3 show">Contact Us</h3>
-                                <p className="mt-4 lh-lg show" style={{ fontSize: "0.875rem" }}>
+                                <h3 className="fw-bold fs-1 mt-3">Contactarnos</h3>
+                                <p className="mt-4 lh-lg" style={{ fontSize: "0.875rem" }}>
                                     Lacinia, lacinia la cus non, fermen tum nisi. Donec et
                                     sollicitudin. Morbi vel arcu gravida, iaculis lacus vel,
                                     posuere ipsum. Sed faucibus mauris vitae urna consectetur, sit
@@ -124,7 +124,7 @@ class Contactanos extends React.Component {
                                     className="cts__icons-unique"
                                 />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
-                                    office@yourbusiness.com
+                                    centrofamir@gmail.com
                                 </p>
                             </div>
                             <div className="col-md-6 show">

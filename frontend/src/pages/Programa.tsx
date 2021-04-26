@@ -34,7 +34,7 @@ class Programa extends React.Component {
                             <span className="fw-light fs-6 text-secondary show">CURSOS</span><br />
                             <h3 className="fw-bold fs-1 mt-3 show">Asincronos</h3>
                         </div>
-                        <div className="row" style={{ marginTop: "4.5rem" }}>
+                        <div className="row mt-5 animate__animated animate__backInUp animate__faster" style={{ marginTop: "4.5rem" }}>
                             <CardCursos
                                 img={tea1}
                                 curso="Modelado de Procesos de Negocios"
@@ -56,7 +56,7 @@ class Programa extends React.Component {
                             <span className="fw-light fs-6 text-secondary show">CURSOS</span><br />
                             <h3 className="fw-bold fs-1 mt-3 show">Sincronos</h3>
                         </div>
-                        <div className="row" style={{ marginTop: "4.5rem" }}>
+                        <div className="row mt-5 animate__animated animate__backInUp animate__faster" style={{ marginTop: "4.5rem" }}>
                             <CardCursos
                                 img={tea1}
                                 curso="Seguridad Informatica"
