@@ -41,6 +41,7 @@ app.use(express.static(path.join(__dirname, "/build")));
 
 // Global Variables
 app.use(async(req, res, next) => {
+    // console.log(req.user);
     app.locals.user = req.user;
     next();
 });

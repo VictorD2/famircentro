@@ -21,11 +21,10 @@ router.post('/signin', (req, res, next) => {
 
 
 router.get('/sucessfulLogin', typePetition, async(req, res) => {
-    if (req.user) {
-        const rows = await pool.query('SELECT * FROM usuarios WHERE Correo = ?', [req.user.Correo]);
-        return res.json({ user: rows[0], authenticate: true });
-    }
-    return res.json({ message: "failed", authenticate: false }); //No autentificado
+    if (!req.user) return res.json({ message: "failed"}); //No autentificado
+    delete req.user.Contrasenia;
+    req.user.authenticate = true;
+    return res.json({ user: req.user });
 });
 
 // Iniciar con Facebook

@@ -24,7 +24,7 @@ const ListaCursos = () => {
    
   // }, []);
   return (
-    <div className="w-100 lista-cursos">
+    <section className="w-100 lista-cursos">
       <div className="container">
         <div className="row mx-auto">
           <CursoItem
@@ -71,7 +71,7 @@ const ListaCursos = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

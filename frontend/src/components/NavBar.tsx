@@ -1,21 +1,15 @@
 import React from "react";
 import logo from "../images/logoFamir.svg";
 import Axios from "axios";
+
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPhone,
-  faBars,
-  faTimes,
-  faDoorOpen,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faBars, faTimes, faDoorOpen, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import { useUsuario } from "../context-user/UsuarioProvider";
 
 const NavBar = () => {
-  const { usuario } = useUsuario();
-  console.log(usuario);
-  console.log("xd");
+  const { usuario, loadUser } = useUsuario();
   // Para fijar el nav al scrollear la pagina
   window.onscroll = () => {
     if (window.scrollY >= 117) {
@@ -61,30 +55,34 @@ const NavBar = () => {
                     </a>
                   </div>
                   <div className="align-self-center justify-content-end">
-                    {usuario.isAuth ? (
-                      <>
-                        <a className="login-button p-3 fs-3" href="/Perfil">
-                          <FontAwesomeIcon icon={faUser} />
-                        </a>
-                        <a
-                          onClick={logout}
-                          className="login-button p-3 fs-3"
-                          href="/logout"
-                        >
-                          <FontAwesomeIcon icon={faDoorOpen} />
-                        </a>
-                      </>
-                    ) : (
-                      // {/* //Cuando no lo está */}
-                      <>
-                        <a className="login-button" href="/Login">
-                          Login /
-                        </a>
-                        <a className="login-button" href="/Register">
-                          / Register
-                        </a>
-                      </>
-                    )}
+                    {loadUser ? (<>
+                      {usuario.authenticate ? (
+                        <>
+                          <Link className="login-button p-3 fs-3" to="/Perfil">
+                            <FontAwesomeIcon icon={faUser} />
+                          </Link>
+                          <a
+                            onClick={logout}
+                            className="login-button p-3 fs-3"
+                            href="/logout"
+                          >
+                            <FontAwesomeIcon icon={faDoorOpen} />
+                          </a>
+                        </>
+                      ) : (
+                        // {/* //Cuando no lo está */}
+                        <>
+                          <Link className="login-button" to="/Login">
+                            Login /
+                        </Link>
+                          <Link className="login-button" to="/Register">
+                            / Register
+                        </Link>
+                        </>
+                      )}
+
+                    </>) : (<></>)}
+
                   </div>
                 </div>
               </div>
@@ -97,24 +95,24 @@ const NavBar = () => {
         <div className="left-side">
           <ul className="lista-enlace">
             <li className="lista-item">
-              <a className="item-link" href="/">
+              <Link className="item-link" to="/">
                 Inicio
-              </a>
+              </Link>
             </li>
             <li className="lista-item">
-              <a className="item-link" href="/Nosotros">
+              <Link className="item-link" to="/Nosotros">
                 Nosotros
-              </a>
+              </Link>
             </li>
             <li className="lista-item">
-              <a className="item-link" href="/Contactanos">
+              <Link className="item-link" to="/Contactanos">
                 Contáctanos
-              </a>
+              </Link>
             </li>
             <li className="lista-item">
-              <a className="item-link" href="/Programa">
+              <Link className="item-link" to="/Programa">
                 Programa
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -151,24 +149,24 @@ const NavBar = () => {
         </div>
         <ul className="d-flex flex-column pt-5 navigation-list">
           <li className="item-list">
-            <a className="item-link" href="/">
+            <Link className="item-link" to="/">
               Inicio
-            </a>
+            </Link>
           </li>
           <li className="item-list">
-            <a className="item-link" href="/Nosotros">
+            <Link className="item-link" to="/Nosotros">
               ¿Quienes Somos?
-            </a>
+            </Link>
           </li>
           <li className="item-list">
-            <a className="item-link" href="/Contactanos">
+            <Link className="item-link" to="/Contactanos">
               Contáctanos
-            </a>
+            </Link>
           </li>
           <li className="item-list">
-            <a className="item-link" href="/Programa">
+            <Link className="item-link" to="/Programa">
               Programa
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

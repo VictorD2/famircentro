@@ -14,11 +14,10 @@ passport.use('local.signin', new LocalStrategy({
 }, async(req, email, password, done) => {
 
     const rows = await pool.query('SELECT * FROM usuarios WHERE  Correo = ?', [email]); //<- Buscamos al usuario
-
     if (!rows.length > 0) return done(null, false); //El usuario no existe
 
     const validPassword = await helpers.matchPassword(password, rows[0].Contrasenia); //<- Verificando la contraseña
-
+    
     if (validPassword) return done(null, rows[0]); //<- Contraseña correcta
 
     done(null, false); //<-Contraseña incorrecta

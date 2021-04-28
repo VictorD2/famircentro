@@ -30,7 +30,6 @@ const FormProfesor = () => {
       setProfesor(initialState);
       toast.success("Profesor creado");
     } else {
-      console.log(params.id);
       const res = await profesorServices.updateProfesor(params.id, profesor);
       console.log(res);
       toast.success("Profesor modificado");

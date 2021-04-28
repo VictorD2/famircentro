@@ -6,6 +6,7 @@ import ListaOpiniones from "../components/Opiniones/ListaOpiniones";
 import ListaTopCursos from "../components/TopCursos/ListaTopCursos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
+
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
