@@ -15,12 +15,14 @@ import DashBoard from "../pages/DashBoard/DashBoard";
 import Usuarios from "./UsuariosDash/Usuarios";
 import Profesores from "./ProfesoresDash/Profesores";
 import FormProfesor from "./ProfesoresDash/FormProfesor";
+import LogRoute from './ProtectedRoutes/LogRoute';
+import NoLogRoute from './ProtectedRoutes/NoLogRoute';
+import AdminRoute from './ProtectedRoutes/AdminRoute';
 
-
-
+import { useUsuario } from "../context-user/UsuarioProvider";
 function App() {
   const [loading, setLoading] = useState(false);
-
+  const {usuario} = useUsuario();
   useEffect(() => {
     setLoading(true);
     window.onload = () => {
@@ -36,20 +38,19 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           {/* Dashboard */}
-          <Route exact path="/perfil" component={Perfil} />
-          <Route exact path="/DashBoard" component={DashBoard} />
+          <LogRoute isSignedIn={usuario.authenticate} component={Perfil} exact path="/perfil" />
+          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard" component={DashBoard} />
           {/* Usuarios */}
-          <Route exact path="/DashBoard/Usuarios" component={Usuarios} />
+          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Usuarios" component={Usuarios} />
           {/* Profesores */}
-          <Route exact path="/DashBoard/Profesores" component={Profesores} />
-          <Route exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
-          <Route exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
+          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Profesores" component={Profesores} />
+          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
+          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
 
           {/* Vistas */}
+          <NoLogRoute isSignedIn={usuario.authenticate} component={Login} exact path="/Login"  />
+          <NoLogRoute isSignedIn={usuario.authenticate} component={Register} exact path="/Register"  />
           <Route exact path="/Programa" component={Programa} />
-          
-          <Route exact path="/Login" component={Login} />
-          <Route exact path="/Register" component={Register} />
           <Route exact path="/Nosotros" component={AboutUs} />
           <Route exact path="/Contactanos" component={Contact} />
           <Route component={NotFound} />
