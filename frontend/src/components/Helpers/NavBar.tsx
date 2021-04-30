@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../images/logoFamir.svg";
+import logo from "../../images/logoFamir.svg";
 import Axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +10,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useUsuario } from "../context-user/UsuarioProvider";
+import { useUsuario } from "../../context-user/UsuarioProvider";
 
 const NavBar = () => {
   const { usuario } = useUsuario();

@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from '../components/Footer';
-import NavBar from '../components/NavBar';
+import Footer from '../components/Helpers/Footer';
+import NavBar from '../components/Helpers/NavBar';
 
 class NotFound extends React.Component {
     render() {

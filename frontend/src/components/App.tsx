@@ -9,10 +9,11 @@ import Contact from "./../pages/Contactanos";
 import Register from "./../pages/Register";
 import Login from "./../pages/Login";
 import Programa from "./../pages/Programa";
-import PageLoading from "./PageLoading";
+import PageLoading from "./Helpers/PageLoading";
 import Perfil from './../pages/Perfil';
 import DashBoard from "../pages/DashBoard/DashBoard";
 import Usuarios from "./UsuariosDash/Usuarios";
+import Curso from './../pages/Curso';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,8 @@ function App() {
       ) : (
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/perfil" component={Perfil} />
+          <Route exact path="/Perfil" component={Perfil} />
+          <Route exact path="/Curso" component={Curso}/>
           <Route exact path="/DashBoard" component={DashBoard} />
           <Route exact path="/DashBoard/Usuarios" component={Usuarios} />
           <Route exact path="/Programa" component={Programa} />

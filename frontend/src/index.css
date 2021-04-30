@@ -18,6 +18,32 @@ code {
     monospace;
 }
 
+/* START SCROLLBAR */
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4px grey; 
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--verde-claro); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--verde-oscuro); 
+}
+
+/* END SCROLLBAR*/
+
 /* Navbar */
 .header-area {
   position: relative;
@@ -253,7 +279,6 @@ code {
 .Main__container {
   margin-left: 11.5rem;
   margin-right: 11.5rem;
-  font-family: "Montserrat", sans-serif;
 }
 
 .card__teacher {
@@ -357,12 +382,12 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .content__form {
   width: 30rem;
   height: 30rem;
-  overflow: auto;
 }
 
 .content__Login {
@@ -541,6 +566,41 @@ code {
   padding-right: 3rem;
 }
 
+.desplegar {
+  max-height: 34rem;
+  overflow-y: scroll;
+}
+
+/* Detalles de Curso */
+.container__curso {
+  margin: 8rem 5rem;
+  padding: 1.5rem;
+  background: #eef3f6;
+}
+
+.content__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ancho-img {
+  width: 60rem;
+}
+
+.btn-width {
+  width: 10rem;
+  height: 2.525rem;
+}
+
+.btn-space {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.column-detail {
+  padding-right: 1rem;
+}
+
 @media only screen and (min-width: 769px) {
   .Box {
     width: 31.25rem;
@@ -567,6 +627,10 @@ code {
     width: 130px;
     height: 130px;
   }
+  .btn-width {
+    width: 12.5rem;
+    height: 2.525rem;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -578,7 +642,7 @@ code {
   .content__form {
     width: 100vw;
     height: 100vh;
-    overflow: auto;
+    overflow-x: hidden;
   }
   .content__items-Perfil {
     padding-left: 0;
@@ -587,6 +651,19 @@ code {
   .content__Card-Perfil {
     padding-left: 0;
     padding-right: 0;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  .content__row {
+    flex-direction: column-reverse;
+  }
+  .column-detail {
+    padding-right: 0;
+    margin-top: 1rem;
+  }
+  .container__curso {
+    margin: 4rem 0;
   }
 }
 

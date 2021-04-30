@@ -1,10 +1,10 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
-import Footer from './../components/Footer';
+import NavBar from '../components/Helpers/NavBar';
+import Footer from '../components/Helpers/Footer';
 
 import foto from '../images/t1.jpg';
-import Badge from '../components/Badge';
-import CardPerfil from '../components/CardCursosPerfil';
+import Badge from '../components/Helpers/Badge';
+import CardCursosPerfil from '../components/Perfil/CardCursosPerfil';
 
 class Perfil extends React.Component {
     render() {
@@ -39,7 +39,7 @@ class Perfil extends React.Component {
                         <div className="content__Card-Perfil">
                             <div className="row pb-5">
                                 <div className="col-12">
-                                    <CardPerfil />
+                                    <CardCursosPerfil />
                                 </div>
                             </div>
                         </div>

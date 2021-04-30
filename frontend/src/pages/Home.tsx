@@ -6,8 +6,8 @@ import ListaOpiniones from "../components/Opiniones/ListaOpiniones";
 import ListaTopCursos from "../components/TopCursos/ListaTopCursos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import NavBar from "../components/Helpers/NavBar";
+import Footer from "../components/Helpers/Footer";
 
 import ScrollReveal from "scrollreveal";
 class Home extends React.Component {

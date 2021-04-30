@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from "../images/logoFamir.jpg";
+import logo from "../../images/logoFamir.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
