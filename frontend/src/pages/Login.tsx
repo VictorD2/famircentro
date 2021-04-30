@@ -1,28 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 import logoLogin from "../images/Logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
-class Login extends React.Component {
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
+const Login = () => {
+  const initialState = {
+    email: "",
+    password: "",
+  };
+
+  const [state, setState] = useState(initialState);
   //Set state
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
   //On submit login
-  handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post("http://localhost:4000/signin", this.state);
-    window.location.href="/";
+    const res = await axios.post("http://localhost:4000/signin", state);
+    if (res.data.message === "failed")
+      return toast.error("Correo o contraseña incorrectos");
+    window.location.href = "/";
   };
 
-  render() {
-    return (
+  return (
+    <React.Fragment>
+      <ToastContainer />
       <div className="rgt__main">
         <div className="card content__Login animate__animated animate__flipInY">
           <a href="/" className="card-header rgt__header">
@@ -37,7 +46,7 @@ class Login extends React.Component {
                   // onClick={this.handleFacebook}
                   className="btn btn-primary w-100 icon__social"
                 >
-                  <FontAwesomeIcon icon={faFacebook} className="fs-3" />{" "}
+                  <FontAwesomeIcon icon={faFacebook} className="fs-3" />
                   <span className="ms-3">Iniciar sesión con Facebook</span>
                 </a>
               </div>
@@ -61,10 +70,10 @@ class Login extends React.Component {
             </div>
             <div className="row">
               <div className="col-12">
-                <form onSubmit={this.handleForm}>
+                <form onSubmit={handleForm}>
                   <div className="form-floating mb-3">
                     <input
-                      onChange={this.handleInputChange}
+                      onChange={handleInputChange}
                       type="email"
                       name="email"
                       className="form-control"
@@ -75,7 +84,7 @@ class Login extends React.Component {
                   </div>
                   <div className="form-floating mb-3">
                     <input
-                      onChange={this.handleInputChange}
+                      onChange={handleInputChange}
                       type="password"
                       name="password"
                       className="form-control"
@@ -113,8 +122,8 @@ class Login extends React.Component {
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </React.Fragment>
+  );
+};
 
 export default Login;

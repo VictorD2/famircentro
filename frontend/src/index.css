@@ -98,16 +98,17 @@ code {
   justify-content: center;
   color: #000;
   align-items: center;
-  background: var(--verde-claro);
+  background: var(--azul-claro);
   background: -webkit-linear-gradient(
     to left,
-    var(--verde-claro),
-    var(--verde-claro)
+    var(--azul-claro),
+    var(--azul-claro)
   );
-  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+  background: linear-gradient(to left, var(--azul-claro), var(--azul-oscuro));
   width: 30%;
   font-size: 14px;
   font-weight: 700;
+  color:white;
 }
 /* .navigation .left-side:after {
   position: absolute;
@@ -217,11 +218,11 @@ code {
 }
 .footer-social-list a,
 .footer-contact svg {
-  color: var(--verde-oscuro);
+  color: white;
 }
 .footer-social-list a:hover,
 .footer-contact svg:hover {
-  color: var(--verde-claro);
+  color: white;
 }
 .footer-links-list {
   list-style: none;
@@ -262,7 +263,7 @@ code {
   width: 17.5rem;
   height: 6.85rem;
   color: #ffffff;
-  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+  background: linear-gradient(to left, var(--azul-claro), var(--azul-oscuro));
   position: absolute;
   top: 19.5rem;
   display: flex;
@@ -295,14 +296,7 @@ code {
   color: white;
   box-shadow: 0 0 20px #eee;
   border-radius: 10px;
-  background-image: linear-gradient(
-    to right,
-    var(--verde-oscuro) 0%,
-    var(--amarillo-claro) 51%,
-    var(--verde-oscuro) 100%
-  );
-  outline: none;
-  font-weight: bold;
+  background:var(--azul-oscuro);
 }
 .btn__more:hover {
   background-position: right center;
@@ -326,7 +320,7 @@ code {
 }
 
 .cts__icons-unique {
-  color: var(--verde-oscuro);
+  color: var(--azul-oscuro);
   margin-right: 1rem;
 }
 
@@ -696,7 +690,7 @@ code {
   justify-content: center;
   width: 15%;
   padding: 0;
-  color: #fff;
+  color: #000;
   text-align: center;
   background: 0 0;
   border: 0;
@@ -706,19 +700,15 @@ code {
 .icon__carrusel {
   width: 56px !important;
   height: 56px !important;
-  background-color: var(--verde-claro);
-  background: -webkit-linear-gradient(
-    to left,
-    var(--verde-claro),
-    var(--verde-claro)
-  );
-  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+  background-color: white;
   opacity: 1;
+  color:#000;
   transition: all 0.5s;
 }
 .icon__carrusel:hover {
   background: #141414;
   transition: all 0.5s;
+  color:#fff
 }
 .desaparecer {
   transition: all 0.5s;
@@ -757,10 +747,10 @@ code {
   background: var(--verde-claro);
   background: -webkit-linear-gradient(
     to left,
-    var(--verde-claro),
-    var(--verde-claro)
+    var(--azul-claro),
+    var(--azul-claro)
   );
-  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+  background: linear-gradient(to left, var(--azul-claro), var(--azul-oscuro));
 }
 .caracteristicas-item {
   display: flex;

@@ -2,53 +2,53 @@ import React from 'react';
 import NavBar from '../components/Helpers/NavBar';
 import Footer from '../components/Helpers/Footer';
 
-import foto from '../images/t1.jpg';
 import Badge from '../components/Helpers/Badge';
-import CardCursosPerfil from '../components/Perfil/CardCursosPerfil';
 
-class Perfil extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                <NavBar />
+import { useUsuario } from "../context-user/UsuarioProvider";
+import CardCursosPerfil from './../components/Perfil/CardCursosPerfil';
+const Perfil = () => {
+    const { usuario } = useUsuario()
 
-                <Badge name="Perfil" />
+    return (
+        <React.Fragment>
+            <NavBar />
 
-                <div className="Main__container">
-                    <div className="container bg-light mt-5" style={{ marginBottom: "4.5rem" }}>
-                        <div className="row p-5 justify-content-center">
-                            <div className="col-lg-2 col-md-3">
-                                <img src={foto} alt="foto" className="BadgesListItem__avatar me-5" />
-                            </div>
-                            <div className="col-md-5">
-                                <div className="row">
-                                    <div className="col-12 d-flex">
-                                        <span className="fs-2">Juliana Amel Ruiz Paz</span>
-                                        <figure>
-                                            <img src="https://static.platzi.com/media/flags/PE.png" alt="pais" height="18" className="img__pais" />
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12">
-                                        <a href="/Perfil/user/edir" className="btn btn__more" style={{padding: "0.5rem 1rem"}}>Editar</a>
-                                    </div>
-                                </div>
-                            </div>
+            <Badge name="Perfil" />
+
+            <div className="Main__container">
+                <div className="container bg-light mt-5" style={{ marginBottom: "4.5rem" }}>
+                    <div className="row p-5 justify-content-center">
+                        <div className="col-lg-2 col-md-3">
+                            <img src={usuario.Url_Foto} alt="foto" className="BadgesListItem__avatar me-5" />
                         </div>
-                        <div className="content__Card-Perfil">
-                            <div className="row pb-5">
+                        <div className="col-md-5">
+                            <div className="row">
+                                <div className="col-12 d-flex">
+                                    <span className="fs-2">{`${usuario.Nombres}  ${usuario.Apellidos}`}</span>
+                                    <figure>
+                                        <img src="https://static.platzi.com/media/flags/PE.png" alt="pais" height="18" className="img__pais" />
+                                    </figure>
+                                </div>
+                            </div>
+                            <div className="row">
                                 <div className="col-12">
                                     <CardCursosPerfil />
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="content__Card-Perfil">
+                        <div className="row pb-5">
+                            <div className="col-12">
+                                <CardCursosPerfil />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <Footer />
-            </React.Fragment>
-        );
-    }
+            </div>
+            <Footer />
+        </React.Fragment>
+    )
 }
 
 export default Perfil;

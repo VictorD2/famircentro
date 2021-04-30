@@ -41,12 +41,14 @@ app.use(express.static(path.join(__dirname, "/build")));
 
 // Global Variables
 app.use(async(req, res, next) => {
+    // console.log(req.user);
     app.locals.user = req.user;
     next();
 });
 
 
 //Routes
+app.use('/api/profesores', require('./routes/profesores.routes'));
 app.use('/api/usuarios', require('./routes/usuarios.routes'));
 app.use(require('./routes/auth.routes'));
 app.use(require('./routes/index.routes')); //<- siempre al ultimo

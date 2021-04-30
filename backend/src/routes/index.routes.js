@@ -2,7 +2,6 @@ const router = require('express').Router();
 const path = require('path');
 const pool = require('../database');
 
-
 router.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });

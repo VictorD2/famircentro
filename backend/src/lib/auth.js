@@ -4,29 +4,26 @@ module.exports = {
         if (req.isAuthenticated()) {
             return next();
         }
-        return res.redirect('/');
+        return res.redirect('/Login');
     },
 
     isNotLoggedIn(req, res, next) {
         if (!req.isAuthenticated()) {
             return next();
         }
-        return res.redirect('/Dashboard');
+        return res.redirect('/');
     },
 
     typePetition(req, res, next) {
         const datos = JSON.stringify(req.headers);
         const respuesta = datos.search("cors");
-        if (respuesta === -1) {
-            return res.redirect('/');
-        }
+        if (respuesta === -1) return res.redirect('/');
         return next();
     },
 
     isAdmin(req, res, next) {
-        if (req.user.Rango == "user") {
-            return res.redirect('/');
-        }
+        if (req.user.Rango == "user") return res.redirect('/');
+
         return next();
     }
 }

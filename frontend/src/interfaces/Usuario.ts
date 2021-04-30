@@ -1,9 +1,9 @@
 export default interface Usuario{
-    id: string;
-    nombre: string;
-    apellidos: string;
-    correo:string;
-    url_foto:string;
-    isAdmin: boolean;
-    isAuth:boolean,
+    Codigo_Usuario: string,
+    Nombres: string,
+    Apellidos: string,
+    Correo: string,
+    Rango: string,
+    Url_Foto: string,
+    authenticate: boolean,
 }
