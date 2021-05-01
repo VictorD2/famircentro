@@ -10,8 +10,6 @@ interface PrivateRouteProps {
 }
 const AdminRoute = (props: PrivateRouteProps) => {
     const { component: Component, isSignedIn, exact, path, rango, ...rest } = props;
-    console.log(rango);
-    console.log(isSignedIn);
     return (
         <Route
             {...rest}

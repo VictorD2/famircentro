@@ -25,7 +25,6 @@ export function UsuarioProvider(props: any) {
         "http://localhost:4000/api/usuarios/whoami"
       );
       if (datos.data.user) setUsuario(datos.data.user);
-      
       setLoadUser(true);
     }
     cargarUsuario();
