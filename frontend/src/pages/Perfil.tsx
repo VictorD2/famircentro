@@ -30,11 +30,6 @@ const Perfil = () => {
                                     </figure>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-12">
-                                    <CardCursosPerfil />
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div className="content__Card-Perfil">

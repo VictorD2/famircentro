@@ -51,9 +51,10 @@ function App() {
           {/* Vistas */}
           <NoLogRoute isSignedIn={usuario.authenticate} component={Login} exact path="/Login"  />
           <NoLogRoute isSignedIn={usuario.authenticate} component={Register} exact path="/Register"  />
-          <Route exact path="/Programa" component={Programa} />
-          <Route exact path="/Nosotros" component={AboutUs} />
-          <Route exact path="/Contactanos" component={Contact} />
+          <Route exact path="/curso" component={Curso} />
+          <Route exact path="/programa" component={Programa} />
+          <Route exact path="/nosotros" component={AboutUs} />
+          <Route exact path="/contactanos" component={Contact} />
           <Route component={NotFound} />
         </Switch>
         

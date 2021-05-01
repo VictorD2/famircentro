@@ -8,7 +8,7 @@ const initialState: Usuario = {
   Correo: "",
   Rango: "admin",
   Url_Foto: "",
-  authenticate: true,
+  authenticate: false,
 };
 const UsuarioContext = React.createContext({
   usuario: initialState,
@@ -17,7 +17,7 @@ const UsuarioContext = React.createContext({
 
 export function UsuarioProvider(props: any) {
   const [usuario, setUsuario] = useState<Usuario>(initialState);
-  const [loadUser, setLoadUser] = useState(false);
+  const [loadUser, setLoadUser] = useState(true);
 
   useEffect(() => {
     async function cargarUsuario() {
