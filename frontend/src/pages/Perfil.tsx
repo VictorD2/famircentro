@@ -1,12 +1,11 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
-import Footer from './../components/Footer';
+import NavBar from '../components/Helpers/NavBar';
+import Footer from '../components/Helpers/Footer';
 
-// import foto from '../images/t1.jpg';
-import Badge from '../components/Badge';
-import CardPerfil from '../components/CardCursosPerfil';
+import Badge from '../components/Helpers/Badge';
 
 import { useUsuario } from "../context-user/UsuarioProvider";
+import CardCursosPerfil from './../components/Perfil/CardCursosPerfil';
 const Perfil = () => {
     const { usuario } = useUsuario()
 
@@ -31,17 +30,12 @@ const Perfil = () => {
                                     </figure>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-12">
-                                    <a href="/Perfil/user/edir" className="btn btn__more" style={{ padding: "0.5rem 1rem" }}>Editar</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div className="content__Card-Perfil">
                         <div className="row pb-5">
                             <div className="col-12">
-                                <CardPerfil />
+                                <CardCursosPerfil />
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Badge from '../components/Badge';
+import Badge from '../components/Helpers/Badge';
 import CardTeacher from '../components/Teacher/CardTeacher';
-import Footer from '../components/Footer';
-import NavBar from '../components/NavBar';
-import Slider from '../components/Slider';
+import Footer from '../components/Helpers/Footer';
+import NavBar from '../components/Helpers/NavBar';
+import Slider from '../components/Helpers/Slider';
 
 //Import de img de ejemplo
 import tea1 from '../images/tea1.jpg';
@@ -32,11 +32,11 @@ class AboutUs extends React.Component {
 
                 <div className="Main__container">
                     <div className="container text-center mt-5" style={{ marginBottom: "4.5rem" }}>
-                        <div className="row">
+                        <div className="row show">
                             <h3 className="fw-bold fs-1">¿Quiénes somos?</h3>
                         </div>
 
-                        <div className="row text__container lh-lg animate__animated animate__backInUp animate__faster" style={{ textAlign: "justify" }}>
+                        <div className="row text__container lh-lg show" style={{ textAlign: "justify" }}>
                             <div className="col-12">
                                 <p>
                                     FAMIR Centro se conforma por un equipo multidisciplinario que realiza capacitaciones y charlas con el objetivo de potenciar sus aprendizajes y entregar herramientas teóricas y prácticas relacionadas al ámbito educativo desde una mirada Psicológica y Psicopedagógica.
@@ -49,7 +49,7 @@ class AboutUs extends React.Component {
                                 <div className="row">
                                     <h3 className="fw-bold fs-1 d-flex justify-content-center text-dark">Misión</h3>
                                 </div>
-                                <div className="row animate__animated animate__backInUp animate__faster" style={{ marginTop: "1.5rem" }}>
+                                <div className="row show" style={{ marginTop: "1.5rem" }}>
                                     <p>
                                         FAMIR Centro, tiene como misión ofrecer servicios de enseñanza orientados a personas que necesitan perfeccionarse en el desarrollo de sus competencias laborales y de una mejor calidad de vida personal y familiar. El compromiso de FAMIR Centro consiste en brindar un servicio online eficiente y de calidad a las personas del área educativa, con actividades de formación, capacitación, atenciones especializadas, material educativo y consultoría, de forma coconstructiva, de reflexión conjunta, acompañada y al alcance de todos. Para lograr su objetivo que se funda en la satisfacción integral de sus clientes, FAMIR Centro está conformado por un equipo humano de profesionales, multidisciplinario y comprometido con el resultado esperado por sus clientes.
                                     </p>
@@ -59,7 +59,7 @@ class AboutUs extends React.Component {
                                 <div className="row">
                                     <h3 className="fw-bold fs-1 d-flex justify-content-center text-dark">Visión</h3>
                                 </div>
-                                <div className="row animate__animated animate__backInUp animate__faster" style={{ marginTop: "1.5rem" }}>
+                                <div className="row show" style={{ marginTop: "1.5rem" }}>
                                     <p>
                                         FAMIR Centro, tiene como visión ser una empresa líder en el mercado, capaz de resolver los requerimientos de capacitación y formación que satisfagan integralmente las necesidades de las personas que lo requieran, para elevar su nivel de conocimiento, mejorar su calidad de vida personal, familiar y laboral, y contribuir positivamente a la sociedad.Para lograr su compromiso, que busca siempre la satisfacción real de sus clientes, FAMIR Centro se basa en la vocación profesional, el crecimiento y el desarrollo continuos de su equipo de trabajo, en estándares de calidad e innovación, en recursos tecnológicos para enseñanza – aprendizaje, y en el acompañamiento durante y después del servicio.
                                     </p>
@@ -70,7 +70,7 @@ class AboutUs extends React.Component {
                         <div className="row mt-5">
                             <h3 className="fw-bold fs-1 mt-3">Nuestros Sellos y Valores</h3>
                         </div>
-                        <div className="row mt-5 text__container lh-lg animate__animated animate__backInUp animate__faster" style={{ textAlign: "justify" }}>
+                        <div className="row mt-5 text__container lh-lg show" style={{ textAlign: "justify" }}>
                             <div className="col-md-6 vision-pRight">
                                 <div className="row">
                                     <span className="fw-bold fs-3 text-secondary">TRABAJO EN EQUIPO</span>
@@ -93,7 +93,7 @@ class AboutUs extends React.Component {
                             </div>
                         </div>
 
-                        <div className="row mt-5 text__container lh-lg animate__animated animate__backInUp animate__faster" style={{ textAlign: "justify" }}>
+                        <div className="row mt-5 text__container lh-lg show" style={{ textAlign: "justify" }}>
                             <div className="col-md-6 vision-pRight">
                                 <div className="row">
                                     <span className="fw-bold fs-3 text-secondary">COMPROMISO</span>
@@ -116,7 +116,7 @@ class AboutUs extends React.Component {
                             </div>
                         </div>
 
-                        <div className="row mt-5 text__container lh-lg animate__animated animate__backInUp animate__faster" style={{ textAlign: "justify" }}>
+                        <div className="row mt-5 text__container lh-lg show" style={{ textAlign: "justify" }}>
                             <div className="col-md-6 vision-pRight">
                                 <div className="row">
                                     <span className="fw-bold fs-3 text-secondary">INTEGRIDAD</span>
@@ -143,7 +143,7 @@ class AboutUs extends React.Component {
                         <div className="row mt-5">
                             <h3 className="fw-bold fs-1">Nuestros Docentes</h3>
                         </div>
-                        <div className="row animate__animated animate__backInUp animate__faster" style={{ marginTop: "4.5rem" }}>
+                        <div className="row show" style={{ marginTop: "4.5rem" }}>
                             <CardTeacher
                                 img={tea1}
                                 name="Maria teresa"

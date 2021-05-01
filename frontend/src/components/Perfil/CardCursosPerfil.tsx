@@ -31,10 +31,10 @@ class CardPerfil extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div className="card-body" id="body-1">
+                <div className="card-body desplegar" id="body-1">
                     <MisCursos />
                 </div>
-                <div className="card-body d-none" id="body-2">
+                <div className="card-body d-none desplegar" id="body-2">
                     <Favoritos />
                 </div>
             </div>

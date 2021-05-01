@@ -9,10 +9,11 @@ import Contact from "./../pages/Contactanos";
 import Register from "./../pages/Register";
 import Login from "./../pages/Login";
 import Programa from "./../pages/Programa";
-import PageLoading from "./PageLoading";
+import PageLoading from "./Helpers/PageLoading";
 import Perfil from './../pages/Perfil';
 import DashBoard from "../pages/DashBoard/DashBoard";
 import Usuarios from "./UsuariosDash/Usuarios";
+import Curso from './../pages/Curso';
 import Profesores from "./ProfesoresDash/Profesores";
 import FormProfesor from "./ProfesoresDash/FormProfesor";
 import LogRoute from './ProtectedRoutes/LogRoute';
@@ -50,9 +51,10 @@ function App() {
           {/* Vistas */}
           <NoLogRoute isSignedIn={usuario.authenticate} component={Login} exact path="/Login"  />
           <NoLogRoute isSignedIn={usuario.authenticate} component={Register} exact path="/Register"  />
-          <Route exact path="/Programa" component={Programa} />
-          <Route exact path="/Nosotros" component={AboutUs} />
-          <Route exact path="/Contactanos" component={Contact} />
+          <Route exact path="/curso" component={Curso} />
+          <Route exact path="/programa" component={Programa} />
+          <Route exact path="/nosotros" component={AboutUs} />
+          <Route exact path="/contactanos" component={Contact} />
           <Route component={NotFound} />
         </Switch>
         

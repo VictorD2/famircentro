@@ -1,12 +1,12 @@
 import React from "react";
-import logo from "../images/logoFamir.svg";
+import logo from "../../images/logoFamir.svg";
 import Axios from "axios";
 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faBars, faTimes, faDoorOpen, faUser } from "@fortawesome/free-solid-svg-icons";
 
-import { useUsuario } from "../context-user/UsuarioProvider";
+import { useUsuario } from "../../context-user/UsuarioProvider";
 
 const NavBar = () => {
   const { usuario, loadUser } = useUsuario();

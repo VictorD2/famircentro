@@ -1,5 +1,5 @@
 import React from 'react';
-import ImgCurso from './ImgCurso';
+import ImgCurso from '../Helpers/ImgCurso';
 
 function ListFavoritos() {
     return (

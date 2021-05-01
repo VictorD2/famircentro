@@ -7,6 +7,7 @@ function Favoritos() {
             <ListFavoritos />
             <ListFavoritos />
             <ListFavoritos />
+            <ListFavoritos />
         </ul>
     );
 }
