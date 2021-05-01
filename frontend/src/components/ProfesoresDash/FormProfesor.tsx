@@ -111,14 +111,6 @@ const FormProfesor = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <input
-                    type="file"
-                    className="form-control"
-                    name="image"
-                    required
-                  />
-                </div>
-                <div className="mb-3">
                   {params.id ? (
                     <button className="btn btn-info">Actualizar</button>
                   ) : (
