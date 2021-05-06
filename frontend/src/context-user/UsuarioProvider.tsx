@@ -8,7 +8,7 @@ const initialState: Usuario = {
   Correo: "",
   Rango: "admin",
   Url_Foto: "",
-  authenticate: false,
+  authenticate: true,
 };
 const UsuarioContext = React.createContext({
   usuario: initialState,

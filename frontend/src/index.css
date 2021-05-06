@@ -300,6 +300,7 @@ code {
 }
 .btn__more:hover {
   background-position: right center;
+  background:var(--azul-claro);
   color: #fff;
   text-decoration: none;
 }
@@ -593,6 +594,26 @@ code {
 
 .column-detail {
   padding-right: 1rem;
+}
+
+.btn__curso {
+  background: var(--azul-oscuro);
+  color: #ffffff;
+}
+
+.btn__curso:hover {
+  background: var(--azul-claro);
+  color: #ffffff;
+}
+
+.btn-outline-warning {
+  border-color: var(--amarillo-oscuro);
+  color: var(--amarillo-oscuro);
+  border-width: 2px;
+}
+
+.btn-outline-warning:hover {
+  background: var(--amarillo-oscuro);
 }
 
 @media only screen and (min-width: 769px) {
