@@ -2,13 +2,17 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Usuario from "../interfaces/Usuario";
 const initialState: Usuario = {
-  Codigo_Usuario: "",
-  Nombres: "",
-  Apellidos: "",
-  Correo: "",
-  Rango: "admin",
-  Url_Foto: "",
-  authenticate: true,
+  id_usuario: "",
+  nombre: "",
+  apellido: "",
+  profesion: "",
+  correo: "",
+  telefono: "",
+  habilitado: 1,
+  rut: "",
+  id_rango: 2,
+  url_foto_usuario: "",
+  authenticate: false,
 };
 const UsuarioContext = React.createContext({
   usuario: initialState,
@@ -21,11 +25,8 @@ export function UsuarioProvider(props: any) {
 
   useEffect(() => {
     async function cargarUsuario() {
-      const datos = await axios.get(
-        "http://localhost:4000/api/usuarios/whoami"
-      );
+      const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
       if (datos.data.user) setUsuario(datos.data.user);
-      
       setLoadUser(true);
     }
     cargarUsuario();

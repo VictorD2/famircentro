@@ -24,8 +24,7 @@ const Login = () => {
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await axios.post("http://localhost:4000/signin", state);
-    if (res.data.message === "failed")
-      return toast.error("Correo o contraseña incorrectos");
+    if (res.data.message === "failed") return toast.error("Correo o contraseña incorrectos");
     window.location.href = "/";
   };
 

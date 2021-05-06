@@ -1,4 +1,4 @@
-export interface Profesor{
+export interface Estudiante{
     id_usuario?:number;
     nombre?:string;
     apellido?:string;

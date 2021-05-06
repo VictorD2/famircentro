@@ -1,54 +1,62 @@
 const pool = require('../database');
 const ctrlProfesores = {};
+const helpers = require('../lib/helpers');
 
-const data = [{
-        id_profesor: "123",
-        nombre: "pedro",
-        apellido: "pedro",
-        email: "pedro@hotmail.com",
-        profesion: "profesion",
-        pais: "Peru"
-    },
-    {
-        id_profesor: "1234",
-        nombre: "pedro",
-        apellido: "marino",
-        email: "pedro@hotmaxxxil.com",
-        profesion: "profeeesion",
-        pais: "Peeeeeru"
-    },
-    {
-        id_profesor: "1235",
-        nombre: "peqwedro",
-        apellido: "peqwedro",
-        email: "pedwwwro@hotmail.com",
-        profesion: "pwwwrofesion",
-        pais: "Pwwwweru"
-    },
-]
-ctrlProfesores.createProfesor = (req, res) => {
-    console.log(req.body);
-    res.json({ message: "Profesor Creado" });
+ctrlProfesores.createProfesor = async(req, res) => {
+    const profesor = await pool.query('SELECT * FROM usuario WHERE correo = ?', [req.body.correo]);
+
+    if (profesor.length > 0) return res.json({ message: "already exists" }); //Existe un correo
+
+    const newProfesor = req.body;
+
+    newProfesor.id_rango = 3;
+
+    newProfesor.habilitado = 1;
+
+    newProfesor.url_foto_usuario = "/defaultProfile.PNG";
+
+    newProfesor.password = newProfesor.rut;
+
+    newProfesor.password = await helpers.encrypPassword(newProfesor.password);
+
+    const rows = await pool.query('INSERT INTO usuario set ?', [newProfesor]);
+
+    if (rows.affectedRows === 1) return res.json({ message: "success" }); //Se logró registrar
+
+    return res.json({ message: "failed" });
 }
 
-ctrlProfesores.getProfesores = (req, res) => {
+ctrlProfesores.getProfesores = async(req, res) => {
+    const data = await pool.query('SELECT id_usuario,nombre,apellido,habilitado,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 3');
     res.json(data);
 }
 
-ctrlProfesores.getProfesorById = (req, res) => {
-    for (let i = 0; i < data.length; i++) {
-        const element = data[i];
-        if (req.params.id == element.id_profesor) return res.json(element);
-    }
-    return res.json({ message: "No encontrado" });
+ctrlProfesores.getProfesorById = async(req, res) => {
+    const rows = await pool.query('SELECT id_usuario,nombre,apellido,habilitado,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango FROM usuario WHERE id_usuario = ?', [req.params.id]);
+    if (rows.length === 0) return res.json({ message: "failed" });
+    return res.json(rows[0]);
 }
 
-ctrlProfesores.updateProfesor = (req, res) => {
-    console.log(req.body);
-    res.json({ message: "Actualizado" });
+ctrlProfesores.updateProfesor = async(req, res) => {
+    const profesor = await pool.query('SELECT * FROM usuario WHERE correo = ?', [req.body.correo]);
+
+    if (profesor.length > 0 && profesor[0].id_usuario != req.params.id) return res.json({ message: "already exists" }); //Existe un correo
+
+    const newProfesor = req.body;
+    const rows = await pool.query('UPDATE usuario set ? WHERE id_usuario = ?', [newProfesor, req.params.id]);
+
+    if (rows.affectedRows === 1) return res.json({ message: "success" }); //Se logró actualizar
+
+    res.json({ message: "failed" });
 }
 
-ctrlProfesores.deleteProfesor = (req, res) => {}
+ctrlProfesores.deleteProfesor = async(req, res) => {
+    const rows = await pool.query("SELECT * FROM usuario WHERE id_usuario = ?", [req.params.id]);
+    rows[0].habilitado == 0 ? rows[0].habilitado = 1 : rows[0].habilitado = 0
+    const data = await pool.query('UPDATE usuario set ? WHERE id_usuario = ?', [rows[0], req.params.id]);
+    if (data.affectedRows === 1) return res.json({ message: "success" }); //Se logró actualizar
+    res.json({ message: "failed" });
+}
 
 
 

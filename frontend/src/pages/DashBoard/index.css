@@ -151,3 +151,30 @@
   margin-left: 90px;
   transition: all 0.5s ease-out;
 }
+
+.btn__blue {
+  background: var(--azul-claro);
+  color: #fff;
+}
+.btn__blue:hover {
+  background: var(--azul-oscuro);
+  color: #fff;
+}
+.btn__amarillo {
+  background: var(--amarillo-claro);
+  color: #000;
+}
+.btn__amarillo:hover {
+  background: var(--amarillo-oscuro);
+  color: #000;
+}
+
+.btn__verde {
+  background: var(--verde-claro);
+  color: #000;
+}
+.btn__verde:hover {
+  background: var(--verde-oscuro);
+  color: #000;
+}
+

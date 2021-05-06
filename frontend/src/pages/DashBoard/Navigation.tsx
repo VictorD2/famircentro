@@ -1,8 +1,8 @@
 import React from "react";
-
+import {Link} from 'react-router-dom';
 // Iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBookReader, faChevronDown, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../images/logoFamir2.png";
 
 const Navigation = () => {
@@ -23,9 +23,9 @@ const Navigation = () => {
         </button>
         <ul className="navbar__list">
           <li className="navbar__item">
-            <a className="navbar__link" href="/">
+            <Link className="navbar__link" to="/">
               Home
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -44,10 +44,10 @@ const Navigation = () => {
         </div>
         <ul className="opciones">
           <li className="opciones__item">
-            <a className="item__link" href="/DashBoard/Usuarios">
-              <FontAwesomeIcon icon={faBars} />
+            <Link className="item__link" to="/DashBoard/Usuarios">
+              <FontAwesomeIcon icon={faUser} />
               <p>Usuarios</p>
-            </a>
+            </Link>
           </li>
           <li className="opciones__item">
             <div className="accordion" id="accordionExample">
@@ -71,30 +71,30 @@ const Navigation = () => {
                 </h2>
                 <div id="collapseOne" className="accordion-collapse collapse">
                   <div className="accordion-body">
-                    <a
+                    <Link
                       className="item__link my-2 p-0"
-                      href="/DashBoard/Asincronos"
+                      to="/DashBoard/Asincronos"
                     >
-                      <FontAwesomeIcon icon={faBars} />
+                      <FontAwesomeIcon icon={faBookReader} />
                       <p>Cursos Asincronos</p>
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       className="item__link my-0 p-0"
-                      href="/DashBoard/Asincronos"
+                      to="/DashBoard/Sincronos"
                     >
                       <FontAwesomeIcon icon={faBars} />
                       <p>Cursos Sincronos</p>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
           </li>
           <li className="opciones__item">
-            <a className="item__link" href="/DashBoard/Profesores">
-              <FontAwesomeIcon icon={faBars} />
+            <Link className="item__link" to="/DashBoard/Profesores">
+              <FontAwesomeIcon icon={faBookReader} />
               <p>Profesores</p>
-            </a>
+            </Link>
           </li>
         </ul>
       </aside>
