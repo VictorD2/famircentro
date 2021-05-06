@@ -13,10 +13,10 @@ passport.use('local.signin', new LocalStrategy({
     passReqToCallback: true
 }, async(req, email, password, done) => {
 
-    const rows = await pool.query('SELECT * FROM usuarios WHERE  Correo = ?', [email]); //<- Buscamos al usuario
+    const rows = await pool.query('SELECT * FROM usuario WHERE  correo = ?', [email]); //<- Buscamos al usuario
     if (!rows.length > 0) return done(null, false); //El usuario no existe
 
-    const validPassword = await helpers.matchPassword(password, rows[0].Contrasenia); //<- Verificando la contraseña
+    const validPassword = await helpers.matchPassword(password, rows[0].password); //<- Verificando la contraseña
     
     if (validPassword) return done(null, rows[0]); //<- Contraseña correcta
 
@@ -30,19 +30,24 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, user, pass, done) => {
-    const rows = await pool.query('SELECT * FROM usuarios WHERE  Correo = ?', [user]);
+    const rows = await pool.query('SELECT * FROM usuario WHERE  correo = ?', [user]);
     if (rows.length > 0) return done(null, false, { message: "El correo ya está en uso" }); //Por si existe un correo ya
-    const { name, surname, email, password } = req.body;
+    const { name, surname, email, password,rut,telefono,pais } = req.body;
     const newUser = {
-        Nombres: name,
-        Apellidos: surname,
-        Rango: "user",
-        Correo: email,
-        Contrasenia: password,
-        Url_Foto: "/defaultProfile.PNG"
+        nombre: name,
+        apellido: surname,
+        id_rango: 2,
+        correo: email,
+        telefono: telefono,
+        rut: rut,
+        habilitado:1,
+        id_pais : pais,
+        password: password,
+        url_foto_usuario: "/defaultProfile.PNG"
     }
-    newUser.Contrasenia = await helpers.encrypPassword(newUser.Contrasenia); //<- Encripta la contraseña
-    await pool.query('INSERT INTO usuarios set ?', [newUser]);
+    console.log(newUser);
+    newUser.password = await helpers.encrypPassword(newUser.password); //<- Encripta la contraseña
+    await pool.query('INSERT INTO usuario set ?', [newUser]);
     return done(null, newUser);
 }));
 
@@ -56,18 +61,22 @@ passport.use(new FacebookStrategy({
     passReqToCallback: true
 }, async(request, accessToken, refreshToken, profile, cb) => {
     const email = profile.emails[0].value; //<- Email
-    const rows = await pool.query('SELECT * FROM usuarios WHERE Correo = ?', [email]);
+    const rows = await pool.query('SELECT * FROM usuario WHERE correo = ?', [email]);
     if (rows.length > 0) return cb(null, rows[0]); //Ya está guardado el correo en la bd
     const newUser = { //Creando nuevo usuario
-        Nombres: profile.name.givenName,
-        Apellidos: profile.name.familyName,
-        Rango: "user",
-        Correo: email,
-        Contrasenia: "",
-        Url_Foto: profile.photos[0].value
+        nombre: profile.name.givenName,
+        apellido: profile.name.familyName,
+        id_rango: 2,
+        correo: email,
+        telefono: "",
+        rut: "",
+        habilitado:1,
+        id_pais : "",
+        password: "",
+        url_foto_usuario: profile.photos[0].value
     }
-    newUser.Contrasenia = await helpers.encrypPassword(newUser.Contrasenia);
-    await pool.query('INSERT INTO usuarios set ?', [newUser]); //Guardando en la bd
+    newUser.password = await helpers.encrypPassword(newUser.Contrasenia);
+    await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
     return cb(null, newUser);
 }));
 
@@ -79,17 +88,21 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true
 }, async(request, accessToken, refreshToken, profile, done) => {
     const email = profile.emails[0].value; //<- Email
-    const rows = await pool.query('SELECT * FROM usuarios WHERE Correo = ?', [email]);
+    const rows = await pool.query('SELECT * FROM usuario WHERE correo = ?', [email]);
     if (rows.length > 0) return done(null, rows[0]); //Ya está guardado el correo en la bd
     const newUser = { //Creando nuevo usuario
-        Nombres: profile.name.givenName,
-        Apellidos: profile.name.familyName,
-        Rango: "user",
-        Correo: email,
-        Contrasenia: "",
-        Url_Foto: profile.photos[0].value
+        nombre: profile.name.givenName,
+        apellido: profile.name.familyName,
+        id_rango: 2,
+        correo: email,
+        telefono: "",
+        rut: "",
+        habilitado:1,
+        id_pais : 1,
+        password: "",
+        url_foto_usuario: profile.photos[0].value
     }
-    await pool.query('INSERT INTO usuarios set ?', [newUser]); //Guardando en la bd
+    await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
     return done(null, newUser);
 }));
 

@@ -1,56 +1,93 @@
 import React, { useState, useEffect, FormEvent } from "react";
-import Navigation from "../../pages/DashBoard/Navigation";
+
 import { Profesor } from "./Profesor";
-import { useParams, useHistory } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
+
+import Navigation from "../../pages/DashBoard/Navigation";
+
 import * as profesorServices from "./ProfesoresServices";
+
+//Icons
+import { FaRegEdit, FaPlus } from 'react-icons/fa';
+
+//Toast
 import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import 'animate.css/animate.min.css';
+
 interface Params {
   id?: string;
 }
+
 const FormProfesor = () => {
-  const history = useHistory();
-  const params = useParams<Params>();
   const initialState = {
     nombre: "",
     apellido: "",
-    email: "",
+    correo: "",
     profesion: "",
-    pais: "",
+    id_pais: "1",
+    rut: "",
+    telefono: ""
+  };
+  const [profesor, setProfesor] = useState<Profesor>(initialState);
+
+  const params = useParams<Params>();
+
+  //Traer los datos del profesor si estça en update
+  const getProfesor = async (id: string) => {
+    const res = await profesorServices.getProfesorById(id);
+    if (res.data.message === "failed") window.location.href = '/Dashboard/Profesores';
+    setProfesor(res.data);
   };
 
-  const [profesor, setProfesor] = useState<Profesor>(initialState);
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const limpieza = () => {
+    setProfesor({});
+  }
+
+  useEffect(() => {
+    if (params.id) {//Por si estoy en update
+      getProfesor(params.id);
+    }
+    return () => {
+      limpieza();
+    }
+  }, [params.id]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setProfesor({ ...profesor, [e.target.name]: e.target.value });
   };
 
+  //Evento submit
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!params.id) {
-      await profesorServices.crearProfesor(profesor);
-      setProfesor(initialState);
-      toast.success("Profesor creado");
+      const res = await profesorServices.crearProfesor(profesor);
+      if (res.data.message === 'already exists') toast.error("Ya existe un usuario con ese correo");
+      if (res.data.message === "success") toast.success("Profesor creado");
+      if (res.data.message === "failed") toast.error("Ocurrió un error");
     } else {
       const res = await profesorServices.updateProfesor(params.id, profesor);
-      console.log(res);
-      toast.success("Profesor modificado");
+      if (res.data.message === 'already exists') toast.error("Ya existe un usuario con ese correo");
+      if (res.data.message === "success") toast.success("Profesor actualizado");
+      if (res.data.message === "failed") toast.error("Ocurrió un error");
     }
-    history.push("/Dashboard/Profesores");
   };
 
-  const getProfesor = async (id: string) => {
-    const res = await profesorServices.getProfesorById(id);
-    const { nombre, apellido, email, profesion, pais } = res.data;
-    setProfesor({ nombre, apellido, email, profesion, pais });
-  };
-
-  useEffect(() => {
-    if (params.id) getProfesor(params.id);
-  }, [params.id]);
 
   return (
     <React.Fragment>
       <Navigation />
+      <ToastContainer />
       <div className="contenido-principal p-4">
+        <div className="d-flex flex-row bg-white mb-5">
+          {params.id ? (
+            <h4 className="m-0 text-uppercase fs-3"><FaPlus className="fs-3 mb-1 " /> Actualizar Profesor</h4>
+          ) : (
+            <h4 className="m-0 text-uppercase fs-3"><FaPlus className="fs-3 mb-1 " /> Crear Profesor</h4>
+          )}
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -83,21 +120,19 @@ const FormProfesor = () => {
                     className="form-control"
                     type="email"
                     placeholder="Email"
-                    name="email"
+                    name="correo"
                     required
-                    value={profesor.email}
+                    value={profesor.correo}
                   />
                 </div>
                 <div className="mb-3">
-                  <input
+                  <select
+                    value={profesor.id_pais}
                     onChange={handleInputChange}
-                    className="form-control"
-                    type="text"
-                    placeholder="Pais"
-                    name="pais"
-                    required
-                    value={profesor.pais}
-                  />
+                    className="form-control" name="id_pais" >
+                    <option value="1">Peru</option>
+                    <option value="2">Chile</option>
+                  </select>
                 </div>
                 <div className="mb-3">
                   <input
@@ -111,10 +146,35 @@ const FormProfesor = () => {
                   />
                 </div>
                 <div className="mb-3">
+                  <input
+                    onChange={handleInputChange}
+                    className="form-control"
+                    type="text"
+                    placeholder="Telefono"
+                    name="telefono"
+                    required
+                    value={profesor.telefono}
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    onChange={handleInputChange}
+                    className="form-control"
+                    type="text"
+                    placeholder="RUT"
+                    name="rut"
+                    required
+                    value={profesor.rut}
+                  />
+                </div>
+                <div className="mb-3">
                   {params.id ? (
-                    <button className="btn btn-info">Actualizar</button>
+                    <button className="btn btn__blue">
+                      <FaRegEdit className="fs-5 mb-1" /> Actualizar
+                    </button>
                   ) : (
-                    <button className="btn btn-primary">Crear</button>
+                    <button className="btn btn__blue">
+                      <FaPlus className="fs-5 mb-1" /> Crear</button>
                   )}
                 </div>
               </form>
@@ -123,6 +183,7 @@ const FormProfesor = () => {
           </div>
         </div>
       </div>
+
     </React.Fragment>
   );
 };

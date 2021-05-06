@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 // Iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBookReader, faChevronDown, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../images/logoFamir2.png";
 
 const Navigation = () => {
@@ -45,7 +45,7 @@ const Navigation = () => {
         <ul className="opciones">
           <li className="opciones__item">
             <Link className="item__link" to="/DashBoard/Usuarios">
-              <FontAwesomeIcon icon={faBars} />
+              <FontAwesomeIcon icon={faUser} />
               <p>Usuarios</p>
             </Link>
           </li>
@@ -75,7 +75,7 @@ const Navigation = () => {
                       className="item__link my-2 p-0"
                       to="/DashBoard/Asincronos"
                     >
-                      <FontAwesomeIcon icon={faBars} />
+                      <FontAwesomeIcon icon={faBookReader} />
                       <p>Cursos Asincronos</p>
                     </Link>
                     <Link
@@ -92,7 +92,7 @@ const Navigation = () => {
           </li>
           <li className="opciones__item">
             <Link className="item__link" to="/DashBoard/Profesores">
-              <FontAwesomeIcon icon={faBars} />
+              <FontAwesomeIcon icon={faBookReader} />
               <p>Profesores</p>
             </Link>
           </li>

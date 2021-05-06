@@ -50,6 +50,7 @@ app.use(async(req, res, next) => {
 //Routes
 app.use('/api/profesores', require('./routes/profesores.routes'));
 app.use('/api/usuarios', require('./routes/usuarios.routes'));
+app.use('/api/estudiantes', require('./routes/estudiantes.routes'));
 app.use(require('./routes/auth.routes'));
 app.use(require('./routes/index.routes')); //<- siempre al ultimo
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { UsuarioProvider } from "./../context-user/UsuarioProvider";
-
+import { useUsuario, UsuarioProvider } from "./../context-user/UsuarioProvider";
 import AboutUs from "./../pages/AboutUs";
 import NotFound from "./../pages/NotFound";
 import Home from "./../pages/Home";
@@ -12,7 +11,7 @@ import Programa from "./../pages/Programa";
 import PageLoading from "./Helpers/PageLoading";
 import Perfil from './../pages/Perfil';
 import DashBoard from "../pages/DashBoard/DashBoard";
-import Usuarios from "./UsuariosDash/Usuarios";
+import Usuarios from "./EstudiantesDash/Estudiantes";
 import Curso from './../pages/Curso';
 import Profesores from "./ProfesoresDash/Profesores";
 import FormProfesor from "./ProfesoresDash/FormProfesor";
@@ -20,46 +19,47 @@ import LogRoute from './ProtectedRoutes/LogRoute';
 import NoLogRoute from './ProtectedRoutes/NoLogRoute';
 import AdminRoute from './ProtectedRoutes/AdminRoute';
 
-import { useUsuario } from "../context-user/UsuarioProvider";
+import FormEstudiante from "./EstudiantesDash/FormEstudiante";
 function App() {
+  const { usuario, loadUser } = useUsuario();
+  console.log(usuario);
   const [loading, setLoading] = useState(false);
-  const {usuario} = useUsuario();
   useEffect(() => {
     setLoading(true);
-    window.onload = () => {
-      setLoading(false);
-    };
+    window.onload = () => setLoading(false);
   }, []);
 
   return (
     <BrowserRouter>
-      {loading ? (
+      {(loading && loadUser) ? (
         <PageLoading />
       ) : (
         <Switch>
           <Route exact path="/" component={Home} />
+
           {/* Dashboard */}
-          <LogRoute isSignedIn={usuario.authenticate} component={Perfil} exact path="/perfil" />
-          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard" component={DashBoard} />
+          <LogRoute authenticate={usuario.authenticate} component={Perfil} exact path="/perfil" />
+          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard" component={DashBoard} />
+
           {/* Usuarios */}
-          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Usuarios" component={Usuarios} />
+          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Usuarios" component={Usuarios} />
+
           {/* Profesores */}
-          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Profesores" component={Profesores} />
-          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
-          <AdminRoute isSignedIn={usuario.authenticate} rango={usuario.Rango} exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
+          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Profesores" component={Profesores} />
+          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
+          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
+          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Estudiantes/update/:id" component={FormEstudiante} />
 
           {/* Vistas */}
-          <NoLogRoute isSignedIn={usuario.authenticate} component={Login} exact path="/Login"  />
-          <NoLogRoute isSignedIn={usuario.authenticate} component={Register} exact path="/Register"  />
+          <NoLogRoute authenticate={usuario.authenticate} component={Login} exact path="/Login" />
+          <NoLogRoute authenticate={usuario.authenticate} component={Register} exact path="/Register" />
           <Route exact path="/curso" component={Curso} />
           <Route exact path="/programa" component={Programa} />
           <Route exact path="/nosotros" component={AboutUs} />
           <Route exact path="/contactanos" component={Contact} />
           <Route component={NotFound} />
         </Switch>
-        
       )}
-      
     </BrowserRouter>
   );
 }
