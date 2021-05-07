@@ -15,14 +15,14 @@ import Usuarios from "./EstudiantesDash/Estudiantes";
 import Curso from './../pages/Curso';
 import Profesores from "./ProfesoresDash/Profesores";
 import FormProfesor from "./ProfesoresDash/FormProfesor";
+
+import AdminRoute from './ProtectedRoutes/AdminRoute';
 import LogRoute from './ProtectedRoutes/LogRoute';
 import NoLogRoute from './ProtectedRoutes/NoLogRoute';
-import AdminRoute from './ProtectedRoutes/AdminRoute';
 
 import FormEstudiante from "./EstudiantesDash/FormEstudiante";
 function App() {
-  const { usuario, loadUser } = useUsuario();
-  //console.log(usuario);
+  const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -38,21 +38,21 @@ function App() {
           <Route exact path="/" component={Home} />
 
           {/* Dashboard */}
-          <LogRoute authenticate={usuario.authenticate} exact path="/Perfil" component={Perfil} />
-          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard" component={DashBoard} />
+          <LogRoute exact path="/perfil" component={Perfil} />
+          <AdminRoute exact path="/DashBoard" component={DashBoard} />
 
           {/* Usuarios */}
-          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Usuarios" component={Usuarios} />
+          <AdminRoute exact path="/DashBoard/Usuarios" component={Usuarios} />
 
           {/* Profesores */}
-          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Profesores" component={Profesores} />
-          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
-          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
-          <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard/Estudiantes/update/:id" component={FormEstudiante} />
+          <AdminRoute exact path="/DashBoard/Profesores" component={Profesores} />
+          <AdminRoute exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
+          <AdminRoute exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
+          <AdminRoute exact path="/DashBoard/Estudiantes/update/:id" component={FormEstudiante} />
 
           {/* Vistas */}
-          <NoLogRoute authenticate={usuario.authenticate} component={Login} exact path="/Login" />
-          <NoLogRoute authenticate={usuario.authenticate} component={Register} exact path="/Register" />
+          <NoLogRoute exact component={Login} path="/Login" />
+          <NoLogRoute exact component={Register} path="/Register" />
           <Route exact path="/curso" component={Curso} />
           <Route exact path="/programa" component={Programa} />
           <Route exact path="/nosotros" component={AboutUs} />
@@ -64,10 +64,6 @@ function App() {
   );
 }
 
-export default function userPrev() {
-  return (
-    <UsuarioProvider>
-      <App></App>
-    </UsuarioProvider>
-  );
-}
+const prev = () => <UsuarioProvider><App></App></UsuarioProvider>
+export default prev;
+

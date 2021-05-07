@@ -21,42 +21,10 @@ const ListaOpiniones = () => {
           </div>
         </div>
         <div className="row">
-          <OpinionesItem
-            avatar={avatar1}
-            rango={"Estudiante"}
-            persona={"Maria Smith"}
-            title={"Great teachers"}
-            comentario={
-              "Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."
-            }
-          />
-          <OpinionesItem
-            avatar={avatar2}
-            rango={"Estudiante"}
-            persona={"Maria Smith"}
-            title={"Great teachers"}
-            comentario={
-              "Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."
-            }
-          />
-          <OpinionesItem
-            avatar={avatar3}
-            rango={"Estudiante"}
-            persona={"Maria Smith"}
-            title={"Great teachers"}
-            comentario={
-              "Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."
-            }
-          />
-          <OpinionesItem
-            avatar={avatar4}
-            rango={"Estudiante"}
-            persona={"Maria Smith"}
-            title={"Great teachers"}
-            comentario={
-              "Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."
-            }
-          />
+          <OpinionesItem avatar={avatar1} rango={"Estudiante"} persona={"Maria Smith"} title={"Great teachers"} comentario={"Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."} />
+          <OpinionesItem avatar={avatar2} rango={"Estudiante"} persona={"Maria Smith"} title={"Great teachers"} comentario={"Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."} />
+          <OpinionesItem avatar={avatar3} rango={"Estudiante"} persona={"Maria Smith"} title={"Great teachers"} comentario={"Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."} />
+          <OpinionesItem avatar={avatar4} rango={"Estudiante"} persona={"Maria Smith"} title={"Great teachers"} comentario={"Etiam nec odio vestbulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna."} />
         </div>
       </div>
     </section>

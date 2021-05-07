@@ -18,14 +18,9 @@ const TopCursosItem = (props: Props) => {
             By {props.nombre_profesor} | {props.fecha}
           </p>
           <p className="curso-description">{props.descripcion}</p>
-          <Link to={props.url} className="btn btn__more mt-5">
-            Ver más
-          </Link>
+          <Link to={props.url} className="btn btn__more mt-5"> Ver más </Link>
         </div>
-        <div
-          className="img"
-          style={{ backgroundImage: `url(${props.img})` }}
-        ></div>
+        <div className="img" style={{ backgroundImage: `url(${props.img})` }} ></div>
       </div>
     </div>
   );

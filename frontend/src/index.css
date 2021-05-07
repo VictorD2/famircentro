@@ -67,10 +67,13 @@ code {
   color: var(--azul-claro);
 }
 .logo-content {
-  width: 120px;
+  width: 500px;
 }
 .logo-link .logo {
   width: 100%;
+}
+.logo-responsive{
+  display: none;
 }
 
 /* Navegacion */
@@ -649,6 +652,9 @@ code {
 }
 
 @media only screen and (max-width: 1024px) {
+  .logo-link .logo {
+    width: 80%;
+  }
   .content__Login {
     width: 100vw;
     height: 100vh;
@@ -983,6 +989,17 @@ code {
   }
 }
 @media only screen and (max-width: 992px) {
+  .logo-content {
+    width: 200px;
+  }
+  .logo-link .logo {
+    width: 100%;
+    display: none;
+  }
+  .logo-responsive{
+    width: 60%;
+    display: block;
+  }
   .navigation {
     display: none;
   }

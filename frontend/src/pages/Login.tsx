@@ -7,6 +7,7 @@ import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const initialState = {
@@ -33,29 +34,21 @@ const Login = () => {
       <ToastContainer />
       <div className="rgt__main">
         <div className="card content__Login animate__animated animate__flipInY">
-          <a href="/" className="card-header rgt__header">
+          <Link to="/" className="card-header rgt__header">
             <img className="rgt__img" src={logoLogin} alt="logo-register" />
             <h5 className="rgt__title">FAMIR CENTRO</h5>
-          </a>
+          </Link>
           <div className="card-body px-4">
             <div className="row pt-2">
               <div className="col-12">
-                <a
-                  href="auth/facebook"
-                  // onClick={this.handleFacebook}
-                  className="btn btn-primary w-100 icon__social"
-                >
+                <a href="auth/facebook" className="btn btn-primary w-100 icon__social">
                   <FontAwesomeIcon icon={faFacebook} className="fs-3" />
                   <span className="ms-3">Iniciar sesión con Facebook</span>
                 </a>
               </div>
               <div className="col-12 mt-2">
-                <a
-                  // onClick={this.handleGoogle}
-                  href="auth/google"
-                  className="btn btn-danger w-100 icon__social"
-                >
-                  <FontAwesomeIcon icon={faGoogle} className="fs-3" />{" "}
+                <a href="auth/google" className="btn btn-danger w-100 icon__social">
+                  <FontAwesomeIcon icon={faGoogle} className="fs-3" />
                   <span className="ms-3">Iniciar sesión con Google</span>
                 </a>
               </div>
@@ -71,35 +64,15 @@ const Login = () => {
               <div className="col-12">
                 <form onSubmit={handleForm}>
                   <div className="form-floating mb-3">
-                    <input
-                      onChange={handleInputChange}
-                      type="email"
-                      name="email"
-                      className="form-control"
-                      id="floatingInput"
-                      placeholder="name@example.com"
-                    />
+                    <input onChange={handleInputChange} type="email" name="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
                     <label htmlFor="floatingInput">Correo</label>
                   </div>
                   <div className="form-floating mb-3">
-                    <input
-                      onChange={handleInputChange}
-                      type="password"
-                      name="password"
-                      className="form-control"
-                      id="floatingPassword"
-                      placeholder="Password"
-                    />
+                    <input onChange={handleInputChange} type="password" name="password" className="form-control" id="floatingPassword" placeholder="Password" />
                     <label htmlFor="floatingPassword">Contraseña</label>
                   </div>
                   <div className="rgt__button">
-                    <button
-                      type="submit"
-                      className="btn btn__more"
-                      style={{ padding: "0.7rem 2rem" }}
-                    >
-                      Inicia sesión
-                    </button>
+                    <button type="submit" className="btn btn__more" style={{ padding: "0.7rem 2rem" }} > Inicia sesión </button>
                   </div>
                 </form>
               </div>
@@ -114,9 +87,7 @@ const Login = () => {
               </div>
             </div>
             <div className="col-12 d-flex justify-content-center mb-3">
-              <a href="/Register" className="btn btn-outline-success w-75">
-                Regístrate
-              </a>
+              <a href="/Register" className="btn btn-outline-success w-75"> Regístrate </a>
             </div>
           </div>
         </div>

@@ -144,26 +144,10 @@ class AboutUs extends React.Component {
                             <h3 className="fw-bold fs-1">Nuestros Docentes</h3>
                         </div>
                         <div className="row show" style={{ marginTop: "4.5rem" }}>
-                            <CardTeacher
-                                img={tea1}
-                                name="Maria teresa"
-                                job="Ingeniera"
-                            />
-                            <CardTeacher
-                                img={tea2}
-                                name="Simon Duval"
-                                job="Digital Proffesor"
-                            />
-                            <CardTeacher
-                                img={tea3}
-                                name="James Hogan"
-                                job="HTML Proffesor"
-                            />
-                            <CardTeacher
-                                img={tea4}
-                                name="Claudia Williams"
-                                job="Marketing Proffesor"
-                            />
+                            <CardTeacher img={tea1} name="Maria teresa" job="Ingeniera" />
+                            <CardTeacher img={tea2} name="Simon Duval" job="Digital Proffesor" />
+                            <CardTeacher img={tea3} name="James Hogan" job="HTML Proffesor" />
+                            <CardTeacher img={tea4} name="Claudia Williams" job="Marketing Proffesor" />
                         </div>
                     </div>
                 </div>

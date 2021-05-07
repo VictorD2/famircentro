@@ -7,11 +7,7 @@ import img3 from "../../images/bg-3.jpg";
 
 function Slider() {
   return (
-    <div
-      id="carouselExampleInterval"
-      className="carousel slide mt-5 py-5 show"
-      data-bs-ride="carousel"
-    >
+    <div id="carouselExampleInterval" className="carousel slide mt-5 py-5 show" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active" data-bs-interval="10000">
           <img src={img1} className="d-block w-100" alt="br-1" />
@@ -24,22 +20,14 @@ function Slider() {
         </div>
       </div>
       <button
-        className="btn__carrusel-prev"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="prev"
-      >
+        className="btn__carrusel-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
         <div className="icon__carrusel d-flex align-items-center">
           <FontAwesomeIcon className="mx-auto" icon={faAngleLeft} />
         </div>
         <span className="visually-hidden">Previous</span>
       </button>
       <button
-        className="btn__carrusel-next"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="next"
-      >
+        className="btn__carrusel-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
         <div className="icon__carrusel d-flex align-items-center">
           <FontAwesomeIcon className="mx-auto" icon={faAngleRight} />
         </div>

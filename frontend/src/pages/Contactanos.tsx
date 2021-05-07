@@ -1,11 +1,4 @@
-import {
-    faBehance,
-    faDribbble,
-    faFacebookF,
-    faLinkedinIn,
-    faPinterest,
-    faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+import { faBehance, faDribbble, faFacebookF, faLinkedinIn, faPinterest, faTwitter, } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Badge from "../components/Helpers/Badge";
@@ -47,71 +40,38 @@ class Contactanos extends React.Component {
                                     mauris.
                                 </p>
                                 <div className="content__icons show">
-                                    <a
-                                        href="https://www.pinterest.ca/"
-                                        target="blank"
-                                        className="cts__icons"
-                                    >
+                                    <a href="https://www.pinterest.ca/" target="blank" className="cts__icons" >
                                         <FontAwesomeIcon icon={faPinterest} />
                                     </a>
-                                    <a
-                                        href="https://www.facebook.com/"
-                                        target="blank"
-                                        className="cts__icons"
-                                    >
+                                    <a href="https://www.facebook.com/" target="blank" className="cts__icons" >
                                         <FontAwesomeIcon icon={faFacebookF} />
                                     </a>
-                                    <a
-                                        href="https://twitter.com/?lang=es"
-                                        target="blank"
-                                        className="cts__icons"
-                                    >
+                                    <a href="https://twitter.com/?lang=es" target="blank" className="cts__icons" >
                                         <FontAwesomeIcon icon={faTwitter} />
                                     </a>
-                                    <a
-                                        href="https://dribbble.com/"
-                                        target="blank"
-                                        className="cts__icons"
-                                    >
+                                    <a href="https://dribbble.com/" target="blank" className="cts__icons" >
                                         <FontAwesomeIcon icon={faDribbble} />
                                     </a>
-                                    <a
-                                        href="https://www.behance.net/"
-                                        target="blank"
-                                        className="cts__icons"
-                                    >
+                                    <a href="https://www.behance.net/" target="blank" className="cts__icons" >
                                         <FontAwesomeIcon icon={faBehance} />
                                     </a>
-                                    <a
-                                        href="https://www.linkedin.com/feed/"
-                                        target="blank"
-                                        className="cts__icons"
-                                    >
+                                    <a href="https://www.linkedin.com/feed/" target="blank" className="cts__icons" >
                                         <FontAwesomeIcon icon={faLinkedinIn} />
                                     </a>
                                 </div>
-                                <FontAwesomeIcon
-                                    icon={faMapMarkerAlt}
-                                    className="cts__icons-unique"
-                                />
+                                <FontAwesomeIcon icon={faMapMarkerAlt} className="cts__icons-unique" />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
                                     4127/ 5B-C Mislane Road, <br />
                                     Gibraltar, UK
                                 </p>
                                 <br />
-                                <FontAwesomeIcon
-                                    icon={faPhoneAlt}
-                                    className="cts__icons-unique"
-                                />
+                                <FontAwesomeIcon icon={faPhoneAlt} className="cts__icons-unique" />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
                                     Main: 203-808-8613 <br />
                                     Office: 203-808-8648
                                 </p>
                                 <br />
-                                <FontAwesomeIcon
-                                    icon={faEnvelopeOpenText}
-                                    className="cts__icons-unique"
-                                />
+                                <FontAwesomeIcon icon={faEnvelopeOpenText} className="cts__icons-unique" />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
                                     centrofamir@gmail.com
                                 </p>

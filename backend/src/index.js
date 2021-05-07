@@ -48,6 +48,7 @@ app.use(async(req, res, next) => {
 
 
 //Routes
+app.use('/api/cursos', require('./routes/cursos.routes'));
 app.use('/api/profesores', require('./routes/profesores.routes'));
 app.use('/api/usuarios', require('./routes/usuarios.routes'));
 app.use('/api/estudiantes', require('./routes/estudiantes.routes'));

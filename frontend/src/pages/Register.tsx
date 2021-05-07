@@ -65,45 +65,25 @@ class Register extends React.Component {
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">Nombres</label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="text"
-                          name="name"
-                        />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="text" name="name" />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">Apellidos</label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="text"
-                          name="surname"
-                        />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="text" name="surname" />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">Correo</label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="email"
-                          name="email"
-                          placeholder="name@example.com"
-                        />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="email" name="email" placeholder="name@example.com" />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">Pais</label>
-                        <select
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          name="pais"
-                        >
+                        <select onChange={this.handleInputChange} className="form-control rgt__form-control" name="pais" >
                           <option value="1">Perú</option>
                           <option value="2">Chile</option>
                         </select>
@@ -112,71 +92,39 @@ class Register extends React.Component {
                     <div className="col-md-12">
                       <div className="mb-3">
                         <label className="form-label">Profesión</label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="text"
-                          name="profesión"
-                        />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="text" name="profesión" />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">Teléfono</label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="text"
-                          name="telefono"
-                          placeholder="Telefono"
-                        />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="text" name="telefono" placeholder="Telefono" />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">RUT</label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="text"
-                          name="rut"
-                          placeholder="RUT"
-                        />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="text" name="rut" placeholder="RUT" />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">Contraseña</label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="password"
-                          name="password"
-                        />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="password" name="password" />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
-                        <label className="form-label">
-                          Confirmar contraseña
-                        </label>
-                        <input
-                          onChange={this.handleInputChange}
-                          className="form-control rgt__form-control"
-                          type="password"
-                          name="verifyPassword"
-                        />
+                        <label className="form-label"> Confirmar contraseña </label>
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="password" name="verifyPassword" />
                       </div>
                     </div>
                     <div className="col-md-12">
                       <div className="rgt__button">
-                        <button type="submit" className="btn btn__more" style={{ padding: "0.7rem 2rem" }}>
-                          Registrar
-                        </button>
+                        <button type="submit" className="btn btn__more" style={{ padding: "0.7rem 2rem" }}> Registrar </button>
                       </div>
                     </div>
                   </div>
-
                 </form>
               </div>
             </div>

@@ -10,10 +10,7 @@ const CursoItem = (props: Props) => {
   return (
     <div className="col-12 col-md-6 col-lg-4 mt-5 d-flex curso-item show">
       <div className="icon-curso-container">
-        <FontAwesomeIcon
-          className="my-auto mx-2 text-white"
-          icon={props.icon}
-        />
+        <FontAwesomeIcon className="my-auto mx-2 text-white" icon={props.icon} />
       </div>
       <div>
         <h5 className="curso-title">{props.title}</h5>

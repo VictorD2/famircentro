@@ -1,11 +1,13 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // Iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBookReader, faChevronDown, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../images/logoFamir2.png";
+import { useUsuario } from "../../context-user/UsuarioProvider";
 
 const Navigation = () => {
+  const { usuario } = useUsuario();
   //Animacion de la navegacion
   const esconder = () => {
     document.querySelector(".left-aside")?.classList.toggle("esconder");
@@ -18,15 +20,9 @@ const Navigation = () => {
     <React.Fragment>
       {/* Nav Superior */}
       <nav className="nav-superior">
-        <button onClick={esconder} className="btn btn-secondary">
-          <FontAwesomeIcon icon={faBars} />
-        </button>
+        <button onClick={esconder} className="btn btn-secondary"> <FontAwesomeIcon icon={faBars} /> </button>
         <ul className="navbar__list">
-          <li className="navbar__item">
-            <Link className="navbar__link" to="/">
-              Home
-            </Link>
-          </li>
+          <li className="navbar__item"> <Link className="navbar__link" to="/"> Home </Link> </li>
         </ul>
       </nav>
 
@@ -39,7 +35,7 @@ const Navigation = () => {
         <div className="user">
           <img className="img-fluid" src={logo} alt="" />
           <div className="w-50">
-            <p className="user__name">Pedro Marino Reyes Herrera</p>
+            <p className="user__name">{`${usuario.nombre} ${usuario.apellido}`} </p>
           </div>
         </div>
         <ul className="opciones">
@@ -53,35 +49,21 @@ const Navigation = () => {
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne">
-                  <button
-                    className="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                  >
+                  <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" >
                     <FontAwesomeIcon icon={faBars} />
                     <p>Cursos</p>
                     <div className="w-100 d-flex align-items-center justify-content-end">
-                      <FontAwesomeIcon
-                        className="icon__button"
-                        icon={faChevronDown}
-                      />
+                      <FontAwesomeIcon className="icon__button" icon={faChevronDown} />
                     </div>
                   </button>
                 </h2>
                 <div id="collapseOne" className="accordion-collapse collapse">
                   <div className="accordion-body">
-                    <Link
-                      className="item__link my-2 p-0"
-                      to="/DashBoard/Asincronos"
-                    >
+                    <Link className="item__link my-2 p-0" to="/DashBoard/Asincronos" >
                       <FontAwesomeIcon icon={faBookReader} />
                       <p>Cursos Asincronos</p>
                     </Link>
-                    <Link
-                      className="item__link my-0 p-0"
-                      to="/DashBoard/Sincronos"
-                    >
+                    <Link className="item__link my-0 p-0" to="/DashBoard/Sincronos" >
                       <FontAwesomeIcon icon={faBars} />
                       <p>Cursos Sincronos</p>
                     </Link>
