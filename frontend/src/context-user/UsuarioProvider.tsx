@@ -26,8 +26,10 @@ export function UsuarioProvider(props: any) {
   useEffect(() => {
     async function cargarUsuario() {
       const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
-      if (datos.data.user) setUsuario(datos.data.user);
-      setLoadUser(true);
+      if(datos.data.user) {
+        setUsuario(datos.data.user);
+        setLoadUser(true);
+      }
     }
     cargarUsuario();
   }, []);

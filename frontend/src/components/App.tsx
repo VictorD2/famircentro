@@ -22,7 +22,7 @@ import AdminRoute from './ProtectedRoutes/AdminRoute';
 import FormEstudiante from "./EstudiantesDash/FormEstudiante";
 function App() {
   const { usuario, loadUser } = useUsuario();
-  console.log(usuario);
+  //console.log(usuario);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/" component={Home} />
 
           {/* Dashboard */}
-          <LogRoute authenticate={usuario.authenticate} component={Perfil} exact path="/perfil" />
+          <LogRoute authenticate={usuario.authenticate} exact path="/Perfil" component={Perfil} />
           <AdminRoute rango={usuario.id_rango} authenticate={usuario.authenticate} exact path="/DashBoard" component={DashBoard} />
 
           {/* Usuarios */}
