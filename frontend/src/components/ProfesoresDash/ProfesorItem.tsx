@@ -20,14 +20,15 @@ const ProfesorItem = (props: Props) => {
     props.funcion(props.profesor);
   }
   const deshabilitar = async () => {
-    if (window.confirm("¿Está seguro que desea habilitar/deshabilitar el usuario?")) {
-      const res = await profesorServices.eliminarProfesor(props.profesor.id_usuario?.toString());
-      if (res.data.message === "success") {
-        props.cargaDatos();
-        return toast.success(`Estado del profesor ${props.profesor.nombre} actualizado`);
-      }
-      return toast.success("Ocurrió un error");
+    if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el usuario?")) return;
+
+    const res = await profesorServices.eliminarProfesor(props.profesor.id_usuario?.toString());
+    if (res.data.message === "success") {
+      props.cargaDatos();
+      return toast.success(`Estado del profesor ${props.profesor.nombre} actualizado`);
     }
+    return toast.success("Ocurrió un error");
+
   }
   return (
     <React.Fragment>
@@ -61,10 +62,10 @@ const ProfesorItem = (props: Props) => {
               <button onClick={deshabilitar} className="btn btn-success">
                 <FontAwesomeIcon className="fs-4" icon={faCheck} />
               </button>
-            </>)}
-
+            </>
+            )
+          }
         </td>
-
       </tr>
     </React.Fragment >
   );

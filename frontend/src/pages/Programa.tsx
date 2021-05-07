@@ -35,44 +35,20 @@ class Programa extends React.Component {
                             <h3 className="fw-bold fs-1 mt-3 show">Asincronos</h3>
                         </div>
                         <div className="row mt-5" style={{ marginTop: "4.5rem" }}>
-                            <CardCursos
-                                img={tea1}
-                                curso="Modelado de Procesos de Negocios"
-                            />
-                            <CardCursos
-                                img={tea2}
-                                curso="Sistemas de Información"
-                            />
-                            <CardCursos
-                                img={tea3}
-                                curso="Redes de Computadoras"
-                            />
-                            <CardCursos
-                                img={tea4}
-                                curso="Machine Learning"
-                            />
+                            <CardCursos img={tea1} curso="Modelado de Procesos de Negocios" />
+                            <CardCursos img={tea2} curso="Sistemas de Información" />
+                            <CardCursos img={tea3} curso="Redes de Computadoras" />
+                            <CardCursos img={tea4} curso="Machine Learning" />
                         </div>
                         <div className="row mt-5">
                             <span className="fw-light fs-6 text-secondary show">CURSOS</span><br />
                             <h3 className="fw-bold fs-1 mt-3 show">Sincronos</h3>
                         </div>
                         <div className="row mt-5" style={{ marginTop: "4.5rem" }}>
-                            <CardCursos
-                                img={tea1}
-                                curso="Seguridad Informatica"
-                            />
-                            <CardCursos
-                                img={tea2}
-                                curso="Fundamentos de Programación"
-                            />
-                            <CardCursos
-                                img={tea3}
-                                curso="Arquitectura de Redes"
-                            />
-                            <CardCursos
-                                img={tea4}
-                                curso="Sistemas Operativos"
-                            />
+                            <CardCursos img={tea1} curso="Seguridad Informatica" />
+                            <CardCursos img={tea2} curso="Fundamentos de Programación" />
+                            <CardCursos img={tea3} curso="Arquitectura de Redes" />
+                            <CardCursos img={tea4} curso="Sistemas Operativos" />
                         </div>
                     </div>
                 </div>

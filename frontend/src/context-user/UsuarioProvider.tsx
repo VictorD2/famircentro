@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Usuario from "../interfaces/Usuario";
+import auth from './auth';
 const initialState: Usuario = {
   id_usuario: "",
   nombre: "",
@@ -19,14 +20,22 @@ const UsuarioContext = React.createContext({
   loadUser: false
 });
 
-export function UsuarioProvider(props: any) {
+export const UsuarioProvider = (props: any) => {
   const [usuario, setUsuario] = useState<Usuario>(initialState);
-  const [loadUser, setLoadUser] = useState(true);
+  const [loadUser, setLoadUser] = useState(false);
 
   useEffect(() => {
     async function cargarUsuario() {
-      const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
-      if (datos.data.user) setUsuario(datos.data.user);
+      try {
+        // const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
+        // setUsuario(datos.data.user);
+        // auth.sigIn();
+        // auth.setRango(datos.data.user.id_rango);
+      } catch (error) {
+        setUsuario(initialState);
+        auth.setRango(2);
+        auth.logOut();
+      }
       setLoadUser(true);
     }
     cargarUsuario();
@@ -44,10 +53,6 @@ export function UsuarioProvider(props: any) {
 
 export function useUsuario() {
   const context = React.useContext(UsuarioContext);
-  if (!context) {
-    throw new Error(
-      "useUsuario debe estar dentro del proveedor usuario context"
-    );
-  }
+  if (!context) throw new Error("useUsuario debe estar dentro del proveedor usuario context");
   return context;
 }

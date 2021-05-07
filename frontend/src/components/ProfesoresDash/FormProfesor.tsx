@@ -67,12 +67,12 @@ const FormProfesor = () => {
       if (res.data.message === 'already exists') toast.error("Ya existe un usuario con ese correo");
       if (res.data.message === "success") toast.success("Profesor creado");
       if (res.data.message === "failed") toast.error("Ocurrió un error");
-    } else {
-      const res = await profesorServices.updateProfesor(params.id, profesor);
-      if (res.data.message === 'already exists') toast.error("Ya existe un usuario con ese correo");
-      if (res.data.message === "success") toast.success("Profesor actualizado");
-      if (res.data.message === "failed") toast.error("Ocurrió un error");
+      return;
     }
+    const res = await profesorServices.updateProfesor(params.id, profesor);
+    if (res.data.message === 'already exists') toast.error("Ya existe un usuario con ese correo");
+    if (res.data.message === "success") toast.success("Profesor actualizado");
+    if (res.data.message === "failed") toast.error("Ocurrió un error");
   };
 
 
@@ -93,88 +93,33 @@ const FormProfesor = () => {
             <div className="col-md-6">
               <form onSubmit={handleFormSubmit}>
                 <div className="mb-3">
-                  <input
-                    onChange={handleInputChange}
-                    className="form-control"
-                    type="text"
-                    placeholder="Nombre"
-                    name="nombre"
-                    required
-                    value={profesor.nombre}
-                  />
+                  <input onChange={handleInputChange} className="form-control" type="text" placeholder="Nombre" name="nombre" required value={profesor.nombre} />
                 </div>
                 <div className="mb-3">
-                  <input
-                    onChange={handleInputChange}
-                    className="form-control"
-                    type="text"
-                    placeholder="Apellidos"
-                    name="apellido"
-                    required
-                    value={profesor.apellido}
-                  />
+                  <input onChange={handleInputChange} className="form-control" type="text" placeholder="Apellidos" name="apellido" required value={profesor.apellido} />
                 </div>
                 <div className="mb-3">
-                  <input
-                    onChange={handleInputChange}
-                    className="form-control"
-                    type="email"
-                    placeholder="Email"
-                    name="correo"
-                    required
-                    value={profesor.correo}
-                  />
+                  <input onChange={handleInputChange} className="form-control" type="email" placeholder="Email" name="correo" required value={profesor.correo} />
                 </div>
                 <div className="mb-3">
-                  <select
-                    value={profesor.id_pais}
-                    onChange={handleInputChange}
-                    className="form-control" name="id_pais" >
-                    <option value="1">Peru</option>
+                  <select value={profesor.id_pais} onChange={handleInputChange} className="form-control" name="id_pais" >                    <option value="1">Peru</option>
                     <option value="2">Chile</option>
                   </select>
                 </div>
                 <div className="mb-3">
-                  <input
-                    onChange={handleInputChange}
-                    className="form-control"
-                    type="text"
-                    placeholder="Profesión"
-                    name="profesion"
-                    required
-                    value={profesor.profesion}
-                  />
+                  <input onChange={handleInputChange} className="form-control" type="text" placeholder="Profesión" name="profesion" required value={profesor.profesion} />
                 </div>
                 <div className="mb-3">
-                  <input
-                    onChange={handleInputChange}
-                    className="form-control"
-                    type="text"
-                    placeholder="Telefono"
-                    name="telefono"
-                    required
-                    value={profesor.telefono}
-                  />
+                  <input onChange={handleInputChange} className="form-control" type="text" placeholder="Telefono" name="telefono" required value={profesor.telefono} />
                 </div>
                 <div className="mb-3">
-                  <input
-                    onChange={handleInputChange}
-                    className="form-control"
-                    type="text"
-                    placeholder="RUT"
-                    name="rut"
-                    required
-                    value={profesor.rut}
-                  />
+                  <input onChange={handleInputChange} className="form-control" type="text" placeholder="RUT" name="rut" required value={profesor.rut} />
                 </div>
                 <div className="mb-3">
                   {params.id ? (
-                    <button className="btn btn__blue">
-                      <FaRegEdit className="fs-5 mb-1" /> Actualizar
-                    </button>
+                    <button className="btn btn__blue"> <FaRegEdit className="fs-5 mb-1" /> Actualizar </button>
                   ) : (
-                    <button className="btn btn__blue">
-                      <FaPlus className="fs-5 mb-1" /> Crear</button>
+                    <button className="btn btn__blue"> <FaPlus className="fs-5 mb-1" /> Crear </button>
                   )}
                 </div>
               </form>
