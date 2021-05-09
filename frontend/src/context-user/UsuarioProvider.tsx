@@ -13,7 +13,7 @@ const initialState: Usuario = {
   rut: "",
   id_rango: 2,
   url_foto_usuario: "",
-  authenticate: false,
+  authenticate: true,
 };
 const UsuarioContext = React.createContext({
   usuario: initialState,

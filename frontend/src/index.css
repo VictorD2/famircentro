@@ -70,7 +70,7 @@ code {
   width: 500px;
 }
 .logo-link .logo {
-  width: 100%;
+  width: 75%;
 }
 .logo-responsive{
   display: none;
@@ -162,6 +162,46 @@ code {
 .navigation .left-side .lista-enlace .lista-item .item-link:hover {
   color: var(--azul-claro);
 }
+
+.content-lista {
+  list-style: none;
+  border-radius: 0.2rem;
+  background: #eef3f6;
+  padding: 0.5rem 0;
+  position: absolute;
+  min-width: 10rem;
+  border: 1px solid;
+}
+
+.position-lista-start {
+  top: 0.5rem;
+  left: 10rem;
+}
+
+.position-lista-end {
+  top: 3.5rem;
+  left: 10rem;
+}
+
+.content-lista > li:nth-child(odd) {
+  padding: .2rem .8rem;
+}
+
+.content-lista > li:nth-child(odd):hover {
+  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+}
+
+.content-lista > li > a {
+  text-decoration: none;
+  color: #000000;
+  width: 100%;
+  display: block;
+}
+
+.content-lista > li > a:hover {
+  color: #ffffff;
+}
+
 /* Navigation Responsive */
 .navigation-responsive {
   display: none;
@@ -189,6 +229,65 @@ code {
 
 .fijar-nav .left-side {
   width: 60%;
+}
+.content-lista-res {
+  list-style: none;
+  border-radius: 0.2rem;
+  background: #eef3f6;
+  padding: 0.5rem 0;
+  position: absolute;
+  min-width: 10rem;
+  border: 1px solid;
+}
+
+.content-lista-res > li:nth-child(1) {
+  padding: .2rem .8rem;
+}
+
+.content-lista-res > li:nth-child(4) {
+  padding: .2rem .8rem;
+}
+
+.content-lista-res > li:nth-child(1):hover {
+  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+}
+
+.content-lista-res > li:nth-child(4):hover {
+  background: linear-gradient(to left, var(--verde-claro), var(--verde-oscuro));
+}
+
+.content-lista-res > li > a {
+  text-decoration: none;
+  color: #000000;
+  width: 100%;
+  display: block;
+}
+
+.content-lista-res > li > a:hover {
+  color: #ffffff;
+}
+
+.subItemMenu-resp {
+  position: relative;
+  background: var(--azul-claro);
+  color: #ffffff;
+  list-style: none;
+  padding: 0.5rem 0;
+}
+
+.subItemMenu-resp > li:nth-child(odd):hover {
+  background: var(--verde-oscuro);
+}
+
+.subItemMenu-resp > li:nth-child(odd) {
+  padding: .2rem .8rem;
+}
+
+.subItemMenu-resp > li > a {
+  text-decoration: none;
+  color: #ffffff;
+  width: 100%;
+  display: block;
 }
 
 /* Footer */
@@ -997,7 +1096,7 @@ code {
     display: none;
   }
   .logo-responsive{
-    width: 60%;
+    width: 55%;
     display: block;
   }
   .navigation {
