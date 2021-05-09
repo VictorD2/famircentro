@@ -9,6 +9,7 @@ import { faPhone, faBars, faTimes, faDoorOpen, faUser, faTachometerAlt } from "@
 
 import { useUsuario } from "../../context-user/UsuarioProvider";
 import { AiOutlinePhone } from "react-icons/ai";
+import { RiArrowDownSFill, RiArrowRightSFill } from "react-icons/ri";
 
 const NavBar = () => {
   const { usuario, loadUser } = useUsuario();
@@ -36,6 +37,40 @@ const NavBar = () => {
     const res = await Axios.get("http://localhost:4000/logout", { withCredentials: true });
     if (res.data.message === "success") window.location.href = "/"; //<- Te regresa a la pagina principal
   };
+
+  // DesplegarMenu
+  const disappearItem = (e: any) => {
+    const lista = document.getElementById('itemsMenu');
+    lista?.classList.toggle('d-none');
+  }
+
+  // SubItems Disappear
+  const disappearSubItemFirst = (e: any) => {
+    const subItem = document.getElementById('subItemsMenuFirst');
+    subItem?.classList.toggle('d-none');
+  }
+
+  const disappearSubItemSecond = (e: any) => {
+    const subItem = document.getElementById('subItemsMenuSecond');
+    subItem?.classList.toggle('d-none');
+  }
+
+  // DesplegarMenu Responsive
+  const disappearItemResponsive = (e: any) => {
+    const lista = document.getElementById('itemsMenuResponsive');
+    lista?.classList.toggle('d-none');
+  }
+
+  // SubItems Disappear Responsive
+  const disappearSubItemFirstResponsive = (e: any) => {
+    const subItem = document.getElementById('subItemsMenuFirstResponsive');
+    subItem?.classList.toggle('d-none');
+  }
+
+  const disappearSubItemSecondResponsive = (e: any) => {
+    const subItem = document.getElementById('subItemsMenuSecondResponsive');
+    subItem?.classList.toggle('d-none');
+  }
 
   return (
     <React.Fragment>
@@ -92,13 +127,29 @@ const NavBar = () => {
             <li className="lista-item"> <Link className="item-link" to="/">Inicio</Link> </li>
             <li className="lista-item"> <Link className="item-link" to="/Nosotros">Nosotros</Link> </li>
             <li className="lista-item"> <Link className="item-link" to="/Contactanos">Contáctanos</Link> </li>
-            <li className="lista-item dropdown">
-              <button className="btn dropdown-toggle text-uppercase" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontSize: "14px", fontWeight: 700, padding: 0 }}>
-                Dropdown
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li><button className="dropdown-item" type="button">Action</button></li>
-                <li><button className="dropdown-item" type="button">Action</button></li>
+            {/* <li className="lista-item"> <Link className="item-link" to="/Programa">Programa</Link> </li> */}
+            <li className="lista-item">
+              <Link className="item-link" to="#" role="button" onClick={disappearItem} >Programa <RiArrowDownSFill className="fs-5" /></Link>
+              <ul className="content-lista d-none" id="itemsMenu">
+                <li onMouseEnter={disappearSubItemFirst} onMouseLeave={disappearSubItemFirst} >
+                  <Link to="#" role="button" className="d-flex align-items-center">Curso <RiArrowRightSFill className="fs-5" /></Link>
+                  <ul className="content-lista d-none position-lista-start" id="subItemsMenuFirst">
+                    <li><Link to="/curso/asincrono">Asincrono</Link></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><Link to="/curso/sincrono">Sincrono</Link></li>
+                  </ul>
+                </li>
+
+                <li><hr className="dropdown-divider" /></li>
+
+                <li onMouseEnter={disappearSubItemSecond} onMouseLeave={disappearSubItemSecond} >
+                  <Link to="#" role="button" className="d-flex align-items-center">Taller <RiArrowRightSFill className="fs-5" /></Link>
+                  <ul className="content-lista d-none position-lista-end" id="subItemsMenuSecond">
+                    <li><Link to="/taller/asincrono">Asincrono</Link></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><Link to="/taller/sincrono">Sincrono</Link></li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
@@ -135,7 +186,30 @@ const NavBar = () => {
           <li className="item-list"> <Link className="item-link" to="/">Inicio</Link> </li>
           <li className="item-list"> <Link className="item-link" to="/Nosotros">¿Quienes Somos?</Link> </li>
           <li className="item-list"> <Link className="item-link" to="/Contactanos">Contáctanos</Link> </li>
-          <li className="item-list"> <Link className="item-link" to="/Programa">Programa</Link> </li>
+          <li className="item-list">
+            <Link className="item-link" to="#" role="button" onClick={disappearItemResponsive} >Programa <RiArrowDownSFill className="fs-5" /></Link>
+            <ul className="content-lista-res d-none" id="itemsMenuResponsive" >
+              <li onClick={disappearSubItemFirstResponsive}>
+                <Link to="#" role="button">Curso <RiArrowDownSFill className="fs-5" /></Link>
+              </li>
+              <ul className="d-none subItemMenu-resp" id="subItemsMenuFirstResponsive">
+                  <li><Link to="/curso/asincrono" role="button">Asincrono</Link></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><Link to="/curso/sincrono" role="button">Sincrono</Link></li>
+              </ul>
+
+              <li><hr className="dropdown-divider" /></li>
+
+              <li onClick={disappearSubItemSecondResponsive}>
+                <Link to="#" role="button">Taller <RiArrowDownSFill className="fs-5" /></Link>
+              </li>
+              <ul className="d-none subItemMenu-resp" id="subItemsMenuSecondResponsive">
+                  <li><Link to="/taller/asincrono" role="button">Asincrono</Link></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><Link to="/taller/sincrono" role="button">Sincrono</Link></li>
+              </ul>
+            </ul>
+          </li>
         </ul>
       </nav>
     </React.Fragment>
