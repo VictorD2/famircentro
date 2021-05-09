@@ -27,10 +27,12 @@ export const UsuarioProvider = (props: any) => {
   useEffect(() => {
     async function cargarUsuario() {
       try {
-        // const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
-        // setUsuario(datos.data.user);
-        // auth.sigIn();
-        // auth.setRango(datos.data.user.id_rango);
+        const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
+        if (datos.data.user) {
+          setUsuario(datos.data.user);
+          auth.sigIn();
+          auth.setRango(datos.data.user.id_rango);
+        }
       } catch (error) {
         setUsuario(initialState);
         auth.setRango(2);

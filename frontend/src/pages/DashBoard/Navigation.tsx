@@ -48,7 +48,7 @@ const Navigation = () => {
           <li className="opciones__item">
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne">
+                <h2 className="accordion-header">
                   <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" >
                     <FontAwesomeIcon icon={faBars} />
                     <p>Cursos</p>
@@ -59,13 +59,40 @@ const Navigation = () => {
                 </h2>
                 <div id="collapseOne" className="accordion-collapse collapse">
                   <div className="accordion-body">
-                    <Link className="item__link my-2 p-0" to="/DashBoard/Asincronos" >
+                    {/* <Link className="item__link my-2 p-0" to="/DashBoard/Cursos/Asincronos" >
                       <FontAwesomeIcon icon={faBookReader} />
                       <p>Cursos Asincronos</p>
-                    </Link>
-                    <Link className="item__link my-0 p-0" to="/DashBoard/Sincronos" >
+                    </Link> */}
+                    <Link className="item__link my-0 p-0" to="/DashBoard/Cursos/Sincronos" >
                       <FontAwesomeIcon icon={faBars} />
                       <p>Cursos Sincronos</p>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li className="opciones__item">
+            <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header">
+                  <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2" >
+                    <FontAwesomeIcon icon={faBars} />
+                    <p>Talleres</p>
+                    <div className="w-100 d-flex align-items-center justify-content-end">
+                      <FontAwesomeIcon className="icon__button" icon={faChevronDown} />
+                    </div>
+                  </button>
+                </h2>
+                <div id="collapseOne2" className="accordion-collapse collapse">
+                  <div className="accordion-body">
+                    <Link className="item__link my-2 p-0" to="/DashBoard/Talleres/Asincronos" >
+                      <FontAwesomeIcon icon={faBookReader} />
+                      <p>Talleres Asincronos</p>
+                    </Link>
+                    <Link className="item__link my-0 p-0" to="/DashBoard/Talleres/Sincronos" >
+                      <FontAwesomeIcon icon={faBars} />
+                      <p>Talleres Sincronos</p>
                     </Link>
                   </div>
                 </div>

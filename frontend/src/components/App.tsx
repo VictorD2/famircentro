@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useUsuario, UsuarioProvider } from "./../context-user/UsuarioProvider";
+
 import AboutUs from "./../pages/AboutUs";
 import NotFound from "./../pages/NotFound";
 import Home from "./../pages/Home";
@@ -21,6 +23,12 @@ import LogRoute from './ProtectedRoutes/LogRoute';
 import NoLogRoute from './ProtectedRoutes/NoLogRoute';
 
 import FormEstudiante from "./EstudiantesDash/FormEstudiante";
+// import CursosAsincronos from "./CursosAsincronosDash/CursosAsincronos";
+// import CursosSincronos from "./CursosSincronosDash/CursosSincronos";
+import TalleresAsincronos from "./TalleresAsincronosDash/Cursos";
+// import TalleresSincronos from "./TalleresSincronosDash/TalleresSincronos";
+import FormCurso from "./TalleresAsincronosDash/FormCurso";
+
 function App() {
   const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
@@ -49,6 +57,15 @@ function App() {
           <AdminRoute exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
           <AdminRoute exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
           <AdminRoute exact path="/DashBoard/Estudiantes/update/:id" component={FormEstudiante} />
+
+          {/* Cursos */}
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
+
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/nuevo" component={FormCurso} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/update/:id" component={FormCurso} />
 
           {/* Vistas */}
           <NoLogRoute exact component={Login} path="/Login" />

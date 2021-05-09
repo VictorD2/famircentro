@@ -62,7 +62,7 @@ const NavBar = () => {
                               <Link className="login-button p-3 fs-3" to="/Dashboard"> <FontAwesomeIcon icon={faTachometerAlt} /> </Link>
                             </>) : (<></>)
                           }
-                          
+
                           {/* Perfil y logout */}
                           <Link className="login-button p-3 fs-3" to="/Perfil"> <FontAwesomeIcon icon={faUser} /> </Link>
                           <a onClick={logout} className="login-button p-3 fs-3" href="/logout"> <FontAwesomeIcon icon={faDoorOpen} /> </a>
@@ -92,7 +92,15 @@ const NavBar = () => {
             <li className="lista-item"> <Link className="item-link" to="/">Inicio</Link> </li>
             <li className="lista-item"> <Link className="item-link" to="/Nosotros">Nosotros</Link> </li>
             <li className="lista-item"> <Link className="item-link" to="/Contactanos">Contáctanos</Link> </li>
-            <li className="lista-item"> <Link className="item-link" to="/Programa">Programa</Link> </li>
+            <li className="lista-item dropdown">
+              <button className="btn dropdown-toggle text-uppercase" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontSize: "14px", fontWeight: 700, padding: 0 }}>
+                Dropdown
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li><button className="dropdown-item" type="button">Action</button></li>
+                <li><button className="dropdown-item" type="button">Action</button></li>
+              </ul>
+            </li>
           </ul>
         </div>
         <div className="right-side">

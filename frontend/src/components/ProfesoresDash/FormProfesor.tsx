@@ -102,7 +102,8 @@ const FormProfesor = () => {
                   <input onChange={handleInputChange} className="form-control" type="email" placeholder="Email" name="correo" required value={profesor.correo} />
                 </div>
                 <div className="mb-3">
-                  <select value={profesor.id_pais} onChange={handleInputChange} className="form-control" name="id_pais" >                    <option value="1">Peru</option>
+                  <select value={profesor.id_pais} onChange={handleInputChange} className="form-control" name="id_pais" >
+                    <option value="1">Peru</option>
                     <option value="2">Chile</option>
                   </select>
                 </div>

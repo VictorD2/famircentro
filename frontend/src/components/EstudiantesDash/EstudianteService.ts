@@ -9,4 +9,4 @@ export const getEstudianteById = async (id: string) => {
 };
 export const eliminarEstudiante = async (id: string | undefined) => {
   return await axios.delete(`${api}/${id}`);
-};
+};  
