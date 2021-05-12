@@ -12,7 +12,7 @@ const LogRoute = (props: PrivateRouteProps) => {
         <Route
             {...rest}
             render={(props) => {
-                if (!auth.isAuth()) {
+                if (auth.isAuth()) {
                     return <Component {...props} />
                 }
                 return <Redirect to={{ pathname: '/', state: { from: props.location } }} />

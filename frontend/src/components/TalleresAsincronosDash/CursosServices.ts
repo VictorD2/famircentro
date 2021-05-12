@@ -3,8 +3,8 @@ import { Curso } from "./Curso";
 const api = "http://localhost:4000/api/cursos";
 
 //OBTENER
-export const getAllCursos = async (tipo:string,modalidad:string) => {
-  return await axios.get(`${api}/${tipo}/${modalidad}`);
+export const getAllCursos = async (tipo: string, modalidad: string) => {
+  return await axios.get(`${api}/all/${tipo}/${modalidad}`);
 };
 
 //Por ID
@@ -13,7 +13,7 @@ export const getCursoById = async (id: string) => {
 };
 
 // CREAR
-export const crearCurso = async (curso: Curso,tipo:string,modalidad:string) => {
+export const crearCurso = async (curso: Curso, tipo: string, modalidad: string) => {
   curso.tipo = tipo;
   curso.modalidad = modalidad;
   return await axios.post(`${api}`, curso);

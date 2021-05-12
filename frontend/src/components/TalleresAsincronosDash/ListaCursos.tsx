@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams,useHistory } from 'react-router-dom';
 import { Curso } from './Curso';
 import * as cursoServices from "./CursosServices";
-import TallerAsincronoItem from './CursoItem';
+import CursoItem from './CursoItem';
 interface Params {
     modalidad: string;
     tipo: string;
@@ -12,7 +12,7 @@ interface Props {
     funcion: (curso: Curso) => void;
     filtro: string;
 }
-const ListaTalleresAsincronos = (props: Props) => {
+const ListaCursos = (props: Props) => {
     const params = useParams<Params>();
     const history = useHistory();
     const [cursos, setCursos] = useState<Curso[]>([]);
@@ -61,10 +61,10 @@ const ListaTalleresAsincronos = (props: Props) => {
     return (
         <React.Fragment>
             {cursos.map((curso) => {
-                if (props.filtro === "") return <TallerAsincronoItem cargaDatos={loadCursos} funcion={props.funcion} curso={curso} key={curso.id_curso} />;
+                if (props.filtro === "") return <CursoItem cargaDatos={loadCursos} funcion={props.funcion} curso={curso} key={curso.id_curso} />;
                 if (props.filtro === curso.id_curso?.toString()
                     || curso.nombre_curso?.toLowerCase().search(props.filtro.toLowerCase()) !== -1)
-                    return <TallerAsincronoItem cargaDatos={loadCursos} funcion={props.funcion} curso={curso} key={curso.id_curso} />;
+                    return <CursoItem cargaDatos={loadCursos} funcion={props.funcion} curso={curso} key={curso.id_curso} />;
                 return <tr key={curso.id_curso}></tr>
             })}
         </React.Fragment>
@@ -72,4 +72,4 @@ const ListaTalleresAsincronos = (props: Props) => {
     );
 }
 
-export default ListaTalleresAsincronos
+export default ListaCursos

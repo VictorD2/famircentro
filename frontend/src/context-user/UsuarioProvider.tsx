@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-// import axios from "axios";
+import axios from "axios";
 import Usuario from "../interfaces/Usuario";
 import auth from './auth';
 const initialState: Usuario = {
@@ -13,7 +13,7 @@ const initialState: Usuario = {
   rut: "",
   id_rango: 2,
   url_foto_usuario: "",
-  authenticate: true,
+  authenticate: false,
 };
 const UsuarioContext = React.createContext({
   usuario: initialState,
