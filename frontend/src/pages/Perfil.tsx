@@ -34,7 +34,7 @@ const Perfil = () => {
                                 </div>
                             </div>
                             <div className="row mt-4">
-                                <Link className="btn btn-success" to="/edit">Editar perfil</Link>
+                                <Link className="btn btn-editPerfil" to="/edit">Editar perfil</Link>
                             </div>
                         </div>
                     </div>

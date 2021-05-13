@@ -633,8 +633,8 @@ code {
   border-radius: 50%;
   background: #a3a3a3;
   margin-right: 0.5rem;
-  width: 70px;
-  height: 70px;
+  width: 110px;
+  height: 110px;
   border-style: solid;
   border-color: var(--verde-oscuro);
 }
@@ -666,6 +666,17 @@ code {
 .desplegar {
   max-height: 34rem;
   overflow-y: scroll;
+}
+
+.btn-editPerfil {
+  background: var(--verde-oscuro);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.btn-editPerfil:hover {
+  background: #55bb2a;
+  color: #ffffff;
 }
 
 /* Detalles de Curso */
@@ -716,6 +727,35 @@ code {
 
 .btn-outline-warning:hover {
   background: var(--amarillo-oscuro);
+}
+
+/* Editar Perfil */
+.cuadroEditPerfil {
+  margin-bottom: 26px;
+  padding: 21px;
+  text-align: center;
+  border: 2px dashed var(--amarillo-oscuro);
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.editProfile-img {
+  margin-bottom: 18px;
+}
+
+.editProfile-img img {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.editProfile-imgLoad {
+  color: #696969;
+}
+
+.editPerfil-link {
+  font-weight: bold;
+  color: #0791e6;
 }
 
 @media only screen and (min-width: 769px) {

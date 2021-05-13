@@ -21,6 +21,7 @@ import LogRoute from './ProtectedRoutes/LogRoute';
 import NoLogRoute from './ProtectedRoutes/NoLogRoute';
 
 import FormEstudiante from "./EstudiantesDash/FormEstudiante";
+import EditPerfil from './../pages/EditPerfil';
 function App() {
   const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
@@ -53,6 +54,7 @@ function App() {
           {/* Vistas */}
           <NoLogRoute exact component={Login} path="/Login" />
           <NoLogRoute exact component={Register} path="/Register" />
+          <Route exact path="/edit" component={EditPerfil} />
           <Route exact path="/curso" component={Curso} />
           <Route exact path="/programa" component={Programa} />
           <Route exact path="/nosotros" component={AboutUs} />
