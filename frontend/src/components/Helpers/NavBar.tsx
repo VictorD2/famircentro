@@ -99,15 +99,15 @@ const NavBar = () => {
                           }
 
                           {/* Perfil y logout */}
-                          <Link className="login-button p-3 fs-3" to="/Perfil"> <FontAwesomeIcon icon={faUser} /> </Link>
+                          <Link className="login-button p-3 fs-3" to="/perfil"> <FontAwesomeIcon icon={faUser} /> </Link>
                           <a onClick={logout} className="login-button p-3 fs-3" href="/logout"> <FontAwesomeIcon icon={faDoorOpen} /> </a>
 
                         </>
                       ) : (
                         // {/* //Cuando no lo está */}
                         <>
-                          <Link className="login-button" to="/Login">Login /</Link>
-                          <Link className="login-button" to="/Register">/ Register</Link>
+                          <Link className="login-button" to="/login">Login /</Link>
+                          <Link className="login-button" to="/register">/ Register</Link>
                         </>
                       )}
 
