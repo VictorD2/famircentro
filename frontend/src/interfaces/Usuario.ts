@@ -5,7 +5,7 @@ export default interface Usuario{
     profesion?: string,
     correo?: string,
     telefono?: string,
-    habilitado?: number,
+    habilitado_u?: number,
     rut?: string,
     id_rango?:number,
     url_foto_usuario?: string,

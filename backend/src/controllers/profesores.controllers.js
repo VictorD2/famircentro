@@ -27,12 +27,12 @@ ctrlProfesores.createProfesor = async(req, res) => {
 }
 
 ctrlProfesores.getProfesores = async(req, res) => {
-    const data = await pool.query('SELECT id_usuario,nombre,apellido,habilitado,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 3');
+    const data = await pool.query('SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 3');
     res.json(data);
 }
 
 ctrlProfesores.getProfesorById = async(req, res) => {
-    const rows = await pool.query('SELECT id_usuario,nombre,apellido,habilitado,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango FROM usuario WHERE id_usuario = ?', [req.params.id]);
+    const rows = await pool.query('SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango FROM usuario WHERE id_usuario = ?', [req.params.id]);
     if (rows.length === 0) return res.json({ message: "failed" });
     return res.json(rows[0]);
 }

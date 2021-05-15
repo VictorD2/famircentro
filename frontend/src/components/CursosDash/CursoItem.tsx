@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faEye } from '@fortawesome/free-solid-svg-icons';
 import { TiCancel } from 'react-icons/ti';
 import { toast } from 'react-toastify';
+import { IoNewspaperSharp } from 'react-icons/io5';
 interface Params {
     id?: string;
     modalidad?: string;
@@ -22,6 +23,7 @@ const CursoItem = (props: Props) => {
     const ponerDatos = () => props.funcion(props.curso);
 
     const deshabilitar = async () => {
+        console.log(props.curso.habilitado);
         if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el curso?")) return;
 
         const res = await CursosServices.eliminarCurso(props.curso.id_curso?.toString());
@@ -53,6 +55,11 @@ const CursoItem = (props: Props) => {
                 <td className="text-center">
                     <button onClick={ponerDatos} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn__blue">
                         <FontAwesomeIcon className="fs-5" icon={faEye} />
+                    </button>
+                </td>
+                <td className="text-center">
+                    <button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/Material/${props.curso.id_curso}`)} className="btn btn__verde">
+                        <IoNewspaperSharp className="fs-5 mb-1" />
                     </button>
                 </td>
                 <td className="text-center">

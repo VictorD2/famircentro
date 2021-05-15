@@ -1,8 +1,7 @@
-import { faCheck, faEdit, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { TiCancel } from 'react-icons/ti';
-import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import { Estudiante } from './Estudiante'
 import * as estudiantesServices from './EstudianteService';
@@ -14,7 +13,6 @@ interface Props {
 }
 
 const EstudianteItem = (props: Props) => {
-    const history = useHistory();
     const ponerDatos = () => props.funcion(props.estudiante);
 
     const deshabilitar = async () => {
@@ -39,16 +37,10 @@ const EstudianteItem = (props: Props) => {
                 <td>{props.estudiante.profesion}</td>
 
                 <td className="text-center">
-                    <button onClick={() => history.push(`/DashBoard/Estudiantes/update/${props.estudiante.id_usuario}`)} className="btn btn__amarillo">
-                        <FontAwesomeIcon className="fs-5" icon={faEdit} />
-                    </button>
-                </td>
-
-                <td className="text-center">
                     <button onClick={ponerDatos} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn__blue"> <FontAwesomeIcon className="fs-5" icon={faEye} /> </button>
                 </td>
                 <td className="text-center">
-                    {props.estudiante.habilitado ? (
+                    {props.estudiante.habilitado_u ? (
                         <>
                             <button onClick={deshabilitar} className="btn btn-secondary"> <TiCancel className="fs-4" /> </button>
                         </>) :

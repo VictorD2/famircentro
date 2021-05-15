@@ -72,7 +72,7 @@ const Usuarios = () => {
                           <p className="card-text">Pais : {estudiante.nombre_pais}</p>
                           <p className="card-text">Telefono : {estudiante.telefono}</p>
                           <p className="card-text">RUT : {estudiante.rut}</p>
-                          <p className="card-text">Habilitado : {estudiante.habilitado === 1 ? (<FaCheck className="text-success mb-1 ms-1" />) : (<FaTimes className="text-danger mb-1 ms-1" />)}</p>
+                          <p className="card-text">Habilitado : {estudiante.habilitado_u === 1 ? (<FaCheck className="text-success mb-1 ms-1" />) : (<FaTimes className="text-danger mb-1 ms-1" />)}</p>
                         </div>
                       </div>
                     </div>

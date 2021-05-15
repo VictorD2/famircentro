@@ -9,7 +9,7 @@ const initialState: Usuario = {
   profesion: "",
   correo: "",
   telefono: "",
-  habilitado: 1,
+  habilitado_u: 1,
   rut: "",
   id_rango: 2,
   url_foto_usuario: "",

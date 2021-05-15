@@ -8,7 +8,7 @@ export interface Profesor{
     rut?:string;
     url_foto_usuario?:string;
     id_pais?:string;
-    habilitado?:number;
+    habilitado_u?:number;
     nombre_pais?:string;
     url_foto_pais?:string;
 }

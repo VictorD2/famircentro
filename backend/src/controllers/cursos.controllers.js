@@ -28,7 +28,7 @@ ctrlCursos.createCurso = async(req, res) => {
     return res.json({ message: "failed" });
 }
 
-ctrlCursos.getTalleresSincronos = async(req, res) => {
+ctrlCursos.getCursos = async(req, res) => {
     const tipo = req.params.tipo == 'Talleres' ? 'Taller' : 'Curso'
     const modalidad = req.params.modalidad == 'Asincronos' ? 'Asincrono' : 'Sincrono'
     const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
@@ -45,14 +45,24 @@ ctrlCursos.getTalleresSincronos = async(req, res) => {
         data[i].modulos = modulos;
         delete data[i].password;
     }
-    
-    console.log(data);
+
     res.json(data);
 }
 
 ctrlCursos.getCursoById = async(req, res) => {
     const rows = await pool.query('SELECT * FROM curso WHERE id_curso = ?', [req.params.id]);
     if (rows.length === 0) return res.json({ message: "failed" });
+
+    const modulos = await pool.query('SELECT * FROM modulo WHERE id_curso = ?', [rows[0].id_curso]);
+    for (let j = 0; j < modulos.length; j++) {
+        const temas = await pool.query('SELECT * FROM tema WHERE id_modulo = ?', [modulos[j].id_modulo]);
+        for (let k = 0; k < temas.length; k++) {
+            const material = await pool.query('SELECT * FROM material_clase WHERE id_tema = ?', [temas[k].id_tema]);
+            temas.material[k] = material
+        }
+        modulos[j].temas = temas;
+    }
+    rows[0].modulos = modulos;
     return res.json(rows[0]);
 }
 
@@ -62,7 +72,7 @@ ctrlCursos.updateCurso = async(req, res) => {
     if (curso.length > 0 && curso[0].id_curso != req.params.id) return res.json({ message: "already exists" }); //Existe un correo
 
     const newCurso = req.body;
-
+    delete newCurso.modulos;
     const rows = await pool.query('UPDATE curso set ? WHERE id_curso = ?', [newCurso, req.params.id]);
 
     if (rows.affectedRows === 1) return res.json({ message: "success" }); //Se logró actualizar
@@ -73,9 +83,13 @@ ctrlCursos.updateCurso = async(req, res) => {
 
 ctrlCursos.deleteCurso = async(req, res) => {
     const rows = await pool.query("SELECT * FROM curso WHERE id_curso = ?", [req.params.id]);
+
     rows[0].habilitado == 0 ? rows[0].habilitado = 1 : rows[0].habilitado = 0
+
     const data = await pool.query('UPDATE curso set ? WHERE id_curso = ?', [rows[0], req.params.id]);
+
     if (data.affectedRows === 1) return res.json({ message: "success" }); //Se logró actualizar
+
     return res.json({ message: "failed" });
 }
 

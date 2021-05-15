@@ -11,7 +11,6 @@ const { database } = require('./keys');
 const app = express();
 require('./lib/passport');
 
-
 //Settings
 app.set('port', process.env.PORT || 4000);
 
@@ -34,7 +33,7 @@ app.use(
     })
 );
 app.use(passport.initialize()); /* Inicializa passport */
-app.use(passport.session({ cookie: { maxAge: 3600 }}));
+app.use(passport.session({ cookie: { maxAge: 3600 } }));
 
 //Public
 app.use(express.static(path.join(__dirname, "/build")));
@@ -48,6 +47,8 @@ app.use(async(req, res, next) => {
 
 
 //Routes
+app.use('/api/tema', require('./routes/tema.routes'));
+app.use('/api/modulos', require('./routes/modulos.routes'));
 app.use('/api/cursos', require('./routes/cursos.routes'));
 app.use('/api/profesores', require('./routes/profesores.routes'));
 app.use('/api/usuarios', require('./routes/usuarios.routes'));

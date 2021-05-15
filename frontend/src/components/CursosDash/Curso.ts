@@ -1,4 +1,4 @@
-import { Modulo } from "./Modulo";
+import { Modulo } from "./Modulos/Modulo";
 
 export interface Curso {
   id_curso?: number;

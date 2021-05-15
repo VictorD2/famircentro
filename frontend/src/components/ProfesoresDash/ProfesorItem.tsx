@@ -52,7 +52,7 @@ const ProfesorItem = (props: Props) => {
           </button>
         </td>
         <td className="text-center">
-          {props.profesor.habilitado ? (
+          {props.profesor.habilitado_u ? (
             <>
               <button onClick={deshabilitar} className="btn btn-secondary">
                 <TiCancel className="fs-4" />

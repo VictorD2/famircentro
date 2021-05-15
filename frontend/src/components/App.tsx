@@ -23,11 +23,9 @@ import LogRoute from './ProtectedRoutes/LogRoute';
 import NoLogRoute from './ProtectedRoutes/NoLogRoute';
 
 import FormEstudiante from "./EstudiantesDash/FormEstudiante";
-// import CursosAsincronos from "./CursosAsincronosDash/CursosAsincronos";
-// import CursosSincronos from "./CursosSincronosDash/CursosSincronos";
-import TalleresAsincronos from "./TalleresAsincronosDash/Cursos";
-// import TalleresSincronos from "./TalleresSincronosDash/TalleresSincronos";
-import FormCurso from "./TalleresAsincronosDash/FormCurso";
+import Cursos from "./CursosDash/Cursos";
+import FormCurso from "./CursosDash/FormCurso";
+import MaterialCurso from "./CursosDash/MaterialCurso";
 
 function App() {
   const { loadUser } = useUsuario();
@@ -59,11 +57,8 @@ function App() {
           <AdminRoute exact path="/DashBoard/Estudiantes/update/:id" component={FormEstudiante} />
 
           {/* Cursos */}
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
-
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={TalleresAsincronos} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id" component={MaterialCurso} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/nuevo" component={FormCurso} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/update/:id" component={FormCurso} />
 

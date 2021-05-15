@@ -74,13 +74,13 @@
 .item__link:hover {
   color: var(--amarillo-claro);
 }
-.accordion-item,
-.accordion-button {
+.opciones__item .accordion-item,
+.opciones__item .accordion-button {
   background: var(--azul-oscuro) !important;
   color: #fff;
   border: none;
 }
-.accordion-button {
+.opciones__item .accordion-button {
   display: flex;
   padding-left: 1rem;
   align-items: center;
@@ -88,15 +88,15 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.accordion-button p {
+.opciones__item .accordion-button p {
   margin: 0;
   padding-left: 1rem;
 }
-.accordion-button::after {
+.opciones__item .accordion-button::after {
   display: none;
   background: none;
 }
-.accordion-button:not(.collapsed)::after {
+.opciones__item .accordion-button:not(.collapsed)::after {
   display: none;
   background: none;
 }
