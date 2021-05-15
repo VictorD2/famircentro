@@ -36,8 +36,8 @@ const ModalTema = (props: Props) => {
             onUploadProgress(e) {
                 let progress = Math.round((e.loaded * 100.0) / e.total);
                 if (progressBar != null) {
-                    progressBar.innerHTML = progress + "%";
-                    progressBar.style.width = progress + "%";
+                    progressBar.innerHTML = `${progress}%`;
+                    progressBar.style.width =`${progress}%`;
                 }
             }
         });
