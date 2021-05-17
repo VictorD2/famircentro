@@ -4,30 +4,33 @@ import Navigation from "../../pages/DashBoard/Navigation";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import BuscadorProfesor from "../ProfesoresDash/BuscadorProfesor";
-import { Estudiante } from "./Estudiante";
-import ListaEstudiantes from "./ListaEstudiantes";
 import { FaCheck, FaTimes } from "react-icons/fa";
+
+//Services
+import { Estudiante } from "./Estudiante";
+
+//Components
+import ListaEstudiantes from "./ListaEstudiantes";
+import BuscadorProfesor from "../ProfesoresDash/BuscadorProfesor";
+import { ToastContainer } from "react-toastify";
 
 const Usuarios = () => {
   const [estudiante, setEstudiante] = useState<Estudiante>({})
-  const [filtro, setFiltro] = useState<string>("")
-  const buscar = (text: string) => {
-    setFiltro(text);
-  }
-  const handleModalChange = (estudiante: Estudiante) => {
-    setEstudiante(estudiante);
-  }
+  const [filtro, setFiltro] = useState<string>("");
+
+  const buscar = (text: string) => setFiltro(text);
+  const handleModalChange = (estudiante: Estudiante) => setEstudiante(estudiante);
 
   return (
     <React.Fragment>
       <Navigation />
+      <ToastContainer/>
       <div className="contenido-principal p-4">
         <div className="d-flex flex-row">
           <FontAwesomeIcon className="me-3 fs-3" icon={faUser} />
           <h6 className="m-0 text-uppercase fs-3">Estudiantes</h6>
         </div>
-        
+
         <div className="d-flex flex-row p-2 mt-4 justify-content-between flex-wrap">
           <div></div>
           <div className="mx-4 my-2"> <BuscadorProfesor funcion={buscar} /> </div>

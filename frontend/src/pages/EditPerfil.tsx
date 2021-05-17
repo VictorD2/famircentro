@@ -15,9 +15,9 @@ class EditPerfil extends React.Component {
     }
 
     handleDrop(e: React.DragEvent<HTMLDivElement>) {
-        let data = e.dataTransfer.files[0];
-        const img = document.getElementById('avatar');
-        const reader = new FileReader();
+        // let data = e.dataTransfer.files[0];
+        // const img = document.getElementById('avatar');
+        // const reader = new FileReader();
         // reader.onload = e => {
         //     if (this.photoSelect) this.photoSelect = reader.result
         // };

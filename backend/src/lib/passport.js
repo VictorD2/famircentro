@@ -17,7 +17,7 @@ passport.use('local.signin', new LocalStrategy({
     if (!rows.length > 0) return done(null, false); //El usuario no existe
 
     const validPassword = await helpers.matchPassword(password, rows[0].password); //<- Verificando la contraseña
-    
+
     if (validPassword) return done(null, rows[0]); //<- Contraseña correcta
 
     done(null, false); //<-Contraseña incorrecta
@@ -30,25 +30,28 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, user, pass, done) => {
-    const rows = await pool.query('SELECT * FROM usuario WHERE  correo = ?', [user]);
-    if (rows.length > 0) return done(null, false, { message: "El correo ya está en uso" }); //Por si existe un correo ya
-    const { name, surname, email, password,rut,telefono,pais } = req.body;
+    const { name, surname, email, password, rut, telefono, pais, profesion } = req.body;
     const newUser = {
         nombre: name,
         apellido: surname,
         id_rango: 2,
+        profesion,
         correo: email,
-        telefono: telefono,
-        rut: rut,
-        habilitado:1,
-        id_pais : pais,
-        password: password,
+        telefono,
+        rut,
+        habilitado_u: 1,
+        id_pais: pais,
+        password,
         url_foto_usuario: "/defaultProfile.PNG"
     }
-    console.log(newUser);
     newUser.password = await helpers.encrypPassword(newUser.password); //<- Encripta la contraseña
-    await pool.query('INSERT INTO usuario set ?', [newUser]);
-    return done(null, newUser);
+    try {
+        await pool.query('INSERT INTO usuario set ?', [newUser]);
+        delete newUser.password;
+        return done(null, newUser);
+    } catch (error) {
+        return done(null, false, { message: "El correo ya está en uso" });
+    }
 }));
 
 
@@ -70,8 +73,8 @@ passport.use(new FacebookStrategy({
         correo: email,
         telefono: "",
         rut: "",
-        habilitado:1,
-        id_pais : "",
+        habilitado_u: 1,
+        id_pais: "",
         password: "",
         url_foto_usuario: profile.photos[0].value
     }
@@ -97,8 +100,8 @@ passport.use(new GoogleStrategy({
         correo: email,
         telefono: "",
         rut: "",
-        habilitado:1,
-        id_pais : 1,
+        habilitado_u: 1,
+        id_pais: 1,
         password: "",
         url_foto_usuario: profile.photos[0].value
     }

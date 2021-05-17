@@ -19,11 +19,11 @@ const EstudianteItem = (props: Props) => {
         if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el usuario?")) return;
 
         const res = await estudiantesServices.eliminarEstudiante(props.estudiante.id_usuario?.toString());
-        if (res.data.message === "success") {
+        if (res.data.success) {
             props.cargaDatos();
-            return toast.success(`Estado del profesor ${props.estudiante.nombre} actualizado`);
+            return toast.success(res.data.success);
         }
-        return toast.success("Ocurrió un error");
+        if (res.data.success) return toast.error(res.data.error);
 
     }
     return (

@@ -1,13 +1,20 @@
 import React from "react";
-import { Profesor } from "./Profesor";
 import { useHistory } from "react-router-dom";
+
+// Interfaces
+import { Profesor } from "./Profesor";
+
+//Services
 import * as profesorServices from './ProfesoresServices';
 
+//Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCheck, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { TiCancel } from 'react-icons/ti';
 
+//Toastify
 import { toast } from "react-toastify";
+
 interface Props {
   profesor: Profesor;
   funcion: (profesor: Profesor) => void;
@@ -23,11 +30,11 @@ const ProfesorItem = (props: Props) => {
     if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el usuario?")) return;
 
     const res = await profesorServices.eliminarProfesor(props.profesor.id_usuario?.toString());
-    if (res.data.message === "success") {
+    if (res.data.success) {
       props.cargaDatos();
-      return toast.success(`Estado del profesor ${props.profesor.nombre} actualizado`);
+      return toast.success(res.data.success);
     }
-    return toast.success("Ocurrió un error");
+    if (res.data.error) return toast.error(res.data.success);
 
   }
   return (

@@ -1,57 +1,122 @@
-import React from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+
+// Icon
+import { VscRefresh } from 'react-icons/vsc'
 import { FaEdit, FaPlus, FaTimes } from 'react-icons/fa'
-import { useParams } from 'react-router';
-import { toast } from 'react-toastify';
-import { Modulo } from './Modulo'
 import { GoKebabVertical } from "react-icons/go";
-import * as moduloServices from './ModuloService';
+
+//Toastify
+import { toast } from 'react-toastify';
+
+// Interfaces
+import { Modulo } from './Modulo'
 import { Tema } from '../Temas/Tema';
-interface Props {
-    modulo: Modulo;
-    tema:Tema;
-    load: (id: string) => void;
-    setModulo: (modulo: Modulo) => void;
-    setTema: (tema: Tema) => void;
-}
+
+//Services
+import * as moduloServices from './ModuloService';
+
+// Components
+import TemaItem from '../Temas/TemaItem';
+
 interface Params {
     id: string;
 }
+
+interface Props {
+    count: number;
+    modulo: Modulo;
+    temaModal: Tema;
+    load: (id: string) => void;
+    setModuloModal: (modulo: Modulo) => void;
+    setTemaModal: (tema: Tema) => void;
+}
+
 const ModuloItem = (props: Props) => {
     const params = useParams<Params>();
+
+    const [temas, setTemas] = useState<Tema[]>([]); //Temas
+    const [loadTemas, setLoadTemas] = useState(false); //Están los temas cargados?
+
     const eliminarModulo = async () => {
         if (!window.confirm('¿Está seguro que desea eliminar el módulo?')) return;
 
         const res = await moduloServices.eliminarModulo(props.modulo);
-        if (res.data.message === 'success') {
-            toast.success('Módulo eliminado correctamente');
+        if (res.data.success) {
+            toast.success(res.data.success);
             props.load(params.id);
             return;
         }
-        return toast.error('Ocurrió un error');
+        if (res.data.error) return toast.error(res.data.error);
     }
+
+    // Cambiando de estado al loadTemas para traer los datos de la bd cuando hacen click al ModuloItem
+    const handleLoadChange = () => {
+        if (!loadTemas) return setLoadTemas(true);
+    }
+
+    // trayendo los temas de la bd
+    const getTemas = async () => {
+        const rows = await moduloServices.getTemasByModuloId(props.modulo.id_modulo + "");
+        setTemas(rows.data);
+    }
+
+    //Limpieza cuando se desrenderice
+    const limpieza = () => {
+        setTemas([]);
+    }
+
+
+    useEffect(() => {
+        if (loadTemas) getTemas();//Solo se hará cuando el estado loadTemas sea true, el cual solo cambia 1 vez
+        return () => limpieza();
+    }, [loadTemas, props.count]);
+
 
     return (
         <div className="accordion-item my-4">
+
+            {/* Options */}
             <div className="w-100 d-flex justify-content-end bg-light">
                 <div className="btn-group">
                     <button type="button" className="btn btn-light" data-bs-toggle="dropdown" aria-expanded="false">
                         <GoKebabVertical className="mb-1" />
                     </button>
                     <ul className="dropdown-menu">
-                        <li><button onClick={() => props.setTema(props.tema)} data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" ><FaPlus className="mb-1" /> Agregar Tema</button></li>
-                        <li><button onClick={() => props.setModulo(props.modulo)} data-bs-toggle="modal" data-bs-target="#crearModulo" className="dropdown-item" ><FaEdit className="mb-1" /> Editar Modulo</button></li>
+                        {/* Actualizar */}
+                        <li><button onClick={() => getTemas()} className="dropdown-item" ><VscRefresh /> Actualizar Modulo</button></li>
+
+                        {/* Creando un tema */}
+                        <li><button
+                            onClick={() => {
+                                props.setTemaModal({ titulo: "", descripcion: "", video: [new File([""], "filename")] });
+                                props.setModuloModal(props.modulo);
+                            }}
+                            data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" ><FaPlus className="mb-1" /> Agregar Tema</button></li>
+
+                        {/* Editar modulo */}
+                        <li><button onClick={() => props.setModuloModal(props.modulo)} data-bs-toggle="modal" data-bs-target="#crearModulo" className="dropdown-item" ><FaEdit className="mb-1" /> Editar Modulo</button></li>
+
+                        {/* Eliminar modulo */}
                         <li><button onClick={eliminarModulo} className="dropdown-item" ><FaTimes className="mb-1" /> Eliminar Modulo</button></li>
                     </ul>
                 </div>
             </div>
+
+            {/* Content */}
             <h2 className="accordion-header" id="panelsStayOpen-headingThree">
-                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#r${props.modulo.id_modulo}`} aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                <button onClick={handleLoadChange}  className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#r${props.modulo.id_modulo}`} aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                     {props.modulo.titulo}
                 </button>
             </h2>
             <div id={`r${props.modulo.id_modulo}`} className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                <div className="p-5">
-
+                <div className="p-4">
+                    <ol className="list-group list-group-numbered">
+                        {temas.map(tema => {
+                            return <TemaItem modulo={props.modulo} setModuloModal={props.setModuloModal} setTemaModal={props.setTemaModal} key={tema.id_tema} tema={tema} />
+                        })}
+                    </ol>
                 </div>
             </div>
         </div>

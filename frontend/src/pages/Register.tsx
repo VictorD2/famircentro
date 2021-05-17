@@ -28,7 +28,7 @@ class Register extends React.Component {
     email: "",
     rut: "",
     telefono: "",
-    pais: 0,
+    pais: 1,
     password: "",
     profesion: "",
     verifyPassword: "",
@@ -42,11 +42,10 @@ class Register extends React.Component {
   //Submit
   handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (this.state.password !== this.state.verifyPassword) return toast.error('Las contraseña nos coinciden');
     const datos = await axios.post("http://localhost:4000/signup", this.state);
-    if (datos.status === 200) {
-      if (datos.data.datos === "failed") return toast.error("Contraseña o Correo incorrectos");
-      window.location.href = "/";
-    }
+    if (datos.data.message === "failed") return toast.error('El correo electrónico ya está en uso');
+    window.location.href = "/";
   };
   render() {
     return (
@@ -92,7 +91,7 @@ class Register extends React.Component {
                     <div className="col-md-12">
                       <div className="mb-3">
                         <label className="form-label">Profesión</label>
-                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="text" name="profesión" />
+                        <input onChange={this.handleInputChange} className="form-control rgt__form-control" type="text" name="profesion" />
                       </div>
                     </div>
                     <div className="col-md-6">

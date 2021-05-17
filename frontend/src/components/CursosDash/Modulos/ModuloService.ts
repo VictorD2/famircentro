@@ -2,6 +2,9 @@ import axios from "axios";
 import { Modulo } from "./Modulo";
 const api = "http://localhost:4000/api/modulos";
 
+export const getTemasByModuloId = async (id: string) => {
+    return await axios.get(`http://localhost:4000/api/tema/${id}`);
+}
 
 export const crearModulo = async (modulo: Modulo, id: string) => {
     modulo.id_curso = id;

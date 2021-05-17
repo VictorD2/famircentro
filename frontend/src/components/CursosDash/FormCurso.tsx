@@ -1,13 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FormEvent, useEffect, useState } from 'react'
-import { FaEdit, FaPlus, FaRegEdit } from 'react-icons/fa';
 import { useParams, useHistory } from 'react-router-dom';
+
+//Icons
+import { FaEdit, FaPlus, FaRegEdit } from 'react-icons/fa';
+
+//Toastify
 import { toast, ToastContainer } from 'react-toastify'
-import { Curso } from './Curso';
+
+//Components
 import Navigation from '../../pages/DashBoard/Navigation';
+
+//Services
 import * as CursosServices from './CursosServices';
 import * as ProfesoresServices from '../ProfesoresDash/ProfesoresServices';
+
+//Interfaces
+import { Curso } from './Curso';
 import { Profesor } from '../ProfesoresDash/Profesor';
+
 interface Params {
     id?: string;
     modalidad?: string;

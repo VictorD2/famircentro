@@ -1,9 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useParams,useHistory } from 'react-router-dom';
+
+//Interfaces
 import { Curso } from './Curso';
+
+//Services
 import * as cursoServices from "./CursosServices";
+
+//Components
 import CursoItem from './CursoItem';
+
 interface Params {
     modalidad: string;
     tipo: string;

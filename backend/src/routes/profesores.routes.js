@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const ctrlProfesores = require('../controllers/profesores.controllers');
-const { isAdmin,isLoggedIn } = require('../lib/auth');
+const { isAdmin, isLoggedIn } = require('../lib/auth');
+
 router.get('/', ctrlProfesores.getProfesores);
 router.get('/:id', ctrlProfesores.getProfesorById);
 router.post('/', ctrlProfesores.createProfesor);

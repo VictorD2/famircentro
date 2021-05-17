@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+//Interfaces
 import { Profesor } from "./Profesor";
+
+//Services
 import * as videoServices from "./ProfesoresServices";
+//Components
 import ProfesorItem from "./ProfesorItem";
+
 
 interface Props {
   funcion: (profesor: Profesor) => void;

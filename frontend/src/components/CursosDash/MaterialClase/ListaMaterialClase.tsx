@@ -1,9 +1,12 @@
 import React from 'react'
-
-const ListaMaterialClase = () => {
+import { MaterialClase } from './MaterialClase'
+interface Props {
+    material: MaterialClase[]
+}
+const ListaMaterialClase = (props: Props) => {
     return (
         <div>
-            
+
         </div>
     )
 }

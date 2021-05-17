@@ -1,15 +1,20 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
+// Components
 import Navigation from "../../pages/DashBoard/Navigation";
 import ListaProfesores from "./ListaProfesores";
-import { useHistory } from "react-router-dom";
+
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookReader, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Profesor } from "./Profesor";
 import {FaCheck, FaTimes} from 'react-icons/fa';
 
+//Components
 import BuscadorProfesor from "./BuscadorProfesor";
 
+//Toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import 'animate.css/animate.min.css';
@@ -73,9 +78,9 @@ const Profesores = () => {
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header btn__blue">
                   <h5 className="modal-title" id="exampleModalLabel">{profesor.nombre} {profesor.apellido}</h5>
-                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
                   <div className="card mb-3">
@@ -85,7 +90,7 @@ const Profesores = () => {
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">
-                          <h5 className="card-title">{profesor.profesion}</h5>
+                          <p className="card-text">Profesión :{profesor.profesion}</p>
                           <p className="card-text">Correo : {profesor.correo}</p>
                           <p className="card-text">Pais : {profesor.nombre_pais}</p>
                           <p className="card-text">Telefono : {profesor.telefono}</p>

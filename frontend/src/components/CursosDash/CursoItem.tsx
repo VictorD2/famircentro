@@ -1,29 +1,40 @@
 import React from 'react'
-import { Curso } from './Curso'
 import { useHistory, useParams } from "react-router-dom";
+
+// Interfaces
+import { Curso } from './Curso'
+
+//Services
 import * as CursosServices from './CursosServices';
+
+//Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faEye } from '@fortawesome/free-solid-svg-icons';
 import { TiCancel } from 'react-icons/ti';
-import { toast } from 'react-toastify';
 import { IoNewspaperSharp } from 'react-icons/io5';
+
+//Toastify
+import { toast } from 'react-toastify';
+
 interface Params {
     id?: string;
     modalidad?: string;
     tipo?: string;
 }
+
 interface Props {
     curso: Curso;
     funcion: (curso: Curso) => void;
     cargaDatos: () => void;
 }
+
 const CursoItem = (props: Props) => {
     const params = useParams<Params>();
     const history = useHistory();
+    
     const ponerDatos = () => props.funcion(props.curso);
 
     const deshabilitar = async () => {
-        console.log(props.curso.habilitado);
         if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el curso?")) return;
 
         const res = await CursosServices.eliminarCurso(props.curso.id_curso?.toString());

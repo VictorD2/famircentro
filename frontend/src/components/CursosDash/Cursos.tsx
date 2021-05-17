@@ -1,17 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom';
+
+//Icons
 import { faBook, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FaCalendarAlt, FaDollarSign, FaEdit, FaEye, FaTimes } from 'react-icons/fa'
-import { useHistory, useParams } from 'react-router-dom';
+import { FiClock } from 'react-icons/fi';
+import { IoNewspaperSharp } from 'react-icons/io5';
+
+// Toastify
 import { ToastContainer } from 'react-toastify'
+
+//Interfaces
 import { Curso } from './Curso'
+
+//Components
 import Navigation from '../../pages/DashBoard/Navigation'
 import BuscadorProfesor from '../ProfesoresDash/BuscadorProfesor'
 import ListaCursos from './ListaCursos'
-import { FiClock } from 'react-icons/fi';
-import { IoNewspaperSharp } from 'react-icons/io5';
 import ModalCurso from './ModalCurso';
+
+
 interface Params {
     modalidad: string;
     tipo: string;
@@ -32,6 +42,7 @@ const Cursos = () => {
 
     const [curso, setCurso] = useState<Curso>(initialState);
     const [filtro, setFiltro] = useState<string>("");
+    
     const [tipo, setTipo] = useState("");
     const [modalidad, setModalidad] = useState("");
 
