@@ -1,55 +1,67 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { FaEdit, FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router';
+
+// Icons
+import { FaEdit, FaPlus } from 'react-icons/fa';
+
+// Toastify
 import { toast } from 'react-toastify';
+
+//Interfaces
 import { Modulo } from './Modulo';
+
+//Services
 import * as moduloServices from './ModuloService';
 
 interface Params {
     id: string;
 }
+
 interface Props {
     load: (id: string) => void;
-    modulo: Modulo;
+    moduloModal: Modulo;
 }
+
 const initialState = {
     titulo: ""
 }
-const ModalCrearModulo = (props: Props) => {
+
+const ModalModulo = (props: Props) => {
     const params = useParams<Params>();
     const [modulo, setModulo] = useState<Modulo>(initialState);
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setModulo({ ...modulo, [e.target.name]: e.target.value });
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!props.modulo.id_modulo) {
+        if (!props.moduloModal.id_modulo) {
             const res = await moduloServices.crearModulo(modulo, params.id);
-            if (res.data.message === 'success') {
-                toast.success('Módulo creado correctamente');
+            if (res.data.success) {
+                toast.success(res.data.success);
                 props.load(params.id);
                 return;
             }
-            return toast.error('Ocurrió un error');
+            if (res.data.error) return toast.error(res.data.error);
+            return;
         }
         const res = await moduloServices.actualizarModulo(modulo);
-        if (res.data.message === 'success') {
-            toast.success('Módulo modificado correctamente');
+        if (res.data.success) {
+            toast.success(res.data.success);
             props.load(params.id);
             return;
         }
-        return toast.error('Ocurrió un error');
+        if (res.data.error) return toast.error(res.data.error);
 
     }
     useEffect(() => {
-        setModulo(props.modulo);
+        setModulo(props.moduloModal);
         return () => setModulo(initialState);
-    }, [props.modulo])
+    }, [props.moduloModal])
 
     return (
         <div className="modal fade" id="crearModulo" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
-                    {props.modulo.id_modulo ? (<>
+                    {props.moduloModal.id_modulo ? (<>
                         <div className="modal-header btn-warning">
                             <h5 className="modal-title" id="exampleModalLabel"> <FaEdit className="mb-1" /> Modificar Modulo</h5>
                             <button type="button" className="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -69,7 +81,7 @@ const ModalCrearModulo = (props: Props) => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            {props.modulo.id_modulo ? (<>
+                            {props.moduloModal.id_modulo ? (<>
                                 <button type="submit" className="btn btn__amarillo"><FaEdit className="mb-1" /> Modificar</button>
                             </>) : (<>
                                 <button type="submit" className="btn btn__blue"><FaPlus className="mb-1" /> Crear</button>
@@ -82,4 +94,4 @@ const ModalCrearModulo = (props: Props) => {
     )
 }
 
-export default ModalCrearModulo
+export default ModalModulo

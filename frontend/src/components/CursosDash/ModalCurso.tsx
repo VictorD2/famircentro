@@ -1,7 +1,13 @@
 import React from 'react'
+
+// Icons
 import { FaCalendarAlt, FaCheck, FaDollarSign, FaPhoneAlt, FaTimes } from 'react-icons/fa'
 import { FiClock } from 'react-icons/fi'
+
+//Interfaces
 import { Curso } from './Curso'
+
+//Imagenes
 import fotoSinCurso from '../../images/sinCurso.png';
 
 interface Props {

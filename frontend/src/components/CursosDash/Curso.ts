@@ -21,5 +21,4 @@ export interface Curso {
   telefono?:string;
   rut?:string;
   url_foto_usuario?:string;
-  modulos: Modulo[];
 }

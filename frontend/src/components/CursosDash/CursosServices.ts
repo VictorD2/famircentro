@@ -3,6 +3,11 @@ import { Curso } from "./Curso";
 const api = "http://localhost:4000/api/cursos";
 
 //OBTENER
+export const getAllModulesByCursoId = async (id: string) => {
+  return await axios.get(`http://localhost:4000/api/modulos/${id}`);
+};
+
+//OBTENER
 export const getAllCursos = async (tipo: string, modalidad: string) => {
   return await axios.get(`${api}/all/${tipo}/${modalidad}`);
 };

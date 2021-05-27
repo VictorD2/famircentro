@@ -11,6 +11,7 @@ interface Props {
 const ListaEstudiantes = (props: Props) => {
     const [estudiantes, setEstudiantes] = useState<Estudiante[]>([]);
     const [loading, setLoading] = useState(false);
+    
     //Traer datos de la bd
     const loadEstudiantes = async () => {
         const res = await estudianteServices.getAll();
