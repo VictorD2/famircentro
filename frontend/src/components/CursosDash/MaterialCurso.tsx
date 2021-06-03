@@ -22,6 +22,7 @@ import * as CursosServices from './CursosServices';
 //Modales
 import ModalModulo from './Modulos/ModalModulo';
 import ModalTema from './Temas/ModalTema';
+import ModalMaterial from './MaterialClase/ModalMaterial';
 
 interface Params {
     modalidad: string;
@@ -45,6 +46,8 @@ const initialStateTema = {
     titulo: "",
     descripcion: "",
     video: [new File([""], "filename")],
+    inputName: "",
+    url_video: ""
 }
 
 const MaterialCurso = () => {
@@ -60,6 +63,7 @@ const MaterialCurso = () => {
 
     // Ventanas modales
     const [count, setcount] = useState(0);
+    const [countChange, setCountChange] = useState(0);
     const [moduloModal, setModuloModal] = useState<Modulo>(initialStateModulo);
     const [temaModal, setTemaModal] = useState<Tema>(initialStateTema);
 
@@ -105,7 +109,6 @@ const MaterialCurso = () => {
                     <FontAwesomeIcon className="me-3 fs-3" icon={faBook} />
                     <h6 className="m-0 text-uppercase fs-3">{tipo} {modalidad} {curso.nombre_curso}</h6>
                 </div>
-
                 {/* Options */}
                 <div className="d-flex flex-row p-2 mt-4 flex-wrap justify-content-between">
                     <button onClick={() => setModuloModal({ titulo: "" })} className="btn btn__blue mx-4 my-2" data-bs-toggle="modal" data-bs-target="#crearModulo" >
@@ -118,14 +121,15 @@ const MaterialCurso = () => {
                 <div className="py-4 mt-4">
                     <div className="accordion" id="accordionPanelsStayOpenExample">
                         {modulos.map(modulo => {
-                            return <ModuloItem count={count} modulo={modulo} temaModal={temaModal} load={getAllModulos} setModuloModal={setModuloModal} setTemaModal={setTemaModal} key={modulo.id_modulo} />
+                            return <ModuloItem countChange={countChange} setCountChange={setCountChange} setcount={setcount} count={count} modulo={modulo} temaModal={temaModal} load={getAllModulos} setModuloModal={setModuloModal} setTemaModal={setTemaModal} key={modulo.id_modulo} />
                         })}
                     </div>
                 </div>
 
             </div>
             <ModalModulo load={getAllModulos} moduloModal={moduloModal} />
-            <ModalTema count={count} setcount={setcount} load={getAllModulos} moduloModal={moduloModal} temaModal={temaModal} />
+            <ModalTema count={count} setcount={setcount} moduloModal={moduloModal} temaModal={temaModal} />
+            <ModalMaterial count={count} setcount={setcount} temaModal={temaModal} />
         </React.Fragment>
     )
 }

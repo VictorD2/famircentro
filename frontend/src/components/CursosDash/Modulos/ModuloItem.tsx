@@ -25,12 +25,17 @@ interface Params {
 }
 
 interface Props {
+    //tema
+    setcount: (count: number) => void
     count: number;
+    //material
+    setCountChange: (count: number) => void
+    countChange: number;
+    setModuloModal: (modulo: Modulo) => void;
     modulo: Modulo;
+    setTemaModal: (tema: Tema) => void;
     temaModal: Tema;
     load: (id: string) => void;
-    setModuloModal: (modulo: Modulo) => void;
-    setTemaModal: (tema: Tema) => void;
 }
 
 const ModuloItem = (props: Props) => {
@@ -67,6 +72,10 @@ const ModuloItem = (props: Props) => {
         setTemas([]);
     }
 
+    const limpiandoEstados = () => {
+        props.setTemaModal({ titulo: "", descripcion: "",url_video: "", video: [new File([""], "filename")]});
+        props.setModuloModal(props.modulo);
+    }
 
     useEffect(() => {
         if (loadTemas) getTemas();//Solo se hará cuando el estado loadTemas sea true, el cual solo cambia 1 vez
@@ -88,12 +97,7 @@ const ModuloItem = (props: Props) => {
                         <li><button onClick={() => getTemas()} className="dropdown-item" ><VscRefresh /> Actualizar Modulo</button></li>
 
                         {/* Creando un tema */}
-                        <li><button
-                            onClick={() => {
-                                props.setTemaModal({ titulo: "", descripcion: "", video: [new File([""], "filename")] });
-                                props.setModuloModal(props.modulo);
-                            }}
-                            data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" ><FaPlus className="mb-1" /> Agregar Tema</button></li>
+                        <li><button onClick={() => limpiandoEstados()} data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" ><FaPlus className="mb-1" /> Agregar Tema</button></li>
 
                         {/* Editar modulo */}
                         <li><button onClick={() => props.setModuloModal(props.modulo)} data-bs-toggle="modal" data-bs-target="#crearModulo" className="dropdown-item" ><FaEdit className="mb-1" /> Editar Modulo</button></li>
@@ -106,7 +110,7 @@ const ModuloItem = (props: Props) => {
 
             {/* Content */}
             <h2 className="accordion-header" id="panelsStayOpen-headingThree">
-                <button onClick={handleLoadChange}  className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#r${props.modulo.id_modulo}`} aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                <button onClick={handleLoadChange} className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#r${props.modulo.id_modulo}`} aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                     {props.modulo.titulo}
                 </button>
             </h2>
@@ -114,7 +118,7 @@ const ModuloItem = (props: Props) => {
                 <div className="p-4">
                     <ol className="list-group list-group-numbered">
                         {temas.map(tema => {
-                            return <TemaItem modulo={props.modulo} setModuloModal={props.setModuloModal} setTemaModal={props.setTemaModal} key={tema.id_tema} tema={tema} />
+                            return <TemaItem countChange={props.countChange} setCountChange={props.setCountChange} setcount={props.setcount} count={props.count} modulo={props.modulo} setModuloModal={props.setModuloModal} setTemaModal={props.setTemaModal} key={tema.id_tema} tema={tema} />
                         })}
                     </ol>
                 </div>

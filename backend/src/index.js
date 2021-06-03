@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const ctrlTema = require('./controllers/tema.controllers');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const passport = require('passport');
@@ -47,6 +48,8 @@ app.use(async(req, res, next) => {
 
 
 //Routes
+app.get('/video-lock', ctrlTema.getVideo);
+app.use('/api/material', require('./routes/material.routes'));
 app.use('/api/tema', require('./routes/tema.routes'));
 app.use('/api/modulos', require('./routes/modulos.routes'));
 app.use('/api/cursos', require('./routes/cursos.routes'));

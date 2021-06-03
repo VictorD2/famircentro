@@ -33,7 +33,7 @@ const Navigation = () => {
           <p>FAMIR CENTRO</p>
         </div>
         <div className="user">
-          <img className="img-fluid" src={logo} alt="" />
+          <img className="img-fluid" src={usuario.url_foto_usuario} alt="" />
           <div className="w-50">
             <p className="user__name">{`${usuario.nombre} ${usuario.apellido}`} </p>
           </div>

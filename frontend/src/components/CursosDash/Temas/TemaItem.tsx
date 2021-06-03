@@ -1,42 +1,72 @@
 import React from 'react'
-import { FaEdit, FaPlus, FaTimes } from 'react-icons/fa'
+
+//Icons
+import { FaEdit, FaEye, FaPlus, FaTimes } from 'react-icons/fa'
 import { GoKebabVertical } from 'react-icons/go'
+
+//Services
+import * as temaServices from './TemaServices';
 
 // Interfaces
 import { Modulo } from '../Modulos/Modulo'
 import { Tema } from './Tema'
-
+import { toast } from 'react-toastify';
+import { useHistory, useParams } from 'react-router';
+interface Params {
+    modalidad: string;
+    id: string;
+    tipo: string;
+}
 interface Props {
+    setcount: (count: number) => void
+    count: number;
+    setCountChange: (count: number) => void
+    countChange: number;
     setModuloModal: (modulo: Modulo) => void;
     setTemaModal: (tema: Tema) => void;
     tema: Tema;
     modulo: Modulo;
 }
 const TemaItem = (props: Props) => {
+    const params = useParams<Params>();
+    const history = useHistory();
+    const eliminarTema = async () => {
+        if (!window.confirm('¿Está seguro que desea eliminar el tema?')) return;
 
-
+        const res = await temaServices.eliminarTema(props.tema.id_tema + "");
+        if (res.data.success) {
+            toast.success(res.data.success);
+            props.setcount(props.count + 1);
+            return;
+        }
+        if (res.data.error) return toast.error(res.data.error);
+    }
+    const setModales = () => {
+        props.setTemaModal(props.tema);
+        props.setModuloModal(props.modulo);
+    }
 
     return (
         <li className="list-group-item d-flex align-items-center justify-content-start">
-            <p className="fw-bold m-0 ms-2">
+            <button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/Material/${params.id}/${props.tema.id_tema}`)} className="btn w-100 mx-4 fw-bold d-flex justify-content-start align-content-center text-start" type="button">
                 {props.tema.titulo}
-            </p>
+            </button>
             <div className="btn-group ms-auto">
                 <button type="button" className="btn btn-light" data-bs-toggle="dropdown" aria-expanded="false">
                     <GoKebabVertical className="mb-1" />
                 </button>
                 <ul className="dropdown-menu">
-                    {/* Creando un tema */}
-                    <li><button data-bs-toggle="modal" data-bs-target="#crearMaterial" className="dropdown-item" ><FaPlus className="mb-1" /> Agregar Material</button></li>
+                    {/* Agregar Material */}
+                    <li><button onClick={() => { props.setTemaModal(props.tema) }} data-bs-toggle="modal" data-bs-target="#crearMaterial" className="dropdown-item" ><FaPlus className="mb-1" /> Agregar Material</button></li>
+
+                    {/* Ver tema */}
+                    <li><button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/Material/${params.id}/${props.tema.id_tema}`)} className="dropdown-item" ><FaEye className="mb-1" /> Ver Material</button></li>
 
                     {/* Editar modulo */}
-                    <li><button onClick={() => {
-                        props.setTemaModal(props.tema);
-                        props.setModuloModal(props.modulo)
-                    }} data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" ><FaEdit className="mb-1" /> Editar Tema</button></li>
+                    <li><button onClick={() => { setModales() }} data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" ><FaEdit className="mb-1" /> Editar Tema</button></li>
 
                     {/* Eliminar modulo */}
-                    <li><button className="dropdown-item" ><FaTimes className="mb-1" /> Eliminar Tema</button></li>
+                    <li><button onClick={eliminarTema} className="dropdown-item" ><FaTimes className="mb-1" /> Eliminar Tema</button></li>
                 </ul>
             </div>
         </li>

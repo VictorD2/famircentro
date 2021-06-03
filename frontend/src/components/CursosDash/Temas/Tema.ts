@@ -4,8 +4,8 @@ export interface Tema {
     id_tema?: number;
     titulo: string;
     descripcion: string;
-    url_video?: string;
-    video:File[];
+    video?:File[];
+    url_video:string;
     // material:File[];
     material_clase?: MaterialClase[];
 }

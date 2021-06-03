@@ -75,8 +75,8 @@ const ModalModulo = (props: Props) => {
                     <form onSubmit={handleFormSubmit}>
                         <div className="modal-body">
                             <div className="form-floating mb-3">
-                                <input onChange={handleInputChange} id="floatingInputTitulo" className="form-control" type="text" placeholder="Título" name="titulo" required value={modulo.titulo} />
-                                <label htmlFor="floatingInputTitulo">Título del módulo</label>
+                                <input onChange={handleInputChange} id="floatingInputTitulo1" className="form-control" type="text" placeholder="Título" name="titulo" required value={modulo.titulo} />
+                                <label htmlFor="floatingInputTitulo1">Título del módulo</label>
                             </div>
                         </div>
                         <div className="modal-footer">

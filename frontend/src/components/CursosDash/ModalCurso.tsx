@@ -66,11 +66,6 @@ const ModalCurso = (props: Props) => {
 
                                         <p className="card-text">Habilitado : {props.curso.habilitado === 1 ? (<FaCheck className="text-success mb-1 ms-1" />) : (<FaTimes className="text-danger mb-1 ms-1" />)}</p>
                                     </div>
-                                    {props.modalidad !== 'Sincrónico' ? (<>
-                                        <div className="col-12 my-4">
-                                            <button className="btn btn__blue">Agregar Modulo</button>
-                                        </div>
-                                    </>) : (<></>)}
                                     <div className="col-12">
                                         <h4 className="card-title my-4">Datos del Profesor</h4>
                                     </div>

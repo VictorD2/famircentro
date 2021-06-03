@@ -28,13 +28,13 @@ const Footer = () => {
         </p>
         <ul className="footer-social-list d-flex">
           <li className="footer-social-list-item mx-2 fs-3">
-            <a href="https://facebook.com" className="text-decoration-none"> <FiFacebook className="mb-2" /> </a>
+            <a href="https://www.facebook.com/famircentro" target="_BLANK" rel="noreferrer" className="text-decoration-none"> <FiFacebook className="mb-2" /> </a>
           </li>
           <li className="footer-social-list-item mx-2 fs-3">
-            <a href="https://instagram.com" className="text-decoration-none"> <FontAwesomeIcon icon={faInstagram} /> </a>
+            <a href="https://www.instagram.com/famircentro/" target="_BLANK"  rel="noreferrer"className="text-decoration-none"> <FontAwesomeIcon icon={faInstagram} /> </a>
           </li>
           <li className="footer-social-list-item mx-2 fs-3">
-            <a href="https://whatsapp.com" className="text-decoration-none"> <FontAwesomeIcon icon={faWhatsapp} /> </a>
+            <a href="https://whatsapp.com" target="_BLANK" rel="noreferrer" className="text-decoration-none"> <FontAwesomeIcon icon={faWhatsapp} /> </a>
           </li>
         </ul>
       </div>
@@ -94,7 +94,7 @@ const Footer = () => {
         <div className="footer-contact">
           <p className="text-white-50 d-flex justify-content-start align-items-center">
             <CgMail className="mx-2 fs-4" />
-            office@yourbusiness.com
+            centrofamir@gmail.com
           </p>
         </div>
       </div>

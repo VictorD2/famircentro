@@ -28,6 +28,7 @@ import FormCurso from "./CursosDash/FormCurso";
 import MaterialCurso from "./CursosDash/MaterialCurso";
 
 import EditPerfil from './../pages/EditPerfil';
+import VerTema from "./CursosDash/Temas/VerTema";
 function App() {
   const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
@@ -60,6 +61,7 @@ function App() {
           {/* Cursos */}
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id" component={MaterialCurso} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id/:idTema" component={VerTema} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/nuevo" component={FormCurso} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/update/:id" component={FormCurso} />
 

@@ -1,13 +1,16 @@
-import { faBehance, faDribbble, faFacebookF, faLinkedinIn, faPinterest, faTwitter, } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Badge from "../components/Helpers/Badge";
-import { faEnvelopeOpenText, faMapMarkerAlt, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import FormContact from "../components/Helpers/FormContact";
 import NavBar from "../components/Helpers/NavBar";
 import Footer from "../components/Helpers/Footer";
 
 import ScrollReveal from "scrollreveal";
+import { IoLocationOutline } from "react-icons/io5";
+import { AiOutlinePhone } from "react-icons/ai";
+import { CgMail } from "react-icons/cg";
+import { FiFacebook } from "react-icons/fi";
 class Contactanos extends React.Component {
     componentDidMount() {
         //Para los efectos de aparicion
@@ -40,38 +43,27 @@ class Contactanos extends React.Component {
                                     mauris.
                                 </p>
                                 <div className="content__icons show">
-                                    <a href="https://www.pinterest.ca/" target="blank" className="cts__icons" >
-                                        <FontAwesomeIcon icon={faPinterest} />
+                                    <a href="https://www.facebook.com/famircentro" target="_BLANK" rel="noreferrer" className="cts__icons" >
+                                        <FiFacebook className="mb-1 fs-6" />
                                     </a>
-                                    <a href="https://www.facebook.com/" target="blank" className="cts__icons" >
-                                        <FontAwesomeIcon icon={faFacebookF} />
+                                    <a href="https://www.instagram.com/famircentro/" target="_BLANK" rel="noreferrer" className="cts__icons" >
+                                        <FontAwesomeIcon icon={faInstagram} />
                                     </a>
-                                    <a href="https://twitter.com/?lang=es" target="blank" className="cts__icons" >
-                                        <FontAwesomeIcon icon={faTwitter} />
-                                    </a>
-                                    <a href="https://dribbble.com/" target="blank" className="cts__icons" >
-                                        <FontAwesomeIcon icon={faDribbble} />
-                                    </a>
-                                    <a href="https://www.behance.net/" target="blank" className="cts__icons" >
-                                        <FontAwesomeIcon icon={faBehance} />
-                                    </a>
-                                    <a href="https://www.linkedin.com/feed/" target="blank" className="cts__icons" >
-                                        <FontAwesomeIcon icon={faLinkedinIn} />
-                                    </a>
+
                                 </div>
-                                <FontAwesomeIcon icon={faMapMarkerAlt} className="cts__icons-unique" />
+                                <IoLocationOutline className="me-2 fs-4 cts__icons-unique" />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
                                     4127/ 5B-C Mislane Road, <br />
                                     Gibraltar, UK
                                 </p>
                                 <br />
-                                <FontAwesomeIcon icon={faPhoneAlt} className="cts__icons-unique" />
+                                <AiOutlinePhone className="me-2 fs-4 cts__icons-unique" />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
                                     Main: 203-808-8613 <br />
                                     Office: 203-808-8648
                                 </p>
                                 <br />
-                                <FontAwesomeIcon icon={faEnvelopeOpenText} className="cts__icons-unique" />
+                                <CgMail className="me-2 fs-4 cts__icons-unique" />
                                 <p className="cts__parrafo lh-lg" style={{ fontSize: "0.875rem" }}>
                                     centrofamir@gmail.com
                                 </p>
