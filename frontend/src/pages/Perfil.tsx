@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import NavBar from '../components/Helpers/NavBar';
 import Footer from '../components/Helpers/Footer';
 
@@ -7,6 +6,7 @@ import Badge from '../components/Helpers/Badge';
 
 import { useUsuario } from "../context-user/UsuarioProvider";
 import CardCursosPerfil from './../components/Perfil/CardCursosPerfil';
+import BotonPerfil from '../components/Perfil/BotonPerfil';
 const Perfil = () => {
     const { usuario } = useUsuario();
     return (
@@ -31,7 +31,7 @@ const Perfil = () => {
                                 </div>
                             </div>
                             <div className="row mt-4">
-                                <Link className="btn btn-editPerfil" to="/edit">Editar perfil</Link>
+                                <BotonPerfil className="btn btn-editPerfil" name="Editar perfil"/>
                             </div>
                         </div>
                     </div>

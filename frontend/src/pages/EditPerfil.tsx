@@ -1,29 +1,55 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import NavBar from '../components/Helpers/NavBar';
 import Badge from '../components/Helpers/Badge';
 import Footer from '../components/Helpers/Footer';
+import FormEditPerfil from '../components/Perfil/FormEditPerfil';
 
 class EditPerfil extends React.Component {
 
-    private file: File = new File([""], "filename");
-    private photoSelect?: string | ArrayBuffer | null;
-
-    handleDragOver(e: React.DragEvent<HTMLDivElement>) {
-        e.stopPropagation();
-        e.preventDefault();
+    state = {
+        profileImg: "https://picsum.photos/200/300"
     }
 
-    handleDrop(e: React.DragEvent<HTMLDivElement>) {
-        // let data = e.dataTransfer.files[0];
-        // const img = document.getElementById('avatar');
-        // const reader = new FileReader();
-        // reader.onload = e => {
-        //     if (this.photoSelect) this.photoSelect = reader.result
-        // };
-        // reader.readAsDataURL(data);
+    handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
-        // console.log(this.file);
+        e.stopPropagation();
+    }
+
+    handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        if (e.dataTransfer.files instanceof FileList) {
+            if (e.dataTransfer.files[0].type === 'image/gif' || e.dataTransfer.files[0].type === 'image/png' || e.dataTransfer.files[0].type === 'image/jpeg' || e.dataTransfer.files[0].type === 'image/bmp' || e.dataTransfer.files[0].type === 'image/webp') {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    if(reader.readyState === 2) {
+                        this.setState({profileImg: reader.result});
+                    }
+                }
+                reader.readAsDataURL(e.dataTransfer.files[0]);
+            } else {
+                alert('Subir un formato de imagen')
+            }
+        } else {
+            alert('Archivo no leido');
+        }
+    }
+
+    handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files instanceof FileList) {
+            if (e.target.files[0].type === 'image/gif' || e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/bmp' || e.target.files[0].type === 'image/webp') {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    if(reader.readyState === 2) {
+                        this.setState({profileImg: reader.result});
+                    }
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            } else {
+                alert('Subir un formato de imagen')
+            }
+        } else {
+            alert('Archivo no leido');
+        }
     }
 
     render() {
@@ -37,23 +63,20 @@ class EditPerfil extends React.Component {
                     <div className="container bg-light mt-5" style={{ marginBottom: "4.5rem" }}>
                         <div className="row p-5">
                             <div className="col-6">
-                                <div draggable="true" onDragOver={this.handleDragOver} onDrop={this.handleDrop} className="cuadroEditPerfil">
+                                <div draggable="true" className="cuadroEditPerfil" onDragOver={this.handleDragOver} onDrop={this.handleDrop}>
                                     <figure className="editProfile-img">
-                                        {this.photoSelect ? (<>
-                                            <img id="avatar" src="https://picsum.photos/200/300" alt="Mi avatar" width="130" height="130" />
-                                        </>) : (<>
-                                            <img id="avatar" src="https://picsum.photos/200/300" alt="Mi avatar" width="130" height="130" />
-                                        </>)}
+                                        <img id="avatar" src={this.state.profileImg} alt="Mi avatar" width="200" height="200" />
                                     </figure>
-                                    <div className="editProfile-imgLoad" >
-                                        Arrastra aquí tu imagen de perfil
-                                        <br />
-                                        o <Link role="button" to="#" >Subir foto</Link>
+                                    <div className="d-grid gap-2 col-6 mx-auto">
+                                        <input type="file" id="inputFile" style={{display: "none"}} onChange={this.handleChange} />
+                                        <button className="btn btn-editPerfil" type="button">
+                                            <label htmlFor="inputFile" className="d-block" style={{cursor: "pointer"}}>Subir foto de perfil</label>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-6">
-                                Formulario
+                                <FormEditPerfil />
                             </div>
                         </div>
                     </div>
