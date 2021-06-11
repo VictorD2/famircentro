@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { FaEnvelope } from 'react-icons/fa';
+import { FaEnvelope, FaTimes } from 'react-icons/fa';
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify';
 import { Comentario } from './Comentario';
@@ -10,6 +10,7 @@ import * as comentariosServices from './ComentariosServices';
 import TimeAgo from 'timeago-react';
 import * as timeago from 'timeago.js';
 import vi from 'timeago.js/lib/lang/es';
+import { useUsuario } from '../../context-user/UsuarioProvider';
 timeago.register('vi', vi);
 
 const initialState: Comentario = {
@@ -22,6 +23,7 @@ interface Params {
     idTema: string;
 }
 const Comentarios = () => {
+    const { usuario } = useUsuario();
     const params = useParams<Params>();
     const [comentario, setComentario] = useState<Comentario>(initialState);
     const [comentarios, setComentarios] = useState<Comentario[]>([])
@@ -34,6 +36,15 @@ const Comentarios = () => {
             getComentarios();
             setComentario(initialState);
             return
+        }
+        toast.error(res.data.error);
+    }
+    const eliminarComentario = async (id?: number) => {
+        if (!window.confirm('¿Está seguro que desea eliminar el comentario?')) return;
+        const res = await comentariosServices.eliminarComentario(id + "");
+        if (res.data.success) {
+            getComentarios();
+            return toast.success(res.data.success);
         }
         toast.error(res.data.error);
     }
@@ -75,7 +86,15 @@ const Comentarios = () => {
                                     <div className="nombre-author">
                                         <p>{comentarioItem.nombre} {comentarioItem.apellido}</p>
                                         <TimeAgo style={{ fontSize: "12px" }} className="text-black-50" datetime={comentarioItem.fecha} live={false} locale='vi' />
+
                                     </div>
+                                    {usuario.id_rango === 2 ? (<>
+                                        <div className="ms-auto">
+                                            <button onClick={() => eliminarComentario(comentarioItem.id_comentario)} className="btn">
+                                                <FaTimes />
+                                            </button>
+                                        </div>
+                                    </>) : (<></>)}
                                 </div>
                                 <div className="comentario">
                                     <p>{comentarioItem.comentario}</p>

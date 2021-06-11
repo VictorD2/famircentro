@@ -11,6 +11,6 @@ export const crearComentario = async (comentario: Comentario, idCurso: string, i
     comentario.id_curso = parseInt(idCurso);
     return await axios.post(`${api}/${idCurso}/${idTema}`, comentario);
 };
-export const eliminarProfesor = async (id: string | undefined) => {
+export const eliminarComentario = async (id: string | undefined) => {
     return await axios.delete(`${api}/${id}`);
 };
