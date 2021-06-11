@@ -6,6 +6,5 @@ export interface Tema {
     descripcion: string;
     video?:File[];
     url_video:string;
-    // material:File[];
     material_clase?: MaterialClase[];
 }

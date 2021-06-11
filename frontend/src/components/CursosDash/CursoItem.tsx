@@ -31,18 +31,18 @@ interface Props {
 const CursoItem = (props: Props) => {
     const params = useParams<Params>();
     const history = useHistory();
-    
+
     const ponerDatos = () => props.funcion(props.curso);
 
     const deshabilitar = async () => {
         if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el curso?")) return;
 
         const res = await CursosServices.eliminarCurso(props.curso.id_curso?.toString());
-        if (res.data.message === "success") {
-            props.cargaDatos();
-            return toast.success(`Estado del curso ${props.curso.nombre_curso} actualizado`);
-        }
-        return toast.success("Ocurrió un error");
+        
+        if (res.data.error) return toast.error(res.data.error);
+
+        props.cargaDatos();
+        toast.success(res.data.success);
 
     }
     return (

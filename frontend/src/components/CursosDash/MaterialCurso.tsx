@@ -37,6 +37,7 @@ const initialStateCurso = {
     horario: "",
     enlace: "",
     id_usuario: 0,
+    url_foto_curso:""
 };
 
 const initialStateModulo = {

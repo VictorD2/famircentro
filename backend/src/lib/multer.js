@@ -1,43 +1,61 @@
-  const multer = require('multer');
-  const path = require('path');
-  const multerCtrl = {};
-  // Settings
-  const storageVideos = multer.diskStorage({
-      destination: path.join(__dirname, '../uploads/video'),
-      filename: (req, file, cb) => {
-          const fecha = new Date();
-          cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`)
-      }
-  });
-  const filerVideos = (req, file, cb) => {
-      const filetypes = /mp4|MP4/
-      const mimetype = filetypes.test(file.mimetype);
-      const extname = filetypes.test(path.extname(file.originalname));
-      if (mimetype && extname) {
-          return cb(null, true);
-      }
-      cb("Archivo debe ser un video .mp4.");
-  }
+const multer = require('multer');
+const path = require('path');
+const multerCtrl = {};
+// Settings
+const storageVideos = multer.diskStorage({
+    destination: path.join(__dirname, '../uploads/video'),
+    filename: (req, file, cb) => {
+        const fecha = new Date();
+        cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`)
+    }
+});
+const filterVideos = (req, file, cb) => {
+    const filetypes = /mp4|MP4/
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname));
+    if (mimetype && extname) {
+        return cb(null, true);
+    }
+    cb("Archivo debe ser un video .mp4.");
+}
 
 
-  const storageFotos = multer.diskStorage({
-      destination: path.join(__dirname, '../build/uploads/fotos'),
-      filename: (req, file, cb) => {
-          const fecha = new Date();
-          cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`)
-      }
-  });
+const storageFotosPerfil = multer.diskStorage({
+    destination: path.join(__dirname, '../build/uploads/fotosPerfil'),
+    filename: (req, file, cb) => {
+        const fecha = new Date();
+        cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`)
+    }
+});
+const storageFotosCursos = multer.diskStorage({
+    destination: path.join(__dirname, '../build/uploads/fotosCursos'),
+    filename: (req, file, cb) => {
+        const fecha = new Date();
+        cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`)
+    }
+});
 
-  const storageArchivos = multer.diskStorage({
-      destination: path.join(__dirname, '../build/uploads/material'),
-      filename: (req, file, cb) => {
-          const fecha = new Date();
-          cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`)
-      }
-  });
+const filterFotos = (req, file, cb) => {
+    const filetypes = /JPG|JPEG|jpg|jpeg|png|PNG/
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname));
+    if (mimetype && extname) {
+        return cb(null, true);
+    }
+    cb("Archivo debe ser una foto.");
+}
 
-  multerCtrl.videos = multer({ storage: storageVideos, fileFilter: filerVideos });
-  multerCtrl.fotos = multer({ storage: storageFotos });
-  multerCtrl.archivos = multer({ storage: storageArchivos });
+const storageArchivos = multer.diskStorage({
+    destination: path.join(__dirname, '../build/uploads/material'),
+    filename: (req, file, cb) => {
+        const fecha = new Date();
+        cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`)
+    }
+});
 
-  module.exports = multerCtrl;
+multerCtrl.videos = multer({ storage: storageVideos, fileFilter: filterVideos });
+multerCtrl.fotosPerfil = multer({ storage: storageFotosPerfil, fileFilter: filterFotos });
+multerCtrl.fotosCursos = multer({ storage: storageFotosCursos, fileFilter: filterFotos });
+multerCtrl.archivos = multer({ storage: storageArchivos });
+
+module.exports = multerCtrl;

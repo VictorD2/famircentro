@@ -34,7 +34,8 @@ const initialState = {
     horario: "",
     enlace: "",
     id_usuario: 0,
-    modulos: []
+    modulos: [],
+    url_foto_curso:""
 };
 const Cursos = () => {
     const params = useParams<Params>();

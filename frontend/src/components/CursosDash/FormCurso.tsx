@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 
 //Icons
@@ -33,7 +33,9 @@ const FormCurso = () => {
         horario: "",
         enlace: "",
         id_usuario: 0,
-        modulos: []
+        modulos: [],
+        foto_curso: [new File([""], "filename")],
+        url_foto_curso: "",
     };
     const [profesores, setProfesores] = useState<Profesor[]>([]);
     const [curso, setCurso] = useState<Curso>(initialState);
@@ -41,16 +43,18 @@ const FormCurso = () => {
     const [tipo, setTipo] = useState("");
     const params = useParams<Params>();
     const history = useHistory();
-
+    const refInput = useRef<HTMLInputElement | null>();
+    const refProgresss = useRef<HTMLDivElement | null>();
     const cargaProfesores = async () => {
         const res = await ProfesoresServices.getAll();
+        if (!params.id) setCurso({ ...curso, id_usuario: res.data[0].id_usuario });//Por si estoy en create
         setProfesores(res.data);
     }
 
     //Traer los datos del profesor si estça en update
     const getCurso = async (id: string) => {
         const res = await CursosServices.getCursoById(id);
-        if (res.data.message === "failed") window.location.href = '/Dashboard/Cursos/Asincronos';
+        if (res.data.error) window.location.href = '/Dashboard';
         if (res.data.horario) {
             const fecha = res.data.horario.replace(" ", "T");
             res.data.horario = fecha;
@@ -64,35 +68,55 @@ const FormCurso = () => {
 
 
     useEffect(() => {
-        if (params.id) getCurso(params.id); //Por si estoy en update
+        cargaProfesores();
         params.tipo === "Talleres" ? setTipo("Taller") : setTipo("Curso");
         params.modalidad === "Asincronos" ? setModalidad("Asincrono") : setModalidad("Sincrono");
-        cargaProfesores();
+        if (params.id) getCurso(params.id); //Por si estoy en update
         return () => limpieza();
     }, [params.id, params.modalidad, params.tipo]);
 
-
+    const borrarInputFile = () => {
+        if (refInput.current) refInput.current.value = ""
+    }
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setCurso({ ...curso, [e.target.name]: e.target.value });
     };
+    const handleInputFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) setCurso({ ...curso, [e.target.name]: e.target.files });
+    }
 
     //Evento submit
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const form = new FormData();
+        form.append('nombre_curso', curso.nombre_curso);
+        form.append('descripcion', curso.descripcion);
+        form.append('precio', curso.precio + "");
+        form.append('duracion', curso.duracion + "");
+        form.append('enlace', curso.enlace);
+        form.append('horario', curso.horario);
+        form.append('id_usuario', curso.id_usuario + "");
+        if (curso.foto_curso) form.append('fotoCurso', curso.foto_curso[0]);
+
         if (!params.id) {
-            const res = await CursosServices.crearCurso(curso, tipo, modalidad);
-            if (res.data.message === 'already exists') toast.error("Ya existe un curso con ese nombre");
-            if (res.data.message === "success") {
-                toast.success("Curso creado");
-                history.push(`/Dashboard/${params.tipo}/${params.modalidad}`);
+            const res = await CursosServices.crearCurso(form, tipo, modalidad, refProgresss.current);
+            if (res.data.error) return toast.error(res.data.error);
+            borrarInputFile();
+            if (refProgresss.current) {
+                refProgresss.current.innerHTML = '0%'
+                refProgresss.current.style.width = '0%'
             }
-            if (res.data.message === "failed") toast.error("Ocurrió un error");
-            return;
+            history.push(`/Dashboard/${params.tipo}/${params.modalidad}`);
+            return
         }
-        const res = await CursosServices.updateCurso(params.id, curso);
-        if (res.data.message === 'already exists') toast.error("Ya existe un curso con ese nombre");
-        if (res.data.message === "success") toast.success("Curso actualizado");
-        if (res.data.message === "failed") toast.error("Ocurrió un error");
+        const res = await CursosServices.updateCurso(params.id, form, refProgresss.current);
+        if (res.data.error) return toast.error(res.data.error);
+        toast.success(res.data.success);
+        borrarInputFile();
+        if (refProgresss.current) {
+            refProgresss.current.innerHTML = '0%'
+            refProgresss.current.style.width = '0%'
+        }
     };
 
     return (
@@ -148,10 +172,20 @@ const FormCurso = () => {
                                     </select>
                                     <label htmlFor="floatingInputProfesor">Profesor</label>
                                 </div>
-
+                                <div className="mb-3">
+                                    <label htmlFor="exampleFormControlFile" className="form-label">Foto del Curso</label>
+                                    {curso.id_curso ? (<>
+                                        <input ref={node => refInput.current = node} onChange={handleInputFileChange} className="form-control" id="exampleFormControlFile" type="file" placeholder="Foto del curso" name="foto_curso" />
+                                    </>) : (<>
+                                        <input ref={node => refInput.current = node} onChange={handleInputFileChange} className="form-control" id="exampleFormControlFile" type="file" placeholder="Foto del curso" name="foto_curso" required />
+                                    </>)}
+                                    <div className="progress">
+                                        <div className="progress-bar" ref={node => refProgresss.current = node} role="progressbar" style={{ width: "0%" }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}>0%</div>
+                                    </div>
+                                </div>
                                 <div className="mb-3">
                                     {params.id ? (
-                                        <button className="btn btn__blue"> <FaRegEdit className="fs-5 mb-1" /> Actualizar </button>
+                                        <button className="btn btn__amarillo"> <FaRegEdit className="fs-5 mb-1" /> Actualizar </button>
                                     ) : (
                                         <button className="btn btn__blue"> <FaPlus className="fs-5 mb-1" /> Crear </button>
                                     )}

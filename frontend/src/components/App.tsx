@@ -14,7 +14,7 @@ import PageLoading from "./Helpers/PageLoading";
 import Perfil from './../pages/Perfil';
 import DashBoard from "../pages/DashBoard/DashBoard";
 import Usuarios from "./EstudiantesDash/Estudiantes";
-import Curso from './../pages/Curso';
+import CursoFullPage from '../pages/Curso/CursoFullPage';
 import Profesores from "./ProfesoresDash/Profesores";
 import FormProfesor from "./ProfesoresDash/FormProfesor";
 
@@ -26,6 +26,7 @@ import FormEstudiante from "./EstudiantesDash/FormEstudiante";
 import Cursos from "./CursosDash/Cursos";
 import FormCurso from "./CursosDash/FormCurso";
 import MaterialCurso from "./CursosDash/MaterialCurso";
+import TemaFullPage from '../pages/TemaFullPage'
 
 import EditPerfil from './../pages/EditPerfil';
 import VerTema from "./CursosDash/Temas/VerTema";
@@ -46,7 +47,8 @@ function App() {
           <Route exact path="/" component={Home} />
 
           {/* Dashboard */}
-          <LogRoute exact path="/perfil" component={Perfil} />
+          <LogRoute exact path="/Perfil" component={Perfil} />
+          <LogRoute exact path="/Perfil/Editar" component={EditPerfil} />
           <AdminRoute exact path="/DashBoard" component={DashBoard} />
 
           {/* Usuarios */}
@@ -68,11 +70,14 @@ function App() {
           {/* Vistas */}
           <NoLogRoute exact component={Login} path="/Login" />
           <NoLogRoute exact component={Register} path="/Register" />
-          <Route exact path="/edit" component={EditPerfil} />
-          <Route exact path="/curso" component={Curso} />
-          <Route exact path="/programa" component={Programa} />
-          <Route exact path="/nosotros" component={AboutUs} />
-          <Route exact path="/contactanos" component={Contact} />
+          <Route exact path="/Nosotros" component={AboutUs} />
+          <Route exact path="/Contactanos" component={Contact} />
+          <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
+          <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
+          <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
+          <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
+          <Route exact path="/Clase/:idCurso" component={CursoFullPage} />
+          <Route exact path="/Clase/:idCurso/:idTema" component={TemaFullPage} />
           <Route component={NotFound} />
         </Switch>
       )}

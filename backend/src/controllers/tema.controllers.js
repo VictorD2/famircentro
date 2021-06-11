@@ -1,20 +1,26 @@
 const pool = require('../database');
 const ctrlTema = {};
 const path = require('path');
-const helpers = require('../lib/helpers');
 const fs = require('fs-extra');
+
 ctrlTema.getTemaById = async(req, res) => {
     const rows = await pool.query('SELECT * FROM tema WHERE id_tema = ?', [req.params.id]);
     return res.json(rows[0]);
 }
+
+
 ctrlTema.getTemaByModuloId = async(req, res) => {
     const rows = await pool.query('SELECT * FROM tema WHERE id_modulo = ?', [req.params.id]);
     return res.json(rows);
 }
+
 ctrlTema.getVideo = async(req, res) => {
     const range = req.headers.range;
+
     if (req.query.key !== '1v4g8h6vcesm') return res.json({ error: "Wrong key" })
+
     if (!range) return res.json({ error: "Requires Range header" });
+
     const videoPath = path.join(__dirname, `..//${req.query.Tema}`);
     const videoSize = fs.statSync(videoPath).size;
     const CHUNK_SIZE = 4 * 10 ** 6; // 4MB
@@ -27,6 +33,7 @@ ctrlTema.getVideo = async(req, res) => {
         "Content-Length": contentLength,
         "Content-Type": "video/mp4",
     };
+
     res.writeHead(206, headers);
     const videoStream = fs.createReadStream(videoPath, { start, end });
     videoStream.pipe(res);
@@ -34,14 +41,18 @@ ctrlTema.getVideo = async(req, res) => {
 
 ctrlTema.createTema = async(req, res) => {
     const { titulo, descripcion, id_modulo } = req.body;
+
     const newTema = {
         titulo,
         descripcion,
         url_video: `/uploads/video/${req.file.filename}`,
         id_modulo
     }
+
     const rows = await pool.query('INSERT INTO tema set ? ', [newTema]);
+
     if (rows.affectedRows === 1) return res.json({ success: "Tema creado" }); //Se logró registrar
+
     return res.json({ error: "Ocurrió un error" });
 }
 
@@ -49,7 +60,9 @@ ctrlTema.eliminarTema = async(req, res) => {
     const tema = await pool.query('SELECT * FROM tema WHERE id_tema = ?', [req.params.id]);
     await fs.unlink(path.join(__dirname, "../" + tema[0].url_video));
     const rows = await pool.query('DELETE FROM tema WHERE id_tema = ?', [req.params.id]);
+
     if (rows.affectedRows === 1) return res.json({ success: "Tema eliminado" }); //Se logró registrar
+
     return res.json({ error: "Ocurrió un error" });
 }
 ctrlTema.actualizarTema = async(req, res) => {
@@ -60,16 +73,21 @@ ctrlTema.actualizarTema = async(req, res) => {
         id_modulo,
         id_tema
     };
+
     if (req.file) {
         const tema = await pool.query('SELECT * FROM tema WHERE id_tema = ?', [id_tema]);
+
         if (tema[0].url_video.search(`/uploads/video/${req.file.filename}`) == -1)
             await fs.unlink(path.join(__dirname, "../" + tema[0].url_video));
+
         newTema.url_video = `/uploads/video/${req.file.filename}`
     }
-    const rows = await pool.query('UPDATE tema set ? WHERE id_tema = ?', [newTema, newTema.id_tema]);
-    if (rows.affectedRows === 1) return res.json({ success: "Tema modificado correctamente" }); //Se logró registrar
-    return res.json({ error: "Ocurrió un error" });
 
+    const rows = await pool.query('UPDATE tema set ? WHERE id_tema = ?', [newTema, newTema.id_tema]);
+    
+    if (rows.affectedRows === 1) return res.json({ success: "Tema modificado correctamente" }); //Se logró registrar
+    
+    return res.json({ error: "Ocurrió un error" });
 }
 
 module.exports = ctrlTema;

@@ -46,8 +46,9 @@ passport.use('local.signup', new LocalStrategy({
     }
     newUser.password = await helpers.encrypPassword(newUser.password); //<- Encripta la contraseña
     try {
-        await pool.query('INSERT INTO usuario set ?', [newUser]);
+        const data = await pool.query('INSERT INTO usuario set ?', [newUser]);
         delete newUser.password;
+        newUser.id_usuario = data.insertId;
         return done(null, newUser);
     } catch (error) {
         return done(null, false, { message: "El correo ya está en uso" });
@@ -79,7 +80,8 @@ passport.use(new FacebookStrategy({
         url_foto_usuario: profile.photos[0].value
     }
     newUser.password = await helpers.encrypPassword(newUser.Contrasenia);
-    await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
+    const data = await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
+    newUser.id_usuario = data.insertId;
     return cb(null, newUser);
 }));
 
@@ -105,7 +107,8 @@ passport.use(new GoogleStrategy({
         password: "",
         url_foto_usuario: profile.photos[0].value
     }
-    await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
+    const data = await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
+    newUser.id_usuario = data.insertId;
     return done(null, newUser);
 }));
 

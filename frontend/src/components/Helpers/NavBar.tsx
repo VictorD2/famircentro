@@ -134,9 +134,9 @@ const NavBar = () => {
                 <li onMouseEnter={disappearSubItemFirst} onMouseLeave={disappearSubItemFirst} >
                   <Link to="#" role="button" className="d-flex align-items-center">Curso <RiArrowRightSFill className="fs-5" /></Link>
                   <ul className="content-lista d-none position-lista-start" id="subItemsMenuFirst">
-                    <li><Link to="/curso/asincrono">Asincrono</Link></li>
+                    <li><Link to="/Clases/Cursos/Asincronos">Asincrono</Link></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><Link to="/curso/sincrono">Sincrono</Link></li>
+                    <li><Link to="/Clases/Cursos/Sincronos">Sincrono</Link></li>
                   </ul>
                 </li>
 
@@ -145,9 +145,9 @@ const NavBar = () => {
                 <li onMouseEnter={disappearSubItemSecond} onMouseLeave={disappearSubItemSecond} >
                   <Link to="#" role="button" className="d-flex align-items-center">Taller <RiArrowRightSFill className="fs-5" /></Link>
                   <ul className="content-lista d-none position-lista-end" id="subItemsMenuSecond">
-                    <li><Link to="/taller/asincrono">Asincrono</Link></li>
+                    <li><Link to="/Clases/Talleres/Asincronos">Asincrono</Link></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><Link to="/taller/sincrono">Sincrono</Link></li>
+                    <li><Link to="/Clases/Talleres/Sincronos">Sincrono</Link></li>
                   </ul>
                 </li>
               </ul>
