@@ -13,6 +13,12 @@ import { toast } from 'react-toastify'
 import { Modulo } from '../Modulos/Modulo'
 import { Tema } from './Tema'
 
+interface Props {
+    count: number;
+    setcount: (count: number) => void
+    moduloModal: Modulo;
+    temaModal: Tema;
+}
 
 const initialState = {
     titulo: "",
@@ -21,17 +27,18 @@ const initialState = {
     url_video: "",
 }
 
-interface Props {
-    count: number;
-    setcount: (count: number) => void
-    moduloModal: Modulo;
-    temaModal: Tema;
-}
-
 const ModalTema = (props: Props) => {
+    
     const refInput = useRef<HTMLInputElement | null>();
     const refProgresss = useRef<HTMLDivElement | null>();
+
     const [tema, setTema] = useState<Tema>(initialState)
+
+    useEffect(() => {
+        setTema(props.temaModal);
+        return () => {
+        }
+    }, [props.temaModal])
 
     //Submit
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,12 +92,6 @@ const ModalTema = (props: Props) => {
     const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) setTema({ ...tema, [e.target.name]: e.target.files });
     };
-
-    useEffect(() => {
-        setTema(props.temaModal);
-        return () => {
-        }
-    }, [props.temaModal])
 
     return (
         <div className="modal fade" id="crearTema" aria-labelledby="exampleModalLabel" aria-hidden="true">

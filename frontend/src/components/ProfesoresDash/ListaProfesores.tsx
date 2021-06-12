@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-//Interfaces
-import { Profesor } from "./Profesor";
-
 //Services
 import * as videoServices from "./ProfesoresServices";
 //Components
 import ProfesorItem from "./ProfesorItem";
 
+//Interfaces
+import { Profesor } from "./Profesor";
 
 interface Props {
   funcion: (profesor: Profesor) => void;
@@ -16,6 +15,12 @@ interface Props {
 const ListaProfesores = (props: Props) => {
   const [profesores, setProfesores] = useState<Profesor[]>([]);
   const [loading, setLoading] = useState(false);
+
+  //Cuando cargue
+  useEffect(() => {
+    loadProfesores();
+    return () => limpieza();
+  }, []);
 
   //Traer datos de la bd
   const loadProfesores = async () => {
@@ -28,14 +33,6 @@ const ListaProfesores = (props: Props) => {
     setProfesores([]);
     setLoading(false);
   }
-
-  //Cuando cargue
-  useEffect(() => {
-    loadProfesores();
-    return () => {
-      limpieza();
-    }
-  }, []);
 
   // Cargando
   if (!loading)

@@ -10,15 +10,15 @@ import { GoKebabVertical } from "react-icons/go";
 //Toastify
 import { toast } from 'react-toastify';
 
-// Interfaces
-import { Modulo } from './Modulo'
-import { Tema } from '../Temas/Tema';
-
 //Services
 import * as moduloServices from './ModuloService';
 
 // Components
 import TemaItem from '../Temas/TemaItem';
+
+// Interfaces
+import { Modulo } from './Modulo'
+import { Tema } from '../Temas/Tema';
 
 interface Params {
     id: string;
@@ -44,6 +44,13 @@ const ModuloItem = (props: Props) => {
     const [temas, setTemas] = useState<Tema[]>([]); //Temas
     const [loadTemas, setLoadTemas] = useState(false); //Están los temas cargados?
 
+    useEffect(() => {
+        if (loadTemas) getTemas();//Solo se hará cuando el estado loadTemas sea true, el cual solo cambia 1 vez
+        return () => limpieza();
+    }, [loadTemas, props.count]);
+
+    //Funciones
+
     const eliminarModulo = async () => {
         if (!window.confirm('¿Está seguro que desea eliminar el módulo?')) return;
 
@@ -68,20 +75,12 @@ const ModuloItem = (props: Props) => {
     }
 
     //Limpieza cuando se desrenderice
-    const limpieza = () => {
-        setTemas([]);
-    }
+    const limpieza = () => setTemas([]);
 
     const limpiandoEstados = () => {
-        props.setTemaModal({ titulo: "", descripcion: "",url_video: "", video: [new File([""], "filename")]});
+        props.setTemaModal({ titulo: "", descripcion: "", url_video: "", video: [new File([""], "filename")] });
         props.setModuloModal(props.modulo);
     }
-
-    useEffect(() => {
-        if (loadTemas) getTemas();//Solo se hará cuando el estado loadTemas sea true, el cual solo cambia 1 vez
-        return () => limpieza();
-    }, [loadTemas, props.count]);
-
 
     return (
         <div className="accordion-item my-4">

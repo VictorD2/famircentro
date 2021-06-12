@@ -1,9 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { FaEnvelope, FaTimes } from 'react-icons/fa';
 import { useParams } from 'react-router'
+//Iconos
+import { FaEnvelope, FaTimes } from 'react-icons/fa';
+
+//Toastify
 import { toast } from 'react-toastify';
+
+//Interfaces
 import { Comentario } from './Comentario';
+
+//Services
 import * as comentariosServices from './ComentariosServices';
 
 //TimeAgo
@@ -24,9 +31,21 @@ interface Params {
 }
 const Comentarios = () => {
     const { usuario } = useUsuario();
+
     const params = useParams<Params>();
+
     const [comentario, setComentario] = useState<Comentario>(initialState);
-    const [comentarios, setComentarios] = useState<Comentario[]>([])
+    const [comentarios, setComentarios] = useState<Comentario[]>([]);
+
+    useEffect(() => {
+        getComentarios();
+        return () => {
+            setComentario(initialState);
+            setComentarios([]);
+        }
+    }, [])
+
+    //Funciones
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (comentario.comentario === "") return toast.warning('No ha escrito un comentario');
@@ -39,6 +58,7 @@ const Comentarios = () => {
         }
         toast.error(res.data.error);
     }
+    
     const eliminarComentario = async (id?: number) => {
         if (!window.confirm('¿Está seguro que desea eliminar el comentario?')) return;
         const res = await comentariosServices.eliminarComentario(id + "");
@@ -52,13 +72,7 @@ const Comentarios = () => {
         const res = await comentariosServices.getAll(params.idCurso, params.idTema);
         setComentarios(res.data);
     }
-    useEffect(() => {
-        getComentarios();
-        return () => {
-            setComentario(initialState);
-            setComentarios([]);
-        }
-    }, [])
+
     const handleTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setComentario({ ...comentario, [e.target.name]: e.target.value });
     }

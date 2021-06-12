@@ -8,11 +8,13 @@ import { FaEdit, FaPlus } from 'react-icons/fa';
 // Toastify
 import { toast } from 'react-toastify';
 
-//Interfaces
-import { Modulo } from './Modulo';
+
 
 //Services
 import * as moduloServices from './ModuloService';
+
+//Interfaces
+import { Modulo } from './Modulo';
 
 interface Params {
     id: string;
@@ -28,8 +30,18 @@ const initialState = {
 }
 
 const ModalModulo = (props: Props) => {
+
     const params = useParams<Params>();
+
     const [modulo, setModulo] = useState<Modulo>(initialState);
+
+    useEffect(() => {
+        setModulo(props.moduloModal);
+        return () => setModulo(initialState);
+    }, [props.moduloModal])
+
+    //Funciones
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setModulo({ ...modulo, [e.target.name]: e.target.value });
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -52,11 +64,7 @@ const ModalModulo = (props: Props) => {
         if (res.data.error) return toast.error(res.data.error);
 
     }
-    useEffect(() => {
-        setModulo(props.moduloModal);
-        return () => setModulo(initialState);
-    }, [props.moduloModal])
-
+    
     return (
         <div className="modal fade" id="crearModulo" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">

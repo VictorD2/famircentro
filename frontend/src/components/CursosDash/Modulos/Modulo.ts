@@ -1,4 +1,3 @@
-import { MaterialClase } from "../MaterialClase/MaterialClase";
 import { Tema } from "../Temas/Tema";
 
 export interface Modulo {

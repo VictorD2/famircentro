@@ -16,14 +16,13 @@ class EditPerfil extends React.Component {
     }
 
     handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        const tipos = ['image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/webp']
         e.preventDefault();
         if (e.dataTransfer.files instanceof FileList) {
-            if (e.dataTransfer.files[0].type === 'image/gif' || e.dataTransfer.files[0].type === 'image/png' || e.dataTransfer.files[0].type === 'image/jpeg' || e.dataTransfer.files[0].type === 'image/bmp' || e.dataTransfer.files[0].type === 'image/webp') {
+            if (tipos.includes(e.dataTransfer.files[0].type)) {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    if(reader.readyState === 2) {
-                        this.setState({profileImg: reader.result});
-                    }
+                    if (reader.readyState === 2) this.setState({ profileImg: reader.result });
                 }
                 reader.readAsDataURL(e.dataTransfer.files[0]);
             } else {
@@ -35,12 +34,13 @@ class EditPerfil extends React.Component {
     }
 
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const tipos = ['image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/webp']
         if (e.target.files instanceof FileList) {
-            if (e.target.files[0].type === 'image/gif' || e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/bmp' || e.target.files[0].type === 'image/webp') {
+            if (tipos.includes(e.target.files[0].type)) {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    if(reader.readyState === 2) {
-                        this.setState({profileImg: reader.result});
+                    if (reader.readyState === 2) {
+                        this.setState({ profileImg: reader.result });
                     }
                 }
                 reader.readAsDataURL(e.target.files[0]);
@@ -68,9 +68,9 @@ class EditPerfil extends React.Component {
                                         <img id="avatar" src={this.state.profileImg} alt="Mi avatar" width="200" height="200" />
                                     </figure>
                                     <div className="d-grid gap-2 col-6 mx-auto">
-                                        <input type="file" id="inputFile" style={{display: "none"}} onChange={this.handleChange} />
+                                        <input type="file" id="inputFile" style={{ display: "none" }} onChange={this.handleChange} />
                                         <button className="btn btn-editPerfil" type="button">
-                                            <label htmlFor="inputFile" className="d-block" style={{cursor: "pointer"}}>Subir foto de perfil</label>
+                                            <label htmlFor="inputFile" className="d-block" style={{ cursor: "pointer" }}>Subir foto de perfil</label>
                                         </button>
                                     </div>
                                 </div>

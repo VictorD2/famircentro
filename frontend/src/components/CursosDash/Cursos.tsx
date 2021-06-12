@@ -12,15 +12,14 @@ import { IoNewspaperSharp } from 'react-icons/io5';
 // Toastify
 import { ToastContainer } from 'react-toastify'
 
-//Interfaces
-import { Curso } from './Curso'
-
 //Components
 import Navigation from '../../pages/DashBoard/Navigation'
 import BuscadorProfesor from '../ProfesoresDash/BuscadorProfesor'
 import ListaCursos from './ListaCursos'
 import ModalCurso from './ModalCurso';
 
+//Interfaces
+import { Curso } from './Curso'
 
 interface Params {
     modalidad: string;
@@ -35,15 +34,17 @@ const initialState = {
     enlace: "",
     id_usuario: 0,
     modulos: [],
-    url_foto_curso:""
+    url_foto_curso: ""
 };
 const Cursos = () => {
+    const modalidades = ['Sincronos', 'Asincronos', 'Talleres', 'Cursos'];
+
     const params = useParams<Params>();
     const history = useHistory();
-
+    
     const [curso, setCurso] = useState<Curso>(initialState);
     const [filtro, setFiltro] = useState<string>("");
-    
+
     const [tipo, setTipo] = useState("");
     const [modalidad, setModalidad] = useState("");
 
@@ -52,10 +53,12 @@ const Cursos = () => {
     const buscar = (text: string) => setFiltro(text);
 
     useEffect(() => {
-        if ((params.tipo !== 'Talleres' && params.tipo !== 'Cursos') || (params.modalidad !== 'Asincronos' && params.modalidad !== 'Sincronos')) return history.push('/Dashboard');//Validando ruta
+        if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push('/Dashboard');//Validando ruta
+
         params.tipo === "Talleres" ? setTipo('Taller') : setTipo('Curso');
         params.modalidad === "Asincronos" ? setModalidad('Asincrónico') : setModalidad('Sincrónico');
     }, [params.tipo, params.modalidad]);
+    
     return (
         <React.Fragment>
             <Navigation />

@@ -25,23 +25,25 @@ export const UsuarioProvider = (props: any) => {
   const [loadUser, setLoadUser] = useState(false);
 
   useEffect(() => {
-    async function cargarUsuario() {
-      try {
-        const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
-        if (datos.data.user) {
-          setUsuario(datos.data.user);
-          auth.sigIn();
-          auth.setRango(datos.data.user.id_rango);
-        }
-      } catch (error) {
-        setUsuario(initialState);
-        auth.setRango(2);
-        auth.logOut();
-      }
-      setLoadUser(true);
-    }
     cargarUsuario();
   }, []);
+  
+  const cargarUsuario = async () => {
+    try {
+      const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
+      if (datos.data.user) {
+        setUsuario(datos.data.user);
+        auth.sigIn();
+        auth.setRango(datos.data.user.id_rango);
+      }
+    } catch (error) {
+      setUsuario(initialState);
+      auth.setRango(2);
+      auth.logOut();
+    }
+    setLoadUser(true);
+  }
+
 
   const value = useMemo(() => {
     return {

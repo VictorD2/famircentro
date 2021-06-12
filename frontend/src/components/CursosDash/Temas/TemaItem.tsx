@@ -12,11 +12,13 @@ import { Modulo } from '../Modulos/Modulo'
 import { Tema } from './Tema'
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router';
+
 interface Params {
     modalidad: string;
     id: string;
     tipo: string;
 }
+
 interface Props {
     setcount: (count: number) => void
     count: number;
@@ -27,9 +29,15 @@ interface Props {
     tema: Tema;
     modulo: Modulo;
 }
+
 const TemaItem = (props: Props) => {
+
     const params = useParams<Params>();
+
     const history = useHistory();
+
+    //Funciones
+    
     const eliminarTema = async () => {
         if (!window.confirm('¿Está seguro que desea eliminar el tema?')) return;
 
@@ -41,6 +49,7 @@ const TemaItem = (props: Props) => {
         }
         if (res.data.error) return toast.error(res.data.error);
     }
+
     const setModales = () => {
         props.setTemaModal(props.tema);
         props.setModuloModal(props.modulo);
@@ -60,7 +69,7 @@ const TemaItem = (props: Props) => {
                     <li><button onClick={() => { props.setTemaModal(props.tema) }} data-bs-toggle="modal" data-bs-target="#crearMaterial" className="dropdown-item" ><FaPlus className="mb-1" /> Agregar Material</button></li>
 
                     {/* Ver tema */}
-                    <li><button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/Material/${params.id}/${props.tema.id_tema}`)} className="dropdown-item" ><FaEye className="mb-1" /> Ver Material</button></li>
+                    <li><button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/Material/${params.id}/${props.tema.id_tema}`)} className="dropdown-item" ><FaEye className="mb-1" /> Ver Tema</button></li>
 
                     {/* Editar modulo */}
                     <li><button onClick={() => { setModales() }} data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" ><FaEdit className="mb-1" /> Editar Tema</button></li>

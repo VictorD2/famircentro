@@ -1,29 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
 
+//Iconos
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useParams } from 'react-router'
-
+//Componentes
 import Navigation from '../../../pages/DashBoard/Navigation'
 import VideoReproductor from '../../Helpers/VideoReproductor';
+import MaterialClaseItem from '../MaterialClase/MaterialClaseItem';
 
-import { MaterialClase } from '../MaterialClase/MaterialClase';
-import { Tema } from './Tema'
-
+//Services
 import * as temaServices from './TemaServices';
 import * as materialServices from '../MaterialClase/MaterialServices';
-import MaterialClaseItem from '../MaterialClase/MaterialClaseItem';
-import { VideoJsPlayerOptions } from 'video.js';
 
+//Poster
 import poster from './logoFamir.jpg';
+
+//Interfaces
+import { VideoJsPlayerOptions } from 'video.js';
+import { Tema } from './Tema'
+import { MaterialClase } from '../MaterialClase/MaterialClase';
 
 interface Params {
     idTema: string;
 }
+
 const VerTema = () => {
     const params = useParams<Params>();
+
     const [countMaterial, setCountMaterial] = useState<number>(0)
     const [tema, setTema] = useState<Tema>({ titulo: "", descripcion: "", url_video: "" });
     const [material, setMaterial] = useState<MaterialClase[]>([]);
@@ -39,6 +45,20 @@ const VerTema = () => {
             type: 'video/mp4'
         }]
     })
+
+    useEffect(() => {
+        getTema();
+        return () => setTema({ titulo: "", descripcion: "", url_video: "" });
+    }, []);
+
+    useEffect(() => {
+        getMaterial();
+        return () => setMaterial([]);
+    }, [countMaterial])
+
+
+    //Funciones
+
     const getTema = async () => {
         const res = await temaServices.getTemaById(params.idTema);
         setTema(res.data);
@@ -49,15 +69,6 @@ const VerTema = () => {
         const res = await materialServices.getMaterialByTemaId(params.idTema);
         setMaterial(res.data);
     }
-    useEffect(() => {
-        getTema();
-        return () => setTema({ titulo: "", descripcion: "", url_video: "" });
-    }, []);
-
-    useEffect(() => {
-        getMaterial();
-        return () => setMaterial([]);
-    }, [countMaterial])
 
     return (
         <React.Fragment>
@@ -75,6 +86,7 @@ const VerTema = () => {
                 {/* Content */}
                 <div className="py-4 mt-4">
                 </div>
+                
                 <div className="row">
                     <div className="col-6">
                         <div className="row">

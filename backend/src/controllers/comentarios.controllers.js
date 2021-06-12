@@ -1,6 +1,7 @@
 const pool = require('../database');
 const ctrlComentarios = {};
 const helpers = require('../lib/helpers');
+
 ctrlComentarios.createComentario = async(req, res) => {
     if (req.user) return res.json({ error: "Necesitas una cuenta para comentar" }); //Poner ! en producción
 
@@ -23,6 +24,7 @@ ctrlComentarios.getComentarios = async(req, res) => {
         const rows = await pool.query('SELECT id_comentario,comentario,fecha,nombre,apellido,url_foto_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_tema = ? ORDER BY fecha DESC', [req.params.idTema]);
         return res.json(rows);
     }
+
     const rows = await pool.query('SELECT id_comentario,comentario,fecha,nombre,apellido,url_foto_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_curso = ? ORDER BY fecha DESC', [req.params.idCurso]);
     return res.json(rows);
 
@@ -30,7 +32,9 @@ ctrlComentarios.getComentarios = async(req, res) => {
 ctrlComentarios.deleteComentario = async(req, res) => {
     const id_comentario = req.params.id;
     const rows = await pool.query('DELETE FROM comentario WHERE id_comentario = ?', [id_comentario]);
+    
     if (rows.affectedRows > 0) return res.json({ success: "Comentario eliminado." }); //Se logró borrar
+    
     return res.json({ error: "Ocurrió un error, intentelo más tarde." });
 }
 module.exports = ctrlComentarios;

@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+import ScrollReveal from "scrollreveal";
 
 import NavBar from '../components/Helpers/NavBar';
 import Badge from '../components/Helpers/Badge';
-
 import Footer from '../components/Helpers/Footer';
-
-import ScrollReveal from "scrollreveal";
-import { useHistory, useParams } from 'react-router';
-import { Curso } from '../components/CursosDash/Curso';
-
-import * as cursosServices from '../components/CursosDash/CursosServices'
 import CursoItem from '../components/CursosCliente/CursoItem';
+
+//Services
+import * as cursosServices from '../components/CursosDash/CursosServices'
+
+//Interfaces
+import { Curso } from '../components/CursosDash/Curso';
 
 interface Params {
     modalidad: string;
@@ -41,8 +42,6 @@ const Programa = () => {
         return () => {
         }
     }, [params.modalidad, params.tipo])
-
-
 
     useEffect(() => {
         const config = {

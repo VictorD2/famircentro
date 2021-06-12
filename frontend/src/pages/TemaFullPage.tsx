@@ -1,44 +1,64 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
-import { VideoJsPlayerOptions } from 'video.js'
-import { Tema } from '../components/CursosDash/Temas/Tema'
-import * as temaServices from '../components/CursosDash/Temas/TemaServices'
-import * as materialServices from '../components/CursosDash/MaterialClase/MaterialServices'
+
+//Iconos
+import { FaDownload } from 'react-icons/fa'
+
+//Componentes
 import Footer from '../components/Helpers/Footer'
 import NavBar from '../components/Helpers/NavBar'
 import VideoReproductor from '../components/Helpers/VideoReproductor'
+
+//Poster video
 import poster from '../components/CursosDash/Temas/logoFamir.jpg';
-import { MaterialClase } from '../components/CursosDash/MaterialClase/MaterialClase'
-import { FaDownload } from 'react-icons/fa'
-import Comentarios from './Curso/Comentarios'
+
+//Toastify
 import { ToastContainer } from 'react-toastify'
-import axios from 'axios'
+
+//Services
+import * as temaServices from '../components/CursosDash/Temas/TemaServices'
+import * as materialServices from '../components/CursosDash/MaterialClase/MaterialServices'
 import * as cursosServices from '../components/CursosDash/CursosServices';
+import axios from 'axios'
+
+//Interfaces
+import Comentarios from './Curso/Comentarios'
+import { VideoJsPlayerOptions } from 'video.js'
+import { Tema } from '../components/CursosDash/Temas/Tema'
+import { MaterialClase } from '../components/CursosDash/MaterialClase/MaterialClase'
+
 interface Params {
     idCurso: string;
 }
 interface Params {
     idTema: string
 }
+
+const initialVideoState = {
+    autoplay: false,
+    preload: "none",
+    controls: true,
+    poster: poster,
+    playbackRates: [0.5, 1, 1.25, 1.5, 2],
+    sources: [{
+        src: '',
+        type: 'video/mp4'
+    }]
+}
+
 const TemaFullPage = () => {
+
     const params = useParams<Params>();
 
     const history = useHistory();
+
     const [tema, setTema] = useState<Tema>();
+
     const [loadingVideo, setLoadingVideo] = useState<boolean>(false)
     const [material, setMaterial] = useState<MaterialClase[]>([]);
-    const [settings, setSettings] = useState<VideoJsPlayerOptions>({//Del video
-        autoplay: false,
-        preload: "none",
-        controls: true,
-        poster: poster,
-        playbackRates: [0.5, 1, 1.25, 1.5, 2],
-        sources: [{
-            src: '',
-            type: 'video/mp4'
-        }]
-    })
+    const [settings, setSettings] = useState<VideoJsPlayerOptions>(initialVideoState);
+
     const getTema = async () => {
         const res = await temaServices.getTemaById(params.idTema);
         const resMaterial = await materialServices.getMaterialByTemaId(params.idTema);
@@ -60,17 +80,7 @@ const TemaFullPage = () => {
             setTema({ titulo: "", descripcion: "", url_video: "" });
             setLoadingVideo(false);
             setMaterial([])
-            setSettings({//Del video
-                autoplay: false,
-                preload: "none",
-                controls: true,
-                poster: poster,
-                playbackRates: [0.5, 1, 1.25, 1.5, 2],
-                sources: [{
-                    src: '',
-                    type: 'video/mp4'
-                }]
-            })
+            setSettings(initialVideoState)
         }
     }, [])
 
