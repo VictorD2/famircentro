@@ -37,14 +37,29 @@ const FormCurso = () => {
         foto_curso: [new File([""], "filename")],
         url_foto_curso: "",
     };
+
+    const params = useParams<Params>();
+
+    const history = useHistory();
+
     const [profesores, setProfesores] = useState<Profesor[]>([]);
     const [curso, setCurso] = useState<Curso>(initialState);
     const [modalidad, setModalidad] = useState("");
     const [tipo, setTipo] = useState("");
-    const params = useParams<Params>();
-    const history = useHistory();
+
     const refInput = useRef<HTMLInputElement | null>();
     const refProgresss = useRef<HTMLDivElement | null>();
+
+    useEffect(() => {
+        cargaProfesores();
+        params.tipo === "Talleres" ? setTipo("Taller") : setTipo("Curso");
+        params.modalidad === "Asincronos" ? setModalidad("Asincrono") : setModalidad("Sincrono");
+        if (params.id) getCurso(params.id); //Por si estoy en update
+        return () => limpieza();
+    }, [params.id, params.modalidad, params.tipo]);
+
+    //Funciones
+
     const cargaProfesores = async () => {
         const res = await ProfesoresServices.getAll();
         if (!params.id) setCurso({ ...curso, id_usuario: res.data[0].id_usuario });//Por si estoy en create
@@ -61,19 +76,11 @@ const FormCurso = () => {
         }
         setCurso(res.data);
     };
+
     const limpieza = () => {
         setCurso(initialState);
         setProfesores([]);
     }
-
-
-    useEffect(() => {
-        cargaProfesores();
-        params.tipo === "Talleres" ? setTipo("Taller") : setTipo("Curso");
-        params.modalidad === "Asincronos" ? setModalidad("Asincrono") : setModalidad("Sincrono");
-        if (params.id) getCurso(params.id); //Por si estoy en update
-        return () => limpieza();
-    }, [params.id, params.modalidad, params.tipo]);
 
     const borrarInputFile = () => {
         if (refInput.current) refInput.current.value = ""
@@ -96,27 +103,36 @@ const FormCurso = () => {
         form.append('enlace', curso.enlace);
         form.append('horario', curso.horario);
         form.append('id_usuario', curso.id_usuario + "");
+
         if (curso.foto_curso) form.append('fotoCurso', curso.foto_curso[0]);
 
         if (!params.id) {
             const res = await CursosServices.crearCurso(form, tipo, modalidad, refProgresss.current);
+
             if (res.data.error) return toast.error(res.data.error);
+
             borrarInputFile();
+
             if (refProgresss.current) {
                 refProgresss.current.innerHTML = '0%'
                 refProgresss.current.style.width = '0%'
             }
+
             history.push(`/Dashboard/${params.tipo}/${params.modalidad}`);
             return
         }
         const res = await CursosServices.updateCurso(params.id, form, refProgresss.current);
+
         if (res.data.error) return toast.error(res.data.error);
+
         toast.success(res.data.success);
         borrarInputFile();
+
         if (refProgresss.current) {
             refProgresss.current.innerHTML = '0%'
             refProgresss.current.style.width = '0%'
         }
+
     };
 
     return (
@@ -125,7 +141,7 @@ const FormCurso = () => {
             <ToastContainer />
             <div className="contenido-principal p-4">
                 <div className="d-flex flex-row bg-white mb-5">
-                    {params.id ? (
+                    {params.id ? (//Editar o crear
                         <h4 className="mb-0 text-uppercase fs-3"><FaEdit className="fs-3 mb-2 " /> Actualizar {tipo} {modalidad}</h4>
                     ) : (
                         <h4 className="m-0 text-uppercase fs-3"><FaPlus className="fs-3 mb-1 " /> Crear {tipo} {modalidad}</h4>
@@ -184,7 +200,7 @@ const FormCurso = () => {
                                     </div>
                                 </div>
                                 <div className="mb-3">
-                                    {params.id ? (
+                                    {params.id ? (//Editar o Crear
                                         <button className="btn btn__amarillo"> <FaRegEdit className="fs-5 mb-1" /> Actualizar </button>
                                     ) : (
                                         <button className="btn btn__blue"> <FaPlus className="fs-5 mb-1" /> Crear </button>

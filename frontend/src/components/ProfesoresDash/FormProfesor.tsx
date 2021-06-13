@@ -1,9 +1,6 @@
 import React, { useState, useEffect, FormEvent } from "react";
 import { useParams } from "react-router-dom";
 
-//Interfaces
-import { Profesor } from "./Profesor";
-
 //Components
 import Navigation from "../../pages/DashBoard/Navigation";
 
@@ -20,6 +17,9 @@ import { ToastContainer } from "react-toastify";
 // CSS
 import "react-toastify/dist/ReactToastify.css";
 import 'animate.css/animate.min.css';
+
+//Interfaces
+import { Profesor } from "./Profesor";
 
 interface Params {
   id?: string;
@@ -39,6 +39,11 @@ const FormProfesor = () => {
 
   const params = useParams<Params>();
 
+  useEffect(() => {
+    if (params.id) getProfesor(params.id);//Por si estoy en update
+    return () => limpieza();
+  }, [params.id]);
+
   //Traer los datos del profesor si estça en update
   const getProfesor = async (id: string) => {
     const res = await profesorServices.getProfesorById(id);
@@ -48,12 +53,7 @@ const FormProfesor = () => {
 
   const limpieza = () => setProfesor({});
 
-  useEffect(() => {
-    if (params.id) getProfesor(params.id);//Por si estoy en update
-    return () => limpieza();
-  }, [params.id]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setProfesor({ ...profesor, [e.target.name]: e.target.value });
   ;
 

@@ -1,9 +1,6 @@
 import React from 'react'
 import { useHistory, useParams } from "react-router-dom";
 
-// Interfaces
-import { Curso } from './Curso'
-
 //Services
 import * as CursosServices from './CursosServices';
 
@@ -16,6 +13,8 @@ import { IoNewspaperSharp } from 'react-icons/io5';
 //Toastify
 import { toast } from 'react-toastify';
 
+// Interfaces
+import { Curso } from './Curso'
 interface Params {
     id?: string;
     modalidad?: string;
@@ -38,13 +37,13 @@ const CursoItem = (props: Props) => {
         if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el curso?")) return;
 
         const res = await CursosServices.eliminarCurso(props.curso.id_curso?.toString());
-        
+
         if (res.data.error) return toast.error(res.data.error);
 
         props.cargaDatos();
         toast.success(res.data.success);
-
     }
+
     return (
         <React.Fragment>
             <tr>
@@ -93,4 +92,4 @@ const CursoItem = (props: Props) => {
     )
 }
 
-export default CursoItem
+export default CursoItem;

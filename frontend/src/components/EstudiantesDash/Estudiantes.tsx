@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FaCheck, FaTimes } from "react-icons/fa";
 
-//Services
+//Interfaces
 import { Estudiante } from "./Estudiante";
 
 //Components

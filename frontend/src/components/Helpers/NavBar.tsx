@@ -1,15 +1,19 @@
 import React from "react";
-import logo from "../../images/logoFamirNav.png";
-import logoResponsive from "../../images/logoFamir.svg";
+import { Link } from 'react-router-dom';
 import Axios from "axios";
 
-import { Link } from 'react-router-dom';
+
+//Imagenes
+import logo from "../../images/logoFamirNav.png";
+import logoResponsive from "../../images/logoFamir.svg";
+
+//Iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faBars, faTimes, faDoorOpen, faUser, faTachometerAlt } from "@fortawesome/free-solid-svg-icons";
-
-import { useUsuario } from "../../context-user/UsuarioProvider";
 import { AiOutlinePhone } from "react-icons/ai";
 import { RiArrowDownSFill, RiArrowRightSFill } from "react-icons/ri";
+
+import { useUsuario } from "../../context-user/UsuarioProvider";
 
 const NavBar = () => {
   const { usuario, loadUser } = useUsuario();

@@ -10,7 +10,7 @@ class Auth {
   }
   sigIn() {
     this.loged = true;
-  }
+  } 
   logOut() {
     this.loged = false;
   }
@@ -20,7 +20,7 @@ class Auth {
   getRango() {
     return this.rango;
   }
-  setRango(rango: number|undefined) {
+  setRango(rango: number | undefined) {
     this.rango = rango;
   }
 }

@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useParams,useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
-//Interfaces
-import { Curso } from './Curso';
 
 //Services
 import * as cursoServices from "./CursosServices";
 
 //Components
 import CursoItem from './CursoItem';
+
+//Interfaces
+import { Curso } from './Curso';
 
 interface Params {
     modalidad: string;
@@ -19,26 +20,18 @@ interface Props {
     funcion: (curso: Curso) => void;
     filtro: string;
 }
+
 const ListaCursos = (props: Props) => {
+
     const params = useParams<Params>();
+
     const history = useHistory();
+
     const [cursos, setCursos] = useState<Curso[]>([]);
     const [loading, setLoading] = useState(false);
     const [modalidad, setModalidad] = useState<string>();
     const [tipo, setTipo] = useState<string>();
-    //Traer datos de la bd
-    const loadCursos = async () => {
-        const res = await cursoServices.getAllCursos(params.tipo,params.modalidad);
-        setCursos(res.data);
-        setLoading(true);
-    };
 
-    const limpieza = () => {
-        setCursos([]);
-        setLoading(false);
-    }
-
-    //Cuando cargue
     useEffect(() => {
         if ((params.tipo !== 'Talleres' && params.tipo !== 'Cursos') || (params.modalidad !== 'Asincronos' && params.modalidad !== 'Sincronos')) return history.push('/Dashboard');//Validando ruta
         setModalidad(params.modalidad);
@@ -48,6 +41,23 @@ const ListaCursos = (props: Props) => {
             limpieza();
         }
     }, [params.modalidad, params.tipo]);
+
+
+    //Funciones
+
+    //Traer datos de la bd
+    const loadCursos = async () => {
+        const res = await cursoServices.getAllCursos(params.tipo, params.modalidad);
+        setCursos(res.data);
+        setLoading(true);
+    };
+
+    const limpieza = () => {
+        setCursos([]);
+        setLoading(false);
+    }
+
+   
     // Cargando
     if (!loading)
         return (

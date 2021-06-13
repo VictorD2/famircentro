@@ -1,10 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { FaLock, FaPlay } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { Modulo } from '../../components/CursosDash/Modulos/Modulo'
+
+//Iconoes
+import { FaLock, FaPlay } from 'react-icons/fa';
+
+//Services
 import * as moduloServices from '../../components/CursosDash/Modulos/ModuloService';
+
+//Interfaces
+import { Modulo } from '../../components/CursosDash/Modulos/Modulo'
 import { Tema } from '../../components/CursosDash/Temas/Tema';
+
 interface Props {
     modulo: Modulo;
     verificacion: boolean;
@@ -12,14 +19,15 @@ interface Props {
 const Modulos = (props: Props) => {
     const [temas, setTemas] = useState<Tema[]>([]);
 
-    const getTemas = async () => {
-        const res = await moduloServices.getTemasByModuloId(props.modulo.id_modulo + "");
-        setTemas(res.data);
-    }
     useEffect(() => {
         getTemas();
         return () => setTemas([]);
     }, [props.modulo])
+
+    const getTemas = async () => {
+        const res = await moduloServices.getTemasByModuloId(props.modulo.id_modulo + "");
+        setTemas(res.data);
+    }
 
     if (!props.verificacion) {//Quitar ! en produccion
         return (

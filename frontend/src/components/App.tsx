@@ -22,7 +22,6 @@ import AdminRoute from './ProtectedRoutes/AdminRoute';
 import LogRoute from './ProtectedRoutes/LogRoute';
 import NoLogRoute from './ProtectedRoutes/NoLogRoute';
 
-import FormEstudiante from "./EstudiantesDash/FormEstudiante";
 import Cursos from "./CursosDash/Cursos";
 import FormCurso from "./CursosDash/FormCurso";
 import MaterialCurso from "./CursosDash/MaterialCurso";
@@ -58,7 +57,6 @@ function App() {
           <AdminRoute exact path="/DashBoard/Profesores" component={Profesores} />
           <AdminRoute exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
           <AdminRoute exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
-          <AdminRoute exact path="/DashBoard/Estudiantes/update/:id" component={FormEstudiante} />
 
           {/* Cursos */}
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />

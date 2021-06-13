@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 
+//Services
 import * as estudianteServices from "./EstudianteService";
-import { Estudiante } from "./Estudiante";
+
+
+//Componentes
 import EstudianteItem from "./EstudianteItem";
+
+//Interfaces
+import { Estudiante } from "./Estudiante";
+
 interface Props {
     funcion: (estudiante: Estudiante) => void;
     filtro: string;
@@ -11,7 +18,7 @@ interface Props {
 const ListaEstudiantes = (props: Props) => {
     const [estudiantes, setEstudiantes] = useState<Estudiante[]>([]);
     const [loading, setLoading] = useState(false);
-    
+
     //Traer datos de la bd
     const loadEstudiantes = async () => {
         const res = await estudianteServices.getAll();
@@ -23,12 +30,11 @@ const ListaEstudiantes = (props: Props) => {
         setEstudiantes([]);
         setLoading(false);
     };
+    
     //Cuando cargue
     useEffect(() => {
         loadEstudiantes();
-        return () => {
-            limpieza();
-        };
+        return () => limpieza();
     }, []);
 
     // Cargando

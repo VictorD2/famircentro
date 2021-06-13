@@ -4,9 +4,7 @@ const api = "http://localhost:4000/api/tema";
 
 export const getVideo = async (id: string) => {
   const res = await axios.get(`http://localhost:4000/video-lock?key=1v4g8h6vcesm&idTema=${id}`,{responseType:"arraybuffer"});
-  console.log(res);
   let blob = new Blob([res.data]);
-  console.log(blob);
   return URL.createObjectURL(blob);
 };
 

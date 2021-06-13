@@ -9,7 +9,7 @@ import ListaProfesores from "./ListaProfesores";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookReader, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Profesor } from "./Profesor";
-import {FaCheck, FaTimes} from 'react-icons/fa';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 //Components
 import BuscadorProfesor from "./BuscadorProfesor";
@@ -21,26 +21,21 @@ import 'animate.css/animate.min.css';
 
 const Profesores = () => {
 
+  const history = useHistory();
+
   const [profesor, setProfesor] = useState<Profesor>({})
   const [filtro, setFiltro] = useState<string>("")
-  const history = useHistory();
   //Redireccionamiento del boton crear profesor
-  const createUser = () => {
-    history.push("/DashBoard/Profesores/nuevo");
-  };
+  const createUser = () => history.push("/DashBoard/Profesores/nuevo");
 
-  const handleModalChange = (profesor: Profesor) => {
-    setProfesor(profesor);
-  }
+  const handleModalChange = (profesor: Profesor) => setProfesor(profesor);
 
-  const buscar = (text: string) => {
-    setFiltro(text);
-  }
+  const buscar = (text: string) => setFiltro(text);
 
   return (
     <React.Fragment>
       <Navigation />
-      <ToastContainer/>
+      <ToastContainer />
       <div className="contenido-principal p-4">
         <div className="d-flex flex-row bg-white">
           <FontAwesomeIcon className="me-3 fs-3" icon={faBookReader} />
@@ -95,7 +90,7 @@ const Profesores = () => {
                           <p className="card-text">Pais : {profesor.nombre_pais}</p>
                           <p className="card-text">Telefono : {profesor.telefono}</p>
                           <p className="card-text">RUT : {profesor.rut}</p>
-                          <p className="card-text">Habilitado : {profesor.habilitado_u===1?(<FaCheck className="text-success mb-1 ms-1"/>):(<FaTimes className="text-danger mb-1 ms-1"/>)}</p>
+                          <p className="card-text">Habilitado : {profesor.habilitado_u === 1 ? (<FaCheck className="text-success mb-1 ms-1" />) : (<FaTimes className="text-danger mb-1 ms-1" />)}</p>
                         </div>
                       </div>
                     </div>

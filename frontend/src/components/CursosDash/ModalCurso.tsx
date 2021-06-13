@@ -1,19 +1,21 @@
-import React from 'react'
+import React from 'react';
 
 // Icons
-import { FaCalendarAlt, FaCheck, FaDollarSign, FaPhoneAlt, FaTimes } from 'react-icons/fa'
-import { FiClock } from 'react-icons/fi'
+import { FaCalendarAlt, FaCheck, FaDollarSign, FaPhoneAlt, FaTimes } from 'react-icons/fa';
+import { FiClock } from 'react-icons/fi';
 
-//Interfaces
-import { Curso } from './Curso'
 
 //Imagenes
 import fotoSinCurso from '../../images/sinCurso.png';
+
+//Interfaces
+import { Curso } from './Curso';
 
 interface Props {
     curso: Curso
     modalidad: string
 }
+
 const ModalCurso = (props: Props) => {
     return (
         <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">

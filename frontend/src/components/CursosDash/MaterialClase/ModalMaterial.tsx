@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 
+//Services
 import * as materialServices from './MaterialServices';
 
 //Icons
@@ -9,17 +10,21 @@ import { FaPlus } from 'react-icons/fa'
 import { Tema } from '../Temas/Tema';
 import { MaterialClase } from './MaterialClase';
 import { toast } from 'react-toastify';
+
 interface Props {
     temaModal: Tema
     count: number;
     setcount: (count: number) => void
 }
+
 const initialState = {
     material: [new File([""], "filename")],
 }
 
 const ModalMaterial = (props: Props) => {
+
     const [material, setMaterial] = useState<MaterialClase>(initialState)
+
     const refProgresss = useRef<HTMLDivElement | null>();
     const refInput = useRef<HTMLInputElement | null>();
 
@@ -27,10 +32,12 @@ const ModalMaterial = (props: Props) => {
         e.preventDefault();
         const form = new FormData();
         form.append('id_tema', props.temaModal.id_tema + "");
+        
         for (let i = 0; i < material.material.length; i++) {
             const element = material.material[i];
             form.append('material', element);
         }
+
         const res = await materialServices.createMaterial(form, refProgresss.current);
         if (res.data.success) {
             if (refProgresss.current) {

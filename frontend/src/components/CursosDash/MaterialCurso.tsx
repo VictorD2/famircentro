@@ -11,11 +11,6 @@ import { ToastContainer } from 'react-toastify';
 import Navigation from '../../pages/DashBoard/Navigation';
 import ModuloItem from './Modulos/ModuloItem';
 
-//Interfaces
-import { Curso } from './Curso';
-import { Modulo } from './Modulos/Modulo';
-import { Tema } from './Temas/Tema';
-
 //Services
 import * as CursosServices from './CursosServices';
 
@@ -23,6 +18,11 @@ import * as CursosServices from './CursosServices';
 import ModalModulo from './Modulos/ModalModulo';
 import ModalTema from './Temas/ModalTema';
 import ModalMaterial from './MaterialClase/ModalMaterial';
+
+//Interfaces
+import { Curso } from './Curso';
+import { Modulo } from './Modulos/Modulo';
+import { Tema } from './Temas/Tema';
 
 interface Params {
     modalidad: string;
@@ -52,6 +52,7 @@ const initialStateTema = {
 }
 
 const MaterialCurso = () => {
+    const modalidades = ['Sincronos', 'Asincronos', 'Talleres', 'Cursos']
 
     const params = useParams<Params>();
     const history = useHistory();
@@ -68,6 +69,15 @@ const MaterialCurso = () => {
     const [moduloModal, setModuloModal] = useState<Modulo>(initialStateModulo);
     const [temaModal, setTemaModal] = useState<Tema>(initialStateTema);
 
+    useEffect(() => {
+        if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push('/');
+        params.tipo === "Talleres" ? setTipo('Taller') : setTipo('Curso');//Definiendo si es taller o curso
+        params.modalidad === "Asincronos" ? setModalidad('Asincrónico') : setModalidad('Sincrónico');//Definiendo si es sincrono o asincrono
+        getCurso(params.id);//Trayendo los datos de la bd
+        return () => limpieza();
+    }, [params.tipo, params.modalidad]);
+
+    //Funciones
 
     //Traer los datos deModall curso
     const getCurso = async (idCurso: string) => {
@@ -90,14 +100,6 @@ const MaterialCurso = () => {
         setTemaModal(initialStateTema);//Limpiando estado modulo
         setModulos([]);//Limpiando estado modulos
     }
-
-    useEffect(() => {
-        if ((params.tipo !== 'Talleres' && params.tipo !== 'Cursos') || (params.modalidad !== 'Asincronos' && params.modalidad !== 'Sincronos')) return history.push('/Dashboard');//Validando ruta
-        params.tipo === "Talleres" ? setTipo('Taller') : setTipo('Curso');//Definiendo si es taller o curso
-        params.modalidad === "Asincronos" ? setModalidad('Asincrónico') : setModalidad('Sincrónico');//Definiendo si es sincrono o asincrono
-        getCurso(params.id);//Trayendo los datos de la bd
-        return () => limpieza();
-    }, [params.tipo, params.modalidad]);
 
     return (
         <React.Fragment>

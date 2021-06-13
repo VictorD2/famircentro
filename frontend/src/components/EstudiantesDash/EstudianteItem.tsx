@@ -1,10 +1,18 @@
+import React from 'react'
+
+//Iconos
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react'
 import { TiCancel } from 'react-icons/ti';
+
+//Toastify
 import { toast } from 'react-toastify';
-import { Estudiante } from './Estudiante'
+
+//Services
 import * as estudiantesServices from './EstudianteService';
+
+//Interfaces
+import { Estudiante } from './Estudiante'
 
 interface Props {
     estudiante: Estudiante;
@@ -26,6 +34,7 @@ const EstudianteItem = (props: Props) => {
         if (res.data.success) return toast.error(res.data.error);
 
     }
+    
     return (
         <React.Fragment>
             <tr>

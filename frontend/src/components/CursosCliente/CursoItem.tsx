@@ -1,12 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { Link } from 'react-router-dom'
+
+//Iconos
 import { BsStar } from 'react-icons/bs'
 import { GiTeacher } from 'react-icons/gi'
-import { Curso } from '../CursosDash/Curso'
 import { GrShop } from 'react-icons/gr'
-import foto from '../../images/bg-2.jpg';
 import { FaDollarSign, FaEye } from 'react-icons/fa'
+
+//Imagenes
+import foto from '../../images/bg-2.jpg';
+
+//Interfaces
+import { Curso } from '../CursosDash/Curso'
+
 interface Props {
     curso: Curso
 }
@@ -42,9 +49,6 @@ const CursoItem = (props: Props) => {
                     </div>
                 </div>
                 <div className="my-auto">
-                    {/* <div className="img-fluid" style={{ width: "728px", height: "342px", background: "red" }}>
-
-                        </div> */}
                     <img src={foto} className="img-fluid ancho-img" alt={`Curso`} />
                 </div>
             </div>

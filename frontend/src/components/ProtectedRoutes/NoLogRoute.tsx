@@ -7,16 +7,13 @@ interface PrivateRouteProps {
     path: string;
 }
 
-
 const NoLogRoute = (props: PrivateRouteProps) => {
     const { component: Component, exact, path, ...rest } = props;
     return (
         <Route
             {...rest}
             render={(props) => {
-                if (!auth.isAuth()) {
-                    return <Component {...props} />
-                }
+                if (!auth.isAuth()) return <Component {...props} />
                 return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
             }}
         />

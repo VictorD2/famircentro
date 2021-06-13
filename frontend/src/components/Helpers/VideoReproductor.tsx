@@ -8,9 +8,7 @@ interface Props {
 const VideoReproductor = (props: Props) => {
     const refContainer = useRef<HTMLVideoElement | null>();
     const refVideo = useRef<VideoJsPlayer>();
-    const noClick = (e: React.PointerEvent<HTMLVideoElement>) => {
-        // e.preventDefault();
-    }
+   
     useEffect(() => {
         refVideo.current = videojs(refContainer.current, props.settings);
         return () => {
@@ -18,6 +16,11 @@ const VideoReproductor = (props: Props) => {
             refVideo.current?.dispose();
         }
     }, [])
+
+    const noClick = (e: React.PointerEvent<HTMLVideoElement>) => {
+        // e.preventDefault();
+    }
+    
     //vjs-big-play-centered
     return (
         <div>

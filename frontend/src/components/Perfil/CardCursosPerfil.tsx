@@ -1,4 +1,6 @@
 import React from 'react';
+
+//Componentes
 import MisCursos from './MisCursos';
 import Favoritos from './Favoritos';
 

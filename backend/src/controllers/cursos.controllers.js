@@ -1,6 +1,6 @@
 const pool = require('../database');
-const ctrlCursos = {};
 const helpers = require('../lib/helpers');
+const ctrlCursos = {};
 const fs = require('fs-extra')
 const path = require('path');
 
@@ -69,6 +69,7 @@ ctrlCursos.updateCurso = async(req, res) => {
     const newCurso = req.body;
     delete newCurso.modulos;
     delete newCurso.fotoCurso;
+    
     try {
         if (req.file) {
             const curso = await pool.query('SELECT * FROM curso WHERE id_curso = ?', [req.params.id]);

@@ -1,9 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-// Interfaces
-import { Profesor } from "./Profesor";
-
 //Services
 import * as profesorServices from './ProfesoresServices';
 
@@ -15,6 +12,9 @@ import { TiCancel } from 'react-icons/ti';
 //Toastify
 import { toast } from "react-toastify";
 
+// Interfaces
+import { Profesor } from "./Profesor";
+
 interface Props {
   profesor: Profesor;
   funcion: (profesor: Profesor) => void;
@@ -22,10 +22,11 @@ interface Props {
 }
 
 const ProfesorItem = (props: Props) => {
+  
   const history = useHistory();
-  const ponerDatos = () => {
-    props.funcion(props.profesor);
-  }
+
+  const ponerDatos = () => props.funcion(props.profesor);
+
   const deshabilitar = async () => {
     if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el usuario?")) return;
 
