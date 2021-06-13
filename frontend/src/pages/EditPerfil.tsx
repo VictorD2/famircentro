@@ -1,4 +1,5 @@
 import React from 'react';
+import swal from 'sweetalert'
 import NavBar from '../components/Helpers/NavBar';
 import Badge from '../components/Helpers/Badge';
 import Footer from '../components/Helpers/Footer';
@@ -26,10 +27,18 @@ class EditPerfil extends React.Component {
                 }
                 reader.readAsDataURL(e.dataTransfer.files[0]);
             } else {
-                alert('Subir un formato de imagen')
+                swal({
+                    title: 'Advertencia',
+                    text: 'Subir un formato de imagen',
+                    icon: 'warning'
+                });
             }
         } else {
-            alert('Archivo no leido');
+            swal({
+                title: 'Error',
+                text: 'Archivo no leido',
+                icon: 'error'
+            });
         }
     }
 
@@ -45,10 +54,18 @@ class EditPerfil extends React.Component {
                 }
                 reader.readAsDataURL(e.target.files[0]);
             } else {
-                alert('Subir un formato de imagen')
+                swal({
+                    title: 'Advertencia',
+                    text: 'Subir un formato de imagen',
+                    icon: 'warning'
+                });
             }
         } else {
-            alert('Archivo no leido');
+            swal({
+                title: 'Error',
+                text: 'Archivo no leido',
+                icon: 'error'
+            });
         }
     }
 
