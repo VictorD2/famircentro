@@ -21,7 +21,13 @@ ctrlUsuarios.whoiam = async(req, res) => {
     return res.json({ user: req.user });
 }
 
-ctrlUsuarios.updateUser = (req, res) => {}
+ctrlUsuarios.updateUser = (req, res) => {
+    if (req.params.id !== req.user.id_usuario) return res.json({ error: "No tienes permiso para esta acción" });
+
+    console.log(req.params.id)
+    console.log(req.file);
+    res.json({ success: "Ok" });
+}
 
 ctrlUsuarios.deleteUser = (req, res) => {}
 

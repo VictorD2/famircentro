@@ -35,6 +35,10 @@ const Register = () => {
     verifyPassword: "",
   });
 
+  const refPasswordVerify = useRef<HTMLInputElement | null>()
+  const refPassword = useRef<HTMLInputElement | null>()
+  const validacion = ['password', 'verifyPassword'];
+
   // CAPTCHA State
   const [captchaValidation, setCaptchaValidation] = useState<Boolean>();
 
@@ -51,10 +55,16 @@ const Register = () => {
 
   //Set state
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setUsuario({
-      ...usuario,
-      [e.target.name]: e.target.value
-    });
+    setUsuario({ ...usuario, [e.target.name]: e.target.value });
+    if (validacion.includes(e.target.name)) {
+      if (refPassword.current?.value === refPasswordVerify.current?.value) {
+        refPassword.current?.classList.remove('is-invalid');
+        refPasswordVerify.current?.classList.remove('is-invalid');
+        return
+      }
+      refPassword.current?.classList.add('is-invalid');
+      refPasswordVerify.current?.classList.add('is-invalid');
+    }
   };
 
   //Submit
@@ -72,6 +82,9 @@ const Register = () => {
       setCaptchaValidation(false);
     }
   };
+
+
+
   return (
     <div className="rgt__main">
       <ToastContainer />
@@ -83,7 +96,7 @@ const Register = () => {
         <div className="card-body">
           <div className="row">
             <div className="col-12 rgt__form">
-              <form onSubmit={handleSubmit}>
+              <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
                     <div className="mb-3">
@@ -106,8 +119,8 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Pais</label>
-                      <select onChange={handleInputChange} className="form-control rgt__form-control" name="pais" >
-                        <option value="0">Chile</option>
+                      <select value="1" onChange={handleInputChange} className="form-control rgt__form-control" name="pais" >
+                        <option value="0" >Chile</option>
                         <option value="1" selected>Perú</option>
                       </select>
                     </div>
@@ -133,13 +146,13 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Contraseña</label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="password" name="password" />
+                      <input onChange={handleInputChange} ref={node => refPassword.current = node} className="form-control rgt__form-control" type="password" name="password" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label"> Confirmar contraseña </label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="password" name="verifyPassword" />
+                      <input onChange={handleInputChange} ref={node => refPasswordVerify.current = node} className="form-control rgt__form-control" type="password" name="verifyPassword" />
                     </div>
                   </div>
                   <div className="recaptcha d-flex justify-content-center">
