@@ -4,10 +4,12 @@ import NavBar from '../components/Helpers/NavBar';
 import Badge from '../components/Helpers/Badge';
 import Footer from '../components/Helpers/Footer';
 import FormEditPerfil from '../components/Perfil/FormEditPerfil';
+import axios from 'axios';
+import { useUsuario } from '../context-user/UsuarioProvider';
 
 const EditPerfil = () => {
-
-    const [profileImg, setProfileImg] = useState<string | ArrayBuffer | null>("https://picsum.photos/200/300");
+    const {usuario} = useUsuario();
+    const [profileImg, setProfileImg] = useState<string | ArrayBuffer>("https://picsum.photos/200/300")
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -21,9 +23,14 @@ const EditPerfil = () => {
             if (tipos.includes(e.dataTransfer.files[0].type)) {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    if (reader.readyState === 2) setProfileImg(reader.result);
+                    if (reader.readyState === 2) {
+                        if (reader.result) setProfileImg(reader.result);
+                    }
                 }
                 reader.readAsDataURL(e.dataTransfer.files[0]);
+                const form = new FormData();
+                form.append('fotoPerfil', e.dataTransfer.files[0]);
+                axios.put(`http://localhost:4000/api/usuarios/${2}`,form);
             } else {
                 swal({
                     title: 'Advertencia',
@@ -47,7 +54,7 @@ const EditPerfil = () => {
                 const reader = new FileReader();
                 reader.onload = () => {
                     if (reader.readyState === 2) {
-                        setProfileImg(reader.result);
+                        if (reader.result) setProfileImg(reader.result);
                     }
                 }
                 reader.readAsDataURL(e.target.files[0]);
@@ -79,7 +86,7 @@ const EditPerfil = () => {
                         <div className="col-6">
                             <div draggable="true" className="cuadroEditPerfil" onDragOver={handleDragOver} onDrop={handleDrop}>
                                 <figure className="editProfile-img">
-                                    <img id="avatar" src={profileImg} alt="Mi avatar" width="200" height="200" />
+                                    <img id="avatar" src={profileImg.toString()} alt="Mi avatar" width="200" height="200" />
                                 </figure>
                                 <div className="d-grid gap-2 col-6 mx-auto">
                                     <input type="file" id="inputFile" style={{ display: "none" }} onChange={handleChange} />

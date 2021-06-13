@@ -3,11 +3,11 @@ const ctrlComentarios = {};
 const helpers = require('../lib/helpers');
 
 ctrlComentarios.createComentario = async(req, res) => {
-    if (req.user) return res.json({ error: "Necesitas una cuenta para comentar" }); //Poner ! en producción
+    if (!req.user) return res.json({ error: "Necesitas una cuenta para comentar" }); //Poner ! en producción
 
     const newComentario = req.body;
     newComentario.fecha = new Date();
-    newComentario.id_usuario = 46; //Poner req.user.id_usuario en producción
+    newComentario.id_usuario = req.user.id_usuario; //Poner req.user.id_usuario en producción
 
     if (newComentario.id_tema) delete newComentario.id_curso;
 
