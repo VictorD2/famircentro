@@ -483,8 +483,8 @@ code {
 }
 
 .content__form {
-  width: 30rem;
-  height: 36rem;
+  width: 38rem;
+  height: 43rem;
 }
 
 .content__Login {
@@ -527,6 +527,7 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .icon__social {
