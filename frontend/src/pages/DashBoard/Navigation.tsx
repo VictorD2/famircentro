@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faBookReader, faChevronDown, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBookReader, faChevronDown, faFileAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../images/logoFamir2.png";
 
 import { useUsuario } from "../../context-user/UsuarioProvider";
@@ -105,6 +105,12 @@ const Navigation = () => {
             <Link className="item__link" to="/DashBoard/Profesores">
               <FontAwesomeIcon icon={faBookReader} />
               <p>Profesores</p>
+            </Link>
+          </li>
+          <li className="opciones__item">
+            <Link className="item__link" to="/DashBoard/Comprobantes">
+              <FontAwesomeIcon icon={faFileAlt} />
+              <p>Comprobantes</p>
             </Link>
           </li>
         </ul>

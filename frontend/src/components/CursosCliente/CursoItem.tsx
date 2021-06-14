@@ -33,7 +33,7 @@ const CursoItem = (props: Props) => {
                             <GiTeacher className="me-2" /><span>Docente: {props.curso.nombre} {props.curso.apellido}</span>
                         </div>
                         <div className="d-flex align-items-center mt-2">
-                            <FaDollarSign className="me-2" /><span className="me-1">Precio: {props.curso.precio}</span><Link className="text-decoration-none" to="#temario">(Ver temario)</Link>
+                            <FaDollarSign className="me-2" /><span className="me-1">Precio: {props.curso.precio}</span><Link className="text-decoration-none" to={`/Clase/${props.curso.id_curso}`}>(Ver temario)</Link>
                         </div>
                         <div className="d-flex align-items-center mt-2">
                             <BsStar className="me-2" /><span className="me-1">Calificación: 4.8</span>

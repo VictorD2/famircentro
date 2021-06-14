@@ -26,7 +26,6 @@ const NavBar = () => {
     }
     document.querySelector("#navPrincipal")?.classList.remove("fijar-nav");
     document.querySelector(".navigation-responsive")?.classList.remove("fijar-nav");
-
   };
 
   // Para mostrar o ocultar la barra lateral
@@ -138,8 +137,8 @@ const NavBar = () => {
                 <li onMouseEnter={disappearSubItemFirst} onMouseLeave={disappearSubItemFirst} >
                   <Link to="#" role="button" className="d-flex align-items-center">Curso <RiArrowRightSFill className="fs-5" /></Link>
                   <ul className="content-lista d-none position-lista-start" id="subItemsMenuFirst">
-                    <li><Link to="/Clases/Cursos/Asincronos">Asincrono</Link></li>
-                    <li><hr className="dropdown-divider" /></li>
+                    {/* <li><Link to="/Clases/Cursos/Asincronos">Asincrono</Link></li> */}
+                    {/* <li><hr className="dropdown-divider" /></li> */}
                     <li><Link to="/Clases/Cursos/Sincronos">Sincrono</Link></li>
                   </ul>
                 </li>
@@ -197,9 +196,9 @@ const NavBar = () => {
                 <Link to="#" role="button">Curso <RiArrowDownSFill className="fs-5" /></Link>
               </li>
               <ul className="d-none subItemMenu-resp" id="subItemsMenuFirstResponsive">
-                  <li><Link to="/curso/asincrono" role="button">Asincrono</Link></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><Link to="/curso/sincrono" role="button">Sincrono</Link></li>
+                {/* <li><Link to="/curso/asincrono" role="button">Asincrono</Link></li>
+                <li><hr className="dropdown-divider" /></li> */}
+                <li><Link to="/Clases/Cursos/Sincronos" role="button">Sincrono</Link></li>
               </ul>
 
               <li><hr className="dropdown-divider" /></li>
@@ -208,9 +207,9 @@ const NavBar = () => {
                 <Link to="#" role="button">Taller <RiArrowDownSFill className="fs-5" /></Link>
               </li>
               <ul className="d-none subItemMenu-resp" id="subItemsMenuSecondResponsive">
-                  <li><Link to="/taller/asincrono" role="button">Asincrono</Link></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><Link to="/taller/sincrono" role="button">Sincrono</Link></li>
+                <li><Link to="/Clases/Talleres/Asincronos" role="button">Asincrono</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link to="/Clases/Talleres/Sincronos" role="button">Sincrono</Link></li>
               </ul>
             </ul>
           </li>

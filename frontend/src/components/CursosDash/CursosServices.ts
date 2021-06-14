@@ -5,7 +5,7 @@ const api = "http://localhost:4000/api/cursos";
 export const getAllModulesByCursoId = async (id: string) => {
   return await axios.get(`http://localhost:4000/api/modulos/${id}`);
 };
-export const verificarSuscribción = async (idCurso: string | undefined) => {
+export const verificarSuscribcion = async (idCurso: string | undefined) => {
   return await axios.get(`${api}/sub/${idCurso}`);
 };
 //OBTENER

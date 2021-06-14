@@ -26,7 +26,7 @@ const Usuarios = () => {
       <Navigation />
       <ToastContainer/>
       <div className="contenido-principal p-4">
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row efecto_titulo">
           <FontAwesomeIcon className="me-3 fs-3" icon={faUser} />
           <h6 className="m-0 text-uppercase fs-3">Estudiantes</h6>
         </div>

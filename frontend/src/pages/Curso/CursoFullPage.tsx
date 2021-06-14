@@ -43,8 +43,10 @@ const CursoFullPage = () => {
     const [profesor, setProfesor] = useState<Profesor>(initialState);
     const [modulos, setModulos] = useState<Modulo[]>([]);
 
+    const [verificacionSub, setVerificacionSub] = useState<boolean>(false)
+
     const refDescripcion = useRef<HTMLParagraphElement | null>()
-    
+
     useEffect(() => {
         getCursoById()
         return () => {
@@ -53,24 +55,23 @@ const CursoFullPage = () => {
             setModulos([]);
         }
     }, [params.idCurso])
-    let verificacion = false;
     const getCursoById = async () => {
         const res = await cursoServices.getCursoById(params.idCurso);
         const newDescripcion = res.data.descripcion.replace(/\n/g, "<br/>");
         res.data.descripcion = newDescripcion;
         const resProfesor = await profesoresServices.getProfesorById(res.data.id_usuario);
         const resModulos = await cursoServices.getAllModulesByCursoId(params.idCurso);
-        
+
         if (refDescripcion.current) refDescripcion.current.innerHTML = res.data.descripcion;
-        
+
         setModulos(resModulos.data);
         setProfesor(resProfesor.data);
-        await verificarSub();
+        verificarSub();
         setCurso(res.data)
     }
     const verificarSub = async () => {
-        const res = await cursoServices.verificarSuscribción(params.idCurso);
-        verificacion = res.data;
+        const res = await cursoServices.verificarSuscribcion(params.idCurso);
+        setVerificacionSub(res.data);
     }
 
     return (
@@ -103,7 +104,7 @@ const CursoFullPage = () => {
                             <img src={cursoFoto} className="img-fluid ancho-img" alt={`Curso`} />
                         </div>
                         {modulos.map(modulo => {
-                            return <Modulos verificacion={verificacion} key={modulo.id_modulo} modulo={modulo} />
+                            return <Modulos verificacion={verificacionSub} key={modulo.id_modulo} modulo={modulo} />
                         })}
                     </div>
                 </div>

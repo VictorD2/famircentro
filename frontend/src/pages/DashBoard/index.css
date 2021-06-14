@@ -178,3 +178,7 @@
   color: #000;
 }
 
+.efecto_titulo:hover {
+  color: var(--azul-claro);
+  transition: all .5s;
+}

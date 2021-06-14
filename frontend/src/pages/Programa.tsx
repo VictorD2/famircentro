@@ -36,7 +36,7 @@ const Programa = () => {
         params.tipo === "Talleres" ? setTipo('Talleres') : setTipo('Cursos');
     }
     useEffect(() => {
-        if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push('/');
+        if ((!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) || (params.tipo === 'Cursos' && params.modalidad === 'Asincronos')) return history.push('/');
         getCursos();
         settings();
         return () => {

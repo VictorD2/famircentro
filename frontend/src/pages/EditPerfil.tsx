@@ -31,7 +31,7 @@ const EditPerfil = () => {
                 reader.readAsDataURL(e.dataTransfer.files[0]);
                 const form = new FormData();
                 form.append('fotoPerfil', e.dataTransfer.files[0]);
-                axios.put(`http://localhost:4000/api/usuarios/${2}`,form);
+                axios.put(`http://localhost:4000/api/usuarios/${usuario.id_usuario}`,form);
             } else {
                 swal({
                     title: 'Advertencia',

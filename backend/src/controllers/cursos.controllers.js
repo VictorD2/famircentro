@@ -6,9 +6,8 @@ const path = require('path');
 
 ctrlCursos.verificarSub = async(req, res) => {
     if (!req.user) return res.json(false);
-    const rows = await pool.query('SELECT * FROM usuario_curso WHERE id_curso = ? AND id_usuario = ?', [req.params.id, req.user.id_usuario]);
-    if (rows[0])
-        if (rows[0].estado_pago === 'E') return res.json(true);
+    const rows = await pool.query('SELECT * FROM usuario_curso WHERE id_curso = ? AND id_usuario = ?', [req.params.id_curso, req.user.id_usuario]);
+    if (rows[0]) return res.json(true);
     return res.json(false);
 }
 
@@ -69,7 +68,7 @@ ctrlCursos.updateCurso = async(req, res) => {
     const newCurso = req.body;
     delete newCurso.modulos;
     delete newCurso.fotoCurso;
-    
+
     try {
         if (req.file) {
             const curso = await pool.query('SELECT * FROM curso WHERE id_curso = ?', [req.params.id]);

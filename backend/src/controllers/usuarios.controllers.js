@@ -14,8 +14,7 @@ ctrlUsuarios.getUsers = async(req, res) => {
 ctrlUsuarios.getUserById = (req, res) => {}
 
 ctrlUsuarios.whoiam = async(req, res) => {
-    if (!req.user) return res.json({ message: "failed" }); //No autentificado
-
+    if (!req.user) return res.json({ error: "No autentificado" }); //No autentificado
     delete req.user.password;
     req.user.authenticate = true;
     return res.json({ user: req.user });

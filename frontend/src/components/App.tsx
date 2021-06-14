@@ -29,6 +29,8 @@ import TemaFullPage from '../pages/TemaFullPage'
 
 import EditPerfil from './../pages/EditPerfil';
 import VerTema from "./CursosDash/Temas/VerTema";
+import ComprarCurso from "../pages/ComprarCurso";
+import Comprobantes from "./Compobantes/Comprobantes";
 function App() {
   const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
@@ -58,6 +60,9 @@ function App() {
           <AdminRoute exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
           <AdminRoute exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
 
+          {/* Comprobantes */}
+          <AdminRoute exact path="/DashBoard/Comprobantes" component={Comprobantes} />
+
           {/* Cursos */}
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id" component={MaterialCurso} />
@@ -71,11 +76,9 @@ function App() {
           <Route exact path="/Nosotros" component={AboutUs} />
           <Route exact path="/Contactanos" component={Contact} />
           <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
-          <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
-          <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
-          <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />
           <Route exact path="/Clase/:idCurso" component={CursoFullPage} />
           <Route exact path="/Clase/:idCurso/:idTema" component={TemaFullPage} />
+          <Route exact path="/Comprar/:idCurso" component={ComprarCurso} />
           <Route component={NotFound} />
         </Switch>
       )}

@@ -49,6 +49,8 @@ app.use(async(req, res, next) => {
 
 //Routes
 app.get('/video-lock', ctrlTema.getVideo);
+app.use('/api/usuariocurso', require('./routes/usuariocurso.routes'));
+app.use('/api/comprobante', require('./routes/comprobantes.routes'));
 app.use('/api/material', require('./routes/material.routes'));
 app.use('/api/comentarios', require('./routes/comentarios.routes'));
 app.use('/api/tema', require('./routes/tema.routes'));
