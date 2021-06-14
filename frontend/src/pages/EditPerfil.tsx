@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import swal from 'sweetalert'
 import NavBar from '../components/Helpers/NavBar';
 import Badge from '../components/Helpers/Badge';
 import Footer from '../components/Helpers/Footer';
 import FormEditPerfil from '../components/Perfil/FormEditPerfil';
 import axios from 'axios';
-import { useState } from 'react';
 import { useUsuario } from '../context-user/UsuarioProvider';
 
 const EditPerfil = () => {
+
     const {usuario} = useUsuario();
-    const [profileImg, setProfileImg] = useState<string | ArrayBuffer>("https://picsum.photos/200/300")
+
+    const [profileImg, setProfileImg] = useState<string | ArrayBuffer>("https://picsum.photos/200/300");
+
+    const cardPass = useRef<HTMLDivElement>(null);
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -75,6 +78,10 @@ const EditPerfil = () => {
         }
     }
 
+    const changePassword = () => {
+        cardPass.current?.classList.toggle('d-none');
+    }
+
     return (
         <React.Fragment>
             <NavBar />
@@ -84,20 +91,47 @@ const EditPerfil = () => {
             <div className="Main__container">
                 <div className="container bg-light mt-5" style={{ marginBottom: "4.5rem" }}>
                     <div className="row p-5">
-                        <div className="col-6">
+                        <div className="col-lg-5 col-md-12">
                             <div draggable="true" className="cuadroEditPerfil" onDragOver={handleDragOver} onDrop={handleDrop}>
                                 <figure className="editProfile-img">
                                     <img id="avatar" src={profileImg.toString()} alt="Mi avatar" width="200" height="200" />
                                 </figure>
-                                <div className="d-grid gap-2 col-6 mx-auto">
+                                <div style={{color: "#696969"}}>
                                     <input type="file" id="inputFile" style={{ display: "none" }} onChange={handleChange} />
-                                    <button className="btn btn-editPerfil" type="button">
-                                        <label htmlFor="inputFile" className="d-block" style={{ cursor: "pointer" }}>Subir foto de perfil</label>
-                                    </button>
+                                    Arrastra aquí tu imagen de perfil<br/>
+                                    o <a href="/" role="button">
+                                        <label htmlFor="inputFile" style={{ cursor: "pointer" }}>Sube una foto</label>
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="fw-bold mb-md-3 mb-lg-0" style={{ color: "#0049af", cursor: "pointer" }} onClick={changePassword}>Cambiar contraseña</div>
+                            <div className="card card-body mt-2 d-none mb-md-5 mb-lg-0" ref={cardPass}>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <label htmlFor="oldPassword">Contraseña anterior</label>
+                                        <input type="password" name="oldPassword" id="oldPassword" className="form-control rgt__form-control mt-2" value="Password" />
+                                    </div>
+                                </div>
+                                <div className="row mt-4">
+                                    <div className="col-12">
+                                        <label htmlFor="newPassword">Nueva contraseña</label>
+                                        <input type="password" name="newPassword" id="newPassword" className="form-control rgt__form-control mt-2" value="Password" />
+                                    </div>
+                                </div>
+                                <div className="row mt-4">
+                                    <div className="col-12">
+                                        <label htmlFor="verifyNewPassword">Confirmar nueva contraseña</label>
+                                        <input type="password" name="verifyNewPassword" id="verifyNewPassword" className="form-control rgt__form-control mt-2" value="Password" />
+                                    </div>
+                                </div>
+                                <div className="row mt-4">
+                                    <div className="rgt__button">
+                                        <button type="submit" className="btn btn__more" style={{ padding: "0.5rem 1.5rem", textTransform: "none" }}> Guardar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-6">
+                        <div className="col-lg-6 col-md-12 offset-lg-1">
                             <FormEditPerfil />
                         </div>
                     </div>

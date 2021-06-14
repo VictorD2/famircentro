@@ -5,7 +5,7 @@ type props = {name:string, className:string};
 
 const BotonPerfil: React.FC<props> = (props) => {
     return(
-        <Link className={props.className} to="/edit">{props.name}</Link>
+        <Link className={props.className} to="/Perfil/Editar">{props.name}</Link>
     );
 }
 
