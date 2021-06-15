@@ -5,6 +5,7 @@ import auth from './auth';
 const initialState: Usuario = {
   id_usuario: "",
   nombre: "",
+  id_pais: "1",
   apellido: "",
   profesion: "",
   correo: "",
@@ -17,7 +18,7 @@ const initialState: Usuario = {
 };
 const UsuarioContext = React.createContext({
   usuario: initialState,
-  loadUser: false
+  loadUser: false,
 });
 
 export const UsuarioProvider = (props: any) => {
@@ -27,7 +28,7 @@ export const UsuarioProvider = (props: any) => {
   useEffect(() => {
     cargarUsuario();
   }, []);
-  
+
   const cargarUsuario = async () => {
     try {
       const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
@@ -48,7 +49,7 @@ export const UsuarioProvider = (props: any) => {
   const value = useMemo(() => {
     return {
       usuario,
-      loadUser
+      loadUser,
     };
   }, [usuario, loadUser]);
 

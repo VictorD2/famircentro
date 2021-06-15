@@ -7,20 +7,67 @@ import FormEditPerfil from '../components/Perfil/FormEditPerfil';
 import axios from 'axios';
 import { useUsuario } from '../context-user/UsuarioProvider';
 
+interface Password {
+    newPassword: string;
+    oldPassword: string;
+    confirmPassowrd: string;
+}
+
 const EditPerfil = () => {
 
-    const {usuario} = useUsuario();
+    const { usuario } = useUsuario();
 
-    const [profileImg, setProfileImg] = useState<string | ArrayBuffer>("https://picsum.photos/200/300");
+    const [profileImg, setProfileImg] = useState<string | ArrayBuffer>(usuario.url_foto_usuario + "");
+    const [password, setPassword] = useState<Password>({ newPassword: "", oldPassword: "", confirmPassowrd: "" });
 
     const cardPass = useRef<HTMLDivElement>(null);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword({ ...password, [e.target.name]: e.target.value })
+    }
+    const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (password.confirmPassowrd === "" || password.newPassword === "" || password.oldPassword === "") {
+            swal({
+                title: 'Advertencia',
+                text: 'Campos incompletos',
+                icon: 'warning'
+            });
+            return
+        }
+        if (password.newPassword !== password.confirmPassowrd) {
+            swal({
+                title: 'Advertencia',
+                text: 'Contraseñas no coinciden',
+                icon: 'warning'
+            });
+            return
+        }
+        const res = await axios.put(`http://localhost:4000/api/usuarios/password/${usuario.id_usuario}`, password)
+        if (res.data.success) {
+            setPassword({ newPassword: "", oldPassword: "", confirmPassowrd: "" });
+            swal({
+                title: 'Hecho',
+                text: res.data.success,
+                icon: 'success'
+            });
+            return;
+        }
+        if (res.data.error) {
+            swal({
+                title: 'Ups!',
+                text: res.data.error,
+                icon: 'error'
+            });
+        }
+    }
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
     }
 
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
         const tipos = ['image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/webp']
         e.preventDefault();
         if (e.dataTransfer.files instanceof FileList) {
@@ -34,7 +81,22 @@ const EditPerfil = () => {
                 reader.readAsDataURL(e.dataTransfer.files[0]);
                 const form = new FormData();
                 form.append('fotoPerfil', e.dataTransfer.files[0]);
-                axios.put(`http://localhost:4000/api/usuarios/${usuario.id_usuario}`,form);
+                const res = await axios.put(`http://localhost:4000/api/usuarios/img/${usuario.id_usuario}`, form);
+                if (res.data.success) {
+                    swal({
+                        title: '¡Hecho!',
+                        text: res.data.success,
+                        icon: 'success'
+                    });
+                    window.location.href = '/Perfil/Editar'
+                }
+                if (res.data.error) {
+                    swal({
+                        title: 'Ups!',
+                        text: res.data.error,
+                        icon: 'error'
+                    });
+                }
             } else {
                 swal({
                     title: 'Advertencia',
@@ -78,9 +140,7 @@ const EditPerfil = () => {
         }
     }
 
-    const changePassword = () => {
-        cardPass.current?.classList.toggle('d-none');
-    }
+    const changePassword = () => cardPass.current?.classList.toggle('d-none');
 
     return (
         <React.Fragment>
@@ -88,17 +148,17 @@ const EditPerfil = () => {
 
             <Badge name="Editar Perfil" />
 
-            <div className="Main__container">
+            <div className="">
                 <div className="container bg-light mt-5" style={{ marginBottom: "4.5rem" }}>
-                    <div className="row p-5">
-                        <div className="col-lg-5 col-md-12">
+                    <div className="row">
+                        <div className="col-12 col-lg-5 col-md-12">
                             <div draggable="true" className="cuadroEditPerfil" onDragOver={handleDragOver} onDrop={handleDrop}>
                                 <figure className="editProfile-img">
                                     <img id="avatar" src={profileImg.toString()} alt="Mi avatar" width="200" height="200" />
                                 </figure>
-                                <div style={{color: "#696969"}}>
+                                <div style={{ color: "#696969" }}>
                                     <input type="file" id="inputFile" style={{ display: "none" }} onChange={handleChange} />
-                                    Arrastra aquí tu imagen de perfil<br/>
+                                    Arrastra aquí tu imagen de perfil<br />
                                     o <a href="/" role="button">
                                         <label htmlFor="inputFile" style={{ cursor: "pointer" }}>Sube una foto</label>
                                     </a>
@@ -106,32 +166,34 @@ const EditPerfil = () => {
                             </div>
                             <div className="fw-bold mb-md-3 mb-lg-0" style={{ color: "#0049af", cursor: "pointer" }} onClick={changePassword}>Cambiar contraseña</div>
                             <div className="card card-body mt-2 d-none mb-md-5 mb-lg-0" ref={cardPass}>
-                                <div className="row">
-                                    <div className="col-12">
-                                        <label htmlFor="oldPassword">Contraseña anterior</label>
-                                        <input type="password" name="oldPassword" id="oldPassword" className="form-control rgt__form-control mt-2" value="Password" />
+                                <form onSubmit={handleSubmitForm}>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <label htmlFor="oldPassword">Contraseña anterior</label>
+                                            <input onChange={handleInputChange} type="password" value={password.oldPassword} name="oldPassword" id="oldPassword" className="form-control rgt__form-control mt-2" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row mt-4">
-                                    <div className="col-12">
-                                        <label htmlFor="newPassword">Nueva contraseña</label>
-                                        <input type="password" name="newPassword" id="newPassword" className="form-control rgt__form-control mt-2" value="Password" />
+                                    <div className="row mt-4">
+                                        <div className="col-12">
+                                            <label htmlFor="newPassword">Nueva contraseña</label>
+                                            <input onChange={handleInputChange} type="password" value={password.newPassword} name="newPassword" id="newPassword" className="form-control rgt__form-control mt-2" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row mt-4">
-                                    <div className="col-12">
-                                        <label htmlFor="verifyNewPassword">Confirmar nueva contraseña</label>
-                                        <input type="password" name="verifyNewPassword" id="verifyNewPassword" className="form-control rgt__form-control mt-2" value="Password" />
+                                    <div className="row mt-4">
+                                        <div className="col-12">
+                                            <label htmlFor="confirmPassowrd">Confirmar nueva contraseña</label>
+                                            <input onChange={handleInputChange} type="password" value={password.confirmPassowrd} name="confirmPassowrd" id="confirmPassowrd" className="form-control rgt__form-control mt-2" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row mt-4">
-                                    <div className="rgt__button">
-                                        <button type="submit" className="btn btn__more" style={{ padding: "0.5rem 1.5rem", textTransform: "none" }}> Guardar</button>
+                                    <div className="row mt-4">
+                                        <div className="rgt__button">
+                                            <button type="submit" className="btn btn__more" style={{ padding: "0.5rem 1.5rem", textTransform: "none" }}> Guardar</button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <div className="col-lg-6 col-md-12 offset-lg-1">
+                        <div className="col-12 col-lg-6 col-md-12 offset-lg-1">
                             <FormEditPerfil />
                         </div>
                     </div>
