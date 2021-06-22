@@ -8,6 +8,9 @@ ctrlComprobantes.createComprobante = async(req, res) => {
     if(!req.user) return res.json({error:"Necesita una cuenta para comprar"})
     if (req.user.id_usuario != req.body.id_usuario) return res.json({ error: "No tienes permiso para hacer eso" });//Descomentar en producción
     if (!req.file) return res.json({ error: "No ha subido una foto" });
+    const validacion = await pool.query('SELECT * FROM comprobante WHERE id_usuario = ? AND id_curso = ?',[req.body.id_usuario,req.body.id_curso])
+    if(validacion[0]) return res.json({ error: "Ya está inscrito a este curso" });
+    
     const newComprobante = req.body;
     newComprobante.id_usuario = req.user.id_usuario;
     newComprobante.fecha_enviado = new Date();

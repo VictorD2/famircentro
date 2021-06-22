@@ -16,14 +16,20 @@ ctrlUsuariocurso.createUsuariocurso = async(req, res) => {
         estado: "Aceptado"
     }
     const data = await pool.query('INSERT INTO usuario_curso set ?', [newUsuariocurso]);
-    await pool.query('UPDATE comprobante set ? WHERE id_comprobante = ?', [newComprobante,id_comprobante]);
+    await pool.query('UPDATE comprobante set ? WHERE id_comprobante = ?', [newComprobante, id_comprobante]);
     if (data.affectedRows === 1) return res.json({ success: `Inscripción realizada` }); //Se logró actualizar
     return res.json({ error: "Ocurrió un error" });
 }
 
-ctrlUsuariocurso.getUsuariocurso = async(req, res) => {}
+ctrlUsuariocurso.getUsuariocursoByIdEstudiante = async(req, res) => {
+    const rows = await pool.query('SELECT id_usuario_curso,nombre_curso,descripción,url_foto_curso,tipo,modalidad,enlace,favorito,id_curso JOIN curso ON usuario_curso.id_curso = curso.id_curso WHERE id_usuario = ?', [req.params.idEstudiante]);
+    res.json(rows);
+}
 
-ctrlUsuariocurso.getUsuariocursoById = async(req, res) => {}
+ctrlUsuariocurso.getUsuariocursoByIdCurso = async(req, res) => {
+    const rows = await pool.query('SELECT id_usuario_curso,usuario.id_usuario,nombre,apellido,correo,telefono,url_foto_usuario FROM usuario_curso JOIN usuario ON usuario_curso.id_usuario = usuario.id_usuario WHERE id_curso = ?', [req.params.idCurso]);
+    res.json(rows);
+}
 
 
 ctrlUsuariocurso.deleteUsuariocurso = async(req, res) => {

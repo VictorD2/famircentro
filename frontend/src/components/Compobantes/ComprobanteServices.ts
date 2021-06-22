@@ -21,8 +21,15 @@ export const crearComprobante = async (form: FormData, idCurso: string, idUsuari
         },
     });
 };
-
-
+export const getUsuarioCursoByIdCurso = async (idCurso: string) => {
+    return await axios.get(`${api2}/curso/${idCurso}`);
+}
+export const getUsuarioCursoByIdEstudiante = async (idEstudiante: string) => {
+    return await axios.get(`${api2}/estudiante/${idEstudiante}`);
+}
+// export const setFavorito = async (idCurso: string,) => {
+//     return await axios.put(`${api2}/${idCurso}`,);
+// }
 export const eliminarComprobante = async (id: string) => {
     return await axios.delete(`${api}/${id}`);
 };

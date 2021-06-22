@@ -4,6 +4,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 
 import Usuario from '../../interfaces/Usuario';
+import { useUsuario } from '../../context-user/UsuarioProvider';
 
 const initialState: Usuario = {
     id_usuario: "",
@@ -20,6 +21,8 @@ const initialState: Usuario = {
     authenticate: false,
 };
 const FormEditPerfil = () => {
+    const { setUsuario } = useUsuario();
+
     const [usuarioPerfil, setUsuarioPerfil] = useState<Usuario>(initialState);
     useEffect(() => {
         getDatos();
@@ -44,7 +47,11 @@ const FormEditPerfil = () => {
                 text: res.data.success,
                 icon: 'success'
             });
-            window.location.href='/Perfil/Editar'
+            if (res.data.usuario) {
+                setUsuarioPerfil(res.data.usuario);
+                setUsuario(res.data.usuario);
+            }
+            // window.location.href = '/Perfil/Editar'
         }
         if (res.data.error) {
             return swal({

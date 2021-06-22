@@ -9,6 +9,7 @@ export interface Curso {
   precio: number;
   horario: string;
   enlace: string;
+  favorito?:number;
   duracion?: number;
   modalidad?: string;
   habilitado?: number;

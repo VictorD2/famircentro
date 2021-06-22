@@ -31,6 +31,7 @@ import EditPerfil from './../pages/EditPerfil';
 import VerTema from "./CursosDash/Temas/VerTema";
 import ComprarCurso from "../pages/ComprarCurso";
 import Comprobantes from "./Compobantes/Comprobantes";
+import VerCurso from "./CursosDash/VerCurso";
 function App() {
   const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
@@ -64,11 +65,12 @@ function App() {
           <AdminRoute exact path="/DashBoard/Comprobantes" component={Comprobantes} />
 
           {/* Cursos */}
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id" component={MaterialCurso} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id/:idTema" component={VerTema} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/nuevo" component={FormCurso} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/update/:id" component={FormCurso} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />
+          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/:idCurso" component={VerCurso} />
 
           {/* Vistas */}
           <NoLogRoute exact component={Login} path="/Login" />

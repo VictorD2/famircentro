@@ -65,9 +65,9 @@ const Navigation = () => {
                       <FontAwesomeIcon icon={faBookReader} />
                       <p>Cursos Asincronos</p>
                     </Link> */}
-                    <Link className="item__link my-0 p-0" to="/DashBoard/Cursos/Sincronos" >
+                    <Link className="item__link my-0 p-0" to="/DashBoard/Cursos/Sincronicos" >
                       <FontAwesomeIcon icon={faBars} />
-                      <p>Cursos Sincronos</p>
+                      <p>Cursos Sincrónicos</p>
                     </Link>
                   </div>
                 </div>
@@ -88,13 +88,13 @@ const Navigation = () => {
                 </h2>
                 <div id="collapseOne2" className="accordion-collapse collapse">
                   <div className="accordion-body">
-                    <Link className="item__link my-2 p-0" to="/DashBoard/Talleres/Asincronos" >
+                    <Link className="item__link my-2 p-0" to="/DashBoard/Talleres/Asincronicos" >
                       <FontAwesomeIcon icon={faBookReader} />
-                      <p>Talleres Asincronos</p>
+                      <p>Talleres Asincrónicos</p>
                     </Link>
-                    <Link className="item__link my-0 p-0" to="/DashBoard/Talleres/Sincronos" >
+                    <Link className="item__link my-0 p-0" to="/DashBoard/Talleres/Sincronicos" >
                       <FontAwesomeIcon icon={faBars} />
-                      <p>Talleres Sincronos</p>
+                      <p>Talleres Sincrónicos</p>
                     </Link>
                   </div>
                 </div>

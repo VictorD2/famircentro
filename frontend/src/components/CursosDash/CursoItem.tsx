@@ -23,7 +23,6 @@ interface Params {
 
 interface Props {
     curso: Curso;
-    funcion: (curso: Curso) => void;
     cargaDatos: () => void;
 }
 
@@ -31,7 +30,6 @@ const CursoItem = (props: Props) => {
     const params = useParams<Params>();
     const history = useHistory();
 
-    const ponerDatos = () => props.funcion(props.curso);
 
     const deshabilitar = async () => {
         if (!window.confirm("¿Está seguro que desea habilitar/deshabilitar el curso?")) return;
@@ -63,7 +61,7 @@ const CursoItem = (props: Props) => {
                 </td>
 
                 <td className="text-center">
-                    <button onClick={ponerDatos} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn__blue">
+                    <button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/${props.curso.id_curso}`)} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn__blue">
                         <FontAwesomeIcon className="fs-5" icon={faEye} />
                     </button>
                 </td>

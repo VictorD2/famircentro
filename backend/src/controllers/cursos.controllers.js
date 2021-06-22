@@ -48,7 +48,7 @@ ctrlCursos.createCurso = async(req, res) => {
 
 ctrlCursos.getCursos = async(req, res) => {
     const tipo = req.params.tipo == 'Talleres' ? 'Taller' : 'Curso'
-    const modalidad = req.params.modalidad == 'Asincronos' ? 'Asincrono' : 'Sincrono'
+    const modalidad = req.params.modalidad == 'Asincronicos' ? 'Asincrono' : 'Sincrono'
     const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
 
     for (let i = 0; i < data.length; i++) delete data[i].password;

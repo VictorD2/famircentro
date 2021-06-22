@@ -9,8 +9,8 @@ import Modulos from './Modulos';
 
 //Iconos
 import { GiTeacher } from "react-icons/gi";
-import { GrShop } from "react-icons/gr";
 import { FaDollarSign } from 'react-icons/fa';
+import { GrShop } from "react-icons/gr";
 
 //Imagenes
 import cursoFoto from '../../images/bg-2.jpg';
@@ -55,6 +55,7 @@ const CursoFullPage = () => {
             setModulos([]);
         }
     }, [params.idCurso])
+
     const getCursoById = async () => {
         const res = await cursoServices.getCursoById(params.idCurso);
         const newDescripcion = res.data.descripcion.replace(/\n/g, "<br/>");
@@ -91,7 +92,7 @@ const CursoFullPage = () => {
                                 </div>
                             </div>
                             <p className="m-0 mt-2 fw-bold">Descripción:</p>
-                            <p ref={node => refDescripcion.current = node} className="m-0"></p>
+                            <p ref={node => refDescripcion.current = node}  style={{ textAlign: "justify" }} className="m-0"></p>
                             <div className="row mt-5">
                                 <Link to={`/Comprar/${params.idCurso}`} className="btn btn-warning btn-width d-flex justify-content-center align-items-center">
                                     <GrShop className="me-2 text-danger" />Comprar curso

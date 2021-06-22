@@ -16,49 +16,34 @@ import { ToastContainer } from 'react-toastify'
 import Navigation from '../../pages/DashBoard/Navigation'
 import BuscadorProfesor from '../ProfesoresDash/BuscadorProfesor'
 import ListaCursos from './ListaCursos'
-import ModalCurso from './ModalCurso';
 
 //Interfaces
-import { Curso } from './Curso'
 
 interface Params {
     modalidad: string;
     tipo: string;
 }
-const initialState = {
-    nombre_curso: "",
-    descripcion: "",
-    precio: 0,
-    duracion: 0,
-    horario: "",
-    enlace: "",
-    id_usuario: 0,
-    modulos: [],
-    url_foto_curso: ""
-};
+
 const Cursos = () => {
-    const modalidades = ['Sincronos', 'Asincronos', 'Talleres', 'Cursos'];
+    const modalidades = ['Sincronicos', 'Asincronicos', 'Talleres', 'Cursos'];
 
     const params = useParams<Params>();
     const history = useHistory();
-    
-    const [curso, setCurso] = useState<Curso>(initialState);
+
     const [filtro, setFiltro] = useState<string>("");
 
     const [tipo, setTipo] = useState("");
     const [modalidad, setModalidad] = useState("");
 
-    const handleModalChange = (curso: Curso) => setCurso(curso);
 
     const buscar = (text: string) => setFiltro(text);
 
     useEffect(() => {
         if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push('/Dashboard');//Validando ruta
-
         params.tipo === "Talleres" ? setTipo('Taller') : setTipo('Curso');
-        params.modalidad === "Asincronos" ? setModalidad('Asincrónico') : setModalidad('Sincrónico');
+        params.modalidad === "Asincronicos" ? setModalidad('Asincrónico') : setModalidad('Sincrónico');
     }, [params.tipo, params.modalidad]);
-    
+
     return (
         <React.Fragment>
             <Navigation />
@@ -98,10 +83,9 @@ const Cursos = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <ListaCursos filtro={filtro} funcion={handleModalChange} />
+                            <ListaCursos filtro={filtro} />
                         </tbody>
                     </table>
-                    <ModalCurso curso={curso} modalidad={modalidad} />
                     {/* Modal */}
 
                 </div>

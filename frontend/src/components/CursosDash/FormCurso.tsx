@@ -53,7 +53,7 @@ const FormCurso = () => {
     useEffect(() => {
         cargaProfesores();
         params.tipo === "Talleres" ? setTipo("Taller") : setTipo("Curso");
-        params.modalidad === "Asincronos" ? setModalidad("Asincrono") : setModalidad("Sincrono");
+        params.modalidad === "Asincronicos" ? setModalidad("Asincrónico") : setModalidad("Sincrónico");
         if (params.id) getCurso(params.id); //Por si estoy en update
         return () => limpieza();
     }, [params.id, params.modalidad, params.tipo]);
@@ -165,7 +165,7 @@ const FormCurso = () => {
                                 </div>
 
                                 {/* En caso de que sean sincronos */}
-                                {modalidad === 'Sincrono' ? (<>
+                                {modalidad === 'Sincrónico' ? (<>
                                     <div className="form-floating mb-3">
                                         <input onChange={handleInputChange} id="floatingInputDuracion" className="form-control" type="number" placeholder="Duración" name="duracion" required value={curso.duracion} />
                                         <label htmlFor="floatingInputDuracion">Duración</label>

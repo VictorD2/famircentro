@@ -86,7 +86,7 @@ const VerTema = () => {
                 {/* Content */}
                 <div className="py-4 mt-4">
                 </div>
-                
+
                 <div className="row">
                     <div className="col-6">
                         <div className="row">

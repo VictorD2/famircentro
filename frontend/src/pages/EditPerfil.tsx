@@ -15,7 +15,7 @@ interface Password {
 
 const EditPerfil = () => {
 
-    const { usuario } = useUsuario();
+    const { usuario, setUsuario } = useUsuario();
 
     const [profileImg, setProfileImg] = useState<string | ArrayBuffer>(usuario.url_foto_usuario + "");
     const [password, setPassword] = useState<Password>({ newPassword: "", oldPassword: "", confirmPassowrd: "" });
@@ -88,7 +88,7 @@ const EditPerfil = () => {
                         text: res.data.success,
                         icon: 'success'
                     });
-                    window.location.href = '/Perfil/Editar'
+                    setUsuario({ ...usuario, url_foto_usuario: res.data.url_foto_usuario })
                 }
                 if (res.data.error) {
                     swal({

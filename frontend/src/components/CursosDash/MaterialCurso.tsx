@@ -52,7 +52,7 @@ const initialStateTema = {
 }
 
 const MaterialCurso = () => {
-    const modalidades = ['Sincronos', 'Asincronos', 'Talleres', 'Cursos']
+    const modalidades = ['Sincronicos', 'Asincronicos', 'Talleres', 'Cursos']
 
     const params = useParams<Params>();
     const history = useHistory();
@@ -72,7 +72,7 @@ const MaterialCurso = () => {
     useEffect(() => {
         if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push('/');
         params.tipo === "Talleres" ? setTipo('Taller') : setTipo('Curso');//Definiendo si es taller o curso
-        params.modalidad === "Asincronos" ? setModalidad('Asincrónico') : setModalidad('Sincrónico');//Definiendo si es sincrono o asincrono
+        params.modalidad === "Asincronicos" ? setModalidad('Asincrónico') : setModalidad('Sincrónico');//Definiendo si es sincrono o asincrono
         getCurso(params.id);//Trayendo los datos de la bd
         return () => limpieza();
     }, [params.tipo, params.modalidad]);

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Usuario from "../interfaces/Usuario";
 import auth from './auth';
+
 const initialState: Usuario = {
   id_usuario: "",
   nombre: "",
@@ -16,10 +17,14 @@ const initialState: Usuario = {
   url_foto_usuario: "",
   authenticate: false,
 };
+
+
 const UsuarioContext = React.createContext({
   usuario: initialState,
   loadUser: false,
+  setUsuario: (usuario: Usuario) => { }
 });
+
 
 export const UsuarioProvider = (props: any) => {
   const [usuario, setUsuario] = useState<Usuario>(initialState);
@@ -50,8 +55,9 @@ export const UsuarioProvider = (props: any) => {
     return {
       usuario,
       loadUser,
+      setUsuario
     };
-  }, [usuario, loadUser]);
+  }, [usuario, loadUser, setUsuario]);
 
   return <UsuarioContext.Provider value={value} {...props} />;
 }
