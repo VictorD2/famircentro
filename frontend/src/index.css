@@ -485,6 +485,7 @@ code {
 .content__form {
   width: 38rem;
   height: 43rem;
+  overflow-y: auto;
 }
 
 .content__Login {
