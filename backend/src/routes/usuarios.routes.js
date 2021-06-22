@@ -8,12 +8,14 @@ router.get('/', [typePetition], ctrlUsuarios.getUsers);
 router.get('/whoami', [typePetition], ctrlUsuarios.whoiam);
 router.get('/:id', ctrlUsuarios.getUserById);
 router.post('/', ctrlUsuarios.createUser);
-router.put('/:id', function(req, res, next) {
+router.put('/:id', ctrlUsuarios.updateUserDatos);
+router.put('/password/:id', ctrlUsuarios.updatePassword);
+router.put('/img/:id', function(req, res, next) {
     upload.fotosPerfil.single('fotoPerfil')(req, res, function(err) {
         if (err) return res.json({ error: err }); // A Multer error occurred when uploading.
         next();
     })
-}, ctrlUsuarios.updateUser);
+}, ctrlUsuarios.updateImg);
 router.delete('/:id', ctrlUsuarios.deleteUser);
 
 module.exports = router;

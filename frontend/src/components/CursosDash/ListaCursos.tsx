@@ -17,11 +17,13 @@ interface Params {
     tipo: string;
 }
 interface Props {
-    funcion: (curso: Curso) => void;
     filtro: string;
 }
 
 const ListaCursos = (props: Props) => {
+
+    const modalidades = ['Sincronicos', 'Asincronicos', 'Talleres', 'Cursos'];
+
 
     const params = useParams<Params>();
 
@@ -33,13 +35,11 @@ const ListaCursos = (props: Props) => {
     const [tipo, setTipo] = useState<string>();
 
     useEffect(() => {
-        if ((params.tipo !== 'Talleres' && params.tipo !== 'Cursos') || (params.modalidad !== 'Asincronos' && params.modalidad !== 'Sincronos')) return history.push('/Dashboard');//Validando ruta
+        if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push('/Dashboard');//Validando ruta
         setModalidad(params.modalidad);
         setTipo(params.tipo);
         loadCursos();
-        return () => {
-            limpieza();
-        }
+        return () => limpieza();
     }, [params.modalidad, params.tipo]);
 
 
@@ -57,7 +57,7 @@ const ListaCursos = (props: Props) => {
         setLoading(false);
     }
 
-   
+
     // Cargando
     if (!loading)
         return (
@@ -78,10 +78,10 @@ const ListaCursos = (props: Props) => {
     return (
         <React.Fragment>
             {cursos.map((curso) => {
-                if (props.filtro === "") return <CursoItem cargaDatos={loadCursos} funcion={props.funcion} curso={curso} key={curso.id_curso} />;
+                if (props.filtro === "") return <CursoItem cargaDatos={loadCursos} curso={curso} key={curso.id_curso} />;
                 if (props.filtro === curso.id_curso?.toString()
                     || curso.nombre_curso?.toLowerCase().search(props.filtro.toLowerCase()) !== -1)
-                    return <CursoItem cargaDatos={loadCursos} funcion={props.funcion} curso={curso} key={curso.id_curso} />;
+                    return <CursoItem cargaDatos={loadCursos} curso={curso} key={curso.id_curso} />;
                 return <tr key={curso.id_curso}></tr>
             })}
         </React.Fragment>

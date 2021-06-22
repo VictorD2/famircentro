@@ -37,7 +37,7 @@ const Profesores = () => {
       <Navigation />
       <ToastContainer />
       <div className="contenido-principal p-4">
-        <div className="d-flex flex-row bg-white">
+        <div className="d-flex flex-row bg-white efecto_titulo">
           <FontAwesomeIcon className="me-3 fs-3" icon={faBookReader} />
           <h6 className="m-0 text-uppercase fs-3">PROFESORES</h6>
         </div>

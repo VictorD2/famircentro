@@ -20,7 +20,7 @@ interface Params {
 }
 
 const Programa = () => {
-    const modalidades = ['Sincronos', 'Asincronos', 'Talleres', 'Cursos']
+    const modalidades = ['Sincronicos', 'Asincronicos', 'Talleres', 'Cursos']
     const params = useParams<Params>();
     const history = useHistory();
     const [tipo, setTipo] = useState<string>("")
@@ -29,14 +29,18 @@ const Programa = () => {
 
     const getCursos = async () => {
         const res = await cursosServices.getAllCursos(params.tipo, params.modalidad);
+        for (let index = 0; index < res.data.length; index++) res.data[index].descripcion = formatingDescripcion(res.data[index].descripcion);
         setCursos(res.data);
     }
+    const formatingDescripcion = (descripcion: string): string => {
+        return descripcion.replace(/\n/g, "<br/>");
+    }
     const settings = () => {
-        params.modalidad === "Sincronos" ? setModalidad('Sincrónicos') : setModalidad('Asincrónicos');
+        params.modalidad === "Sincronicos" ? setModalidad('Sincrónicos') : setModalidad('Asincrónicos');
         params.tipo === "Talleres" ? setTipo('Talleres') : setTipo('Cursos');
     }
     useEffect(() => {
-        if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push('/');
+        if ((!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) || (params.tipo === 'Cursos' && params.modalidad === 'Asincrónicos')) return history.push('/');
         getCursos();
         settings();
         return () => {

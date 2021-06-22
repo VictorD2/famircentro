@@ -26,7 +26,6 @@ const NavBar = () => {
     }
     document.querySelector("#navPrincipal")?.classList.remove("fijar-nav");
     document.querySelector(".navigation-responsive")?.classList.remove("fijar-nav");
-
   };
 
   // Para mostrar o ocultar la barra lateral
@@ -110,8 +109,8 @@ const NavBar = () => {
                       ) : (
                         // {/* //Cuando no lo está */}
                         <>
-                          <Link className="login-button" to="/login">Login /</Link>
-                          <Link className="login-button" to="/register">/ Register</Link>
+                          <Link className="login-button" to="/login">Iniciar Sesión /</Link>
+                          <Link className="login-button" to="/register">/ Registrarse</Link>
                         </>
                       )}
 
@@ -138,9 +137,9 @@ const NavBar = () => {
                 <li onMouseEnter={disappearSubItemFirst} onMouseLeave={disappearSubItemFirst} >
                   <Link to="#" role="button" className="d-flex align-items-center">Curso <RiArrowRightSFill className="fs-5" /></Link>
                   <ul className="content-lista d-none position-lista-start" id="subItemsMenuFirst">
-                    <li><Link to="/Clases/Cursos/Asincronos">Asincrono</Link></li>
-                    <li><hr className="dropdown-divider" /></li>
-                    <li><Link to="/Clases/Cursos/Sincronos">Sincrono</Link></li>
+                    {/* <li><Link to="/Clases/Cursos/Asincronos">Asincrono</Link></li> */}
+                    {/* <li><hr className="dropdown-divider" /></li> */}
+                    <li><Link to="/Clases/Cursos/Sincronicos">Sincrónico</Link></li>
                   </ul>
                 </li>
 
@@ -149,9 +148,9 @@ const NavBar = () => {
                 <li onMouseEnter={disappearSubItemSecond} onMouseLeave={disappearSubItemSecond} >
                   <Link to="#" role="button" className="d-flex align-items-center">Taller <RiArrowRightSFill className="fs-5" /></Link>
                   <ul className="content-lista d-none position-lista-end" id="subItemsMenuSecond">
-                    <li><Link to="/Clases/Talleres/Asincronos">Asincrono</Link></li>
+                    <li><Link to="/Clases/Talleres/Asincronicos">Asincrónico</Link></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><Link to="/Clases/Talleres/Sincronos">Sincrono</Link></li>
+                    <li><Link to="/Clases/Talleres/Sincronicos">Sincrónico</Link></li>
                   </ul>
                 </li>
               </ul>
@@ -165,6 +164,7 @@ const NavBar = () => {
           <p className="phone">(+65) 456 332 5568 889</p>
         </div>
       </nav>
+
       {/* NavBar Responsive */}
       <div className="navigation-responsive">
         <div className="left-side text-center">
@@ -197,9 +197,9 @@ const NavBar = () => {
                 <Link to="#" role="button">Curso <RiArrowDownSFill className="fs-5" /></Link>
               </li>
               <ul className="d-none subItemMenu-resp" id="subItemsMenuFirstResponsive">
-                  <li><Link to="/curso/asincrono" role="button">Asincrono</Link></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><Link to="/curso/sincrono" role="button">Sincrono</Link></li>
+                {/* <li><Link to="/curso/asincrono" role="button">Asincrono</Link></li>
+                <li><hr className="dropdown-divider" /></li> */}
+                <li><Link to="/Clases/Cursos/Sincronicos" role="button">Sincrónico</Link></li>
               </ul>
 
               <li><hr className="dropdown-divider" /></li>
@@ -208,9 +208,9 @@ const NavBar = () => {
                 <Link to="#" role="button">Taller <RiArrowDownSFill className="fs-5" /></Link>
               </li>
               <ul className="d-none subItemMenu-resp" id="subItemsMenuSecondResponsive">
-                  <li><Link to="/taller/asincrono" role="button">Asincrono</Link></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><Link to="/taller/sincrono" role="button">Sincrono</Link></li>
+                <li><Link to="/Clases/Talleres/Asincronicos" role="button">Asincrónico</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link to="/Clases/Talleres/Sincronicos" role="button">Sincrónico</Link></li>
               </ul>
             </ul>
           </li>

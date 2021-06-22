@@ -1,10 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Curso } from '../CursosDash/Curso';
 import ImgCurso from '../Helpers/ImgCurso';
 
-function ListFavoritos() {
+interface Props {
+    curso: Curso;
+}
+function ListFavoritos(props: Props) {
     return (
         <li className="BadgesListItem" key="1">
-            <a href="/cursos" className="link-unstyled d-flex align-items-center" >
+            <Link to={`/Clase/${props.curso.id_curso}`} className="link-unstyled d-flex align-items-center" >
                 <div className="row">
                     <div className="col-lg-3 col-md-3">
                         <ImgCurso className="BadgesListItem__avatar" />
@@ -14,7 +19,7 @@ function ListFavoritos() {
                         <p className="mt-2">Domina el framework para Ruby más completo y práctico para desarrollo Web.</p>
                     </div>
                 </div>
-            </a>
+            </Link>
             <div className="row">
                 <div className="col-12 d-flex justify-content-end">
                     <button className="btn btn-danger" style={{ width: "5rem" }}>Quitar</button>

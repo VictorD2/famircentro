@@ -9,8 +9,8 @@ import Modulos from './Modulos';
 
 //Iconos
 import { GiTeacher } from "react-icons/gi";
-import { GrShop } from "react-icons/gr";
 import { FaDollarSign } from 'react-icons/fa';
+import { GrShop } from "react-icons/gr";
 
 //Imagenes
 import cursoFoto from '../../images/bg-2.jpg';
@@ -43,8 +43,10 @@ const CursoFullPage = () => {
     const [profesor, setProfesor] = useState<Profesor>(initialState);
     const [modulos, setModulos] = useState<Modulo[]>([]);
 
+    const [verificacionSub, setVerificacionSub] = useState<boolean>(false)
+
     const refDescripcion = useRef<HTMLParagraphElement | null>()
-    
+
     useEffect(() => {
         getCursoById()
         return () => {
@@ -53,24 +55,24 @@ const CursoFullPage = () => {
             setModulos([]);
         }
     }, [params.idCurso])
-    let verificacion = false;
+
     const getCursoById = async () => {
         const res = await cursoServices.getCursoById(params.idCurso);
         const newDescripcion = res.data.descripcion.replace(/\n/g, "<br/>");
         res.data.descripcion = newDescripcion;
         const resProfesor = await profesoresServices.getProfesorById(res.data.id_usuario);
         const resModulos = await cursoServices.getAllModulesByCursoId(params.idCurso);
-        
+
         if (refDescripcion.current) refDescripcion.current.innerHTML = res.data.descripcion;
-        
+
         setModulos(resModulos.data);
         setProfesor(resProfesor.data);
-        await verificarSub();
+        verificarSub();
         setCurso(res.data)
     }
     const verificarSub = async () => {
-        const res = await cursoServices.verificarSuscribción(params.idCurso);
-        verificacion = res.data;
+        const res = await cursoServices.verificarSuscribcion(params.idCurso);
+        setVerificacionSub(res.data);
     }
 
     return (
@@ -90,7 +92,7 @@ const CursoFullPage = () => {
                                 </div>
                             </div>
                             <p className="m-0 mt-2 fw-bold">Descripción:</p>
-                            <p ref={node => refDescripcion.current = node} className="m-0"></p>
+                            <p ref={node => refDescripcion.current = node}  style={{ textAlign: "justify" }} className="m-0"></p>
                             <div className="row mt-5">
                                 <Link to={`/Comprar/${params.idCurso}`} className="btn btn-warning btn-width d-flex justify-content-center align-items-center">
                                     <GrShop className="me-2 text-danger" />Comprar curso
@@ -103,7 +105,7 @@ const CursoFullPage = () => {
                             <img src={cursoFoto} className="img-fluid ancho-img" alt={`Curso`} />
                         </div>
                         {modulos.map(modulo => {
-                            return <Modulos verificacion={verificacion} key={modulo.id_modulo} modulo={modulo} />
+                            return <Modulos verificacion={verificacionSub} key={modulo.id_modulo} modulo={modulo} />
                         })}
                     </div>
                 </div>

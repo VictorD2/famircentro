@@ -29,7 +29,7 @@ const Modulos = (props: Props) => {
         setTemas(res.data);
     }
 
-    if (!props.verificacion) {//Quitar ! en produccion
+    if (props.verificacion) {//Quitar ! en produccion
         return (
             <div className="mt-5">
                 <div className="fw-bold text-uppercase fs-5">
