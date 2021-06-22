@@ -1,13 +1,15 @@
 import React, { ChangeEvent, FormEvent, useState, useRef, RefObject } from "react";
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from "axios";
-
+import { Link } from 'react-router-dom';
 import logoRegister from "../images/Logo.svg";
 //Toast
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import 'animate.css/animate.min.css';
+import { useUsuario } from "../context-user/UsuarioProvider";
+import { useHistory } from "react-router-dom";
 interface Usuario {
   name: string;
   surname: string;
@@ -23,7 +25,7 @@ interface Usuario {
 const Register = () => {
 
   //Initial State
-  const [usuario, setUsuario] = useState<Usuario>({
+  const [usuarioR, setUsuarioR] = useState<Usuario>({
     name: "",
     surname: "",
     email: "",
@@ -35,9 +37,13 @@ const Register = () => {
     verifyPassword: "",
   });
 
+  const history = useHistory();
+
   const refPasswordVerify = useRef<HTMLInputElement | null>()
   const refPassword = useRef<HTMLInputElement | null>()
   const validacion = ['password', 'verifyPassword'];
+
+  const { setUsuario } = useUsuario();
 
   // CAPTCHA State
   const [captchaValidation, setCaptchaValidation] = useState<Boolean>();
@@ -55,7 +61,7 @@ const Register = () => {
 
   //Set state
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setUsuario({ ...usuario, [e.target.name]: e.target.value });
+    setUsuarioR({ ...usuarioR, [e.target.name]: e.target.value });
     if (validacion.includes(e.target.name)) {
       if (refPassword.current?.value === refPasswordVerify.current?.value) {
         refPassword.current?.classList.remove('is-invalid');
@@ -72,10 +78,13 @@ const Register = () => {
     e.preventDefault();
     if (captcha.current?.getValue()) {
       // console.log('El usuario no es un Robot');
-      if (usuario.password !== usuario.verifyPassword) return toast.error('Las contraseña nos coinciden');
-      const datos = await axios.post("http://localhost:4000/signup", usuario);
-      if (datos.data.message === "failed") return toast.error('El correo electrónico ya está en uso');
-      window.location.href = "/";
+      if (usuarioR.password !== usuarioR.verifyPassword) return toast.error('Las contraseña nos coinciden');
+      const datos = await axios.post("http://localhost:4000/signup", usuarioR);
+      if (datos.data.success) {
+        setUsuario(usuarioR)
+        history.push('/')
+      }
+      if (datos.data.error) return toast.error(datos.data.error);
       setCaptchaValidation(true);
     } else {
       // console.log('Por favor acepta el captcha');
@@ -89,10 +98,10 @@ const Register = () => {
     <div className="rgt__main">
       <ToastContainer />
       <div className="card content__form animate__animated animate__flipInY">
-        <a href="/" className="card-header rgt__header">
+        <Link to="/" className="card-header rgt__header">
           <img className="rgt__img" src={logoRegister} alt="logo-register" />
           <h5 className="rgt__title">FAMIR CENTRO</h5>
-        </a>
+        </Link>
         <div className="card-body">
           <div className="row">
             <div className="col-12 rgt__form">
@@ -101,19 +110,19 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Nombres</label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="name" />
+                      <input value={usuarioR.name} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="name" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Apellidos</label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="surname" />
+                      <input value={usuarioR.surname} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="surname" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Correo</label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="email" name="email" placeholder="name@example.com" />
+                      <input value={usuarioR.email} onChange={handleInputChange} className="form-control rgt__form-control" type="email" name="email" placeholder="name@example.com" />
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -128,31 +137,31 @@ const Register = () => {
                   <div className="col-md-12">
                     <div className="mb-3">
                       <label className="form-label">Profesión</label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="profesion" />
+                      <input value={usuarioR.profesion} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="profesion" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Teléfono</label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="telefono" placeholder="Telefono" />
+                      <input value={usuarioR.telefono} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="telefono" placeholder="Telefono" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">RUT</label>
-                      <input onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="rut" placeholder="RUT" />
+                      <input value={usuarioR.rut} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="rut" placeholder="RUT" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Contraseña</label>
-                      <input onChange={handleInputChange} ref={node => refPassword.current = node} className="form-control rgt__form-control" type="password" name="password" />
+                      <input value={usuarioR.password} onChange={handleInputChange} ref={node => refPassword.current = node} className="form-control rgt__form-control" type="password" name="password" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label"> Confirmar contraseña </label>
-                      <input onChange={handleInputChange} ref={node => refPasswordVerify.current = node} className="form-control rgt__form-control" type="password" name="verifyPassword" />
+                      <input value={usuarioR.verifyPassword} onChange={handleInputChange} ref={node => refPasswordVerify.current = node} className="form-control rgt__form-control" type="password" name="verifyPassword" />
                     </div>
                   </div>
                   <div className="recaptcha d-flex justify-content-center">

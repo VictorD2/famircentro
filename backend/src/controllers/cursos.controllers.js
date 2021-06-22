@@ -13,7 +13,6 @@ ctrlCursos.verificarSub = async(req, res) => {
 
 ctrlCursos.createCurso = async(req, res) => {
     const { nombre_curso, descripcion, precio, duracion, horario, enlace, tipo, modalidad, id_usuario } = req.body;
-
     const newCurso = {
         nombre_curso,
         descripcion,
@@ -27,11 +26,10 @@ ctrlCursos.createCurso = async(req, res) => {
         habilitado: 1
     }
 
-    if (modalidad === "Asincrono") {
+    if (modalidad === "Asincrónico") {
         delete newCurso.duracion;
         delete newCurso.horario;
         delete newCurso.enlace;
-
     }
 
     try {
@@ -48,7 +46,7 @@ ctrlCursos.createCurso = async(req, res) => {
 
 ctrlCursos.getCursos = async(req, res) => {
     const tipo = req.params.tipo == 'Talleres' ? 'Taller' : 'Curso'
-    const modalidad = req.params.modalidad == 'Asincronicos' ? 'Asincrono' : 'Sincrono'
+    const modalidad = req.params.modalidad == 'Asincronicos' ? 'Asincrónico' : 'Sincrónico'
     const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
 
     for (let i = 0; i < data.length; i++) delete data[i].password;

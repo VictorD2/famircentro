@@ -20,9 +20,20 @@ ctrlUsuariocurso.createUsuariocurso = async(req, res) => {
     if (data.affectedRows === 1) return res.json({ success: `Inscripción realizada` }); //Se logró actualizar
     return res.json({ error: "Ocurrió un error" });
 }
+ctrlUsuariocurso.setFavorito = async(req, res) => {
+    let favorito = "";
+    const rows = await pool.query("SELECT * FROM usuario_curso WHERE id_curso = ? AND id_usuario = ?", [req.params.idCurso, req.params.idUsuario]);
 
+    rows[0].favorito == 0 ? rows[0].favorito = 1 : rows[0].favorito = 0
+    const data = await pool.query('UPDATE usuario_curso set ? WHERE id_curso = ? AND id_usuario = ?', [rows[0], req.params.idCurso, req.params.idUsuario]);
+    rows[0].favorito == 0 ? favorito = "Quitado de la lista de Favoritos" : favorito = "Agregado a la lista de Favoritos"
+
+    if (data.affectedRows === 1) return res.json({ success: `${favorito}` }); //Se logró actualizar
+
+    return res.json({ error: "Ocurrió un error" });
+}
 ctrlUsuariocurso.getUsuariocursoByIdEstudiante = async(req, res) => {
-    const rows = await pool.query('SELECT id_usuario_curso,nombre_curso,descripción,url_foto_curso,tipo,modalidad,enlace,favorito,id_curso JOIN curso ON usuario_curso.id_curso = curso.id_curso WHERE id_usuario = ?', [req.params.idEstudiante]);
+    const rows = await pool.query('SELECT id_usuario_curso,nombre_curso,descripcion,url_foto_curso,tipo,modalidad,enlace,favorito,curso.id_curso FROM usuario_curso JOIN curso ON usuario_curso.id_curso = curso.id_curso WHERE usuario_curso.id_usuario = ?', [req.params.idEstudiante]);
     res.json(rows);
 }
 

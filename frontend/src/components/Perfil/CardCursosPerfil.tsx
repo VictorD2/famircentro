@@ -6,6 +6,7 @@ import ListFavoritos from './ListFavoritos';
 import ListMisCursos from './ListMisCursos';
 
 
+
 import { useUsuario } from '../../context-user/UsuarioProvider';
 import { Curso } from '../CursosDash/Curso';
 import * as cursosServices from '../Compobantes/ComprobanteServices'
@@ -57,22 +58,22 @@ function CardPerfil() {
                 </ul>
             </div>
             <div className="card-body desplegar" id="body-1">
-                <ul className="container content__items-Perfil">
+                {cursos.length === 0 ? (<></>) : (<>
                     {cursos.map(curso => {
                         if (curso.favorito === 0)
-                            return <ListMisCursos key={curso.id_curso} curso={curso} />
+                            return <ListMisCursos refresh={getCursosByEstudiante} key={curso.id_curso} curso={curso} />
                         return <></>
                     })}
-                </ul>
+                </>)}
             </div>
             <div className="card-body d-none desplegar" id="body-2">
-                <ul className="container content__items-Perfil">
+                {cursos.length === 0 ? (<></>) : (<>
                     {cursos.map(curso => {
                         if (curso.favorito === 1)
-                            return <ListFavoritos key={curso.id_curso} curso={curso} />
+                            return <ListFavoritos refresh={getCursosByEstudiante} key={curso.id_curso} curso={curso} />
                         return <></>
                     })}
-                </ul>
+                </>)}
             </div>
         </div>
     );

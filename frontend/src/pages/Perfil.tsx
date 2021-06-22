@@ -31,7 +31,7 @@ const Perfil = () => {
                                 </div>
                             </div>
                             <div className="row mt-4">
-                                <BotonPerfil className="btn btn-editPerfil" name="Editar perfil"/>
+                                <BotonPerfil className="btn btn-editPerfil" name="Editar perfil" />
                             </div>
                         </div>
                     </div>

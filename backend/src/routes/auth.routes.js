@@ -21,10 +21,10 @@ router.post('/signin', (req, res, next) => {
 
 
 router.get('/sucessfulLogin', typePetition, async(req, res) => {
-    if (!req.user) return res.json({ message: "failed"}); //No autentificado
+    if (!req.user) return res.json({ message: "failed" }); //No autentificado
     delete req.user.Contrasenia;
     req.user.authenticate = true;
-    return res.json({ user: req.user });
+    return res.json({ success: "Sesión Iniciada", user: req.user });
 });
 
 // Iniciar con Facebook

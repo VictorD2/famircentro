@@ -27,9 +27,9 @@ export const getUsuarioCursoByIdCurso = async (idCurso: string) => {
 export const getUsuarioCursoByIdEstudiante = async (idEstudiante: string) => {
     return await axios.get(`${api2}/estudiante/${idEstudiante}`);
 }
-// export const setFavorito = async (idCurso: string,) => {
-//     return await axios.put(`${api2}/${idCurso}`,);
-// }
+export const setFavorito = async (idCurso: string, idUsuario: string) => {
+    return await axios.put(`${api2}/${idCurso}/${idUsuario}`);
+}
 export const eliminarComprobante = async (id: string) => {
     return await axios.delete(`${api}/${id}`);
 };
