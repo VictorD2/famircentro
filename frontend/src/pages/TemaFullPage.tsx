@@ -69,8 +69,8 @@ const TemaFullPage = () => {
     }
     const authentificar = async () => {
         const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
-        if (datos.data.error) return history.push('/Login');
-        if (!datos.data.user.authenticate) return history.push('/Login');//Poner ! en produccion
+        if (datos.data.error) return history.push('/Iniciar');
+        if (!datos.data.user.authenticate) return history.push('/Iniciar');//Poner ! en produccion
         const res = await cursosServices.verificarSuscribcion(params.idCurso);
         if (!res.data) history.push(`/Clase/${params.idCurso}`);//Poner ! en produccion
     }

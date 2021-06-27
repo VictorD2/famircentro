@@ -44,8 +44,10 @@ ctrlUsuarios.updatePassword = async(req, res) => {
     if (req.params.id != req.user.id_usuario) return res.json({ error: "No tienes permiso para esta acción" });
 
     const usuario = await pool.query('SELECT * FROM usuario WHERE id_usuario = ?', [req.params.id])
-    const validarPassword = await helpers.matchPassword(req.body.oldPassword, usuario[0].password)
-    if (!validarPassword) return res.json({ error: "Contraseña anterior incorrecta" })
+    if (usuario[0].password != "") {
+        const validarPassword = await helpers.matchPassword(req.body.oldPassword, usuario[0].password)
+        if (!validarPassword) return res.json({ error: "Contraseña anterior incorrecta" })
+    }
     const newPassword = await helpers.encrypPassword(req.body.newPassword);
     const newUsuario = {
         password: newPassword

@@ -12,7 +12,7 @@ const AdminRoute = (props: PrivateRouteProps) => {
         <Route
             {...rest}
             render={(props) => {
-                if (auth.getRango() === 1) return <Component {...props} />
+                if (auth.getRango() === 2) return <Component {...props} />
                 return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
             }}
         />

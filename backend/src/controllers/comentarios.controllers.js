@@ -8,7 +8,7 @@ ctrlComentarios.createComentario = async(req, res) => {
     const newComentario = req.body;
     newComentario.fecha = new Date();
     newComentario.id_usuario = req.user.id_usuario; //Poner req.user.id_usuario en producción
-
+    delete newComentario.id_rango;
     if (newComentario.id_tema) delete newComentario.id_curso;
 
     if (newComentario.id_curso) delete newComentario.id_tema;
@@ -21,11 +21,11 @@ ctrlComentarios.createComentario = async(req, res) => {
 }
 ctrlComentarios.getComentarios = async(req, res) => {
     if (req.params.idTema) {
-        const rows = await pool.query('SELECT id_comentario,comentario,fecha,nombre,apellido,url_foto_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_tema = ? ORDER BY fecha DESC', [req.params.idTema]);
+        const rows = await pool.query('SELECT id_comentario,id_rango,comentario,fecha,nombre,apellido,url_foto_usuario,comentario.id_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_tema = ? ORDER BY fecha DESC', [req.params.idTema]);
         return res.json(rows);
     }
 
-    const rows = await pool.query('SELECT id_comentario,comentario,fecha,nombre,apellido,url_foto_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_curso = ? ORDER BY fecha DESC', [req.params.idCurso]);
+    const rows = await pool.query('SELECT id_comentario,id_rango,comentario,fecha,nombre,apellido,url_foto_usuario,comentario.id_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_curso = ? ORDER BY fecha DESC', [req.params.idCurso]);
     return res.json(rows);
 
 }

@@ -1,10 +1,10 @@
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import Badge from "../components/Helpers/Badge";
-import FormContact from "../components/Helpers/FormContact";
-import NavBar from "../components/Helpers/NavBar";
-import Footer from "../components/Helpers/Footer";
+import Badge from "../../components/Helpers/Badge";
+import FormContact from "./FormContact";
+import NavBar from "../../components/Helpers/NavBar";
+import Footer from "../../components/Helpers/Footer";
 
 import ScrollReveal from "scrollreveal";
 import { IoLocationOutline } from "react-icons/io5";

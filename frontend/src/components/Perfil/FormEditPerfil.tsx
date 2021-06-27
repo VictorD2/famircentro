@@ -26,7 +26,7 @@ const FormEditPerfil = () => {
     const [usuarioPerfil, setUsuarioPerfil] = useState<Usuario>(initialState);
     useEffect(() => {
         getDatos();
-        return () => setUsuarioPerfil({});
+        return () => setUsuarioPerfil(initialState);
     }, [])
 
     const getDatos = async () => {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -25,6 +26,8 @@ const Profesores = () => {
 
   const [profesor, setProfesor] = useState<Profesor>({})
   const [filtro, setFiltro] = useState<string>("")
+
+
   //Redireccionamiento del boton crear profesor
   const createUser = () => history.push("/DashBoard/Profesores/nuevo");
 
@@ -51,24 +54,9 @@ const Profesores = () => {
           </div>
         </div>
         <div className="py-4 mt-4">
-          <table className="table table-light-gray table-bordered table-hover table-responsive">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>APELLIDOS</th>
-                <th>CORREO</th>
-                <th>PAIS</th>
-                <th>PROFESION</th>
-                <th className="text-center">EDITAR</th>
-                <th className="text-center">VER MÁS</th>
-                <th className="text-center">DESHABILITAR</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ListaProfesores filtro={filtro} funcion={handleModalChange} />
-            </tbody>
-          </table>
+          <div className="table-responsive">
+            <ListaProfesores filtro={filtro} funcion={handleModalChange} />
+          </div>
           {/* Modal */}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">

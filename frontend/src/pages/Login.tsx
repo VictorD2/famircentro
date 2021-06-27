@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,  useHistory } from "react-router-dom";
 import axios from "axios";
 
 //Imagenes
@@ -12,13 +12,16 @@ import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 //Toastify
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
+import { useUsuario } from "../context-user/UsuarioProvider";
+import auth from "../context-user/auth";
 
 const Login = () => {
   const initialState = {
     email: "",
     password: "",
   };
-
+  const history = useHistory();
+  const {setUsuario} = useUsuario();
   const [state, setState] = useState(initialState);
   //Set state
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +32,13 @@ const Login = () => {
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await axios.post("http://localhost:4000/signin", state);
-    if (res.data.message === "failed") return toast.error("Correo o contraseña incorrectos");
-    window.location.href = "/";
+    if (res.data.success) {
+      setUsuario(res.data.user)
+      auth.setRango(res.data.user.id_rango);
+      auth.sigIn();
+      return history.push('/')
+    }
+    if (res.data.error) return toast.error(res.data.error);
   };
 
   return (

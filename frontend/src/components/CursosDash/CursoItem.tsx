@@ -48,7 +48,7 @@ const CursoItem = (props: Props) => {
                 <td>{props.curso.id_curso}</td>
                 <td>{props.curso.nombre_curso}</td>
                 <td>{props.curso.precio}</td>
-                {props.curso.modalidad === 'Sincrono' ? (
+                {props.curso.modalidad === 'Sincrónico' ? (
                     <>
                         <td>{props.curso.horario}</td>
                         <td>{props.curso.duracion} horas</td>

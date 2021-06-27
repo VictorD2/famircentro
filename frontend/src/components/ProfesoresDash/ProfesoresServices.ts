@@ -2,8 +2,11 @@ import axios from "axios";
 import { Profesor } from "./Profesor";
 const api = "http://localhost:4000/api/profesores";
 
-export const getAll = async () => {
-  return await axios.get(`${api}`);
+export const getAll = async (page:number) => {
+  return await axios.get(`${api}/all/${page}`);
+};
+export const getCount = async () => {
+  return await axios.get(`${api}/count`);
 };
 export const getProfesorById = async (id: string) => {
   return await axios.get(`${api}/${id}`);

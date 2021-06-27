@@ -27,8 +27,10 @@ const Programa = () => {
     const [modalidad, setModalidad] = useState<string>("")
     const [cursos, setCursos] = useState<Curso[]>([])
 
+    // const [cantidadPaginas, setCantidadPaginas] = useState<number>(0)
+    const [page, setPage] = useState<number>(1);
     const getCursos = async () => {
-        const res = await cursosServices.getAllCursos(params.tipo, params.modalidad);
+        const res = await cursosServices.getAllCursos(params.tipo, params.modalidad,page);
         for (let index = 0; index < res.data.length; index++) res.data[index].descripcion = formatingDescripcion(res.data[index].descripcion);
         setCursos(res.data);
     }
@@ -44,6 +46,7 @@ const Programa = () => {
         getCursos();
         settings();
         return () => {
+            setPage(1);
         }
     }, [params.modalidad, params.tipo])
 

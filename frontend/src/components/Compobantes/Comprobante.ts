@@ -6,6 +6,7 @@ export interface Comprobante {
     comprobateFoto?: File[];
     nombre?: string;
     apellido?: string;
+    estado:string;
     nombre_curso?: string;
     fecha_enviado:string;
 }

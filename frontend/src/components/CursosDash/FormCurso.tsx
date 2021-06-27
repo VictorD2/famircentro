@@ -61,7 +61,7 @@ const FormCurso = () => {
     //Funciones
 
     const cargaProfesores = async () => {
-        const res = await ProfesoresServices.getAll();
+        const res = await ProfesoresServices.getAll(0);
         if (!params.id) setCurso({ ...curso, id_usuario: res.data[0].id_usuario });//Por si estoy en create
         setProfesores(res.data);
     }

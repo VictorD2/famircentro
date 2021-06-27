@@ -1,7 +1,6 @@
 const multer = require('multer');
 const path = require('path');
 const multerCtrl = {};
-const fs = require('fs-extra');
 // Settings
 const storageVideos = multer.diskStorage({
     destination: path.join(__dirname, '../uploads/video'),

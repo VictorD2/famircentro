@@ -1,5 +1,5 @@
 export default interface Usuario{
-    id_usuario?: string,
+    id_usuario: string,
     id_pais?: string,
     nombre?: string,
     apellido?: string,

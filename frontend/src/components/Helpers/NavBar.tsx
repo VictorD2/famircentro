@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Axios from "axios";
 
 
@@ -14,9 +14,26 @@ import { AiOutlinePhone } from "react-icons/ai";
 import { RiArrowDownSFill, RiArrowRightSFill } from "react-icons/ri";
 
 import { useUsuario } from "../../context-user/UsuarioProvider";
+import auth from "../../context-user/auth";
+import Usuario from "../../interfaces/Usuario";
 
+const initialState: Usuario = {
+  id_usuario: "",
+  nombre: "",
+  id_pais: "1",
+  apellido: "",
+  profesion: "",
+  correo: "",
+  telefono: "",
+  habilitado_u: 1,
+  rut: "",
+  id_rango: 2,
+  url_foto_usuario: "",
+  authenticate: false,
+};
 const NavBar = () => {
-  const { usuario, loadUser } = useUsuario();
+  const { usuario, loadUser, setUsuario } = useUsuario();
+  const history = useHistory();
   // Para fijar el nav al scrollear la pagina
   window.onscroll = () => {
     if (window.scrollY >= 117) {
@@ -38,7 +55,12 @@ const NavBar = () => {
   //Desconectar
   const logout = async () => {
     const res = await Axios.get("http://localhost:4000/logout", { withCredentials: true });
-    if (res.data.message === "success") window.location.href = "/"; //<- Te regresa a la pagina principal
+    if (res.data.success) {
+      setUsuario(initialState);
+      auth.setRango(2);
+      auth.logOut();
+      return history.push('/'); //<- Te regresa a la pagina principal
+    }
   };
 
   // DesplegarMenu
@@ -102,15 +124,15 @@ const NavBar = () => {
                           }
 
                           {/* Perfil y logout */}
-                          <Link className="login-button p-3 fs-3" to="/perfil"> <FontAwesomeIcon icon={faUser} /> </Link>
-                          <a onClick={logout} className="login-button p-3 fs-3" href="/logout"> <FontAwesomeIcon icon={faDoorOpen} /> </a>
+                          <Link className="login-button p-3 fs-3" to="/Perfil"> <FontAwesomeIcon icon={faUser} /> </Link>
+                          <div onClick={logout} className="login-button d-inline-block p-3 fs-3"> <FontAwesomeIcon icon={faDoorOpen} /> </div>
 
                         </>
                       ) : (
                         // {/* //Cuando no lo está */}
                         <>
-                          <Link className="login-button" to="/login">Iniciar Sesión /</Link>
-                          <Link className="login-button" to="/register">/ Registrarse</Link>
+                          <Link className="login-button" to="/Iniciar">Iniciar Sesión /</Link>
+                          <Link className="login-button" to="/Registrarse">/ Registrarse</Link>
                         </>
                       )}
 

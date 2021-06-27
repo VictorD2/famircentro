@@ -3,7 +3,8 @@ const ctrlComprobantes = require('../controllers/comprobantes.controllers');
 const { isAdmin, typePetition } = require('../lib/auth');
 const upload = require('../lib/multer');
 
-router.get('/', [typePetition], ctrlComprobantes.getComprobantes);
+router.get('/count/:estado', ctrlComprobantes.getCount);
+router.get('/:estado/:page', [typePetition], ctrlComprobantes.getComprobantes);
 router.get('/:id', ctrlComprobantes.getComprobanteById);
 router.post('/', function(req, res, next) {
     upload.fotosComprobantes.single('fotoComprobante')(req, res, function(err) {
@@ -12,6 +13,7 @@ router.post('/', function(req, res, next) {
     })
 }, ctrlComprobantes.createComprobante);
 
-router.delete('/:id', ctrlComprobantes.deleteComprobante);
+router.put('/:id', ctrlComprobantes.actualizarComprobante);
+// router.delete('/:id', ctrlComprobantes.deleteComprobante);
 
 module.exports = router;

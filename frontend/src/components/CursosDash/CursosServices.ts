@@ -9,10 +9,12 @@ export const verificarSuscribcion = async (idCurso: string | undefined) => {
   return await axios.get(`${api}/sub/${idCurso}`);
 };
 //OBTENER
-export const getAllCursos = async (tipo: string, modalidad: string) => {
-  return await axios.get(`${api}/all/${tipo}/${modalidad}`);
+export const getAllCursos = async (tipo: string, modalidad: string,page:number) => {
+  return await axios.get(`${api}/all/${tipo}/${modalidad}/${page}`);
 };
-
+export const getCount = async (tipo: string, modalidad: string) => {
+  return await axios.get(`${api}/count/${tipo}/${modalidad}`);
+};
 //Por ID
 export const getCursoById = async (id: string) => {
   return await axios.get(`${api}/${id}`);

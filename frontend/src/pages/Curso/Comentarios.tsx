@@ -18,12 +18,14 @@ import TimeAgo from 'timeago-react';
 import * as timeago from 'timeago.js';
 import vi from 'timeago.js/lib/lang/es';
 import { useUsuario } from '../../context-user/UsuarioProvider';
+import CajaComentario from './CajaComentario';
 timeago.register('vi', vi);
 
 const initialState: Comentario = {
     comentario: "",
     fecha: "",
-    id_usuario: 0
+    id_usuario: 0,
+    id_rango: 0
 }
 interface Params {
     idCurso: string;
@@ -58,7 +60,7 @@ const Comentarios = () => {
         }
         toast.error(res.data.error);
     }
-    
+
     const eliminarComentario = async (id?: number) => {
         if (!window.confirm('¿Está seguro que desea eliminar el comentario?')) return;
         const res = await comentariosServices.eliminarComentario(id + "");
@@ -99,20 +101,28 @@ const Comentarios = () => {
                                     </div>
                                     <div className="nombre-author">
                                         <p>{comentarioItem.nombre} {comentarioItem.apellido}</p>
+                                        {(comentarioItem.id_rango === 1) ? (<>
+                                            <p className="mt-1" style={{ color: 'var(--verde-oscuro)' }}>Administrador</p>
+                                        </>) : (<></>)}
                                         <TimeAgo style={{ fontSize: "12px" }} className="text-black-50" datetime={comentarioItem.fecha} live={false} locale='vi' />
-
                                     </div>
-                                    {usuario.id_rango === 2 ? (<>
+                                    {(usuario.id_rango === 1) ? (<>
                                         <div className="ms-auto">
                                             <button onClick={() => eliminarComentario(comentarioItem.id_comentario)} className="btn">
                                                 <FaTimes />
                                             </button>
                                         </div>
-                                    </>) : (<></>)}
+                                    </>) : (<>
+                                        {comentarioItem.id_usuario === parseInt(usuario.id_usuario) ? (<>
+                                            <div className="ms-auto">
+                                                <button onClick={() => eliminarComentario(comentarioItem.id_comentario)} className="btn">
+                                                    <FaTimes />
+                                                </button>
+                                            </div>
+                                        </>) : (<></>)}
+                                    </>)}
                                 </div>
-                                <div className="comentario">
-                                    <p>{comentarioItem.comentario}</p>
-                                </div>
+                                <CajaComentario comentario={comentarioItem.comentario} />
                             </div>
                         </div>
                     )

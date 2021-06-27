@@ -24,7 +24,7 @@ const Usuarios = () => {
   return (
     <React.Fragment>
       <Navigation />
-      <ToastContainer/>
+      <ToastContainer />
       <div className="contenido-principal p-4">
         <div className="d-flex flex-row efecto_titulo">
           <FontAwesomeIcon className="me-3 fs-3" icon={faUser} />
@@ -37,23 +37,9 @@ const Usuarios = () => {
         </div>
 
         <div className="py-4 mt-4">
-          <table className="table table-bordered table-hover table-responsive">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>APELLIDOS</th>
-                <th>CORREO</th>
-                <th>PAIS</th>
-                <th>PROFESION</th>
-                <th className="text-center">VER MÁS</th>
-                <th className="text-center">DESHABILITAR</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ListaEstudiantes filtro={filtro} funcion={handleModalChange} />
-            </tbody>
-          </table>
+          <div className="table-responsive">
+            <ListaEstudiantes filtro={filtro} funcion={handleModalChange} />
+          </div>
           {/* Modal */}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">

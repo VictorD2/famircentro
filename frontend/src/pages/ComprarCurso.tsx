@@ -44,7 +44,8 @@ const ComprarCurso = () => {
         url_foto_comprobante: "",
         comprobateFoto: [new File([""], "filename")],
         id_usuario: "0",
-        fecha_enviado: ""
+        fecha_enviado: "",
+        estado:"",
     }
     const { usuario } = useUsuario();
 

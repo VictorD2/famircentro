@@ -15,16 +15,20 @@ router.post('/signup', async(req, res, next) => {
 router.post('/signin', (req, res, next) => {
     passport.authenticate('local.signin', {
         successRedirect: '/sucessfulLogin',
-        failureRedirect: '/sucessfulLogin',
+        failureRedirect: '/failedLogin',
     })(req, res, next);
 });
 
 
 router.get('/sucessfulLogin', typePetition, async(req, res) => {
-    if (!req.user) return res.json({ message: "failed" }); //No autentificado
+    if (!req.user) return res.json({ error: "Contraseña o Correo inválidos" }); //No autentificado
     delete req.user.Contrasenia;
     req.user.authenticate = true;
     return res.json({ success: "Sesión Iniciada", user: req.user });
+});
+
+router.get('/failedLogin', typePetition, async(req, res) => {
+   return res.json({ error: "Contraseña o Correo inválidos" }); //No autentificado
 });
 
 // Iniciar con Facebook
@@ -47,7 +51,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 //Desconectarse
 router.get('/logout', (req, res) => {
     req.logOut();
-    res.redirect('/');
+    res.json({success:"Desconectado"});
 });
 
 module.exports = router;

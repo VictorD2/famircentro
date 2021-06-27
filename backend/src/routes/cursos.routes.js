@@ -3,7 +3,8 @@ const ctrlCursos = require('../controllers/cursos.controllers');
 const { isAdmin, typePetition } = require('../lib/auth');
 const upload = require('../lib/multer');
 
-router.get('/all/:tipo/:modalidad', [typePetition], ctrlCursos.getCursos);
+router.get('/all/:tipo/:modalidad/:page', [typePetition], ctrlCursos.getCursos);
+router.get('/count/:tipo/:modalidad', [typePetition], ctrlCursos.getCount);
 router.get('/:id', ctrlCursos.getCursoById);
 router.get('/sub/:id_curso', ctrlCursos.verificarSub);
 router.post('/', function(req, res, next) {

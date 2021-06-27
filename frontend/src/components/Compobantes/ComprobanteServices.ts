@@ -4,10 +4,12 @@ const api = "http://localhost:4000/api/comprobante";
 const api2 = "http://localhost:4000/api/usuariocurso";
 
 
-export const getComprobantes = async () => {
-    return await axios.get(`${api}`);
+export const getComprobantes = async (estado: string, page: number) => {
+    return await axios.get(`${api}/${estado}/${page}`);
 };
-
+export const getCantidad = async (estado: string) => {
+    return await axios.get(`${api}/count/${estado}`);
+};
 export const getComprobanteById = async (id?: number) => {
     return await axios.get(`${api}/${id}`);
 };
@@ -21,6 +23,14 @@ export const crearComprobante = async (form: FormData, idCurso: string, idUsuari
         },
     });
 };
+
+export const eliminarComprobante = async (id: string) => {
+    return await axios.delete(`${api}/${id}`);
+};
+export const actualizarComprobante = async (id: string, comprobante: Comprobante) => {
+    comprobante.estado ="Rechazado"
+    return await axios.put(`${api}/${id}`,comprobante);
+};
 export const getUsuarioCursoByIdCurso = async (idCurso: string) => {
     return await axios.get(`${api2}/curso/${idCurso}`);
 }
@@ -30,9 +40,6 @@ export const getUsuarioCursoByIdEstudiante = async (idEstudiante: string) => {
 export const setFavorito = async (idCurso: string, idUsuario: string) => {
     return await axios.put(`${api2}/${idCurso}/${idUsuario}`);
 }
-export const eliminarComprobante = async (id: string) => {
-    return await axios.delete(`${api}/${id}`);
-};
 
 export const crearInscripcion = async (inscripcion?: Comprobante) => {
     return await axios.post(`${api2}`, inscripcion);

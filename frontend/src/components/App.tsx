@@ -6,7 +6,7 @@ import { useUsuario, UsuarioProvider } from "./../context-user/UsuarioProvider";
 import AboutUs from "./../pages/AboutUs";
 import NotFound from "./../pages/NotFound";
 import Home from "./../pages/Home";
-import Contact from "./../pages/Contactanos";
+import Contact from "../pages/Contacto/Contactanos";
 import Register from "./../pages/Register";
 import Login from "./../pages/Login";
 import Programa from "./../pages/Programa";
@@ -32,6 +32,8 @@ import VerTema from "./CursosDash/Temas/VerTema";
 import ComprarCurso from "../pages/ComprarCurso";
 import Comprobantes from "./Compobantes/Comprobantes";
 import VerCurso from "./CursosDash/VerCurso";
+import ContactoDash from "../pages/Contacto/ContactoDash";
+
 function App() {
   const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
@@ -64,6 +66,9 @@ function App() {
           {/* Comprobantes */}
           <AdminRoute exact path="/DashBoard/Comprobantes" component={Comprobantes} />
 
+          {/* Contactos */}
+          <AdminRoute exact path="/DashBoard/Contacto" component={ContactoDash} />
+
           {/* Cursos */}
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id" component={MaterialCurso} />
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id/:idTema" component={VerTema} />
@@ -73,8 +78,8 @@ function App() {
           <AdminRoute exact path="/DashBoard/:tipo/:modalidad/:idCurso" component={VerCurso} />
 
           {/* Vistas */}
-          <NoLogRoute exact component={Login} path="/Login" />
-          <NoLogRoute exact component={Register} path="/Register" />
+          <NoLogRoute exact component={Login} path="/Iniciar" />
+          <NoLogRoute exact component={Register} path="/Registrarse" />
           <Route exact path="/Nosotros" component={AboutUs} />
           <Route exact path="/Contactanos" component={Contact} />
           <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />

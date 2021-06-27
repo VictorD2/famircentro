@@ -4,9 +4,18 @@ const helpers = require('../lib/helpers');
 
 
 ctrlEstudiantes.getEstudiantes = async(req, res) => {
+    const cantidadDatos = 12;
+    const pagina = (req.params.page - 1) * cantidadDatos;
     const data = await pool.query('SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 2');
-    res.json(data);
+    res.json(data.splice(pagina, cantidadDatos));
 }
+
+ctrlEstudiantes.getCount = async(req, res) => {
+    const rows = await pool.query('SELECT COUNT(*) FROM usuario WHERE id_rango = 2');
+    if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"])
+    return res.json({ error: "Ocurrió un error" });
+}
+
 ctrlEstudiantes.getEstudianteById = async(req, res) => {
     const rows = await pool.query('SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_usuario = ?', [req.params.id]);
     

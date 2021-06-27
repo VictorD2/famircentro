@@ -3,7 +3,8 @@ const ctrlEstudiantes = require('../controllers/estudiantes.controllers');
 const { isAdmin, typePetition } = require('../lib/auth');
 
 
-router.get('/', [typePetition], ctrlEstudiantes.getEstudiantes);
+router.get('/all/:page', [typePetition], ctrlEstudiantes.getEstudiantes);
+router.get('/count', ctrlEstudiantes.getCount);
 router.get('/:id', ctrlEstudiantes.getEstudianteById);
 router.delete('/:id', ctrlEstudiantes.deleteEstudiante);
 // router.post('/', ctrlEstudiantes.createUser);

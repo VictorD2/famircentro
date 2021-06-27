@@ -20,6 +20,7 @@ ctrlUsuariocurso.createUsuariocurso = async(req, res) => {
     if (data.affectedRows === 1) return res.json({ success: `Inscripción realizada` }); //Se logró actualizar
     return res.json({ error: "Ocurrió un error" });
 }
+
 ctrlUsuariocurso.setFavorito = async(req, res) => {
     let favorito = "";
     const rows = await pool.query("SELECT * FROM usuario_curso WHERE id_curso = ? AND id_usuario = ?", [req.params.idCurso, req.params.idUsuario]);

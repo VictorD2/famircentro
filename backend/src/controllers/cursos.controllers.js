@@ -43,15 +43,24 @@ ctrlCursos.createCurso = async(req, res) => {
     }
 
 }
-
+ctrlCursos.getCount = async(req, res) => {
+    const tipo = req.params.tipo == 'Talleres' ? 'Taller' : 'Curso'
+    const modalidad = req.params.modalidad == 'Asincronicos' ? 'Asincrónico' : 'Sincrónico'
+    const rows = await pool.query('SELECT COUNT(*) FROM curso WHERE tipo = ? AND modalidad = ?', [tipo, modalidad]);
+    if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"])
+    return res.json({ error: "Ocurrió un error" });
+}
 ctrlCursos.getCursos = async(req, res) => {
+    const cantidadDatos = 12;
+    const pagina = (req.params.page - 1) * cantidadDatos;
     const tipo = req.params.tipo == 'Talleres' ? 'Taller' : 'Curso'
     const modalidad = req.params.modalidad == 'Asincronicos' ? 'Asincrónico' : 'Sincrónico'
     const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
 
     for (let i = 0; i < data.length; i++) delete data[i].password;
 
-    res.json(data);
+    res.json(data.splice(pagina, cantidadDatos));
+
 }
 
 ctrlCursos.getCursoById = async(req, res) => {

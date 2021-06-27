@@ -20,7 +20,7 @@ function ListFavoritos(props: Props) {
         const res = await comprobanteServices.setFavorito(props.curso.id_curso + "", usuario.id_usuario + "");
         if (res.data.success) {
             swal({
-                title: 'Enviado',
+                title: 'Hecho',
                 text: `${res.data.success}`,
                 icon: 'success'
             });

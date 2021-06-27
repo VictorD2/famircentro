@@ -3,6 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import logoRegister from "../images/Logo.svg";
+import auth from '../context-user/auth';
 //Toast
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
@@ -81,8 +82,10 @@ const Register = () => {
       if (usuarioR.password !== usuarioR.verifyPassword) return toast.error('Las contraseña nos coinciden');
       const datos = await axios.post("http://localhost:4000/signup", usuarioR);
       if (datos.data.success) {
-        setUsuario(usuarioR)
-        history.push('/')
+        setUsuario(datos.data.user)
+        auth.setRango(datos.data.user.id_rango);
+        auth.sigIn();
+        return history.push('/')
       }
       if (datos.data.error) return toast.error(datos.data.error);
       setCaptchaValidation(true);
@@ -128,9 +131,9 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Pais</label>
-                      <select value="1" onChange={handleInputChange} className="form-control rgt__form-control" name="pais" >
-                        <option value="0" >Chile</option>
-                        <option value="1" selected>Perú</option>
+                      <select value={usuarioR.pais} onChange={handleInputChange} className="form-control rgt__form-control" name="pais" >
+                        <option value="2">Chile</option>
+                        <option value="1">Perú</option>
                       </select>
                     </div>
                   </div>
