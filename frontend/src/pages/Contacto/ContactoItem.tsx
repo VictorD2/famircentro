@@ -11,9 +11,11 @@ interface Contacto {
 }
 
 interface Props {
+    page: number
     contacto: Contacto;
     changeModalContent: (contacto: Contacto) => void;
-    getAllContactos: () => void;
+    getCantidad: () => void;
+    getAllContactos: (page: number) => void;
 }
 
 const ContactoItem = (props: Props) => {
@@ -22,7 +24,8 @@ const ContactoItem = (props: Props) => {
         if (!window.confirm('¿Está seguro de eliminar el mensaje?')) return;
         const res = await contactoServices.deleteContacto(props.contacto.id_contacto + "");
         if (res.data.success) {
-            props.getAllContactos();
+            props.getAllContactos(props.page);
+            props.getCantidad();
             return toast.success(res.data.success);
         }
         if (res.data.error) return toast.success(res.data.error);

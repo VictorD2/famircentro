@@ -28,17 +28,44 @@ const ContactoDash = () => {
     const [contacto, setContacto] = useState<Contacto>(initialState);
 
     const refMensaje = useRef<HTMLParagraphElement | null>();
+    const [cantidad, setCantidad] = useState<number>(0)
+    const [cantidadPaginas, setCantidadPaginas] = useState<number>(0)
+    const [page, setPage] = useState<number>(1);
 
+    const paginaSiguiente = () => {
+        if (page === cantidadPaginas) return;
+        setPage(page + 1)
+    }
+
+    const paginaAnterior = () => {
+        if (page === 1) return;
+        setPage(page - 1)
+    }
+
+    const getCantidad = async () => {
+        const res = await contactoServices.getCount();
+        setCantidad(res.data);
+        setCantidadPaginas(Math.ceil(res.data / 12));
+    }
     useEffect(() => {
         getAllContactos();
         return () => {
             setContactos([]);
             setContacto(initialState);
         }
-    }, [])
+    }, [page])
+
+    useEffect(() => {
+        getCantidad();
+        return () => {
+            setCantidad(0);
+            setCantidadPaginas(0);
+            setPage(1);
+        }
+    }, []);
 
     const getAllContactos = async () => {
-        const res = await contactoServices.getAllContactos();
+        const res = await contactoServices.getAllContactos(page);
         for (let i = 0; i < res.data.length; i++) {
             const newMensaje = res.data[i].mensaje.replace(/\n/g, "<br/>");
             res.data[i].mensaje = newMensaje;
@@ -68,7 +95,7 @@ const ContactoDash = () => {
                 <div className="py-4 mt-4">
                     <div className="table-responsive">
                         <table className="table table-striped table-light-gray table-bordered table-hover">
-                            <caption>Lista de mensajes de contacto</caption>
+                            <caption>Cantidad de mensajes de contacto: {cantidad}</caption>
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -87,12 +114,22 @@ const ContactoDash = () => {
                                 </>) : (<>
                                     {contactos.map(contacto => {
                                         return (
-                                            <ContactoItem getAllContactos={getAllContactos} changeModalContent={changeModalContent} contacto={contacto} key={contacto.id_contacto} />
+                                            <ContactoItem getCantidad={getCantidad} page={page}  getAllContactos={getAllContactos} changeModalContent={changeModalContent} contacto={contacto} key={contacto.id_contacto} />
                                         )
                                     })}
                                 </>)}
                             </tbody>
                         </table>
+                        <div className="d-flex justify-content-between">
+                            {page === 1 ? (<>
+                            </>) : (<>
+                                <button onClick={() => { paginaAnterior() }} className="btn btn__blue"><span aria-hidden="true">&laquo; Página Anterior</span></button>
+                            </>)}
+                            {page === cantidadPaginas ? (<>
+                            </>) : (<>
+                                <button onClick={() => { paginaSiguiente() }} className="btn btn__blue ms-auto"><span aria-hidden="true">Página Siguiente &raquo;</span></button>
+                            </>)}
+                        </div>
                     </div>
                 </div>
             </div>

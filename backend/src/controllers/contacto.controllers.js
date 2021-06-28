@@ -49,8 +49,16 @@ ctrlContacto.createContacto = async(req, res) => {
 }
 
 ctrlContacto.getContactos = async(req, res) => {
+    const cantidadDatos = 12;
+    console.log(req.params.page)
+    const pagina = (req.params.page - 1) * cantidadDatos;
     const rows = await pool.query('SELECT * FROM contactos');
-    res.json(rows);
+    res.json(rows.splice(pagina, cantidadDatos));
+}
+ctrlContacto.getCount = async(req, res) => {
+    const rows = await pool.query('SELECT COUNT(*) FROM contactos');
+    if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"])
+    return res.json({ error: "Ocurrió un error" });
 }
 
 ctrlContacto.getContactoById = async(req, res) => {
