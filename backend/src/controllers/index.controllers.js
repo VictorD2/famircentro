@@ -1,6 +1,4 @@
 const controller = {};
-const pool = require('../database');
-
-
+const pool = require("../database");
 
 module.exports = controller;

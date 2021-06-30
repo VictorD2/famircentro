@@ -1,16 +1,21 @@
 import React, { ChangeEvent, FormEvent, useState, useRef, RefObject } from "react";
-import ReCAPTCHA from 'react-google-recaptcha';
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import auth from "../context-user/auth";
+
+import ReCAPTCHA from "react-google-recaptcha";
 import logoRegister from "../images/Logo.svg";
-import auth from '../context-user/auth';
+
 //Toast
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import 'animate.css/animate.min.css';
+import "animate.css/animate.min.css";
+
 import { useUsuario } from "../context-user/UsuarioProvider";
-import { useHistory } from "react-router-dom";
+
+// Interfaces
 interface Usuario {
   name: string;
   surname: string;
@@ -24,7 +29,6 @@ interface Usuario {
 }
 
 const Register = () => {
-
   //Initial State
   const [usuarioR, setUsuarioR] = useState<Usuario>({
     name: "",
@@ -40,9 +44,9 @@ const Register = () => {
 
   const history = useHistory();
 
-  const refPasswordVerify = useRef<HTMLInputElement | null>()
-  const refPassword = useRef<HTMLInputElement | null>()
-  const validacion = ['password', 'verifyPassword'];
+  const refPasswordVerify = useRef<HTMLInputElement | null>();
+  const refPassword = useRef<HTMLInputElement | null>();
+  const validacion = ["password", "verifyPassword"];
 
   const { setUsuario } = useUsuario();
 
@@ -58,19 +62,19 @@ const Register = () => {
       // console.log('El usuario no es un robot');
       setCaptchaValidation(true);
     }
-  }
+  };
 
   //Set state
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setUsuarioR({ ...usuarioR, [e.target.name]: e.target.value });
     if (validacion.includes(e.target.name)) {
       if (refPassword.current?.value === refPasswordVerify.current?.value) {
-        refPassword.current?.classList.remove('is-invalid');
-        refPasswordVerify.current?.classList.remove('is-invalid');
-        return
+        refPassword.current?.classList.remove("is-invalid");
+        refPasswordVerify.current?.classList.remove("is-invalid");
+        return;
       }
-      refPassword.current?.classList.add('is-invalid');
-      refPasswordVerify.current?.classList.add('is-invalid');
+      refPassword.current?.classList.add("is-invalid");
+      refPasswordVerify.current?.classList.add("is-invalid");
     }
   };
 
@@ -79,13 +83,13 @@ const Register = () => {
     e.preventDefault();
     if (captcha.current?.getValue()) {
       // console.log('El usuario no es un Robot');
-      if (usuarioR.password !== usuarioR.verifyPassword) return toast.error('Las contraseña nos coinciden');
+      if (usuarioR.password !== usuarioR.verifyPassword) return toast.error("Las contraseña nos coinciden");
       const datos = await axios.post("http://localhost:4000/signup", usuarioR);
       if (datos.data.success) {
-        setUsuario(datos.data.user)
+        setUsuario(datos.data.user);
         auth.setRango(datos.data.user.id_rango);
         auth.sigIn();
-        return history.push('/')
+        return history.push("/");
       }
       if (datos.data.error) return toast.error(datos.data.error);
       setCaptchaValidation(true);
@@ -94,8 +98,6 @@ const Register = () => {
       setCaptchaValidation(false);
     }
   };
-
-
 
   return (
     <div className="rgt__main">
@@ -131,7 +133,7 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Pais</label>
-                      <select value={usuarioR.pais} onChange={handleInputChange} className="form-control rgt__form-control" name="pais" >
+                      <select value={usuarioR.pais} onChange={handleInputChange} className="form-control rgt__form-control" name="pais">
                         <option value="2">Chile</option>
                         <option value="1">Perú</option>
                       </select>
@@ -158,30 +160,24 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Contraseña</label>
-                      <input value={usuarioR.password} onChange={handleInputChange} ref={node => refPassword.current = node} className="form-control rgt__form-control" type="password" name="password" />
+                      <input value={usuarioR.password} onChange={handleInputChange} ref={(node) => (refPassword.current = node)} className="form-control rgt__form-control" type="password" name="password" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label"> Confirmar contraseña </label>
-                      <input value={usuarioR.verifyPassword} onChange={handleInputChange} ref={node => refPasswordVerify.current = node} className="form-control rgt__form-control" type="password" name="verifyPassword" />
+                      <input value={usuarioR.verifyPassword} onChange={handleInputChange} ref={(node) => (refPasswordVerify.current = node)} className="form-control rgt__form-control" type="password" name="verifyPassword" />
                     </div>
                   </div>
                   <div className="recaptcha d-flex justify-content-center">
-                    <ReCAPTCHA
-                      ref={captcha}
-                      sitekey="6LejHikbAAAAADWr-hPzdVv7v7pU4m0M_ceI_6SB"
-                      onChange={onChange}
-                    />
+                    <ReCAPTCHA ref={captcha} sitekey="6LejHikbAAAAADWr-hPzdVv7v7pU4m0M_ceI_6SB" onChange={onChange} />
                   </div>
-                  {captchaValidation === false &&
-                    <div className="text-center text-danger mt-2">
-                      Por favor acepta el captcha
-                    </div>
-                  }
+                  {captchaValidation === false && <div className="text-center text-danger mt-2">Por favor acepta el captcha</div>}
                   <div className="col-md-12">
                     <div className="rgt__button">
-                      <button type="submit" className="btn btn__more" style={{ padding: "0.7rem 2rem" }}> Registrar </button>
+                      <button type="submit" className="btn btn__more" style={{ padding: "0.7rem 2rem" }}>
+                        Registrar
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -192,6 +188,6 @@ const Register = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Register;

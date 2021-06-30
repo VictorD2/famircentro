@@ -5,11 +5,12 @@ export interface Curso {
   calificacion?: number;
   url_foto_curso: string;
   foto_curso?: File[];
+  capacidad?: number;
   tipo?: string;
   precio: number;
   horario: string;
   enlace: string;
-  favorito?:number;
+  favorito?: number;
   duracion?: number;
   modalidad?: string;
   habilitado?: number;

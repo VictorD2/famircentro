@@ -1,5 +1,6 @@
 import React from "react";
 
+// Interfaces
 type myProps = { name: string };
 
 const Badge: React.FC<myProps> = (props) => {

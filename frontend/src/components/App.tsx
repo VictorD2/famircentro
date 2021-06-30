@@ -11,23 +11,23 @@ import Register from "./../pages/Register";
 import Login from "./../pages/Login";
 import Programa from "./../pages/Programa";
 import PageLoading from "./Helpers/PageLoading";
-import Perfil from './../pages/Perfil';
+import Perfil from "./../pages/Perfil";
 import DashBoard from "../pages/DashBoard/DashBoard";
 import Usuarios from "./EstudiantesDash/Estudiantes";
-import CursoFullPage from '../pages/Curso/CursoFullPage';
+import CursoFullPage from "../pages/Curso/CursoFullPage";
 import Profesores from "./ProfesoresDash/Profesores";
 import FormProfesor from "./ProfesoresDash/FormProfesor";
 
-import AdminRoute from './ProtectedRoutes/AdminRoute';
-import LogRoute from './ProtectedRoutes/LogRoute';
-import NoLogRoute from './ProtectedRoutes/NoLogRoute';
+import AdminRoute from "./ProtectedRoutes/AdminRoute";
+import LogRoute from "./ProtectedRoutes/LogRoute";
+import NoLogRoute from "./ProtectedRoutes/NoLogRoute";
 
 import Cursos from "./CursosDash/Cursos";
 import FormCurso from "./CursosDash/FormCurso";
 import MaterialCurso from "./CursosDash/MaterialCurso";
-import TemaFullPage from '../pages/TemaFullPage'
+import TemaFullPage from "../pages/TemaFullPage";
 
-import EditPerfil from './../pages/EditPerfil';
+import EditPerfil from "./../pages/EditPerfil";
 import VerTema from "./CursosDash/Temas/VerTema";
 import ComprarCurso from "../pages/ComprarCurso";
 import Comprobantes from "./Compobantes/Comprobantes";
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {(loading && loadUser) ? (
+      {loading && loadUser ? (
         <PageLoading />
       ) : (
         <Switch>
@@ -93,6 +93,9 @@ function App() {
   );
 }
 
-const prev = () => <UsuarioProvider><App></App></UsuarioProvider>
+const prev = () => (
+  <UsuarioProvider>
+    <App></App>
+  </UsuarioProvider>
+);
 export default prev;
-

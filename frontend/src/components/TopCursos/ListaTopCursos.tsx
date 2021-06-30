@@ -3,7 +3,6 @@ import imagen from "../../images/pc-2.jpg";
 import TopCursosItem from "./TopCursosItem";
 
 const ListaTopCursos = () => {
-  
   return (
     <section className="top-cursos">
       <div className="container">
@@ -16,10 +15,10 @@ const ListaTopCursos = () => {
           </div>
         </div>
         <div className="row">
-          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod."nombre_profesor="Simon Smith" />
-          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod."nombre_profesor="Simon Smith" />
-          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod."nombre_profesor="Simon Smith" />
-          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod."nombre_profesor="Simon Smith" />
+          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod." nombre_profesor="Simon Smith" />
+          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod." nombre_profesor="Simon Smith" />
+          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod." nombre_profesor="Simon Smith" />
+          <TopCursosItem img={imagen} fecha="15/05/2000" url="/" title="Business for begginers" descripcion="Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod." nombre_profesor="Simon Smith" />
         </div>
       </div>
     </section>

@@ -1,4 +1,7 @@
 import React from "react";
+
+
+// Interfaces
 interface Props {
   title: string;
   comentario: string;

@@ -1,9 +1,12 @@
 import React from "react";
+
+// Interfaces
 interface Props {
   img: string;
   subtitle: string;
   title: string;
 }
+
 const CarruselItem = (props: Props) => {
   return (
     <div className="carousel-item carrousel-item" style={{ backgroundImage: `url(${props.img})`, height: 600 }}>

@@ -2,12 +2,12 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 //Services
-import * as profesorServices from './ProfesoresServices';
+import * as profesorServices from "./ProfesoresServices";
 
 //Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCheck, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { TiCancel } from 'react-icons/ti';
+import { TiCancel } from "react-icons/ti";
 
 //Toastify
 import { toast } from "react-toastify";
@@ -22,7 +22,6 @@ interface Props {
 }
 
 const ProfesorItem = (props: Props) => {
-  
   const history = useHistory();
 
   const ponerDatos = () => props.funcion(props.profesor);
@@ -36,8 +35,7 @@ const ProfesorItem = (props: Props) => {
       return toast.success(res.data.success);
     }
     if (res.data.error) return toast.error(res.data.success);
-
-  }
+  };
   return (
     <React.Fragment>
       <tr>
@@ -65,17 +63,17 @@ const ProfesorItem = (props: Props) => {
               <button onClick={deshabilitar} className="btn btn-secondary">
                 <TiCancel className="fs-4" />
               </button>
-            </>) :
-            (<>
+            </>
+          ) : (
+            <>
               <button onClick={deshabilitar} className="btn btn-success">
                 <FontAwesomeIcon className="fs-4" icon={faCheck} />
               </button>
             </>
-            )
-          }
+          )}
         </td>
       </tr>
-    </React.Fragment >
+    </React.Fragment>
   );
 };
 

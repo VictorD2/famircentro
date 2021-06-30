@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link,  useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 //Imagenes
@@ -21,7 +21,7 @@ const Login = () => {
     password: "",
   };
   const history = useHistory();
-  const {setUsuario} = useUsuario();
+  const { setUsuario } = useUsuario();
   const [state, setState] = useState(initialState);
   //Set state
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,10 +33,10 @@ const Login = () => {
     e.preventDefault();
     const res = await axios.post("http://localhost:4000/signin", state);
     if (res.data.success) {
-      setUsuario(res.data.user)
+      setUsuario(res.data.user);
       auth.setRango(res.data.user.id_rango);
       auth.sigIn();
-      return history.push('/')
+      return history.push("/");
     }
     if (res.data.error) return toast.error(res.data.error);
   };
@@ -84,7 +84,9 @@ const Login = () => {
                     <label htmlFor="floatingPassword">Contraseña</label>
                   </div>
                   <div className="rgt__button">
-                    <button type="submit" className="btn btn__more" style={{ padding: "0.7rem 2rem" }} > Inicia sesión </button>
+                    <button type="submit" className="btn btn__more" style={{ padding: "0.7rem 2rem" }}>
+                      Inicia sesión
+                    </button>
                   </div>
                 </form>
               </div>
@@ -93,13 +95,13 @@ const Login = () => {
           <div className="card-footer text-muted">
             <div className="row">
               <div className="col-12 d-flex justify-content-center mb-3">
-                <span style={{ color: "#000000" }}>
-                  ¿Aún no tienes cuenta en FAMIR CENTRO?
-                </span>
+                <span style={{ color: "#000000" }}>¿Aún no tienes cuenta en FAMIR CENTRO?</span>
               </div>
             </div>
             <div className="col-12 d-flex justify-content-center mb-3">
-              <a href="/Register" className="btn btn-outline-success w-75"> Regístrate </a>
+              <a href="/Register" className="btn btn-outline-success w-75">
+                Regístrate
+              </a>
             </div>
           </div>
         </div>

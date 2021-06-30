@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Usuario from "../interfaces/Usuario";
-import auth from './auth';
+import auth from "./auth";
 
 const initialState: Usuario = {
   id_usuario: "",
@@ -18,13 +18,11 @@ const initialState: Usuario = {
   authenticate: false,
 };
 
-
 const UsuarioContext = React.createContext({
   usuario: initialState,
   loadUser: false,
-  setUsuario: (usuario: Usuario) => { }
+  setUsuario: (usuario: Usuario) => {},
 });
-
 
 export const UsuarioProvider = (props: any) => {
   const [usuario, setUsuario] = useState<Usuario>(initialState);
@@ -48,19 +46,18 @@ export const UsuarioProvider = (props: any) => {
       auth.logOut();
     }
     setLoadUser(true);
-  }
-
+  };
 
   const value = useMemo(() => {
     return {
       usuario,
       loadUser,
-      setUsuario
+      setUsuario,
     };
   }, [usuario, loadUser, setUsuario]);
 
   return <UsuarioContext.Provider value={value} {...props} />;
-}
+};
 
 export function useUsuario() {
   const context = React.useContext(UsuarioContext);

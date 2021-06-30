@@ -10,7 +10,7 @@ class Auth {
   }
   sigIn() {
     this.loged = true;
-  } 
+  }
   logOut() {
     this.loged = false;
   }

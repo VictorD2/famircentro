@@ -1,4 +1,6 @@
 import React from "react";
+
+// Imagenes
 import fondo2 from "../../images/bg-2.jpg";
 import avatar1 from "../../images/t1.jpg";
 import avatar2 from "../../images/t2.jpg";

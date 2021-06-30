@@ -1,22 +1,26 @@
 import React from "react";
 
+// Componentes
 import Carrusel from "../components/Carrousel/Carrusel";
 import ListaCursos from "../components/Cursos/ListaCursos";
 import ListaOpiniones from "../components/Opiniones/ListaOpiniones";
 import ListaTopCursos from "../components/TopCursos/ListaTopCursos";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/Helpers/NavBar";
 import Footer from "../components/Helpers/Footer";
 
+// Iconos
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
+
+// ScrollReveal
 import ScrollReveal from "scrollreveal";
 class Home extends React.Component {
-  componentDidMount(){
-     //Para los efectos de aparicion
-     const config = {
+  componentDidMount() {
+    //Para los efectos de aparicion
+    const config = {
       duration: 1000,
       delay: 150,
-      easing: 'ease',
+      easing: "ease",
     };
     ScrollReveal().reveal(".show", config);
   }

@@ -1,11 +1,10 @@
 import React from "react";
 
 //Iconos
-import { faAddressCard, faGlobe, faMap, faPaperPlane, faServer, faThumbsUp, } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faGlobe, faMap, faPaperPlane, faServer, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 //Componentes
 import CursoItem from "./CursoItem";
-
 
 const ListaCursos = () => {
   return (

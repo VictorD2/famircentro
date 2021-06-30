@@ -2,11 +2,14 @@ import axios from "axios";
 import { Profesor } from "./Profesor";
 const api = "http://localhost:4000/api/profesores";
 
-export const getAll = async (page:number) => {
-  return await axios.get(`${api}/all/${page}`);
+export const getAll = async (page: number, keyword: string) => {
+  if (page === 0) return await axios.get(`${api}`);
+  if (keyword.trim() !== "") return await axios.get(`${api}?keyword=${keyword}&page=${page}`);
+  return await axios.get(`${api}?page=${page}`);
 };
-export const getCount = async () => {
-  return await axios.get(`${api}/count`);
+export const getCount = async (keyword: string) => {
+  if (keyword.trim() === "") return await axios.get(`${api}/count`);
+  return await axios.get(`${api}/count?keyword=${keyword}`);
 };
 export const getProfesorById = async (id: string) => {
   return await axios.get(`${api}/${id}`);

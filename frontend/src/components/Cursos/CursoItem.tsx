@@ -1,11 +1,14 @@
 import React from "react";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Interfaces
 interface Props {
   icon: IconDefinition;
   title: string;
   descripcion: string;
 }
+
 const CursoItem = (props: Props) => {
   return (
     <div className="col-12 col-md-6 col-lg-4 mt-5 d-flex curso-item show">
