@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useUsuario } from "../../context-user/UsuarioProvider";
+
 //Iconos
 import { FaEnvelope, FaTimes } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 //Toastify
 import { toast } from "react-toastify";
@@ -13,12 +16,13 @@ import { Comentario } from "./Comentario";
 //Services
 import * as comentariosServices from "./ComentariosServices";
 
+//Components
+import CajaComentario from "./CajaComentario";
+
 //TimeAgo
 import TimeAgo from "timeago-react";
 import * as timeago from "timeago.js";
 import vi from "timeago.js/lib/lang/es";
-import { useUsuario } from "../../context-user/UsuarioProvider";
-import CajaComentario from "./CajaComentario";
 timeago.register("vi", vi);
 
 const initialState: Comentario = {
@@ -39,13 +43,26 @@ const Comentarios = () => {
   const [comentario, setComentario] = useState<Comentario>(initialState);
   const [comentarios, setComentarios] = useState<Comentario[]>([]);
 
+  const [page, setPage] = useState<number>(1);
+  const [cantidad, setCantidad] = useState<number>(0);
+  const [trigger, setTrigger] = useState<number>(0);
+
   useEffect(() => {
     getComentarios();
     return () => {
       setComentario(initialState);
       setComentarios([]);
     };
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    getCantidad();
+    return () => {
+      setCantidad(0);
+      setPage(1);
+      setTrigger(0);
+    };
+  }, [trigger]);
 
   //Funciones
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -55,10 +72,18 @@ const Comentarios = () => {
     if (res.data.success) {
       toast.success(res.data.success);
       getComentarios();
+      setTrigger(trigger + 1);
       setComentario(initialState);
       return;
     }
     toast.error(res.data.error);
+  };
+
+  const getCantidad = async () => {
+    const res = await comentariosServices.getCount(params.idCurso, params.idTema);
+    console.log(Math.ceil(res.data / 4));
+    setCantidad(res.data);
+    setCantidad(Math.ceil(res.data / 4));
   };
 
   const eliminarComentario = async (id?: number) => {
@@ -66,12 +91,14 @@ const Comentarios = () => {
     const res = await comentariosServices.eliminarComentario(id + "");
     if (res.data.success) {
       getComentarios();
+      setTrigger(trigger + 1);
       return toast.success(res.data.success);
     }
     toast.error(res.data.error);
   };
+
   const getComentarios = async () => {
-    const res = await comentariosServices.getAll(params.idCurso, params.idTema);
+    const res = await comentariosServices.getAll(page, params.idCurso, params.idTema);
     setComentarios(res.data);
   };
 
@@ -145,6 +172,22 @@ const Comentarios = () => {
             </div>
           );
         })}
+        {cantidad === page ? (
+          <></>
+        ) : (
+          <>
+            <div className="w-100 d-flex justify-content-center p-2">
+              <button
+                onClick={() => {
+                  setPage(page + 1);
+                }}
+                className="btn btn__blue"
+              >
+                <FaChevronDown /> Ver más comentarios
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

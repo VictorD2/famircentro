@@ -4,13 +4,43 @@ const helpers = require("../lib/helpers");
 
 //.get(/:idCurso/:idTema)
 ctrlComentarios.getComentarios = async (req, res) => {
+  // Tema
   if (req.params.idTema) {
+    if (req.query.page) {
+      const cantidadDatos = 4;
+      const pagina = parseInt(req.query.page) * cantidadDatos;
+      const rows = await pool.query("SELECT id_comentario,id_rango,comentario,fecha,nombre,apellido,url_foto_usuario,comentario.id_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_tema = ? ORDER BY fecha DESC", [req.params.idTema]);
+      console.log(pagina)
+      return res.json(rows.splice(0, pagina));
+    }
     const rows = await pool.query("SELECT id_comentario,id_rango,comentario,fecha,nombre,apellido,url_foto_usuario,comentario.id_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_tema = ? ORDER BY fecha DESC", [req.params.idTema]);
     return res.json(rows);
   }
 
+  // Curso
+  if (req.query.page) {
+    const cantidadDatos = 4;
+    const pagina = parseInt(req.query.page) * cantidadDatos;
+    const rows = await pool.query("SELECT id_comentario,id_rango,comentario,fecha,nombre,apellido,url_foto_usuario,comentario.id_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_curso = ? ORDER BY fecha DESC", [req.params.idCurso]);
+    return res.json(rows.splice(0, pagina));
+  }
   const rows = await pool.query("SELECT id_comentario,id_rango,comentario,fecha,nombre,apellido,url_foto_usuario,comentario.id_usuario FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_curso = ? ORDER BY fecha DESC", [req.params.idCurso]);
   return res.json(rows);
+};
+
+// .get("/count/:idCurso/:idTema)
+ctrlComentarios.getCount = async (req, res) => {
+  // Tema
+  if (req.params.idTema) {
+    const rows = await pool.query("SELECT COUNT(*) FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_tema = ? ORDER BY fecha DESC", [req.params.idTema]);
+    if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"]);
+    return res.json(0);
+  }
+
+  // Curso
+  const rows = await pool.query("SELECT COUNT(*) FROM comentario JOIN usuario ON comentario.id_usuario=usuario.id_usuario WHERE id_curso = ? ORDER BY fecha DESC", [req.params.idCurso]);
+  if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"]);
+  return res.json(0);
 };
 
 // .post("/:idCurso/:idTema")
