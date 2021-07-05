@@ -27,7 +27,7 @@ const Navigation = () => {
         <ul className="navbar__list">
           <li className="navbar__item">
             <Link className="navbar__link" to="/">
-              Home
+              INICIO
             </Link>
           </li>
         </ul>

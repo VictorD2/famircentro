@@ -102,7 +102,7 @@ const ComprarCurso = () => {
 
       <div className="container mt-5" style={{ marginBottom: "4.5rem" }}>
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-12 col-md-12 col-sm-12 col-lg-6 mb-5">
             <img className="img-fluid" src={fotoPrueba} alt={`Foto Curso ${curso.nombre_curso}`} />
             <div className="w-100 mt-4">
               <h6 className="fs-4 fw-bold text-uppercase">DATOS DEL {curso.tipo}</h6>
@@ -114,9 +114,18 @@ const ComprarCurso = () => {
               ) : (
                 <></>
               )}
+              <div className="border border-2 border-warning mt-5 p-4">
+                <p className="text-center fw-bold fs-5" style={{ color: "var(--verde-oscuro)" }}>
+                  IMPORTANTE
+                </p>
+                <p className="fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>Devoluciones</p>
+                <p style={{ textAlign: "justify" }}>No se realizará la devolución del dinero en caso de que el cliente manifiesta retracción, pues los cupos son limitados.</p>
+                <p className="fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>Pago</p>
+                <p style={{ textAlign: "justify" }}>El pago es mediante transferencia electrónica y para su confiabilidad le enviaremos un correo de confirmación y un archivo adjunto donde se indica el pago conforme y completo del curso.</p>
+              </div>
             </div>
           </div>
-          <div className="col-sm-6">
+          <div className="col-12 col-md-12 col-sm-12 col-lg-6">
             <Paso curso={curso} titulo={"PASO 01"} subtitulo={"DATOS DE PAGO"} descripcion={"Estos son los datos correspondientes"} />
             <Paso titulo={"PASO 02"} subtitulo={"ENVÍA TU COMPROBANTE"} descripcion={"Envíanos tu comprobante de pago"} />
 

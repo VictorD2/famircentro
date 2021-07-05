@@ -36,6 +36,13 @@ ctrlComprobantes.createComprobante = async (req, res) => {
   const validacion2 = await pool.query("SELECT * FROM usuario_curso WHERE id_usuario = ? AND id_curso = ?", [req.body.id_usuario, req.body.id_curso]);
   if (validacion2[0]) return res.json({ error: "Ya está inscrito en este curso" });
 
+  // Capacidad Validación
+  const curso = await pool.query("SELECT capacidad FROM curso WHERE id_curso = ?", [req.body.id_curso]);
+  if (curso[0].capacidad) {
+    const count = await pool.query("SELECT COUNT(*) FROM usuario_curso WHERE id_curso = ?", [req.body.id_curso]);
+    if (curso[0].capacidad <= count[0]["COUNT(*)"]) return res.json({ error: "Ya no hay cupos disponibles" });
+  }
+
   const newComprobante = req.body;
   newComprobante.id_usuario = req.user.id_usuario;
   newComprobante.fecha_enviado = new Date();

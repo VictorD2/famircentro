@@ -172,7 +172,7 @@ const Comentarios = () => {
             </div>
           );
         })}
-        {cantidad === page ? (
+        {cantidad === page || cantidad === 0 ? (
           <></>
         ) : (
           <>

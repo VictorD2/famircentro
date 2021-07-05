@@ -7,6 +7,7 @@ const session = require("express-session");
 const MySQLStore = require("express-mysql-session");
 const passport = require("passport");
 const { database } = require("./keys");
+const pool = require("./database");
 
 //Initialization
 const app = express();
@@ -49,6 +50,8 @@ app.use(async (req, res, next) => {
 
 //Routes
 app.get("/video-lock", ctrlTema.getVideo);
+app.use("/api/tareasMaterial", require("./routes/tarea_material.routes"));
+app.use("/api/tareas", require("./routes/tareas.routes"));
 app.use("/api/contacto", require("./routes/contacto.routes"));
 app.use("/api/usuariocurso", require("./routes/usuariocurso.routes"));
 app.use("/api/comprobante", require("./routes/comprobantes.routes"));

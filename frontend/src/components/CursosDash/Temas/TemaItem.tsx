@@ -2,6 +2,7 @@ import React from "react";
 
 //Icons
 import { FaEdit, FaEye, FaPlus, FaTimes } from "react-icons/fa";
+import { FiPlay } from "react-icons/fi";
 import { GoKebabVertical } from "react-icons/go";
 
 //Services
@@ -55,9 +56,9 @@ const TemaItem = (props: Props) => {
   };
 
   return (
-    <li className="list-group-item d-flex align-items-center justify-content-start">
+    <li className="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
       <button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/Material/${params.id}/${props.tema.id_tema}`)} className="btn w-100 mx-4 fw-bold d-flex justify-content-start align-content-center text-start" type="button">
-        {props.tema.titulo}
+        <FiPlay className="me-2 my-auto" /> {props.tema.titulo}
       </button>
       <div className="btn-group ms-auto">
         <button type="button" className="btn btn-light" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,7 +67,14 @@ const TemaItem = (props: Props) => {
         <ul className="dropdown-menu">
           {/* Agregar Material */}
           <li>
-            <button onClick={() => { props.setTemaModal(props.tema); }} data-bs-toggle="modal" data-bs-target="#crearMaterial" className="dropdown-item" >
+            <button
+              onClick={() => {
+                props.setTemaModal(props.tema);
+              }}
+              data-bs-toggle="modal"
+              data-bs-target="#crearMaterial"
+              className="dropdown-item"
+            >
               <FaPlus className="mb-1" /> Agregar Material
             </button>
           </li>
@@ -78,9 +86,16 @@ const TemaItem = (props: Props) => {
             </button>
           </li>
 
-          {/* Editar modulo */}
+          {/* Editar tema */}
           <li>
-            <button onClick={() => {setModales();}} data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item" >
+            <button
+              onClick={() => {
+                setModales();
+              }}
+              data-bs-toggle="modal"
+              data-bs-target="#crearTema"
+              className="dropdown-item"
+            >
               <FaEdit className="mb-1" /> Editar Tema
             </button>
           </li>

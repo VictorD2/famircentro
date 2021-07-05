@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 // Icon
 import { VscRefresh } from "react-icons/vsc";
 import { FaEdit, FaPlus, FaTimes } from "react-icons/fa";
+import { FiFilePlus } from "react-icons/fi";
 import { GoKebabVertical } from "react-icons/go";
 
 //Toastify
@@ -12,6 +13,7 @@ import { toast } from "react-toastify";
 
 //Services
 import * as moduloServices from "./ModuloService";
+import * as tareaServices from "../Tareas/TareaServices";
 
 // Components
 import TemaItem from "../Temas/TemaItem";
@@ -19,6 +21,8 @@ import TemaItem from "../Temas/TemaItem";
 // Interfaces
 import { Modulo } from "./Modulo";
 import { Tema } from "../Temas/Tema";
+import { Tarea } from "../Tareas/Tarea";
+import TareaItem from "../Tareas/TareaItem";
 
 interface Params {
   id: string;
@@ -31,10 +35,15 @@ interface Props {
   //material
   setCountChange: (count: number) => void;
   countChange: number;
+  // Modulo
   setModuloModal: (modulo: Modulo) => void;
   modulo: Modulo;
+  // Tema
   setTemaModal: (tema: Tema) => void;
   temaModal: Tema;
+  // Tarea
+  setTareaModal: (tarea: Tarea) => void;
+  tareaModal: Tarea;
   load: (id: string) => void;
 }
 
@@ -42,10 +51,15 @@ const ModuloItem = (props: Props) => {
   const params = useParams<Params>();
 
   const [temas, setTemas] = useState<Tema[]>([]); //Temas
+  const [tareas, setTareas] = useState<Tarea[]>([]); //Tareas
   const [loadTemas, setLoadTemas] = useState(false); //Están los temas cargados?
 
   useEffect(() => {
-    if (loadTemas) getTemas(); //Solo se hará cuando el estado loadTemas sea true, el cual solo cambia 1 vez
+    //Solo se hará cuando el estado loadTemas sea true, el cual solo cambia 1 vez
+    if (loadTemas) {
+      getTemas();
+      getTareas();
+    }
     return () => limpieza();
   }, [loadTemas, props.count]);
 
@@ -74,8 +88,17 @@ const ModuloItem = (props: Props) => {
     setTemas(rows.data);
   };
 
+  //Trayendo las tareas de la bd
+  const getTareas = async () => {
+    const rows = await tareaServices.getTareasByModuloId(props.modulo.id_modulo + "");
+    setTareas(rows.data);
+  };
+
   //Limpieza cuando se desrenderice
-  const limpieza = () => setTemas([]);
+  const limpieza = () => {
+    setTareas([]);
+    setTemas([]);
+  };
 
   const limpiandoEstados = () => {
     props.setTemaModal({ titulo: "", descripcion: "", url_video: "", video: [new File([""], "filename")] });
@@ -102,6 +125,21 @@ const ModuloItem = (props: Props) => {
             <li>
               <button onClick={() => limpiandoEstados()} data-bs-toggle="modal" data-bs-target="#crearTema" className="dropdown-item">
                 <FaPlus className="mb-1" /> Agregar Tema
+              </button>
+            </li>
+
+            {/* Creando una tarea */}
+            <li>
+              <button
+                onClick={() => {
+                  props.setTareaModal({ titulo_tarea: "", descripcion_tarea: "", id_modulo: 0 });
+                  props.setModuloModal(props.modulo);
+                }}
+                data-bs-toggle="modal"
+                data-bs-target="#crearTarea"
+                className="dropdown-item"
+              >
+                <FiFilePlus className="mb-1" /> Agregar Tarea
               </button>
             </li>
 
@@ -133,6 +171,9 @@ const ModuloItem = (props: Props) => {
           <ol className="list-group list-group-numbered">
             {temas.map((tema) => {
               return <TemaItem countChange={props.countChange} setCountChange={props.setCountChange} setcount={props.setcount} count={props.count} modulo={props.modulo} setModuloModal={props.setModuloModal} setTemaModal={props.setTemaModal} key={tema.id_tema} tema={tema} />;
+            })}
+            {tareas.map((tarea) => {
+              return <TareaItem setTareaModal={props.setTareaModal} tarea={tarea} countChange={props.countChange} setCountChange={props.setCountChange} setcount={props.setcount} count={props.count} modulo={props.modulo} setModuloModal={props.setModuloModal} key={tarea.id_tarea} />;
             })}
           </ol>
         </div>

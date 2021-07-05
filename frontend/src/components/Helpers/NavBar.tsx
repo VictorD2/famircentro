@@ -106,10 +106,10 @@ const NavBar = () => {
               <div className="col-12 h-100">
                 <div className="header-content h-100 d-flex align-items-center justify-content-between">
                   <div className="logo-content align-self-cemter justify-content-start">
-                    <a className="logo-link" href="/">
+                    <Link className="logo-link" to="/">
                       <img className="logo" src={logo} alt="Logo FamirCentro" />
                       <img className="logo-responsive" src={logoResponsive} alt="Logo FamirCentro" />
-                    </a>
+                    </Link>
                   </div>
                   <div className="align-self-center justify-content-end">
                     {loadUser ? (
@@ -223,7 +223,7 @@ const NavBar = () => {
           <div className="icon-phone">
             <AiOutlinePhone className="fs-3" />
           </div>
-          <p className="phone">(+65) 456 332 5568 889</p>
+          <p className="phone">56973952562</p>
         </div>
       </nav>
 

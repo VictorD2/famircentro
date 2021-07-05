@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 
 //Iconos
@@ -34,6 +34,7 @@ const VerTema = () => {
   const [tema, setTema] = useState<Tema>({ titulo: "", descripcion: "", url_video: "" });
   const [material, setMaterial] = useState<MaterialClase[]>([]);
   const [loadingVideo, setLoadingVideo] = useState<boolean>(false);
+  const refDesc = useRef<HTMLParagraphElement | null>();
   const [settings, setSettings] = useState<VideoJsPlayerOptions>({
     //Del video
     autoplay: false,
@@ -63,7 +64,10 @@ const VerTema = () => {
 
   const getTema = async () => {
     const res = await temaServices.getTemaById(params.idTema);
+    const newDescripcion = res.data.descripcion.replace(/\n/g, "<br/>");
+    res.data.descripcion = newDescripcion;
     setTema(res.data);
+    if (refDesc.current) refDesc.current.innerHTML = res.data.descripcion;
     setSettings({ ...settings, sources: [{ src: `http://localhost:4000/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
     setLoadingVideo(true);
   };
@@ -115,7 +119,7 @@ const VerTema = () => {
             <div className="row">
               <div className="col-12">
                 <p className="fs-4">Descripción:</p>
-                {tema?.descripcion}
+                <p ref={(node) => (refDesc.current = node)} style={{ textAlign: "justify" }} className="fs-6"></p>
               </div>
             </div>
           </div>

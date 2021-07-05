@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router";
 
 //Iconos
@@ -53,8 +53,9 @@ const TemaFullPage = () => {
   const params = useParams<Params>();
 
   const history = useHistory();
-
   const [tema, setTema] = useState<Tema>();
+
+  const refDesc = useRef<HTMLParagraphElement | null>();
 
   const [loadingVideo, setLoadingVideo] = useState<boolean>(false);
   const [material, setMaterial] = useState<MaterialClase[]>([]);
@@ -64,6 +65,9 @@ const TemaFullPage = () => {
     const res = await temaServices.getTemaById(params.idTema);
     const resMaterial = await materialServices.getMaterialByTemaId(params.idTema);
     setMaterial(resMaterial.data);
+    const newDescripcion = res.data.descripcion.replace(/\n/g, "<br/>");
+    res.data.descripcion = newDescripcion;
+    if (refDesc.current) refDesc.current.innerHTML = res.data.descripcion;
     setTema(res.data);
     setSettings({ ...settings, sources: [{ src: `http://localhost:4000/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
     setLoadingVideo(true);
@@ -120,8 +124,8 @@ const TemaFullPage = () => {
               </li>
             </ul>
             <div className="tab-content" id="pills-tabContent">
-              <div className="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-home-tab">
-                {tema?.descripcion}
+              <div style={{ textAlign: "justify" }} ref={(node) => (refDesc.current = node)} className="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-home-tab">
+              
               </div>
               <div className="tab-pane fade" id="pills-material" role="tabpanel" aria-labelledby="pills-profile-tab">
                 {material.map((material) => {

@@ -55,11 +55,18 @@ const storageArchivos = multer.diskStorage({
     cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`);
   },
 });
-
+const storageTareas = multer.diskStorage({
+  destination: path.join(__dirname, "../build/uploads/tareas"),
+  filename: (req, file, cb) => {
+    const fecha = new Date();
+    cb(null, `${fecha.getDate()}-${fecha.getMonth()}-${fecha.getFullYear()}-${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}${file.originalname}`);
+  },
+});
 multerCtrl.videos = multer({ storage: storageVideos, fileFilter: filterVideos });
 multerCtrl.fotosPerfil = multer({ storage: storageFotosPerfil, fileFilter: filterFotos });
 multerCtrl.fotosCursos = multer({ storage: storageFotosCursos, fileFilter: filterFotos });
 multerCtrl.fotosComprobantes = multer({ storage: storageFotosComprobantes, fileFilter: filterFotos });
 multerCtrl.archivos = multer({ storage: storageArchivos });
+multerCtrl.storageTareas = multer({ storage: storageTareas });
 
 module.exports = multerCtrl;

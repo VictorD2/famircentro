@@ -17,12 +17,14 @@ import * as CursosServices from "./CursosServices";
 //Modales
 import ModalModulo from "./Modulos/ModalModulo";
 import ModalTema from "./Temas/ModalTema";
+import ModalTarea from "./Tareas/ModalTarea";
 import ModalMaterial from "./MaterialClase/ModalMaterial";
 
 //Interfaces
 import { Curso } from "./Curso";
 import { Modulo } from "./Modulos/Modulo";
 import { Tema } from "./Temas/Tema";
+import { Tarea } from "./Tareas/Tarea";
 
 interface Params {
   modalidad: string;
@@ -50,7 +52,12 @@ const initialStateTema = {
   inputName: "",
   url_video: "",
 };
-
+const initialStateTarea = {
+  id_tarea: 0,
+  titulo_tarea: "",
+  descripcion_tarea: "",
+  id_modulo: 0,
+};
 const MaterialCurso = () => {
   const modalidades = ["Sincronicos", "Asincronicos", "Talleres", "Cursos"];
 
@@ -68,6 +75,7 @@ const MaterialCurso = () => {
   const [countChange, setCountChange] = useState(0);
   const [moduloModal, setModuloModal] = useState<Modulo>(initialStateModulo);
   const [temaModal, setTemaModal] = useState<Tema>(initialStateTema);
+  const [tareaModal, setTareaModal] = useState<Tarea>(initialStateTarea);
 
   useEffect(() => {
     if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo)) return history.push("/");
@@ -82,7 +90,7 @@ const MaterialCurso = () => {
   //Traer los datos deModall curso
   const getCurso = async (idCurso: string) => {
     const res = await CursosServices.getCursoById(idCurso);
-    if (res.data.message === "failed") window.location.href = "/Dashboard/Cursos/Asincronos";
+    if (res.data.error) history.push(`/Dashboard/${params.tipo}/${params.modalidad}`);
     setCurso(res.data);
     getAllModulos(idCurso);
   };
@@ -125,7 +133,7 @@ const MaterialCurso = () => {
         <div className="py-4 mt-4">
           <div className="accordion" id="accordionPanelsStayOpenExample">
             {modulos.map((modulo) => {
-              return <ModuloItem countChange={countChange} setCountChange={setCountChange} setcount={setcount} count={count} modulo={modulo} temaModal={temaModal} load={getAllModulos} setModuloModal={setModuloModal} setTemaModal={setTemaModal} key={modulo.id_modulo} />;
+              return <ModuloItem tareaModal={tareaModal} setTareaModal={setTareaModal} countChange={countChange} setCountChange={setCountChange} setcount={setcount} count={count} modulo={modulo} temaModal={temaModal} load={getAllModulos} setModuloModal={setModuloModal} setTemaModal={setTemaModal} key={modulo.id_modulo} />;
             })}
           </div>
         </div>
@@ -133,6 +141,7 @@ const MaterialCurso = () => {
       <ModalModulo load={getAllModulos} moduloModal={moduloModal} />
       <ModalTema count={count} setcount={setcount} moduloModal={moduloModal} temaModal={temaModal} />
       <ModalMaterial count={count} setcount={setcount} temaModal={temaModal} />
+      <ModalTarea count={count} setcount={setcount} tareaModal={tareaModal} moduloModal={moduloModal} />
     </React.Fragment>
   );
 };
