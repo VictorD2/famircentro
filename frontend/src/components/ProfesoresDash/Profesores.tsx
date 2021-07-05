@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -9,22 +10,22 @@ import ListaProfesores from "./ListaProfesores";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookReader, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Profesor } from "./Profesor";
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 //Components
-import BuscadorProfesor from "./BuscadorProfesor";
+import Buscador from "../Buscador/Buscador";
 
 //Toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import 'animate.css/animate.min.css';
+import "animate.css/animate.min.css";
 
 const Profesores = () => {
-
   const history = useHistory();
 
-  const [profesor, setProfesor] = useState<Profesor>({})
-  const [filtro, setFiltro] = useState<string>("")
+  const [profesor, setProfesor] = useState<Profesor>({});
+  const [filtro, setFiltro] = useState<string>("");
+
   //Redireccionamiento del boton crear profesor
   const createUser = () => history.push("/DashBoard/Profesores/nuevo");
 
@@ -47,34 +48,21 @@ const Profesores = () => {
             Agrega un profesor
           </button>
           <div className="mx-4 my-2">
-            <BuscadorProfesor funcion={buscar} />
+            <Buscador placeholder={`Buscar profesor`} funcion={buscar} />
           </div>
         </div>
         <div className="py-4 mt-4">
-          <table className="table table-light-gray table-bordered table-hover table-responsive">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>APELLIDOS</th>
-                <th>CORREO</th>
-                <th>PAIS</th>
-                <th>PROFESION</th>
-                <th className="text-center">EDITAR</th>
-                <th className="text-center">VER MÁS</th>
-                <th className="text-center">DESHABILITAR</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ListaProfesores filtro={filtro} funcion={handleModalChange} />
-            </tbody>
-          </table>
+          <div className="table-responsive">
+            <ListaProfesores filtro={filtro} funcion={handleModalChange} />
+          </div>
           {/* Modal */}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
                 <div className="modal-header btn__blue">
-                  <h5 className="modal-title" id="exampleModalLabel">{profesor.nombre} {profesor.apellido}</h5>
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    {profesor.nombre} {profesor.apellido}
+                  </h5>
                   <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
@@ -90,7 +78,7 @@ const Profesores = () => {
                           <p className="card-text">Pais : {profesor.nombre_pais}</p>
                           <p className="card-text">Telefono : {profesor.telefono}</p>
                           <p className="card-text">RUT : {profesor.rut}</p>
-                          <p className="card-text">Habilitado : {profesor.habilitado_u === 1 ? (<FaCheck className="text-success mb-1 ms-1" />) : (<FaTimes className="text-danger mb-1 ms-1" />)}</p>
+                          <p className="card-text">Habilitado : {profesor.habilitado_u === 1 ? <FaCheck className="text-success mb-1 ms-1" /> : <FaTimes className="text-danger mb-1 ms-1" />}</p>
                         </div>
                       </div>
                     </div>

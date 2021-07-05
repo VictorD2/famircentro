@@ -11,11 +11,11 @@ import { Estudiante } from "./Estudiante";
 
 //Components
 import ListaEstudiantes from "./ListaEstudiantes";
-import BuscadorProfesor from "../ProfesoresDash/BuscadorProfesor";
+import Buscador from "../Buscador/Buscador";
 import { ToastContainer } from "react-toastify";
 
 const Usuarios = () => {
-  const [estudiante, setEstudiante] = useState<Estudiante>({})
+  const [estudiante, setEstudiante] = useState<Estudiante>({});
   const [filtro, setFiltro] = useState<string>("");
 
   const buscar = (text: string) => setFiltro(text);
@@ -24,7 +24,7 @@ const Usuarios = () => {
   return (
     <React.Fragment>
       <Navigation />
-      <ToastContainer/>
+      <ToastContainer />
       <div className="contenido-principal p-4">
         <div className="d-flex flex-row efecto_titulo">
           <FontAwesomeIcon className="me-3 fs-3" icon={faUser} />
@@ -33,33 +33,23 @@ const Usuarios = () => {
 
         <div className="d-flex flex-row p-2 mt-4 justify-content-between flex-wrap">
           <div></div>
-          <div className="mx-4 my-2"> <BuscadorProfesor funcion={buscar} /> </div>
+          <div className="mx-4 my-2">
+            <Buscador placeholder={`Buscar estudiante`} funcion={buscar} />
+          </div>
         </div>
 
         <div className="py-4 mt-4">
-          <table className="table table-bordered table-hover table-responsive">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>APELLIDOS</th>
-                <th>CORREO</th>
-                <th>PAIS</th>
-                <th>PROFESION</th>
-                <th className="text-center">VER MÁS</th>
-                <th className="text-center">DESHABILITAR</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ListaEstudiantes filtro={filtro} funcion={handleModalChange} />
-            </tbody>
-          </table>
+          <div className="table-responsive">
+            <ListaEstudiantes filtro={filtro} funcion={handleModalChange} />
+          </div>
           {/* Modal */}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">{estudiante.nombre} {estudiante.apellido}</h5>
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    {estudiante.nombre} {estudiante.apellido}
+                  </h5>
                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
@@ -75,7 +65,7 @@ const Usuarios = () => {
                           <p className="card-text">Pais : {estudiante.nombre_pais}</p>
                           <p className="card-text">Telefono : {estudiante.telefono}</p>
                           <p className="card-text">RUT : {estudiante.rut}</p>
-                          <p className="card-text">Habilitado : {estudiante.habilitado_u === 1 ? (<FaCheck className="text-success mb-1 ms-1" />) : (<FaTimes className="text-danger mb-1 ms-1" />)}</p>
+                          <p className="card-text">Habilitado : {estudiante.habilitado_u === 1 ? <FaCheck className="text-success mb-1 ms-1" /> : <FaTimes className="text-danger mb-1 ms-1" />}</p>
                         </div>
                       </div>
                     </div>

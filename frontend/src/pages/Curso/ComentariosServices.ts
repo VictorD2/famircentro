@@ -2,15 +2,19 @@ import axios from "axios";
 import { Comentario } from "./Comentario";
 const api = "http://localhost:4000/api/comentarios";
 
-
-export const getAll = async (idCurso: string, idTema?: string) => {
-    return await axios.get(`${api}/${idCurso}/${idTema}`);
+export const getAll = async (page: number, idCurso: string, idTema?: string) => {
+  return await axios.get(`${api}/${idCurso}/${idTema}?page=${page}`);
 };
+
+export const getCount = async (idCurso: string, idTema?: string) =>{
+  return await axios.get(`${api}/count/${idCurso}/${idTema}`);
+}
+
 export const crearComentario = async (comentario: Comentario, idCurso: string, idTema: string) => {
-    comentario.id_tema = parseInt(idTema);
-    comentario.id_curso = parseInt(idCurso);
-    return await axios.post(`${api}/${idCurso}/${idTema}`, comentario);
+  comentario.id_tema = parseInt(idTema);
+  comentario.id_curso = parseInt(idCurso);
+  return await axios.post(`${api}/${idCurso}/${idTema}`, comentario);
 };
 export const eliminarComentario = async (id: string | undefined) => {
-    return await axios.delete(`${api}/${id}`);
+  return await axios.delete(`${api}/${id}`);
 };

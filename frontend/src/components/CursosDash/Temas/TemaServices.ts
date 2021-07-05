@@ -1,9 +1,8 @@
 import axios from "axios";
 const api = "http://localhost:4000/api/tema";
 
-
 export const getVideo = async (id: string) => {
-  const res = await axios.get(`http://localhost:4000/video-lock?key=1v4g8h6vcesm&idTema=${id}`,{responseType:"arraybuffer"});
+  const res = await axios.get(`http://localhost:4000/video-lock?key=1v4g8h6vcesm&idTema=${id}`, { responseType: "arraybuffer" });
   let blob = new Blob([res.data]);
   return URL.createObjectURL(blob);
 };
@@ -16,7 +15,7 @@ export const getTemaById = async (id: string) => {
 export const crearTema = async (form: FormData, progressBar: any) => {
   return await axios.post(`${api}`, form, {
     headers: {
-      'Content-Type': 'multipart/form-data'
+      "Content-Type": "multipart/form-data",
     },
     onUploadProgress(e) {
       let progress = Math.round((e.loaded * 100.0) / e.total);
@@ -24,7 +23,7 @@ export const crearTema = async (form: FormData, progressBar: any) => {
         progressBar.innerHTML = `${progress}%`;
         progressBar.style.width = `${progress}%`;
       }
-    }
+    },
   });
 };
 
@@ -32,7 +31,7 @@ export const crearTema = async (form: FormData, progressBar: any) => {
 export const editarTema = async (id: string, form: FormData, progressBar: any) => {
   return await axios.put(`${api}/${id}`, form, {
     headers: {
-      'Content-Type': 'multipart/form-data'
+      "Content-Type": "multipart/form-data",
     },
     onUploadProgress(e) {
       let progress = Math.round((e.loaded * 100.0) / e.total);
@@ -40,7 +39,7 @@ export const editarTema = async (id: string, form: FormData, progressBar: any) =
         progressBar.innerHTML = `${progress}%`;
         progressBar.style.width = `${progress}%`;
       }
-    }
+    },
   });
 };
 

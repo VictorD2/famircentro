@@ -1,14 +1,14 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 //Imagenes
 import logo from "../../images/logoFamir.jpg";
 
 // Iconos
-import { FiFacebook } from 'react-icons/fi'
-import { CgMail } from 'react-icons/cg'
+import { FiFacebook } from "react-icons/fi";
+import { CgMail } from "react-icons/cg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faWhatsapp, } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { IoLocationOutline } from "react-icons/io5";
 import { AiOutlinePhone } from "react-icons/ai";
 
@@ -22,20 +22,22 @@ const Footer = () => {
             <img className="img-fluid sombra-blanca" src={logo} alt="Logo Famir Centro" />
           </a>
         </div>
-        <p className="footer-text text-white-50 mt-5 mt-md-4 mt-lg-3 lh-lg pe-5">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. A, Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. A, Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. A, recusandae.
-        </p>
+        <p className="footer-text text-white-50 mt-5 mt-md-4 mt-lg-3 lh-lg pe-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. A, Lorem ipsum dolor sit amet consectetur adipisicing elit. A, Lorem ipsum dolor sit amet consectetur adipisicing elit. A, recusandae.</p>
         <ul className="footer-social-list d-flex">
           <li className="footer-social-list-item mx-2 fs-3">
-            <a href="https://www.facebook.com/famircentro" target="_BLANK" rel="noreferrer" className="text-decoration-none"> <FiFacebook className="mb-2" /> </a>
+            <a href="https://www.facebook.com/famircentro" target="_BLANK" rel="noreferrer" className="text-decoration-none">
+              <FiFacebook className="mb-2" />
+            </a>
           </li>
           <li className="footer-social-list-item mx-2 fs-3">
-            <a href="https://www.instagram.com/famircentro/" target="_BLANK"  rel="noreferrer"className="text-decoration-none"> <FontAwesomeIcon icon={faInstagram} /> </a>
+            <a href="https://www.instagram.com/famircentro/" target="_BLANK" rel="noreferrer" className="text-decoration-none">
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
           </li>
           <li className="footer-social-list-item mx-2 fs-3">
-            <a href="https://whatsapp.com" target="_BLANK" rel="noreferrer" className="text-decoration-none"> <FontAwesomeIcon icon={faWhatsapp} /> </a>
+            <a href="https://whatsapp.com" target="_BLANK" rel="noreferrer" className="text-decoration-none">
+              <FontAwesomeIcon icon={faWhatsapp} />
+            </a>
           </li>
         </ul>
       </div>
@@ -44,16 +46,24 @@ const Footer = () => {
         <h6 className="footer-subtitle text-white fs-5 text-uppercase"> ENLACES </h6>
         <ul className="footer-as-list ftr__list">
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/"> Inicio </Link>
+            <Link className="text-white-50 text-decoration-none" to="/">
+              Inicio
+            </Link>
           </li>
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/Nosotros"> Nosotros </Link>
+            <Link className="text-white-50 text-decoration-none" to="/Nosotros">
+              Nosotros
+            </Link>
           </li>
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/Contactanos"> Contáctanos </Link>
+            <Link className="text-white-50 text-decoration-none" to="/Contactanos">
+              Contáctanos
+            </Link>
           </li>
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/Programa"> Programa </Link>
+            <Link className="text-white-50 text-decoration-none" to="/Programa">
+              Programa
+            </Link>
           </li>
         </ul>
       </div>

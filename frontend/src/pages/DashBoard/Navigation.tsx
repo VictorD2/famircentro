@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 // Iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faBookReader, faChevronDown, faFileAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBookReader, faChevronDown, faEnvelope, faFileAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../images/logoFamir2.png";
 
 import { useUsuario } from "../../context-user/UsuarioProvider";
@@ -17,14 +17,19 @@ const Navigation = () => {
     document.querySelector(".contenido-principal")?.classList.toggle("ajustar");
   };
 
-
   return (
     <React.Fragment>
       {/* Nav Superior */}
       <nav className="nav-superior">
-        <button onClick={esconder} className="btn btn-secondary"> <FontAwesomeIcon icon={faBars} /> </button>
+        <button onClick={esconder} className="btn btn-secondary">
+          <FontAwesomeIcon icon={faBars} />
+        </button>
         <ul className="navbar__list">
-          <li className="navbar__item"> <Link className="navbar__link" to="/"> Home </Link> </li>
+          <li className="navbar__item">
+            <Link className="navbar__link" to="/">
+              Home
+            </Link>
+          </li>
         </ul>
       </nav>
 
@@ -51,7 +56,7 @@ const Navigation = () => {
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header">
-                  <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" >
+                  <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                     <FontAwesomeIcon icon={faBars} />
                     <p>Cursos</p>
                     <div className="w-100 d-flex align-items-center justify-content-end">
@@ -65,7 +70,7 @@ const Navigation = () => {
                       <FontAwesomeIcon icon={faBookReader} />
                       <p>Cursos Asincronos</p>
                     </Link> */}
-                    <Link className="item__link my-0 p-0" to="/DashBoard/Cursos/Sincronicos" >
+                    <Link className="item__link my-0 p-0" to="/DashBoard/Cursos/Sincronicos">
                       <FontAwesomeIcon icon={faBars} />
                       <p>Cursos Sincrónicos</p>
                     </Link>
@@ -78,7 +83,7 @@ const Navigation = () => {
             <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
                 <h2 className="accordion-header">
-                  <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2" >
+                  <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2">
                     <FontAwesomeIcon icon={faBars} />
                     <p>Talleres</p>
                     <div className="w-100 d-flex align-items-center justify-content-end">
@@ -88,11 +93,11 @@ const Navigation = () => {
                 </h2>
                 <div id="collapseOne2" className="accordion-collapse collapse">
                   <div className="accordion-body">
-                    <Link className="item__link my-2 p-0" to="/DashBoard/Talleres/Asincronicos" >
+                    <Link className="item__link my-2 p-0" to="/DashBoard/Talleres/Asincronicos">
                       <FontAwesomeIcon icon={faBookReader} />
                       <p>Talleres Asincrónicos</p>
                     </Link>
-                    <Link className="item__link my-0 p-0" to="/DashBoard/Talleres/Sincronicos" >
+                    <Link className="item__link my-0 p-0" to="/DashBoard/Talleres/Sincronicos">
                       <FontAwesomeIcon icon={faBars} />
                       <p>Talleres Sincrónicos</p>
                     </Link>
@@ -111,6 +116,12 @@ const Navigation = () => {
             <Link className="item__link" to="/DashBoard/Comprobantes">
               <FontAwesomeIcon icon={faFileAlt} />
               <p>Comprobantes</p>
+            </Link>
+          </li>
+          <li className="opciones__item">
+            <Link className="item__link" to="/DashBoard/Contacto">
+              <FontAwesomeIcon icon={faEnvelope} />
+              <p>Mensajes de Contacto</p>
             </Link>
           </li>
         </ul>

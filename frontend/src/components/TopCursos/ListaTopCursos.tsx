@@ -3,7 +3,6 @@ import imagen from "../../images/pc-2.jpg";
 import TopCursosItem from "./TopCursosItem";
 
 const ListaTopCursos = () => {
-  
   return (
     <section className="top-cursos">
       <div className="container">

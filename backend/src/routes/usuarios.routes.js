@@ -4,10 +4,10 @@ const { isAdmin, typePetition } = require('../lib/auth');
 const upload = require('../lib/multer');
 
 
-router.get('/', [typePetition], ctrlUsuarios.getUsers);
+// router.get('/', [typePetition], ctrlUsuarios.getUsers);
 router.get('/whoami', [typePetition], ctrlUsuarios.whoiam);
-router.get('/:id', ctrlUsuarios.getUserById);
-router.post('/', ctrlUsuarios.createUser);
+// router.get('/:id', ctrlUsuarios.getUserById);
+// router.post('/', ctrlUsuarios.createUser);
 router.put('/:id', ctrlUsuarios.updateUserDatos);
 router.put('/password/:id', ctrlUsuarios.updatePassword);
 router.put('/img/:id', function(req, res, next) {
@@ -16,6 +16,6 @@ router.put('/img/:id', function(req, res, next) {
         next();
     })
 }, ctrlUsuarios.updateImg);
-router.delete('/:id', ctrlUsuarios.deleteUser);
+// router.delete('/:id', ctrlUsuarios.deleteUser);
 
 module.exports = router;

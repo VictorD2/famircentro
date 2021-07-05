@@ -180,5 +180,8 @@
 
 .efecto_titulo:hover {
   color: var(--azul-claro);
-  transition: all .5s;
+  transition: all 0.5s;
+}
+.nav-tabs .nav-item .active {
+  color: white;
 }

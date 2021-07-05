@@ -24,7 +24,7 @@ const TopCursosItem = (props: Props) => {
           <p className="mb-0 fw-bold"><RiCoinsLine className="fs-5 me-1" />Precio: {props.precio}</p>
           <Link to={props.url} className="btn btn__more mt-5"> {props.btnTitle} </Link>
         </div>
-        <div className="img" style={{ backgroundImage: `url(${props.img})` }} ></div>
+        <div className="img" style={{ backgroundImage: `url(${props.img})` }}></div>
       </div>
     </div>
   );
