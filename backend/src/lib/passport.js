@@ -51,6 +51,7 @@ passport.use('local.signup', new LocalStrategy({
         newUser.id_usuario = data.insertId;
         return done(null, newUser);
     } catch (error) {
+        console.log(error)
         return done(null, false, { message: "El correo ya está en uso" });
     }
 }));

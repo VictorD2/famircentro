@@ -96,7 +96,7 @@ const Register = () => {
     if (captcha.current?.getValue()) {
       // console.log('El usuario no es un Robot');
       // if (usuario.password !== usuario.verifyPassword) return toast.error('Las contraseña nos coinciden');
-      if (exprRegular.nombre.test(usuario.name) && exprRegular.nombre.test(usuario.surname) && usuario.password === usuario.verifyPassword) {
+      if (exprRegular.nombre.test(usuario.name) && exprRegular.nombre.test(usuario.surname) && exprRegular.password.test(usuario.password) === exprRegular.password.test(usuario.verifyPassword) && exprRegular.correo.test(usuario.email) && exprRegular.telefono.test(usuario.telefono)) {
         const datos = await axios.post("http://localhost:4000/signup", usuario);
         if (datos.data.message === "failed") return toast.error('El correo electrónico ya está en uso');
         window.location.href = "/";
@@ -198,7 +198,7 @@ const Register = () => {
                     <div className="mb-3">
                       <label className="form-label">Pais</label>
                       <select onChange={handleInputChange} className="form-control rgt__form-control" name="pais" >
-                        <option value="0" >Chile</option>
+                        <option value="2" >Chile</option>
                         <option value="1" selected>Perú</option>
                       </select>
                     </div>
@@ -240,33 +240,33 @@ const Register = () => {
                     <div className="mb-3">
                       <label className="form-label">RUT</label>
                       <input
-                      onChange={handleInputChange}
-                      className="form-control rgt__form-control"
-                      type="text"
-                      name="rut"
-                      placeholder="RUT" />
+                        onChange={handleInputChange}
+                        className="form-control rgt__form-control"
+                        type="text"
+                        name="rut"
+                        placeholder="RUT" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Contraseña</label>
                       <input
-                      onChange={handleInputChange}
-                      ref={refPassword}
-                      className="form-control rgt__form-control"
-                      type="password"
-                      name="password" />
+                        onChange={handleInputChange}
+                        ref={refPassword}
+                        className="form-control rgt__form-control"
+                        type="password"
+                        name="password" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label"> Confirmar contraseña </label>
                       <input
-                      onChange={handleInputChange}
-                      ref={refPasswordVerify}
-                      className="form-control rgt__form-control"
-                      type="password"
-                      name="verifyPassword" />
+                        onChange={handleInputChange}
+                        ref={refPasswordVerify}
+                        className="form-control rgt__form-control"
+                        type="password"
+                        name="verifyPassword" />
                     </div>
                   </div>
                   <div className="recaptcha d-flex justify-content-center">
