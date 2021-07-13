@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import {API} from '../config/config';
 
 //Iconos
 import { FaDownload } from "react-icons/fa";
@@ -69,11 +70,11 @@ const TemaFullPage = () => {
     res.data.descripcion = newDescripcion;
     if (refDesc.current) refDesc.current.innerHTML = res.data.descripcion;
     setTema(res.data);
-    setSettings({ ...settings, sources: [{ src: `http://localhost:4000/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
+    setSettings({ ...settings, sources: [{ src: `${API}/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
     setLoadingVideo(true);
   };
   const authentificar = async () => {
-    const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
+    const datos = await axios.get(`${API}/api/v0/usuarios/whoami`);
     if (datos.data.error) return history.push("/Iniciar");
     if (!datos.data.user.authenticate) return history.push("/Iniciar"); //Poner ! en produccion
     const res = await cursosServices.verificarSuscribcion(params.idCurso);

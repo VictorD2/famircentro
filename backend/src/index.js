@@ -8,7 +8,7 @@ const MySQLStore = require("express-mysql-session");
 const passport = require("passport");
 const { database } = require("./keys");
 const pool = require("./database");
-
+const llaves = require("./config");
 //Initialization
 const app = express();
 require("./lib/passport");
@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: "http://localhost:3000", //Asi el frontend puede hacer peticiones
+    origin: llaves.API, //Asi el frontend puede hacer peticiones
     credentials: true,
   })
 );
@@ -50,19 +50,19 @@ app.use(async (req, res, next) => {
 
 //Routes
 app.get("/video-lock", ctrlTema.getVideo);
-app.use("/api/tareasMaterial", require("./routes/tarea_material.routes"));
-app.use("/api/tareas", require("./routes/tareas.routes"));
-app.use("/api/contacto", require("./routes/contacto.routes"));
-app.use("/api/usuariocurso", require("./routes/usuariocurso.routes"));
-app.use("/api/comprobante", require("./routes/comprobantes.routes"));
-app.use("/api/material", require("./routes/material.routes"));
-app.use("/api/comentarios", require("./routes/comentarios.routes"));
-app.use("/api/tema", require("./routes/tema.routes"));
-app.use("/api/modulos", require("./routes/modulos.routes"));
-app.use("/api/cursos", require("./routes/cursos.routes"));
-app.use("/api/profesores", require("./routes/profesores.routes"));
-app.use("/api/usuarios", require("./routes/usuarios.routes"));
-app.use("/api/estudiantes", require("./routes/estudiantes.routes"));
+app.use("/api/v0/tareasMaterial", require("./routes/tarea_material.routes"));
+app.use("/api/v0/tareas", require("./routes/tareas.routes"));
+app.use("/api/v0/contacto", require("./routes/contacto.routes"));
+app.use("/api/v0/usuariocurso", require("./routes/usuariocurso.routes"));
+app.use("/api/v0/comprobante", require("./routes/comprobantes.routes"));
+app.use("/api/v0/material", require("./routes/material.routes"));
+app.use("/api/v0/comentarios", require("./routes/comentarios.routes"));
+app.use("/api/v0/tema", require("./routes/tema.routes"));
+app.use("/api/v0/modulos", require("./routes/modulos.routes"));
+app.use("/api/v0/cursos", require("./routes/cursos.routes"));
+app.use("/api/v0/profesores", require("./routes/profesores.routes"));
+app.use("/api/v0/usuarios", require("./routes/usuarios.routes"));
+app.use("/api/v0/estudiantes", require("./routes/estudiantes.routes"));
 app.use(require("./routes/auth.routes"));
 app.use(require("./routes/index.routes")); //<- siempre al ultimo
 

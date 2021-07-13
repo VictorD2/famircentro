@@ -10,7 +10,7 @@ import Footer from "../components/Helpers/Footer";
 import NavBar from "../components/Helpers/NavBar";
 import { MaterialTarea } from "../components/CursosDash/Tareas/MaterialTarea";
 import swal from "sweetalert";
-
+import {API} from '../config/config';
 interface Params {
   idTarea: string;
   idCurso: string;
@@ -35,7 +35,7 @@ const TareaFullPage = () => {
   const [tarea, setTarea] = useState<Tarea>(initialStateTarea);
   const [tareaMaterial, setTareaMaterial] = useState<MaterialTarea>(initialStateTareaMaterial);
   useEffect(() => {
-    // authentificar();
+    authentificar();
     getTarea();
     return () => {};
   }, [params.idTarea]);
@@ -47,7 +47,7 @@ const TareaFullPage = () => {
     setTarea(res.data[0]);
   };
   const authentificar = async () => {
-    const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
+    const datos = await axios.get(`${API}/api/v0/usuarios/whoami`);
     if (datos.data.error) return history.push("/Iniciar");
     if (!datos.data.user.authenticate) return history.push("/Iniciar"); //Poner ! en produccion
     const res = await cursosServices.verificarSuscribcion(params.idCurso);

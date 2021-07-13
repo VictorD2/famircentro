@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Usuario from "../interfaces/Usuario";
 import auth from "./auth";
-
+import {API} from '../config/config';
 const initialState: Usuario = {
   id_usuario: "",
   nombre: "",
@@ -34,7 +34,7 @@ export const UsuarioProvider = (props: any) => {
 
   const cargarUsuario = async () => {
     try {
-      const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
+      const datos = await axios.get(`${API}/api/v0/usuarios/whoami`);
       if (datos.data.user) {
         setUsuario(datos.data.user);
         auth.sigIn();

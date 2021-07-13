@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Tarea } from "./Tarea";
-const api = "http://localhost:4000/api/tareas";
-const api2 = "http://localhost:4000/api/tareasMaterial";
+import {API} from '../../../config/config';
+const api = `${API}/api/v0/tareas`;
+const api2 = `${API}/api/v0/tareasMaterial`;
 
 export const getTareasById = async (id: string) => {
   return await axios.get(`${api}/single/${id}`);

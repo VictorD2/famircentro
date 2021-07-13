@@ -68,7 +68,7 @@ const VerTema = () => {
     res.data.descripcion = newDescripcion;
     setTema(res.data);
     if (refDesc.current) refDesc.current.innerHTML = res.data.descripcion;
-    setSettings({ ...settings, sources: [{ src: `http://localhost:4000/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
+    setSettings({ ...settings, sources: [{ src: `https://prueba-naztec.herokuapp.com/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
     setLoadingVideo(true);
   };
   const getMaterial = async () => {

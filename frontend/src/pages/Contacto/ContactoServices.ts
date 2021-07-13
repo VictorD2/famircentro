@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Contacto } from "./Contacto";
-const api = "http://localhost:4000/api/contacto";
+import {API} from '../../config/config'
+const api = `${API}/api/v0/contacto`;
 
 //OBTENER
 export const getAllContactos = async (page: number, keyword: string) => {

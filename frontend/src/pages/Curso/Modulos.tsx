@@ -42,7 +42,7 @@ const Modulos = (props: Props) => {
     setTareas(res.data);
   };
 
-  if (!props.verificacion) {
+  if (props.verificacion) {
     //Quitar ! en produccion
     return (
       <div className="mt-5">

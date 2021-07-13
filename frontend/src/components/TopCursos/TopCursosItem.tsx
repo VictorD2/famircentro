@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { RiCoinsLine } from 'react-icons/ri';
+import { RiCoinsLine } from "react-icons/ri";
 interface Props {
   title: string;
   url: string;
   nombre_profesor: string;
-  fecha: string;
+  fecha?: string;
   descripcion: string;
   img: string;
   precio?: number;
@@ -21,8 +21,13 @@ const TopCursosItem = (props: Props) => {
             By {props.nombre_profesor} | {props.fecha}
           </p>
           <p className="curso-description">{props.descripcion}</p>
-          <p className="mb-0 fw-bold"><RiCoinsLine className="fs-5 me-1" />Precio: {props.precio}</p>
-          <Link to={props.url} className="btn btn__more mt-5"> {props.btnTitle} </Link>
+          <p className="mb-0 fw-bold">
+            <RiCoinsLine className="fs-5 me-1" />
+            Precio: {props.precio}
+          </p>
+          <Link to={props.url} className="btn btn__more mt-5">
+            {props.btnTitle}
+          </Link>
         </div>
         <div className="img" style={{ backgroundImage: `url(${props.img})` }}></div>
       </div>

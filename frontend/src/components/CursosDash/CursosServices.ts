@@ -1,9 +1,10 @@
 import axios from "axios";
-const api = "http://localhost:4000/api/cursos";
+import { API } from "../../config/config";
+const api = `${API}/api/v0/cursos`;
 
 //OBTENER
 export const getAllModulesByCursoId = async (id: string) => {
-  return await axios.get(`http://localhost:4000/api/modulos/${id}`);
+  return await axios.get(`${API}/api/v0/modulos/${id}`);
 };
 export const verificarSuscribcion = async (idCurso: string | undefined) => {
   return await axios.get(`${api}/sub/${idCurso}`);

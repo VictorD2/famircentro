@@ -1,8 +1,9 @@
 import axios from "axios";
-const api = "http://localhost:4000/api/tema";
+import { API } from "../../../config/config";
+const api = `${API}/api/v0/tema`;
 
 export const getVideo = async (id: string) => {
-  const res = await axios.get(`http://localhost:4000/video-lock?key=1v4g8h6vcesm&idTema=${id}`, { responseType: "arraybuffer" });
+  const res = await axios.get(`${API}/video-lock?key=1v4g8h6vcesm&idTema=${id}`, { responseType: "arraybuffer" });
   let blob = new Blob([res.data]);
   return URL.createObjectURL(blob);
 };

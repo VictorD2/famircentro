@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import {API} from '../config/config';
 
 //Imagenes
 import logoLogin from "../images/Logo.svg";
 
 //Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 //Toastify
 import { toast } from "react-toastify";
@@ -31,7 +32,7 @@ const Login = () => {
   //On submit login
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:4000/signin", state);
+    const res = await axios.post(`${API}/signin`, state);
     if (res.data.success) {
       setUsuario(res.data.user);
       auth.setRango(res.data.user.id_rango);
@@ -52,26 +53,14 @@ const Login = () => {
           </Link>
           <div className="card-body px-4">
             <div className="row pt-2">
-              <div className="col-12">
+              {/* <div className="col-12">
                 <a href="auth/facebook" className="btn btn-primary w-100 icon__social">
                   <FontAwesomeIcon icon={faFacebook} className="fs-3" />
                   <span className="ms-3">Iniciar sesión con Facebook</span>
                 </a>
-              </div>
-              <div className="col-12 mt-2">
-                <a href="auth/google" className="btn btn-danger w-100 icon__social">
-                  <FontAwesomeIcon icon={faGoogle} className="fs-3" />
-                  <span className="ms-3">Iniciar sesión con Google</span>
-                </a>
-              </div>
+              </div> */}
             </div>
-            <div className="row">
-              <div className="col-12 d-flex justify-content-center">
-                <span className="line__login">
-                  <span>O</span>
-                </span>
-              </div>
-            </div>
+
             <div className="row">
               <div className="col-12">
                 <form onSubmit={handleForm}>
@@ -90,6 +79,19 @@ const Login = () => {
                   </div>
                 </form>
               </div>
+              <div className="row">
+                <div className="col-12 d-flex justify-content-center">
+                  <span className="line__login">
+                    <span>O</span>
+                  </span>
+                </div>
+              </div>
+              <div className="col-12 mt-2">
+                <a href="auth/google" className="btn btn-danger w-100 icon__social">
+                  <FontAwesomeIcon icon={faGoogle} className="fs-3" />
+                  <span className="ms-3">Iniciar sesión con Google</span>
+                </a>
+              </div>
             </div>
           </div>
           <div className="card-footer text-muted">
@@ -99,7 +101,7 @@ const Login = () => {
               </div>
             </div>
             <div className="col-12 d-flex justify-content-center mb-3">
-              <a href="/Register" className="btn btn-outline-success w-75">
+              <a href="/Registrarse" className="btn btn-outline-success w-75">
                 Regístrate
               </a>
             </div>

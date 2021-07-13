@@ -1,5 +1,6 @@
 import axios from "axios";
-const api = "http://localhost:4000/api/estudiantes";
+import {API} from '../../config/config';
+const api = `${API}/api/v0/estudiantes`;
 
 export const getAll = async (page: number, keyword: string) => {
   if (keyword.trim() !== "") return await axios.get(`${api}?keyword=${keyword}&page=${page}`);

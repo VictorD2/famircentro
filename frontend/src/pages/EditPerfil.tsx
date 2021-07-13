@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useUsuario } from "../context-user/UsuarioProvider";
-
+import {API} from '../config/config';
 // Sweetalert
 import swal from "sweetalert";
 
@@ -47,7 +47,7 @@ const EditPerfil = () => {
       });
       return;
     }
-    const res = await axios.put(`http://localhost:4000/api/usuarios/password/${usuario.id_usuario}`, password);
+    const res = await axios.put(`${API}/api/v0/usuarios/password/${usuario.id_usuario}`, password);
     if (res.data.success) {
       setPassword({ newPassword: "", oldPassword: "", confirmPassowrd: "" });
       swal({
@@ -85,7 +85,7 @@ const EditPerfil = () => {
         reader.readAsDataURL(e.dataTransfer.files[0]);
         const form = new FormData();
         form.append("fotoPerfil", e.dataTransfer.files[0]);
-        const res = await axios.put(`http://localhost:4000/api/usuarios/img/${usuario.id_usuario}`, form);
+        const res = await axios.put(`${API}/api/v0/usuarios/img/${usuario.id_usuario}`, form);
         if (res.data.success) {
           swal({
             title: "¡Hecho!",
@@ -117,7 +117,7 @@ const EditPerfil = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const tipos = ["image/gif", "image/png", "image/jpeg", "image/bmp", "image/webp"];
     if (e.target.files instanceof FileList) {
       if (tipos.includes(e.target.files[0].type)) {
@@ -128,6 +128,24 @@ const EditPerfil = () => {
           }
         };
         reader.readAsDataURL(e.target.files[0]);
+        const form = new FormData();
+        form.append("fotoPerfil", e.target.files[0]);
+        const res = await axios.put(`${API}/api/v0/usuarios/img/${usuario.id_usuario}`, form);
+        if (res.data.success) {
+          swal({
+            title: "¡Hecho!",
+            text: res.data.success,
+            icon: "success",
+          });
+          setUsuario({ ...usuario, url_foto_usuario: res.data.url_foto_usuario });
+        }
+        if (res.data.error) {
+          swal({
+            title: "Ups!",
+            text: res.data.error,
+            icon: "error",
+          });
+        }
       } else {
         swal({
           title: "Advertencia",

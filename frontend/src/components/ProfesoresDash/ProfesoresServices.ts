@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Profesor } from "./Profesor";
-const api = "http://localhost:4000/api/profesores";
+import {API} from '../../config/config';
+const api = `${API}/api/v0/profesores`;
 
 export const getAll = async (page: number, keyword: string) => {
   if (page === 0) return await axios.get(`${api}`);

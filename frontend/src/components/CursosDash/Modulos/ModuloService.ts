@@ -1,9 +1,10 @@
 import axios from "axios";
 import { Modulo } from "./Modulo";
-const api = "http://localhost:4000/api/modulos";
+import {API} from '../../../config/config';
+const api = `${API}/api/v0/modulos`;
 
 export const getTemasByModuloId = async (id: string) => {
-  return await axios.get(`http://localhost:4000/api/tema/${id}`);
+  return await axios.get(`${API}/api/v0/tema/${id}`);
 };
 
 export const crearModulo = async (modulo: Modulo, id: string) => {

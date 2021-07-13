@@ -1,14 +1,15 @@
 import axios from "axios";
 import { Comentario } from "./Comentario";
-const api = "http://localhost:4000/api/comentarios";
+import { API } from "../../config/config";
+const api = `${API}/api/v0/comentarios`;
 
 export const getAll = async (page: number, idCurso: string, idTema?: string) => {
   return await axios.get(`${api}/${idCurso}/${idTema}?page=${page}`);
 };
 
-export const getCount = async (idCurso: string, idTema?: string) =>{
+export const getCount = async (idCurso: string, idTema?: string) => {
   return await axios.get(`${api}/count/${idCurso}/${idTema}`);
-}
+};
 
 export const crearComentario = async (comentario: Comentario, idCurso: string, idTema: string) => {
   comentario.id_tema = parseInt(idTema);

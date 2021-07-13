@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-
+import {API} from '../../config/config';
 import Usuario from "../../interfaces/Usuario";
 import { useUsuario } from "../../context-user/UsuarioProvider";
 
@@ -30,7 +30,7 @@ const FormEditPerfil = () => {
   }, []);
 
   const getDatos = async () => {
-    const datos = await axios.get("http://localhost:4000/api/usuarios/whoami");
+    const datos = await axios.get(`${API}/api/v0/usuarios/whoami`);
     if (datos.data.user) setUsuarioPerfil(datos.data.user);
   };
 
@@ -40,7 +40,7 @@ const FormEditPerfil = () => {
 
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await axios.put(`http://localhost:4000/api/usuarios/${usuarioPerfil.id_usuario}`, usuarioPerfil);
+    const res = await axios.put(`${API}/api/v0/usuarios/${usuarioPerfil.id_usuario}`, usuarioPerfil);
     if (res.data.success) {
       swal({
         title: "¡Hecho!",

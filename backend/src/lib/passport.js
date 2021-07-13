@@ -51,39 +51,40 @@ passport.use('local.signup', new LocalStrategy({
         newUser.id_usuario = data.insertId;
         return done(null, newUser);
     } catch (error) {
+        console.log(error)
         return done(null, false, { error: "El correo ya está en uso" });
     }
 }));
 
 
 // Facebook
-passport.use(new FacebookStrategy({
-    clientID: llaves.FACEBOOK.clientID,
-    clientSecret: llaves.FACEBOOK.clientSecret,
-    callbackURL: "/auth/facebook/callback",
-    profileFields: ['name', 'photos', 'email'],
-    passReqToCallback: true
-}, async(request, accessToken, refreshToken, profile, cb) => {
-    const email = profile.emails[0].value; //<- Email
-    const rows = await pool.query('SELECT * FROM usuario WHERE correo = ?', [email]);
-    if (rows.length > 0) return cb(null, rows[0]); //Ya está guardado el correo en la bd
-    const newUser = { //Creando nuevo usuario
-        nombre: profile.name.givenName,
-        apellido: profile.name.familyName,
-        id_rango: 2,
-        correo: email,
-        telefono: "",
-        rut: "",
-        habilitado_u: 1,
-        id_pais: "",
-        password: "",
-        url_foto_usuario: profile.photos[0].value
-    }
-    newUser.password = await helpers.encrypPassword(newUser.Contrasenia);
-    const data = await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
-    newUser.id_usuario = data.insertId;
-    return cb(null, newUser);
-}));
+// passport.use(new FacebookStrategy({
+//     clientID: llaves.FACEBOOK.clientID,
+//     clientSecret: llaves.FACEBOOK.clientSecret,
+//     callbackURL: "/auth/facebook/callback",
+//     profileFields: ['name', 'photos', 'email'],
+//     passReqToCallback: true
+// }, async(request, accessToken, refreshToken, profile, cb) => {
+//     const email = profile.emails[0].value; //<- Email
+//     const rows = await pool.query('SELECT * FROM usuario WHERE correo = ?', [email]);
+//     if (rows.length > 0) return cb(null, rows[0]); //Ya está guardado el correo en la bd
+//     const newUser = { //Creando nuevo usuario
+//         nombre: profile.name.givenName,
+//         apellido: profile.name.familyName,
+//         id_rango: 2,
+//         correo: email,
+//         telefono: "",
+//         rut: "",
+//         habilitado_u: 1,
+//         id_pais: "",
+//         password: "",
+//         url_foto_usuario: profile.photos[0].value
+//     }
+//     newUser.password = await helpers.encrypPassword(newUser.Contrasenia);
+//     const data = await pool.query('INSERT INTO usuario set ?', [newUser]); //Guardando en la bd
+//     newUser.id_usuario = data.insertId;
+//     return cb(null, newUser);
+// }));
 
 // Google
 passport.use(new GoogleStrategy({

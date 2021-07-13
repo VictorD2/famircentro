@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
+import {API} from '../../config/config';
 
 //Imagenes
 import logo from "../../images/logoFamirNav.png";
@@ -53,7 +54,7 @@ const NavBar = () => {
 
   //Desconectar
   const logout = async () => {
-    const res = await Axios.get("http://localhost:4000/logout", { withCredentials: true });
+    const res = await Axios.get(`${API}/logout`, { withCredentials: true });
     if (res.data.success) {
       setUsuario(initialState);
       auth.setRango(2);
@@ -238,7 +239,7 @@ const NavBar = () => {
           <div className="icon-phone">
             <FontAwesomeIcon icon={faPhone} />
           </div>
-          <p className="phone">(+65) 456 332 5568 889</p>
+          <p className="phone">(+65) 56973952562</p>
         </div>
       </div>
       {/* Nav Lateral */}

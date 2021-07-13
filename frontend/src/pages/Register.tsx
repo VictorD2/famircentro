@@ -2,14 +2,14 @@ import React, { ChangeEvent, FormEvent, useState, useRef, RefObject } from "reac
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import auth from "../context-user/auth";
+import {API} from '../config/config';
 
 import ReCAPTCHA from "react-google-recaptcha";
 import logoRegister from "../images/Logo.svg";
 
 //Toast
-import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "animate.css/animate.min.css";
@@ -31,6 +31,8 @@ interface Usuario {
 
 const Register = () => {
   //Initial State
+  const history = useHistory();
+  const { setUsuario } = useUsuario();
   const [usuarioR, setUsuarioR] = useState<Usuario>({
     name: "",
     surname: "",
@@ -50,8 +52,8 @@ const Register = () => {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     password: /^.{4,12}$/, // 4 a 12 digitos.
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, // name@example.com
-    telefono: /^\d{9,14}$/ // 7 a 14 numeros.
-  }
+    telefono: /^\d{9,14}$/, // 7 a 14 numeros.
+  };
 
   // CAPTCHA State
   const [captchaValidation, setCaptchaValidation] = useState<Boolean>();
@@ -65,8 +67,8 @@ const Register = () => {
   const parrafoProfesion = useRef<HTMLInputElement>(null);
   const parrafoTelephone = useRef<HTMLInputElement>(null);
 
-  const refPasswordVerify = useRef<HTMLInputElement>(null)
-  const refPassword = useRef<HTMLInputElement>(null)
+  const refPasswordVerify = useRef<HTMLInputElement>(null);
+  const refPassword = useRef<HTMLInputElement>(null);
 
   // onChange ReCAPTCHA
   const onChange = () => {
@@ -79,19 +81,26 @@ const Register = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setUsuarioR({ ...usuarioR, [e.target.name]: e.target.value });
     switch (e.target.name) {
-      case 'name': validation(exprRegular.nombre, e.target.value, e.target, parrafoName);
+      case "name":
+        validation(exprRegular.nombre, e.target.value, e.target, parrafoName);
         break;
-      case 'surname': validation(exprRegular.nombre, e.target.value, e.target, parrafoSurname);
+      case "surname":
+        validation(exprRegular.nombre, e.target.value, e.target, parrafoSurname);
         break;
-      case 'email': validation(exprRegular.correo, e.target.value, e.target, parrafoEmail);
+      case "email":
+        validation(exprRegular.correo, e.target.value, e.target, parrafoEmail);
         break;
-      case 'profesion': validation(exprRegular.nombre, e.target.value, e.target, parrafoProfesion);
+      case "profesion":
+        validation(exprRegular.nombre, e.target.value, e.target, parrafoProfesion);
         break;
-      case 'telefono': validation(exprRegular.telefono, e.target.value, e.target, parrafoTelephone);
+      case "telefono":
+        validation(exprRegular.telefono, e.target.value, e.target, parrafoTelephone);
         break;
-      case 'password': validationPassword();
+      case "password":
+        validationPassword();
         break;
-      case 'verifyPassword': validationPassword();
+      case "verifyPassword":
+        validationPassword();
         break;
     }
   };
@@ -102,14 +111,18 @@ const Register = () => {
     if (captcha.current?.getValue()) {
       // console.log('El usuario no es un Robot');
       // if (usuario.password !== usuario.verifyPassword) return toast.error('Las contraseña nos coinciden');
-      if (exprRegular.nombre.test(usuarioR.name) && exprRegular.nombre.test(usuarioR.surname) && exprRegular.password.test(usuarioR.password) === exprRegular.password.test(usuarioR.verifyPassword) && exprRegular.correo.test(usuarioR.email) && exprRegular.telefono.test(usuarioR.telefono)) {
-        const datos = await axios.post("http://localhost:4000/signup", usuarioR);
-        if (datos.data.message === "failed") return toast.error('El correo electrónico ya está en uso');
-        window.location.href = "/";
+      if (exprRegular.nombre.test(usuarioR.name) && exprRegular.nombre.test(usuarioR.surname) && usuarioR.password === usuarioR.verifyPassword && exprRegular.correo.test(usuarioR.email) && exprRegular.telefono.test(usuarioR.telefono)) {
+        const datos = await axios.post(`${API}/signup`, usuarioR);
+        if (datos.data.success) {
+          setUsuario(datos.data.user);
+          auth.setRango(datos.data.user.id_rango);
+          auth.sigIn();
+          history.push("/");
+        }
+        if (datos.data.error) return swal("Oops!", datos.data.error, "error");
         setCaptchaValidation(true);
-        return
+        return;
       }
-      swal("Oops!", "Ocurrió un error al intentar registrarse", "error")
     } else {
       setCaptchaValidation(false);
     }
@@ -118,25 +131,23 @@ const Register = () => {
   // Validación de campos
   const validation = (expr: RegExp, valor: string, input: EventTarget & (HTMLInputElement | HTMLSelectElement), msg: RefObject<HTMLParagraphElement>) => {
     if (expr.test(valor)) {
-      input.classList.remove('is-invalid');
-      msg.current?.classList.add('d-none');
-      return
+      input.classList.remove("is-invalid");
+      msg.current?.classList.add("d-none");
+      return;
     }
-    input.classList.add('is-invalid');
-    msg.current?.classList.remove('d-none');
-  }
+    input.classList.add("is-invalid");
+    msg.current?.classList.remove("d-none");
+  };
 
   const validationPassword = () => {
     if (refPassword.current?.value === refPasswordVerify.current?.value) {
-      console.log(refPassword.current?.value, refPasswordVerify.current?.value)
-      refPassword.current?.classList.remove('is-invalid');
-      refPasswordVerify.current?.classList.remove('is-invalid');
-      return
+      refPassword.current?.classList.remove("is-invalid");
+      refPasswordVerify.current?.classList.remove("is-invalid");
+      return;
     }
-    console.log(refPassword.current?.value, refPasswordVerify.current?.value)
-    refPassword.current?.classList.add('is-invalid');
-    refPasswordVerify.current?.classList.add('is-invalid');
-  }
+    refPassword.current?.classList.add("is-invalid");
+    refPasswordVerify.current?.classList.add("is-invalid");
+  };
 
   return (
     <div className="rgt__main">
@@ -154,15 +165,8 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Nombres</label>
-                      <input
-                        onChange={handleInputChange}
-                        className="form-control rgt__form-control"
-                        type="text"
-                        name="name" />
-                      <p
-                        className="text-danger fw-light d-none mt-2"
-                        ref={parrafoName}
-                        style={{ fontSize: '0.75rem' }}>
+                      <input value={usuarioR.name} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="name" />
+                      <p className="text-danger fw-light d-none mt-2" ref={parrafoName} style={{ fontSize: "0.75rem" }}>
                         El nombre solo puede contener letras y espacios.
                       </p>
                     </div>
@@ -170,15 +174,8 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Apellidos</label>
-                      <input
-                        onChange={handleInputChange}
-                        className="form-control rgt__form-control"
-                        type="text"
-                        name="surname" />
-                      <p
-                        className="text-danger fw-light d-none mt-2"
-                        ref={parrafoSurname}
-                        style={{ fontSize: '0.75rem' }}>
+                      <input value={usuarioR.surname} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="surname" />
+                      <p className="text-danger fw-light d-none mt-2" ref={parrafoSurname} style={{ fontSize: "0.75rem" }}>
                         El apellido solo puede contener letras y espacios.
                       </p>
                     </div>
@@ -186,16 +183,8 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Correo</label>
-                      <input
-                        onChange={handleInputChange}
-                        className="form-control rgt__form-control"
-                        type="email"
-                        name="email"
-                        placeholder="name@example.com" />
-                      <p
-                        className="text-danger fw-light d-none mt-2"
-                        ref={parrafoEmail}
-                        style={{ fontSize: '0.75rem' }}>
+                      <input value={usuarioR.email} onChange={handleInputChange} className="form-control rgt__form-control" type="email" name="email" placeholder="name@example.com" />
+                      <p className="text-danger fw-light d-none mt-2" ref={parrafoEmail} style={{ fontSize: "0.75rem" }}>
                         El email debe tener formato name@example.com
                       </p>
                     </div>
@@ -212,15 +201,8 @@ const Register = () => {
                   <div className="col-md-12">
                     <div className="mb-3">
                       <label className="form-label">Profesión</label>
-                      <input
-                        onChange={handleInputChange}
-                        className="form-control rgt__form-control"
-                        type="text"
-                        name="profesion" />
-                      <p
-                        className="text-danger fw-light d-none mt-2"
-                        ref={parrafoProfesion}
-                        style={{ fontSize: '0.75rem' }}>
+                      <input value={usuarioR.profesion} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="profesion" />
+                      <p className="text-danger fw-light d-none mt-2" ref={parrafoProfesion} style={{ fontSize: "0.75rem" }}>
                         La profesion debe contener letras y espacios
                       </p>
                     </div>
@@ -228,16 +210,8 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Teléfono</label>
-                      <input
-                        onChange={handleInputChange}
-                        className="form-control rgt__form-control"
-                        type="text"
-                        name="telefono"
-                        placeholder="Telefono" />
-                      <p
-                        className="text-danger fw-light d-none mt-2"
-                        ref={parrafoTelephone}
-                        style={{ fontSize: '0.75rem' }}>
+                      <input value={usuarioR.telefono} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="telefono" placeholder="Telefono" />
+                      <p className="text-danger fw-light d-none mt-2" ref={parrafoTelephone} style={{ fontSize: "0.75rem" }}>
                         El telefono solo debe tener 9 a 14 numeros
                       </p>
                     </div>
@@ -245,34 +219,19 @@ const Register = () => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">RUT</label>
-                      <input
-                        onChange={handleInputChange}
-                        className="form-control rgt__form-control"
-                        type="text"
-                        name="rut"
-                        placeholder="RUT" />
+                      <input value={usuarioR.rut} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="rut" placeholder="RUT" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Contraseña</label>
-                      <input
-                        onChange={handleInputChange}
-                        ref={refPassword}
-                        className="form-control rgt__form-control"
-                        type="password"
-                        name="password" />
+                      <input value={usuarioR.password} onChange={handleInputChange} ref={refPassword} className="form-control rgt__form-control" type="password" name="password" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label"> Confirmar contraseña </label>
-                      <input
-                        onChange={handleInputChange}
-                        ref={refPasswordVerify}
-                        className="form-control rgt__form-control"
-                        type="password"
-                        name="verifyPassword" />
+                      <input value={usuarioR.verifyPassword} onChange={handleInputChange} ref={refPasswordVerify} className="form-control rgt__form-control" type="password" name="verifyPassword" />
                     </div>
                   </div>
                   <div className="recaptcha d-flex justify-content-center">

@@ -1,5 +1,6 @@
 import axios from "axios";
-const api = "http://localhost:4000/api/material";
+import {API} from '../../../config/config';
+const api = `${API}/api/v0/material`;
 
 // CREAR
 export const createMaterial = async (form: FormData, progressBar: any) => {

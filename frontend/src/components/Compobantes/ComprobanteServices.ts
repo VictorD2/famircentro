@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Comprobante } from "./Comprobante";
-const api = "http://localhost:4000/api/comprobante";
-const api2 = "http://localhost:4000/api/usuariocurso";
+import {API} from '../../config/config';
+const api = `${API}/api/v0/comprobante`;
+const api2 = `${API}/api/v0/usuariocurso`;
 
 export const getComprobantes = async (estado: string, page: number) => {
   return await axios.get(`${api}/${estado}/${page}`);

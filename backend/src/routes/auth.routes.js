@@ -6,8 +6,8 @@ const { isAdmin, typePetition } = require("../lib/auth");
 //Registrarse
 router.post("/signup", async (req, res, next) => {
   passport.authenticate("local.signup", {
-    successRedirect: "/sucessfulLogin",
-    failureRedirect: "/sucessfulLogin",
+    successRedirect: "/sucessfulRegister",
+    failureRedirect: "/failedLogin",
   })(req, res, next);
 });
 
@@ -17,6 +17,10 @@ router.post("/signin", (req, res, next) => {
     successRedirect: "/sucessfulLogin",
     failureRedirect: "/failedLogin",
   })(req, res, next);
+});
+router.get("/sucessfulRegister", typePetition, async (req, res) => {
+  req.user.authenticate = true;
+  return res.json({ success: "Sesión Iniciada", user: req.user });
 });
 
 router.get("/sucessfulLogin", typePetition, async (req, res) => {
@@ -31,8 +35,8 @@ router.get("/failedLogin", typePetition, async (req, res) => {
 });
 
 // Iniciar con Facebook
-router.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }));
-router.get("/auth/facebook/callback", passport.authenticate("facebook", { successRedirect: "/", failureRedirect: "/Login" }));
+// router.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }));
+// router.get("/auth/facebook/callback", passport.authenticate("facebook", { successRedirect: "/", failureRedirect: "/Login" }));
 
 //Iniciar con Google
 router.get("/auth/google", passport.authenticate("google", { scope: ["email", "profile"] }));

@@ -80,6 +80,7 @@ const Programa = () => {
       </div>
       <div className="mt-5" style={{ marginBottom: "4.5rem" }}>
         {cursos.map((curso) => {
+          
           return <CursoItem key={curso.id_curso} curso={curso} />;
         })}
       </div>

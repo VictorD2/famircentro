@@ -107,6 +107,7 @@ const ComprarCurso = () => {
             <div className="w-100 mt-4">
               <h6 className="fs-4 fw-bold text-uppercase">DATOS DEL {curso.tipo}</h6>
               <Fila titulo1={`nombre del ${curso.tipo}`} titulo2="Precio" subtitulo1={`${curso.nombre_curso}`} subtitulo2={`$ ${curso.precio}`} />
+             
               {curso.modalidad === "Sincrónico" ? (
                 <>
                   <Fila titulo1={`Cupos disponibles: `} titulo2="" subtitulo1={`${cupos}`} subtitulo2={``} />
