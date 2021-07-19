@@ -19,6 +19,7 @@ router.post("/signin", (req, res, next) => {
   })(req, res, next);
 });
 router.get("/sucessfulRegister", typePetition, async (req, res) => {
+  if(!req.user) return res.json({error:"Ocurrió un error"});
   req.user.authenticate = true;
   return res.json({ success: "Sesión Iniciada", user: req.user });
 });

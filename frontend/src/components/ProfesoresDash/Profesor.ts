@@ -7,8 +7,11 @@ export interface Profesor {
   telefono?: string;
   rut?: string;
   url_foto_usuario?: string;
-  id_pais?: string;
   habilitado_u?: number;
-  nombre_pais?: string;
-  url_foto_pais?: string;
+  id_pais_nacimiento?: string;
+  id_pais_residencia?: string;
+  nombre_pais_nacimiento?: string;
+  nombre_pais_residencia?: string;
+  url_foto_nacimiento?:string;
+  url_foto_residencia?:string;
 }

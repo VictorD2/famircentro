@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import {API} from '../config/config';
+import { API } from "../config/config";
 
 //Imagenes
 import logoLogin from "../images/Logo.svg";
@@ -24,6 +24,12 @@ const Login = () => {
   const history = useHistory();
   const { setUsuario } = useUsuario();
   const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    return () => {};
+  }, []);
+
   //Set state
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value });

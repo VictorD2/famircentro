@@ -75,7 +75,14 @@ const Profesores = () => {
                         <div className="card-body">
                           <p className="card-text">Profesión :{profesor.profesion}</p>
                           <p className="card-text">Correo : {profesor.correo}</p>
-                          <p className="card-text">Pais : {profesor.nombre_pais}</p>
+                          <p className="card-text">
+                            Pais de nacimiento : {profesor.nombre_pais_nacimiento}
+                            <img src={profesor.url_foto_residencia} className="img__pais register" alt={profesor.nombre_pais_residencia} />
+                          </p>
+                          <p className="card-text">
+                            Pais de residencia : {profesor.nombre_pais_residencia}
+                            <img src={profesor.url_foto_residencia} className="img__pais register" alt={profesor.nombre_pais_residencia} />
+                          </p>
                           <p className="card-text">Telefono : {profesor.telefono}</p>
                           <p className="card-text">RUT : {profesor.rut}</p>
                           <p className="card-text">Habilitado : {profesor.habilitado_u === 1 ? <FaCheck className="text-success mb-1 ms-1" /> : <FaTimes className="text-danger mb-1 ms-1" />}</p>

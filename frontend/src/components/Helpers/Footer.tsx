@@ -22,7 +22,7 @@ const Footer = () => {
             <img className="img-fluid sombra-blanca" src={logo} alt="Logo Famir Centro" />
           </a>
         </div>
-        <p className="footer-text text-white-50 mt-5 mt-md-4 mt-lg-3 lh-lg pe-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. A, Lorem ipsum dolor sit amet consectetur adipisicing elit. A, Lorem ipsum dolor sit amet consectetur adipisicing elit. A, recusandae.</p>
+        <p className="footer-text text-white-50 mt-5 mt-md-4 mt-lg-3 lh-lg pe-0 pe-lg-5" style={{textAlign: "justify" }}>FAMIR Centro se conforma por un equipo multidisciplinario que realiza capacitaciones y charlas con el objetivo de potenciar sus aprendizajes y entregar herramientas teóricas y prácticas relacionadas al ámbito educativo desde una mirada Psicológica y Psicopedagógica.</p>
         <ul className="footer-social-list d-flex">
           <li className="footer-social-list-item mx-2 fs-3">
             <a href="https://www.facebook.com/famircentro" target="_BLANK" rel="noreferrer" className="text-decoration-none">
@@ -43,25 +43,25 @@ const Footer = () => {
       </div>
       {/* Segunda Fila */}
       <div className="col-12 col-md-6 col-lg-3 my-4 my-md-2 my-lg-3 footer-section">
-        <h6 className="footer-subtitle text-white fs-5 text-uppercase"> ENLACES </h6>
+        <h6 className="footer-subtitle text-white fs-6 text-uppercase"> ENLACES </h6>
         <ul className="footer-as-list ftr__list">
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/">
+            <Link className="text-white-50 text-decoration-none text-uppercase" to="/">
               Inicio
             </Link>
           </li>
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/Nosotros">
+            <Link className="text-white-50 text-decoration-none text-uppercase" to="/Nosotros">
               Nosotros
             </Link>
           </li>
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/Contactanos">
+            <Link className="text-white-50 text-decoration-none text-uppercase" to="/Contactanos">
               Contáctanos
             </Link>
           </li>
           <li className="footer-as-list-item my-3 my-md-2 my-lg-4">
-            <Link className="text-white-50 text-decoration-none" to="/Programa">
+            <Link className="text-white-50 text-decoration-none text-uppercase" to="/Programa">
               Programa
             </Link>
           </li>
@@ -87,7 +87,7 @@ const Footer = () => {
       </div>
       {/* Cuarta Fila */}
       <div className="col-12 col-md-6 col-lg-3 my-4 my-lg-3 my-md-2 footer-section">
-        <h6 className="footer-subtitle text-white text-uppercase">CONTACT</h6>
+        <h6 className="footer-subtitle text-white text-uppercase">CONTACTO</h6>
         <div className="footer-contact">
           <p className="text-white-50 d-flex justify-content-start align-items-center">
             <IoLocationOutline className="mx-2 fs-4" />

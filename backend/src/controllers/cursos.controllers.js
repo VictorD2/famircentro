@@ -6,11 +6,13 @@ const path = require("path");
 
 //.get('/:tipo/:modalidad')
 ctrlCursos.getCursos = async (req, res) => {
+  if (!req.user) return res.json({ error: "Necesitas una cuenta" });
   const tipo = req.params.tipo == "Talleres" ? "Taller" : "Curso";
   const modalidad = req.params.modalidad == "Asincronicos" ? "Asincrónico" : "Sincrónico";
-
+  let datosSQL = "*";
+  if (req.user.id_rango === 2) datosSQL = "nombre,apellido,descripcion,duracion,enlace,horario,id_curso,modalidad,precio,tipo,url_foto_curso";
   if (req.query.keyword && req.query.page) {
-    const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE (tipo = '${tipo}' AND modalidad = '${modalidad}') AND (nombre_curso LIKE '%${req.query.keyword}%')`);
+    const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE (tipo = '${tipo}' AND modalidad = '${modalidad}') AND (nombre_curso LIKE '%${req.query.keyword}%')`);
     for (let i = 0; i < data.length; i++) delete data[i].password;
     const cantidadDatos = 12;
     const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
@@ -18,7 +20,7 @@ ctrlCursos.getCursos = async (req, res) => {
   }
 
   if (req.query.keyword) {
-    const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE (tipo = '${tipo}' AND modalidad = '${modalidad}') AND (nombre_curso LIKE '%${req.query.keyword}%')`);
+    const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE (tipo = '${tipo}' AND modalidad = '${modalidad}') AND (nombre_curso LIKE '%${req.query.keyword}%')`);
     for (let i = 0; i < data.length; i++) delete data[i].password;
     return res.json(data);
   }
@@ -26,11 +28,11 @@ ctrlCursos.getCursos = async (req, res) => {
   if (req.query.page) {
     const cantidadDatos = 12;
     const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
-    const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
+    const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
     for (let i = 0; i < data.length; i++) delete data[i].password;
     return res.json(data.splice(pagina, cantidadDatos));
   }
-  const data = await pool.query(`SELECT * FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
+  const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE tipo = '${tipo}' AND modalidad = '${modalidad}'`);
   for (let i = 0; i < data.length; i++) delete data[i].password;
   res.json(data);
 };
@@ -60,6 +62,7 @@ ctrlCursos.getCursoById = async (req, res) => {
 //.get('/sub/:id_curso')
 ctrlCursos.verificarSub = async (req, res) => {
   if (!req.user) return res.json(false);
+  if (req.user.id_rango === 1) return res.json(true);
   const rows = await pool.query("SELECT * FROM usuario_curso WHERE id_curso = ? AND id_usuario = ?", [req.params.id_curso, req.user.id_usuario]);
   if (rows[0]) return res.json(true);
   return res.json(false);

@@ -234,7 +234,10 @@ const Comprobantes = () => {
                             Correo: <span className="ms-2"> {estudiante?.correo}</span>
                           </p>
                           <p>
-                            Pais: <span className="ms-2"> {estudiante?.nombre_pais}</span>
+                            Pais de Nacimiento: <span className="ms-2"> {estudiante?.nombre_pais_nacimiento}</span>
+                          </p>
+                          <p>
+                            Pais de Residencia: <span className="ms-2"> {estudiante?.nombre_pais_residencia}</span>
                           </p>
                           <p>
                             Telefono: <span className="ms-2"> {estudiante?.telefono}</span>

@@ -75,7 +75,6 @@ const ListaProfesores = (props: Props) => {
             <th>NOMBRE</th>
             <th>APELLIDOS</th>
             <th>CORREO</th>
-            <th>PAIS</th>
             <th>PROFESION</th>
             <th className="text-center">EDITAR</th>
             <th className="text-center">VER MÁS</th>

@@ -16,6 +16,7 @@ import tea4 from "../images/tea4.jpg";
 import ScrollReveal from "scrollreveal";
 class AboutUs extends React.Component {
   componentDidMount() {
+    window.scrollTo({ top: 0 });
     //Para los efectos de aparicion
     const config = {
       duration: 1000,

@@ -35,6 +35,7 @@ const TareaFullPage = () => {
   const [tarea, setTarea] = useState<Tarea>(initialStateTarea);
   const [tareaMaterial, setTareaMaterial] = useState<MaterialTarea>(initialStateTareaMaterial);
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     authentificar();
     getTarea();
     return () => {};

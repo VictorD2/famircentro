@@ -81,6 +81,7 @@ const TemaFullPage = () => {
     if (!res.data) history.push(`/Clase/${params.idCurso}`); //Poner ! en produccion
   };
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     authentificar();
     getTema();
     return () => {

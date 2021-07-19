@@ -79,7 +79,7 @@ ctrlTema.getVideo = async (req, res) => {
 
   const videoPath = path.join(__dirname, `..//${req.query.Tema}`);
   const videoSize = fs.statSync(videoPath).size;
-  const CHUNK_SIZE = 0.5 * 10 ** 6; // 4MB
+  const CHUNK_SIZE = 0.6 * 10 ** 6; // 0.5MB
   const start = Number(range.replace(/\D/g, ""));
   const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
   const contentLength = end - start + 1;

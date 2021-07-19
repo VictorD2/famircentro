@@ -41,7 +41,6 @@ const EstudianteItem = (props: Props) => {
         <td>{props.estudiante.nombre}</td>
         <td>{props.estudiante.apellido}</td>
         <td>{props.estudiante.correo}</td>
-        <td>{props.estudiante.nombre_pais}</td>
         <td>{props.estudiante.profesion}</td>
 
         <td className="text-center">

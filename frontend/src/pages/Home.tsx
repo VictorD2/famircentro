@@ -16,6 +16,7 @@ import { faBook, faUser, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import ScrollReveal from "scrollreveal";
 class Home extends React.Component {
   componentDidMount() {
+    window.scrollTo({ top: 0 });
     //Para los efectos de aparicion
     const config = {
       duration: 1000,
@@ -35,11 +36,11 @@ class Home extends React.Component {
             <div className="d-flex justify-content-around align-items-center w-100 h-100 fila">
               <div className="w-100 caracteristicas-item">
                 <FontAwesomeIcon className="fs-3" icon={faBook} />
-                <h5 className="caracteristicas-text">Online Courses</h5>
+                <h5 className="caracteristicas-text">Cursos Virtuales</h5>
               </div>
               <div className="w-100 caracteristicas-item">
                 <FontAwesomeIcon className="fs-3" icon={faUser} />
-                <h5 className="caracteristicas-text">Amazing Teachers</h5>
+                <h5 className="caracteristicas-text">Increíbles Profesores</h5>
               </div>
               <div className="w-100 caracteristicas-item">
                 <FontAwesomeIcon className="fs-3" icon={faPhoneAlt} />

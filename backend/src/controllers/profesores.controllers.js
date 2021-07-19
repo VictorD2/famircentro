@@ -4,23 +4,26 @@ const helpers = require("../lib/helpers");
 
 //.get("/")
 ctrlProfesores.getProfesores = async (req, res) => {
+  let datosSQL = `id_usuario,nombre,apellido,profesion,correo,telefono,rut,habilitado_u,url_foto_usuario, id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
+  let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
+
   if (req.query.keyword && req.query.page) {
-    const data = await pool.query(`SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 3 AND (nombre LIKE '%${req.query.keyword}%' OR apellido LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%')`);
+    const data = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_rango = '3' AND (nombre LIKE '%${req.query.keyword}%' OR apellido LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%')  ORDER BY id_usuario DESC`);
     const cantidadDatos = 12;
     const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
     return res.json(data.splice(pagina, cantidadDatos));
   }
   if (req.query.keyword) {
-    const data = await pool.query(`SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 3 AND (nombre LIKE '%${req.query.keyword}%' OR apellido LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%')`);
+    const data = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} id_rango = '3' AND (nombre LIKE '%${req.query.keyword}%' OR apellido LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%')  ORDER BY id_usuario DESC`);
     return res.json(data);
   }
   if (req.query.page) {
-    const data = await pool.query(`SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 3`);
+    const data = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_rango = '3'  ORDER BY id_usuario DESC`);
     const cantidadDatos = 12;
     const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
     return res.json(data.splice(pagina, cantidadDatos));
   }
-  const data = await pool.query(`SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango,nombre_pais,url_foto_pais FROM usuario JOIN pais ON pais.id_pais=usuario.id_pais WHERE id_rango = 3`);
+  const data = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_rango = '3'  ORDER BY id_usuario DESC`);
   return res.json(data);
 };
 
@@ -38,7 +41,17 @@ ctrlProfesores.getCount = async (req, res) => {
 
 //.get("/:id")
 ctrlProfesores.getProfesorById = async (req, res) => {
-  const rows = await pool.query("SELECT id_usuario,nombre,apellido,habilitado_u,profesion,correo,telefono,rut,url_foto_usuario,usuario.id_pais,id_rango FROM usuario WHERE id_usuario = ?", [req.params.id]);
+  if (!req.user) return res.json({ error: "Necesitas una cuenta" });
+  if (req.user.id_rango === 2) {
+    let datosSQL = `id_usuario,nombre,apellido,url_foto_usuario`;
+    const rows = await pool.query(`SELECT ${datosSQL} FROM usuario WHERE id_usuario = ? ORDER BY id_usuario DESC`, [req.params.id]);
+    if (rows.length === 0) return res.json({ error: "No existe al profesor" });
+    return res.json(rows[0]);
+  }
+  let datosSQL = `id_usuario,nombre,apellido,profesion,correo,telefono,rut,habilitado_u,url_foto_usuario, id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
+  let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
+
+  const rows = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_usuario = ? ORDER BY id_usuario DESC`, [req.params.id]);
 
   if (rows.length === 0) return res.json({ error: "No existe al profesor" });
 
@@ -53,6 +66,7 @@ ctrlProfesores.createProfesor = async (req, res) => {
   newProfesor.url_foto_usuario = "/defaultProfile.PNG";
   newProfesor.password = newProfesor.rut;
   newProfesor.password = await helpers.encrypPassword(newProfesor.password);
+  console.log(newProfesor);
 
   try {
     const rows = await pool.query("INSERT INTO usuario set ?", [newProfesor]);
@@ -61,6 +75,7 @@ ctrlProfesores.createProfesor = async (req, res) => {
 
     return res.json({ error: "Ocurrió un error" });
   } catch (error) {
+    console.log(error);
     if (error.code === "ECONNREFUSED") return res.json({ error: "Base de datos desconectada" });
     if (error.code === "ER_DUP_ENTRY") return res.json({ error: "Ese correo ya está registrado" });
   }

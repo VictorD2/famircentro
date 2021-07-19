@@ -6,6 +6,9 @@ import NavBar from "../components/Helpers/NavBar";
 import "./Styles/Error.css";
 
 class NotFound extends React.Component {
+  componentDidMount() {
+    window.scrollTo({ top: 0 });
+  }
   render() {
     return (
       <>

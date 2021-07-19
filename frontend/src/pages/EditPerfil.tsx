@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useUsuario } from "../context-user/UsuarioProvider";
-import {API} from '../config/config';
+import { API } from "../config/config";
 // Sweetalert
 import swal from "sweetalert";
 
@@ -26,44 +26,25 @@ const EditPerfil = () => {
 
   const cardPass = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    return () => {};
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword({ ...password, [e.target.name]: e.target.value });
   };
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (password.confirmPassowrd === "" || password.newPassword === "" || password.oldPassword === "") {
-      swal({
-        title: "Advertencia",
-        text: "Campos incompletos",
-        icon: "warning",
-      });
-      return;
-    }
-    if (password.newPassword !== password.confirmPassowrd) {
-      swal({
-        title: "Advertencia",
-        text: "Contraseñas no coinciden",
-        icon: "warning",
-      });
-      return;
-    }
+    if (password.confirmPassowrd === "" || password.newPassword === "" || password.oldPassword === "") return swal({ title: "Advertencia", text: "Campos incompletos", icon: "warning" });
+    if (password.newPassword !== password.confirmPassowrd) return swal({ title: "Advertencia", text: "Contraseñas no coinciden", icon: "warning" });
     const res = await axios.put(`${API}/api/v0/usuarios/password/${usuario.id_usuario}`, password);
     if (res.data.success) {
       setPassword({ newPassword: "", oldPassword: "", confirmPassowrd: "" });
-      swal({
-        title: "Hecho",
-        text: res.data.success,
-        icon: "success",
-      });
+      swal({ title: "Hecho", text: res.data.success, icon: "success" });
       return;
     }
-    if (res.data.error) {
-      swal({
-        title: "Ups!",
-        text: res.data.error,
-        icon: "error",
-      });
-    }
+    if (res.data.error) return swal({ title: "Ups!", text: res.data.error, icon: "error" });
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -87,33 +68,17 @@ const EditPerfil = () => {
         form.append("fotoPerfil", e.dataTransfer.files[0]);
         const res = await axios.put(`${API}/api/v0/usuarios/img/${usuario.id_usuario}`, form);
         if (res.data.success) {
-          swal({
-            title: "¡Hecho!",
-            text: res.data.success,
-            icon: "success",
-          });
+          swal({ title: "¡Hecho!", text: res.data.success, icon: "success" });
           setUsuario({ ...usuario, url_foto_usuario: res.data.url_foto_usuario });
         }
         if (res.data.error) {
-          swal({
-            title: "Ups!",
-            text: res.data.error,
-            icon: "error",
-          });
+          swal({ title: "Ups!", text: res.data.error, icon: "error" });
         }
       } else {
-        swal({
-          title: "Advertencia",
-          text: "Subir un formato de imagen",
-          icon: "warning",
-        });
+        swal({ title: "Advertencia", text: "Subir un formato de imagen", icon: "warning" });
       }
     } else {
-      swal({
-        title: "Error",
-        text: "Archivo no leido",
-        icon: "error",
-      });
+      swal({ title: "Error", text: "Archivo no leido", icon: "error" });
     }
   };
 
@@ -132,33 +97,17 @@ const EditPerfil = () => {
         form.append("fotoPerfil", e.target.files[0]);
         const res = await axios.put(`${API}/api/v0/usuarios/img/${usuario.id_usuario}`, form);
         if (res.data.success) {
-          swal({
-            title: "¡Hecho!",
-            text: res.data.success,
-            icon: "success",
-          });
+          swal({ title: "¡Hecho!", text: res.data.success, icon: "success" });
           setUsuario({ ...usuario, url_foto_usuario: res.data.url_foto_usuario });
         }
         if (res.data.error) {
-          swal({
-            title: "Ups!",
-            text: res.data.error,
-            icon: "error",
-          });
+          swal({ title: "Ups!", text: res.data.error, icon: "error" });
         }
       } else {
-        swal({
-          title: "Advertencia",
-          text: "Subir un formato de imagen",
-          icon: "warning",
-        });
+        swal({ title: "Advertencia", text: "Subir un formato de imagen", icon: "warning" });
       }
     } else {
-      swal({
-        title: "Error",
-        text: "Archivo no leido",
-        icon: "error",
-      });
+      swal({ title: "Error", text: "Archivo no leido", icon: "error" });
     }
   };
 
@@ -181,8 +130,8 @@ const EditPerfil = () => {
                 <div style={{ color: "#696969" }}>
                   <input type="file" id="inputFile" style={{ display: "none" }} onChange={handleChange} />
                   Arrastra aquí tu imagen de perfil
-                  <br />o
-                  <a href="/" role="button">
+                  <br /> o
+                  <a href="/" className="ms-1" role="button">
                     <label htmlFor="inputFile" style={{ cursor: "pointer" }}>
                       Sube una foto
                     </label>

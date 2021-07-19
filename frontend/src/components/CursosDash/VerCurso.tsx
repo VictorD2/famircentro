@@ -41,7 +41,8 @@ const initialStateProfesor: Profesor = {
   apellido: "",
   correo: "",
   profesion: "",
-  id_pais: "1",
+  id_pais_nacimiento: "AF",
+  id_pais_residencia: "AF",
   rut: "",
   telefono: "",
 };
@@ -81,10 +82,10 @@ const VerCurso = () => {
 
   const cargarCurso = async () => {
     const res = await cursoServices.getCursoById(params.idCurso);
-    if (params.modalidad === "Sincronicos") {
-      const resCount = await comprobanteServices.getCountUsuarioCursoByCursoId(params.idCurso);
-      setInscritos(resCount.data);
-    }
+    // if (params.modalidad === "Sincronicos") {
+    const resCount = await comprobanteServices.getCountUsuarioCursoByCursoId(params.idCurso);
+    setInscritos(resCount.data);
+    // }
     if (res.data.error) return history.push("/Dashboard");
 
     const newDescripcion = res.data.descripcion.replace(/\n/g, "<br/>");
@@ -112,7 +113,7 @@ const VerCurso = () => {
           </h4>
         </div>
         <div className="row mt-4">
-          <div className="col-12 col-sm-6">
+          <div className="col-12 col-sm-6 text-center">
             <img src={curso.url_foto_curso} className="img-fluid" alt="" />
           </div>
           <div className="col-12 col-sm-6">
@@ -169,57 +170,51 @@ const VerCurso = () => {
             <p ref={(node) => (refDescripcion.current = node)} style={{ textAlign: "justify" }}></p>
           </div>
 
-          {params.modalidad === "Sincronicos" ? (
-            <>
-              <div className="col-12 col-sm-12 mt-3">
-                <p className="m-0 card-text fw-bold text-uppercase">Lista de Estudiantes Inscritos: </p>
-                <table className="table table-light-gray table-bordered table-hover table-responsive mt-3">
-                  <thead>
+          <div className="col-12 col-sm-12 mt-3">
+            <p className="m-0 card-text fw-bold text-uppercase">Lista de Estudiantes Inscritos: </p>
+            <table className="table table-light-gray table-bordered table-hover table-responsive mt-3">
+              <thead>
+                <tr>
+                  <th>
+                    <FaRegImage /> Foto
+                  </th>
+                  <th>Nombre del Estudiante</th>
+                  <th>
+                    <CgMail /> Correo Electrónico
+                  </th>
+                  <th>
+                    <FaPhoneAlt /> Número de Teléfono
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {estudiantes.length === 0 ? (
+                  <>
                     <tr>
-                      <th>
-                        <FaRegImage /> Foto
-                      </th>
-                      <th>Nombre del Estudiante</th>
-                      <th>
-                        <CgMail /> Correo Electrónico
-                      </th>
-                      <th>
-                        <FaPhoneAlt /> Número de Teléfono
-                      </th>
+                      <td>No hay estudiantes inscritos aún</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {estudiantes.length === 0 ? (
-                      <>
+                  </>
+                ) : (
+                  <>
+                    {estudiantes.map((estudiante) => {
+                      return (
                         <tr>
-                          <td>No hay estudiantes inscritos aún</td>
+                          <td style={{ width: "100px", height: "100%" }}>
+                            <img alt="Foto Perfil" className="img-fluid" src={estudiante.url_foto_usuario} />
+                          </td>
+                          <td className="py-auto">
+                            {estudiante.nombre} {estudiante.apellido}
+                          </td>
+                          <td className="py-auto">{estudiante.correo}</td>
+                          <td className="py-auto">{estudiante.telefono}</td>
                         </tr>
-                      </>
-                    ) : (
-                      <>
-                        {estudiantes.map((estudiante) => {
-                          return (
-                            <tr>
-                              <td style={{ width: "100px", height: "100%" }}>
-                                <img alt="Foto Perfil" className="img-fluid" src={estudiante.url_foto_usuario} />
-                              </td>
-                              <td className="py-auto">
-                                {estudiante.nombre} {estudiante.apellido}
-                              </td>
-                              <td className="py-auto">{estudiante.correo}</td>
-                              <td className="py-auto">{estudiante.telefono}</td>
-                            </tr>
-                          );
-                        })}
-                      </>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+                      );
+                    })}
+                  </>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </React.Fragment>

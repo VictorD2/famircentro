@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FormEvent, useState, useRef, RefObject } from "react";
+import React, { ChangeEvent, FormEvent, useState, useRef, RefObject, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import auth from "../context-user/auth";
-import {API} from '../config/config';
+import { API } from "../config/config";
 
 import ReCAPTCHA from "react-google-recaptcha";
 import logoRegister from "../images/Logo.svg";
@@ -25,10 +25,15 @@ interface Usuario {
   verifyPassword: string;
   rut: string;
   telefono: string;
-  pais: number;
+  id_pais_nacimiento: string;
+  id_pais_residencia: string;
   profesion: string;
 }
-
+interface Pais {
+  id_pais: string;
+  nombre_pais: string;
+  url_foto_pais: string;
+}
 const Register = () => {
   //Initial State
   const history = useHistory();
@@ -39,7 +44,8 @@ const Register = () => {
     email: "",
     rut: "",
     telefono: "",
-    pais: 1,
+    id_pais_nacimiento: "AF",
+    id_pais_residencia: "AF",
     password: "",
     profesion: "",
     verifyPassword: "",
@@ -69,6 +75,20 @@ const Register = () => {
 
   const refPasswordVerify = useRef<HTMLInputElement>(null);
   const refPassword = useRef<HTMLInputElement>(null);
+  const [paises, setPaises] = useState<Pais[]>([]);
+  const [paisNaci, setPaisNaci] = useState<Pais>({ nombre_pais: "Afganistan", id_pais: "AF", url_foto_pais: "/uploads/paises/afganistan.png" });
+  const [paisResi, setPaisResi] = useState<Pais>({ nombre_pais: "Afganistan", id_pais: "AF", url_foto_pais: "/uploads/paises/afganistan.png" });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    getPaises();
+    return () => {};
+  }, []);
+
+  const getPaises = async () => {
+    const res = await axios.get(`${API}/api/v0/pais`);
+    setPaises(res.data);
+  };
 
   // onChange ReCAPTCHA
   const onChange = () => {
@@ -102,7 +122,31 @@ const Register = () => {
       case "verifyPassword":
         validationPassword();
         break;
+      case "id_pais_nacimiento":
+        for (let i = 0; i < paises.length; i++) {
+          const pais = paises[i];
+          if (pais.id_pais === e.target.value) {
+            setPaisNaci({ ...paisNaci, url_foto_pais: pais.url_foto_pais });
+            return;
+          }
+        }
+        break;
+      case "id_pais_residencia":
+        for (let i = 0; i < paises.length; i++) {
+          const pais = paises[i];
+          if (pais.id_pais === e.target.value) {
+            setPaisResi({ ...paisResi, url_foto_pais: pais.url_foto_pais });
+            return;
+          }
+        }
+        break;
     }
+  };
+
+  const enviarDatos = async(user: any, url_foto_residencia: string, url_foto_nacimiento: string) => {
+    user.url_foto_residencia = url_foto_residencia;
+    user.url_foto_nacimiento = url_foto_nacimiento;
+    return await axios.post(`${API}/signup`, user);
   };
 
   //Submit
@@ -112,7 +156,7 @@ const Register = () => {
       // console.log('El usuario no es un Robot');
       // if (usuario.password !== usuario.verifyPassword) return toast.error('Las contraseña nos coinciden');
       if (exprRegular.nombre.test(usuarioR.name) && exprRegular.nombre.test(usuarioR.surname) && usuarioR.password === usuarioR.verifyPassword && exprRegular.correo.test(usuarioR.email) && exprRegular.telefono.test(usuarioR.telefono)) {
-        const datos = await axios.post(`${API}/signup`, usuarioR);
+        const datos = await enviarDatos(usuarioR,paisResi.url_foto_pais,paisNaci.url_foto_pais);
         if (datos.data.success) {
           setUsuario(datos.data.user);
           auth.setRango(datos.data.user.id_rango);
@@ -191,15 +235,6 @@ const Register = () => {
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">Pais</label>
-                      <select value={usuarioR.pais} onChange={handleInputChange} className="form-control rgt__form-control" name="pais">
-                        <option value="2">Chile</option>
-                        <option value="1">Perú</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="mb-3">
                       <label className="form-label">Profesión</label>
                       <input value={usuarioR.profesion} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="profesion" />
                       <p className="text-danger fw-light d-none mt-2" ref={parrafoProfesion} style={{ fontSize: "0.75rem" }}>
@@ -207,6 +242,41 @@ const Register = () => {
                       </p>
                     </div>
                   </div>
+                  <div className="col-md-6">
+                    <div className="input-group mb-3">
+                      <p className="w-100 mb-0">Pais de Nacimiento</p>
+                      <label className="input-group-text" htmlFor="inputGroupSelect01">
+                        <img src={paisNaci.url_foto_pais} className="img__pais register" alt="" />
+                      </label>
+                      <select value={usuarioR.id_pais_nacimiento} onChange={handleInputChange} className="form-control rgt__form-control" name="id_pais_nacimiento" id="inputGroupSelect01">
+                        {paises.map((pais) => {
+                          return (
+                            <option key={pais.id_pais} value={pais.id_pais}>
+                              {pais.nombre_pais}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="input-group mb-3">
+                      <p className="w-100 mb-0"> Pais de Residencia</p>
+                      <label className="input-group-text" htmlFor="inputGroupSelect02">
+                        <img src={paisResi.url_foto_pais} className="img__pais register" alt="" />
+                      </label>
+                      <select value={usuarioR.id_pais_residencia} onChange={handleInputChange} className="form-control rgt__form-control" name="id_pais_residencia" id="inputGroupSelect02">
+                        {paises.map((pais) => {
+                          return (
+                            <option key={pais.id_pais} value={pais.id_pais}>
+                              {pais.nombre_pais}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  </div>
+
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label className="form-label">Teléfono</label>
@@ -218,8 +288,8 @@ const Register = () => {
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">RUT</label>
-                      <input value={usuarioR.rut} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="rut" placeholder="RUT" />
+                      <label className="form-label">RUT / DNI</label>
+                      <input value={usuarioR.rut} onChange={handleInputChange} className="form-control rgt__form-control" type="text" name="rut" placeholder="RUT o DNI" />
                     </div>
                   </div>
                   <div className="col-md-6">

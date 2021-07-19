@@ -1,5 +1,5 @@
-import React from "react";
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 //Componentes
 import NavBar from "../components/Helpers/NavBar";
 import Footer from "../components/Helpers/Footer";
@@ -11,6 +11,12 @@ import { useUsuario } from "../context-user/UsuarioProvider";
 
 const Perfil = () => {
   const { usuario } = useUsuario();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    return () => {};
+  }, []);
+
   return (
     <React.Fragment>
       <NavBar />
@@ -28,7 +34,7 @@ const Perfil = () => {
                 <div className="col-12 d-flex">
                   <span className="fs-2">{`${usuario.nombre}  ${usuario.apellido}`}</span>
                   <figure>
-                    <img src="https://static.platzi.com/media/flags/PE.png" alt="pais" height="18" className="img__pais" />
+                    <img src={usuario.url_foto_nacimiento} alt="pais" className="img__pais" />
                   </figure>
                 </div>
               </div>

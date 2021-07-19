@@ -59,6 +59,7 @@ const ComprarCurso = () => {
   const [curso, setCurso] = useState<Curso>(initialState);
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     getCurso();
     return () => setCurso(initialState);
   }, []);
@@ -73,19 +74,9 @@ const ComprarCurso = () => {
     const res = await comprobanteServices.crearComprobante(form, params.idCurso, usuario.id_usuario);
     if (res.data.success) {
       if (refInput.current) refInput.current.value = "";
-      swal({
-        title: "Enviado",
-        text: `${res.data.success}`,
-        icon: "success",
-      });
+      swal({ title: "Enviado", text: `${res.data.success}`, icon: "success" });
     }
-    if (res.data.error) {
-      swal({
-        title: "Advertencia",
-        text: `${res.data.error}`,
-        icon: "warning",
-      });
-    }
+    if (res.data.error) return swal({ title: "Advertencia", text: `${res.data.error}`, icon: "warning" });
   };
   const getCurso = async () => {
     const res = await cursoServices.getCursoById(params.idCurso);
@@ -106,22 +97,33 @@ const ComprarCurso = () => {
             <img className="img-fluid" src={fotoPrueba} alt={`Foto Curso ${curso.nombre_curso}`} />
             <div className="w-100 mt-4">
               <h6 className="fs-4 fw-bold text-uppercase">DATOS DEL {curso.tipo}</h6>
-              <Fila titulo1={`nombre del ${curso.tipo}`} titulo2="Precio" subtitulo1={`${curso.nombre_curso}`} subtitulo2={`$ ${curso.precio}`} />
-             
               {curso.modalidad === "Sincrónico" ? (
                 <>
-                  <Fila titulo1={`Cupos disponibles: `} titulo2="" subtitulo1={`${cupos}`} subtitulo2={``} />
+                  <Fila titulo1={"Cupos disponibles: "} titulo2="" subtitulo1={`${cupos}`} subtitulo2={``} />
                 </>
               ) : (
                 <></>
               )}
+              <Fila titulo1={`nombre del ${curso.tipo}`} titulo2="Precio" subtitulo1={`${curso.nombre_curso}`} subtitulo2={`$ ${curso.precio}`} />
+              <Fila
+                titulo1={`DONACIÓN A <a style="color:var(--amarillo-oscuro)" target="__BLANK" href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi6noq_nt_xAhV5QjABHfZ4DiEQFjABegQICBAD&url=https%3A%2F%2Fongdamanecer.wixsite.com%2Fongdamanecer%23%3A~%3Atext%3DEl%2520Centro%2520de%2520Investigaci%25C3%25B3n%2520y%2Cla%2520ciudad%2520de%2520Trujillo%2520%25E2%2580%2593%2520Per%25C3%25BA.&usg=AOvVaw2KAqKZOTls8viSgnZTvANq">ONG<a/>`}
+                titulo2="Donación"
+                subtitulo1={`5%`}
+                subtitulo2={`$ ${(curso.precio * 0.05).toFixed(2)}`}
+              />
+              <Fila titulo1={``} titulo2="Total" subtitulo1={``} subtitulo2={`$ ${curso.precio}`} />
+
               <div className="border border-2 border-warning mt-5 p-4">
                 <p className="text-center fw-bold fs-5" style={{ color: "var(--verde-oscuro)" }}>
                   IMPORTANTE
                 </p>
-                <p className="fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>Devoluciones</p>
+                <p className="fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>
+                  Devoluciones
+                </p>
                 <p style={{ textAlign: "justify" }}>No se realizará la devolución del dinero en caso de que el cliente manifiesta retracción, pues los cupos son limitados.</p>
-                <p className="fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>Pago</p>
+                <p className="fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>
+                  Pago
+                </p>
                 <p style={{ textAlign: "justify" }}>El pago es mediante transferencia electrónica y para su confiabilidad le enviaremos un correo de confirmación y un archivo adjunto donde se indica el pago conforme y completo del curso.</p>
               </div>
             </div>
@@ -195,10 +197,12 @@ interface PropsFila {
 }
 
 const Fila = (props: PropsFila) => {
+  const refP = useRef<HTMLParagraphElement | null>();
+  if (refP.current) refP.current.innerHTML = props.titulo1;
   return (
     <div className="row mt-4" style={{ borderBottom: "1px solid var(--azul-oscuro)" }}>
       <div className="col-6 col-sm-6">
-        <p className="m-0 fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>
+        <p ref={(node) => (refP.current = node)} className="m-0 fw-bold text-uppercase" style={{ color: "var(--azul-oscuro)" }}>
           {props.titulo1}
         </p>
         <p className="m-0">{props.subtitulo1}</p>

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
+import { API } from "../../../config/config";
 
 //Iconos
 import { faBook } from "@fortawesome/free-solid-svg-icons";
@@ -68,7 +69,7 @@ const VerTema = () => {
     res.data.descripcion = newDescripcion;
     setTema(res.data);
     if (refDesc.current) refDesc.current.innerHTML = res.data.descripcion;
-    setSettings({ ...settings, sources: [{ src: `https://prueba-naztec.herokuapp.com/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
+    setSettings({ ...settings, sources: [{ src: `${API}/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
     setLoadingVideo(true);
   };
   const getMaterial = async () => {

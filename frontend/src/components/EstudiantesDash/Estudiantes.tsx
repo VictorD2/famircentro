@@ -62,7 +62,14 @@ const Usuarios = () => {
                         <div className="card-body">
                           <h5 className="card-title">{estudiante.profesion}</h5>
                           <p className="card-text">Correo : {estudiante.correo}</p>
-                          <p className="card-text">Pais : {estudiante.nombre_pais}</p>
+                          <p className="card-text">
+                            Pais nacimiento : {estudiante.nombre_pais_nacimiento}
+                            <img src={estudiante.url_foto_nacimiento} alt={estudiante.nombre_pais_nacimiento} />
+                          </p>
+                          <p className="card-text">
+                            Pais residencia : {estudiante.nombre_pais_residencia}
+                            <img src={estudiante.url_foto_residencia} className="img__pais register" alt={estudiante.nombre_pais_residencia} />
+                          </p>
                           <p className="card-text">Telefono : {estudiante.telefono}</p>
                           <p className="card-text">RUT : {estudiante.rut}</p>
                           <p className="card-text">Habilitado : {estudiante.habilitado_u === 1 ? <FaCheck className="text-success mb-1 ms-1" /> : <FaTimes className="text-danger mb-1 ms-1" />}</p>

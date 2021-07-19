@@ -13,8 +13,7 @@ import * as cursosServices from "../Compobantes/ComprobanteServices";
 // Interfaces
 import { Curso } from "../CursosDash/Curso";
 
-
-function CardPerfil() {
+function CardCursosPerfil() {
   const { usuario } = useUsuario();
   const [cursos, setCursos] = useState<Curso[]>([]);
 
@@ -24,6 +23,7 @@ function CardPerfil() {
   };
 
   useEffect(() => {
+    
     getCursosByEstudiante();
     return () => {
       setCursos([]);
@@ -88,4 +88,4 @@ function CardPerfil() {
   );
 }
 
-export default CardPerfil;
+export default CardCursosPerfil;

@@ -51,6 +51,7 @@ const Programa = () => {
     params.tipo === "Talleres" ? setTipo("Talleres") : setTipo("Cursos");
   };
   useEffect(() => {
+    if (filtro === "") window.scrollTo({ top: 0 });
     if (!modalidades.includes(params.modalidad) || !modalidades.includes(params.tipo) || (params.tipo === "Cursos" && params.modalidad === "Asincrónicos")) return history.push("/");
     getCursos();
     settings();
@@ -74,15 +75,16 @@ const Programa = () => {
       <NavBar />
       <Badge name={`${tipo} ${modalidad}`} />
       <div className="w-100 d-flex justify-content-between">
-        <div className="ms-auto pe-5">
+        <div className="ms-auto buscador px-4 pe-lg-5 col-12 col-lg-3 col-md-5 col-sm-5">
           <Buscador placeholder={`Buscar ${tipo} ${modalidad}`} funcion={buscar} />
         </div>
       </div>
-      <div className="mt-5" style={{ marginBottom: "4.5rem" }}>
-        {cursos.map((curso) => {
-          
-          return <CursoItem key={curso.id_curso} curso={curso} />;
-        })}
+      <div className="my-2 py-5">
+        <div className="row m-0 py-5 px-lg-5 px-sm-5 px-2 justify-content-around" style={{ backgroundColor: "#eff3f5" }}>
+          {cursos.map((curso) => {
+            return <CursoItem key={curso.id_curso} curso={curso} />;
+          })}
+        </div>
       </div>
       <Footer />
     </React.Fragment>

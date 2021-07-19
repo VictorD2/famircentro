@@ -17,21 +17,12 @@ function ListFavoritos(props: Props) {
   const setFavorito = async () => {
     const res = await comprobanteServices.setFavorito(props.curso.id_curso + "", usuario.id_usuario + "");
     if (res.data.success) {
-      swal({
-        title: "Hecho",
-        text: `${res.data.success}`,
-        icon: "success",
-      });
+      swal({ title: "Hecho", text: `${res.data.success}`, icon: "success" });
       props.refresh();
       return;
     }
     if (res.data.error) {
-      swal({
-        title: "Ups!",
-        text: `${res.data.error}`,
-        icon: "error",
-      });
-      return;
+      return swal({ title: "Ups!", text: `${res.data.error}`, icon: "error" });
     }
   };
 

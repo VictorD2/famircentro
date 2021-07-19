@@ -20,7 +20,8 @@ import Usuario from "../../interfaces/Usuario";
 const initialState: Usuario = {
   id_usuario: "",
   nombre: "",
-  id_pais: "1",
+  id_pais_nacimiento: "AF",
+  id_pais_residencia: "AF",
   apellido: "",
   profesion: "",
   correo: "",

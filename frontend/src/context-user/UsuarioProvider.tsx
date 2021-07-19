@@ -6,7 +6,8 @@ import {API} from '../config/config';
 const initialState: Usuario = {
   id_usuario: "",
   nombre: "",
-  id_pais: "1",
+  id_pais_residencia: "AF",
+  id_pais_nacimiento: "AF",
   apellido: "",
   profesion: "",
   correo: "",
@@ -15,6 +16,8 @@ const initialState: Usuario = {
   rut: "",
   id_rango: 2,
   url_foto_usuario: "",
+  url_foto_residencia: "",
+  url_foto_nacimiento: "",
   authenticate: false,
 };
 

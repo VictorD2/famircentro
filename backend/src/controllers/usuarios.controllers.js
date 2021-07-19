@@ -18,8 +18,10 @@ const path = require("path");
 //.get('/whoami')
 ctrlUsuarios.whoiam = async (req, res) => {
   if (!req.user) return res.json({ error: "No autentificado" }); //No autentificado
-  const usuario = await pool.query("SELECT * FROM usuario WHERE id_usuario = ?", [req.user.id_usuario]);
-  delete usuario[0].password;
+  let datosSQL = `id_usuario,nombre,apellido,correo,telefono,rut,habilitado_u,profesion,url_foto_usuario, id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
+  let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
+
+  const usuario = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_usuario = ? `, [req.user.id_usuario]);
   usuario[0].authenticate = true;
   return res.json({ user: usuario[0] });
 };
@@ -27,12 +29,24 @@ ctrlUsuarios.whoiam = async (req, res) => {
 //.put('/:id')
 ctrlUsuarios.updateUserDatos = async (req, res) => {
   if (req.params.id != req.user.id_usuario) return res.json({ error: "No tienes permiso para esta acción" });
-  delete req.body.authenticate;
-  const newUsuario = req.body;
+  const { id_usuario, nombre, apellido, correo, telefono, rut, habilitado_u, profesion, url_foto_usuario, id_rango, id_pais_nacimiento, id_pais_residencia } = req.body;
+  const newUsuario = {
+    id_usuario,
+    nombre,
+    apellido,
+    correo,
+    telefono,
+    rut,
+    habilitado_u,
+    profesion,
+    url_foto_usuario,
+    id_rango,
+    id_pais_nacimiento,
+    id_pais_residencia,
+  };
   try {
     const rows = await pool.query("UPDATE usuario set ? WHERE id_usuario = ?", [newUsuario, req.params.id]);
-    newUsuario.authenticate = true;
-    if (rows.affectedRows === 1) return res.json({ success: "Perfil modificado correctamente", usuario: newUsuario }); //Se logró registrar
+    if (rows.affectedRows === 1) return res.json({ success: "Perfil modificado correctamente", usuario: req.body }); //Se logró registrar
   } catch (error) {
     if (error.code === "ECONNREFUSED") return res.json({ error: "Base de datos desconectada" });
     if (error.code === "ER_DUP_ENTRY") return res.json({ error: "Ya existe un usuario con ese correo" });

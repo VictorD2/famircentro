@@ -2,7 +2,7 @@ const pool = require('../database');
 const helpers = require('./helpers');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
+// const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const llaves = require('../config');
 
@@ -12,14 +12,14 @@ passport.use('local.signin', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, email, password, done) => {
-
-    const rows = await pool.query('SELECT * FROM usuario WHERE  correo = ?', [email]); //<- Buscamos al usuario
+    let datosSQL = `id_usuario,password,nombre,apellido,correo,telefono,rut,habilitado_u,url_foto_usuario,profesion , id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
+    let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
+    const rows = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE correo = ?`,[email]);
     if (!rows.length > 0) return done(null, false); //El usuario no existe
-
     const validPassword = await helpers.matchPassword(password, rows[0].password); //<- Verificando la contraseña
-
+    delete rows[0].password;
     if (validPassword) return done(null, rows[0]); //<- Contraseña correcta
-
+    
     done(null, false, { error: "Contraseña o Correo inválidos" }); //<-Contraseña incorrecta
 
 }));
@@ -30,7 +30,8 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, user, pass, done) => {
-    const { name, surname, email, password, rut, telefono, pais, profesion } = req.body;
+    const { name, surname, email, password, rut, telefono, id_pais_nacimiento,id_pais_residencia, profesion } = req.body;
+    console.log(req.body);
     const newUser = {
         nombre: name,
         apellido: surname,
@@ -40,7 +41,8 @@ passport.use('local.signup', new LocalStrategy({
         telefono,
         rut,
         habilitado_u: 1,
-        id_pais: pais,
+        id_pais_nacimiento,
+        id_pais_residencia,
         password,
         url_foto_usuario: "/defaultProfile.PNG"
     }
@@ -49,9 +51,10 @@ passport.use('local.signup', new LocalStrategy({
         const data = await pool.query('INSERT INTO usuario set ?', [newUser]);
         delete newUser.password;
         newUser.id_usuario = data.insertId;
+        newUser.url_foto_residencia = req.body.url_foto_residencia;
+        newUser.url_foto_nacimiento = req.body.url_foto_nacimiento;
         return done(null, newUser);
     } catch (error) {
-        console.log(error)
         return done(null, false, { error: "El correo ya está en uso" });
     }
 }));

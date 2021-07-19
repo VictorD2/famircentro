@@ -19,12 +19,9 @@ import { FiFacebook } from "react-icons/fi";
 
 class Contactanos extends React.Component {
   componentDidMount() {
+    window.scrollTo({ top: 0 });
     //Para los efectos de aparicion
-    const config = {
-      duration: 1000,
-      delay: 150,
-      easing: "ease",
-    };
+    const config = { duration: 1000, delay: 150, easing: "ease" };
     ScrollReveal().reveal(".show", config);
   }
   render() {

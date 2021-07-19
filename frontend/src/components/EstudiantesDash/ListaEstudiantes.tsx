@@ -42,7 +42,7 @@ const ListaEstudiantes = (props: Props) => {
   const getCantidad = async () => {
     const res = await estudianteServices.getCount(props.filtro);
     setCantidad(res.data);
-    setCantidadPaginas(Math.ceil(res.data / 12));
+    setCantidadPaginas(Math.ceil(res.data / 3));
   };
   const limpieza = () => {
     setEstudiantes([]);
@@ -77,7 +77,6 @@ const ListaEstudiantes = (props: Props) => {
             <th>NOMBRE</th>
             <th>APELLIDOS</th>
             <th>CORREO</th>
-            <th>PAIS</th>
             <th>PROFESION</th>
             <th className="text-center">VER MÁS</th>
             <th className="text-center">DESHABILITAR</th>

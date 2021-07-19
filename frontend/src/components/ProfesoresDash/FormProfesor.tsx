@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FormEvent } from "react";
 import { useParams } from "react-router-dom";
-
+import {API} from '../../config/config'
+import axios from 'axios';
 //Components
 import Navigation from "../../pages/DashBoard/Navigation";
 
@@ -24,26 +25,34 @@ import { Profesor } from "./Profesor";
 interface Params {
   id?: string;
 }
-
+interface Pais {
+  id_pais: string;
+  nombre_pais: string;
+  url_foto_pais: string;
+}
 const FormProfesor = () => {
   const initialState = {
     nombre: "",
     apellido: "",
     correo: "",
     profesion: "",
-    id_pais: "1",
     rut: "",
     telefono: "",
   };
   const [profesor, setProfesor] = useState<Profesor>(initialState);
+  const [paises, setPaises] = useState<Pais[]>([]);
 
   const params = useParams<Params>();
 
   useEffect(() => {
+    getPaises();
     if (params.id) getProfesor(params.id); //Por si estoy en update
     return () => limpieza();
   }, [params.id]);
-
+  const getPaises = async () => {
+    const res = await axios.get(`${API}/api/v0/pais`);
+    setPaises(res.data);
+  };
   //Traer los datos del profesor si estça en update
   const getProfesor = async (id: string) => {
     const res = await profesorServices.getProfesorById(id);
@@ -101,11 +110,28 @@ const FormProfesor = () => {
                   <label htmlFor="floatingInputEmail">Correo Electrónico</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <select value={profesor.id_pais} id="floatingInputPais" onChange={handleInputChange} className="form-control" name="id_pais">
-                    <option value="1">Peru</option>
-                    <option value="2">Chile</option>
+                  <select value={profesor.id_pais_nacimiento} id="floatingInputPais1" onChange={handleInputChange} className="form-control" name="id_pais_nacimiento">
+                  {paises.map((pais) => {
+                          return (
+                            <option key={pais.id_pais} value={pais.id_pais}>
+                              {pais.nombre_pais}
+                            </option>
+                          );
+                        })}
                   </select>
-                  <label htmlFor="floatingInputPais">Pais</label>
+                  <label htmlFor="floatingInputPais1">Pais de Nacimiento</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <select value={profesor.id_pais_residencia} id="floatingInputPais" onChange={handleInputChange} className="form-control" name="id_pais_residencia">
+                  {paises.map((pais) => {
+                          return (
+                            <option key={pais.id_pais} value={pais.id_pais}>
+                              {pais.nombre_pais}
+                            </option>
+                          );
+                        })}
+                  </select>
+                  <label htmlFor="floatingInputPais">Pais de Residencia</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input onChange={handleInputChange} id="floatingInputProfesion" className="form-control" type="text" placeholder="Profesión" name="profesion" required value={profesor.profesion} />

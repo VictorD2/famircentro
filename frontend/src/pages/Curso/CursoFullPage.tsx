@@ -47,6 +47,7 @@ const CursoFullPage = () => {
   const refDescripcion = useRef<HTMLParagraphElement | null>();
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     getCursoById();
     return () => {
       setCurso(initialState);
@@ -78,8 +79,8 @@ const CursoFullPage = () => {
     <React.Fragment>
       <NavBar />
       <div className="p-5" style={{ marginTop: "5rem", background: "#eef3f6" }}>
-        <div className="row">
-          <div className="col-12 ps-5 col-sm-5 col-lg-5 mb-5">
+        <div className="row flex-column-reverse flex-lg-row">
+          <div className="col-12 ps-5 col-sm-5 col-lg-5 col-md-12 mb-5 mt-sm-5">
             <div className="column-detail">
               <h3 className="fw-bold">{curso.nombre_curso}</h3>
               <div className="row mt-5">
@@ -104,14 +105,16 @@ const CursoFullPage = () => {
               </div>
             </div>
           </div>
-          <div className="col-12 col-sm-7 col-lg-7">
+          <div className="col-12 col-sm-12 col-lg-7">
             <div className="my-auto">
               <img src={cursoFoto} className="img-fluid ancho-img" alt={`Curso`} />
             </div>
-            {modulos.map((modulo) => {
-              return <Modulos verificacion={verificacionSub} key={modulo.id_modulo} modulo={modulo} />;
-            })}
           </div>
+        </div>
+        <div className="col-12 col-sm-7 col-lg-7 ms-auto">
+          {modulos.map((modulo) => {
+            return <Modulos verificacion={verificacionSub} key={modulo.id_modulo} modulo={modulo} />;
+          })}
         </div>
       </div>
       <Footer />
