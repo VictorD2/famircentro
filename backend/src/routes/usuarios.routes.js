@@ -5,7 +5,7 @@ const upload = require('../lib/multer');
 
 
 // router.get('/', [typePetition], ctrlUsuarios.getUsers);
-router.get('/whoami', [typePetition], ctrlUsuarios.whoiam);
+router.get('/whoami', ctrlUsuarios.whoiam);
 // router.get('/:id', ctrlUsuarios.getUserById);
 // router.post('/', ctrlUsuarios.createUser);
 router.put('/:id', ctrlUsuarios.updateUserDatos);

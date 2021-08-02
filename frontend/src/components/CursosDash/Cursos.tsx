@@ -1,16 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 //Icons
-import { faBook, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Toastify
 import { ToastContainer } from "react-toastify";
 
 //Components
-import Navigation from "../../pages/DashBoard/Navigation";
 import Buscador from "../Buscador/Buscador";
 import ListaCursos from "./ListaCursos";
 
@@ -41,30 +40,63 @@ const Cursos = () => {
 
   return (
     <React.Fragment>
-      <Navigation />
       <ToastContainer />
-      <div className="contenido-principal p-4">
-        <div className="d-flex flex-row bg-white efecto_titulo">
-          <FontAwesomeIcon className="me-3 fs-3" icon={faBook} />
-          <h6 className="m-0 text-uppercase fs-3">
-            {tipo} {modalidad}
-          </h6>
+      <div className="content-wrapper" style={{ minHeight: 643 }}>
+        {/* Content Header (Page header) */}
+        <div className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                <h1 className="m-0 efecto_titulo">
+                  <i className="nav-icon fas fa-book me-3" />
+                  {tipo} {modalidad}
+                </h1>
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/">
+                      Inicio
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item active">
+                    {params.tipo} {params.modalidad}
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="d-flex flex-row p-2 mt-4 flex-wrap justify-content-between">
-          <button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/nuevo`)} className="btn btn__blue mx-4 my-2">
-            <FontAwesomeIcon className="me-2" icon={faPlus} />
-            Agrega un {tipo} {modalidad}
-          </button>
+        {/* /.content-header */}
 
-          <div className="mx-4 my-2">
-            <Buscador placeholder={`Buscar ${tipo} ${modalidad}`} funcion={buscar} />
+        {/* Main content */}
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-4 col-md-6">
+                <button onClick={() => history.push(`/DashBoard/${params.tipo}/${params.modalidad}/nuevo`)} className="btn btn__blue mx-4 my-2">
+                  <FontAwesomeIcon className="me-2" icon={faPlus} />
+                  Agrega un {tipo} {modalidad}
+                </button>
+              </div>
+              <div className="col-lg-3 col-md-3 ms-auto">
+                <Buscador placeholder={`Buscar ${tipo} ${modalidad}`} funcion={buscar} />
+              </div>
+            </div>
+            <div className="row mt-5">
+              <div className="table-responsive">
+                <div className="table-responsive">
+                  <ListaCursos filtro={filtro} />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="py-4 mt-4">
-          <div className="table-responsive">
-            <ListaCursos filtro={filtro} />
-          </div>
-        </div>
+        </section>
       </div>
     </React.Fragment>
   );

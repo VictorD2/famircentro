@@ -13,7 +13,6 @@ import { FaDollarSign } from "react-icons/fa";
 import { GrShop } from "react-icons/gr";
 
 //Imagenes
-import cursoFoto from "../../images/bg-2.jpg";
 
 //Services
 import * as cursoServices from "../../components/CursosDash/CursosServices";
@@ -79,11 +78,14 @@ const CursoFullPage = () => {
     <React.Fragment>
       <NavBar />
       <div className="p-5" style={{ marginTop: "5rem", background: "#eef3f6" }}>
-        <div className="row flex-column-reverse flex-lg-row">
-          <div className="col-12 ps-5 col-sm-5 col-lg-5 col-md-12 mb-5 mt-sm-5">
+        <div className="row flex-lg-row">
+          <div className="col-12 ps-5 col-sm-12 col-lg-5 col-md-12 mb-2 mb-lg-5 mt-sm-5 mt-lg-0">
+            <div className="my-auto d-lg-none d-flex">
+              <img src={curso.url_foto_curso} className="img-fluid ancho-img" alt={`Curso`} />
+            </div>
             <div className="column-detail">
               <h3 className="fw-bold">{curso.nombre_curso}</h3>
-              <div className="row mt-5">
+              <div className="row mt-3 mt-lg-5">
                 <div className="d-flex align-items-center">
                   <GiTeacher className="me-2" />
                   <span>
@@ -106,15 +108,13 @@ const CursoFullPage = () => {
             </div>
           </div>
           <div className="col-12 col-sm-12 col-lg-7">
-            <div className="my-auto">
-              <img src={cursoFoto} className="img-fluid ancho-img" alt={`Curso`} />
+            <div className="my-auto d-lg-flex d-none">
+              <img src={curso.url_foto_curso} className="img-fluid ancho-img" alt={`Curso`} />
             </div>
+            {modulos.map((modulo) => {
+              return <Modulos verificacion={verificacionSub} key={modulo.id_modulo} modulo={modulo} />;
+            })}
           </div>
-        </div>
-        <div className="col-12 col-sm-7 col-lg-7 ms-auto">
-          {modulos.map((modulo) => {
-            return <Modulos verificacion={verificacionSub} key={modulo.id_modulo} modulo={modulo} />;
-          })}
         </div>
       </div>
       <Footer />

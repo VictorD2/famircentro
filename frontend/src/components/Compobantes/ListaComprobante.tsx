@@ -61,8 +61,8 @@ const ListaComprobante = (props: Props) => {
           </div>
           {props.comprobantes.map((comprobante) => {
             return (
-              <div key={comprobante.id_comprobante} className="col-12 col-sm-6 col-lg-3">
-                <div className="card mb-5">
+              <div key={comprobante.id_comprobante} className="col-12 col-sm-6 col-lg-3 mb-5" style={{ maxHeight: "480px", minHeight: "480px" }}>
+                <div className="card" style={{ maxHeight: "480px", minHeight: "480px" }}>
                   {comprobante.estado === "Aceptado" ? (
                     <>
                       <div className="card-header btn__verde bg-gradient">{comprobante.nombre_curso}</div>
@@ -80,13 +80,12 @@ const ListaComprobante = (props: Props) => {
                       )}
                     </>
                   )}
-                  <div className="card-body">
+                  <div className="card-body d-flex justify-content-between flex-column">
                     <img src={comprobante.url_foto_comprobante} className="img-fluid" alt="" />
-                    <p className="m-0 mt-2">
+                    <p className="m-0 mt-auto">
                       <span className="fw-bold">
                         Estudiante:
-                        <span />
-                      </span>{" "}
+                      </span>
                       {comprobante.nombre} {comprobante.apellido}
                     </p>
                   </div>

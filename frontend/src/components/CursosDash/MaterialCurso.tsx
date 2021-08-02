@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 
 //Icons
-import { faBook, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ToastContainer } from "react-toastify";
 
 //Components
-import Navigation from "../../pages/DashBoard/Navigation";
 import ModuloItem from "./Modulos/ModuloItem";
 
 //Services
@@ -25,6 +24,7 @@ import { Curso } from "./Curso";
 import { Modulo } from "./Modulos/Modulo";
 import { Tema } from "./Temas/Tema";
 import { Tarea } from "./Tareas/Tarea";
+import { Link } from "react-router-dom";
 
 interface Params {
   modalidad: string;
@@ -111,32 +111,63 @@ const MaterialCurso = () => {
 
   return (
     <React.Fragment>
-      <Navigation />
       <ToastContainer />
-      <div className="contenido-principal p-4">
-        {/* Title */}
-        <div className="d-flex flex-row bg-white">
-          <FontAwesomeIcon className="me-3 fs-3" icon={faBook} />
-          <h6 className="m-0 text-uppercase fs-3">
-            {tipo} {modalidad} {curso.nombre_curso}
-          </h6>
-        </div>
-        {/* Options */}
-        <div className="d-flex flex-row p-2 mt-4 flex-wrap justify-content-between">
-          <button onClick={() => setModuloModal({ titulo: "" })} className="btn btn__blue mx-4 my-2" data-bs-toggle="modal" data-bs-target="#crearModulo">
-            <FontAwesomeIcon className="me-2" icon={faPlus} />
-            Agrega un modulo
-          </button>
-        </div>
-
-        {/* Content */}
-        <div className="py-4 mt-4">
-          <div className="accordion" id="accordionPanelsStayOpenExample">
-            {modulos.map((modulo) => {
-              return <ModuloItem tareaModal={tareaModal} setTareaModal={setTareaModal} countChange={countChange} setCountChange={setCountChange} setcount={setcount} count={count} modulo={modulo} temaModal={temaModal} load={getAllModulos} setModuloModal={setModuloModal} setTemaModal={setTemaModal} key={modulo.id_modulo} />;
-            })}
+      <div className="content-wrapper" style={{ minHeight: 643 }}>
+        {/* Content Header (Page header) */}
+        <div className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                <h1 className="m-0 efecto_titulo">
+                  <i className="nav-icon fas fa-book me-3" />
+                  {tipo} {modalidad} {curso.nombre_curso}
+                </h1>
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/">
+                      Inicio
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to={`/Dashboard/${params.tipo}/${params.modalidad}`}>
+                      {params.tipo} {params.modalidad}
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item active">Material</li>
+                </ol>
+              </div>
+            </div>
           </div>
         </div>
+        {/* /.content-header */}
+        {/* Main content */}
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-4 col-md-6">
+                <button onClick={() => setModuloModal({ titulo: "" })} className="btn btn__blue mx-4 my-2" data-bs-toggle="modal" data-bs-target="#crearModulo">
+                  <FontAwesomeIcon className="me-2" icon={faPlus} />
+                  Agrega un modulo
+                </button>
+              </div>
+              <div className="col-lg-3 col-md-3 ms-auto"></div>
+            </div>
+            <div className="row mt-5">
+              <div className="accordion" id="accordionPanelsStayOpenExample">
+                {modulos.map((modulo) => {
+                  return <ModuloItem tareaModal={tareaModal} setTareaModal={setTareaModal} countChange={countChange} setCountChange={setCountChange} setcount={setcount} count={count} modulo={modulo} temaModal={temaModal} load={getAllModulos} setModuloModal={setModuloModal} setTemaModal={setTemaModal} key={modulo.id_modulo} />;
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
       <ModalModulo load={getAllModulos} moduloModal={moduloModal} />
       <ModalTema count={count} setcount={setcount} moduloModal={moduloModal} temaModal={temaModal} />

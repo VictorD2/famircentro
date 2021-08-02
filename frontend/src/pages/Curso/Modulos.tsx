@@ -45,7 +45,7 @@ const Modulos = (props: Props) => {
   if (props.verificacion) {
     //Quitar ! en produccion
     return (
-      <div className="mt-5">
+      <div className="mt-lg-5 mt-1">
         <div className="fw-bold text-uppercase fs-5">{props.modulo.titulo}</div>
         {temas.map((tema) => {
           return (

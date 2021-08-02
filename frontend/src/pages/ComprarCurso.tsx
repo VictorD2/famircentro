@@ -16,7 +16,6 @@ import { Curso } from "../components/CursosDash/Curso";
 import { Comprobante } from "../components/Compobantes/Comprobante";
 
 //fotoPrueba
-import fotoPrueba from "../images/bg-2.jpg";
 
 //Iconos
 import { BiPaperPlane } from "react-icons/bi";
@@ -94,7 +93,7 @@ const ComprarCurso = () => {
       <div className="container mt-5" style={{ marginBottom: "4.5rem" }}>
         <div className="row">
           <div className="col-12 col-md-12 col-sm-12 col-lg-6 mb-5">
-            <img className="img-fluid" src={fotoPrueba} alt={`Foto Curso ${curso.nombre_curso}`} />
+            <img className="img-fluid" src={curso.url_foto_curso} alt={`Foto Curso ${curso.nombre_curso}`} />
             <div className="w-100 mt-4">
               <h6 className="fs-4 fw-bold text-uppercase">DATOS DEL {curso.tipo}</h6>
               {curso.modalidad === "Sincrónico" ? (
@@ -105,13 +104,6 @@ const ComprarCurso = () => {
                 <></>
               )}
               <Fila titulo1={`nombre del ${curso.tipo}`} titulo2="Precio" subtitulo1={`${curso.nombre_curso}`} subtitulo2={`$ ${curso.precio}`} />
-              <Fila
-                titulo1={`DONACIÓN A <a style="color:var(--amarillo-oscuro)" target="__BLANK" href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi6noq_nt_xAhV5QjABHfZ4DiEQFjABegQICBAD&url=https%3A%2F%2Fongdamanecer.wixsite.com%2Fongdamanecer%23%3A~%3Atext%3DEl%2520Centro%2520de%2520Investigaci%25C3%25B3n%2520y%2Cla%2520ciudad%2520de%2520Trujillo%2520%25E2%2580%2593%2520Per%25C3%25BA.&usg=AOvVaw2KAqKZOTls8viSgnZTvANq">ONG<a/>`}
-                titulo2="Donación"
-                subtitulo1={`5%`}
-                subtitulo2={`$ ${(curso.precio * 0.05).toFixed(2)}`}
-              />
-              <Fila titulo1={``} titulo2="Total" subtitulo1={``} subtitulo2={`$ ${curso.precio}`} />
 
               <div className="border border-2 border-warning mt-5 p-4">
                 <p className="text-center fw-bold fs-5" style={{ color: "var(--verde-oscuro)" }}>

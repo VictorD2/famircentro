@@ -153,29 +153,29 @@
 }
 
 .btn__blue {
-  background: var(--azul-claro);
-  color: #fff;
+  background: var(--azul-claro) !important;
+  color: #fff !important;
 }
 .btn__blue:hover {
-  background: var(--azul-oscuro);
-  color: #fff;
+  background: var(--azul-oscuro) !important;
+  color: #fff !important;
 }
 .btn__amarillo {
-  background: var(--amarillo-claro);
-  color: #000;
+  background: var(--amarillo-claro) !important;
+  color: #000 !important;
 }
 .btn__amarillo:hover {
-  background: var(--amarillo-oscuro);
-  color: #000;
+  background: var(--amarillo-oscuro) !important;
+  color: #000 !important;
 }
 
 .btn__verde {
-  background: var(--verde-claro);
-  color: #000;
+  background: var(--verde-claro) !important;
+  color: #000 !important;
 }
 .btn__verde:hover {
-  background: var(--verde-oscuro);
-  color: #000;
+  background: var(--verde-oscuro) !important;
+  color: #000 !important;
 }
 
 .efecto_titulo:hover {

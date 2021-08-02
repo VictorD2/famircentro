@@ -1,3 +1,4 @@
+const { closeSync } = require("fs");
 const pool = require("../database");
 const ctrlProfesores = {};
 const helpers = require("../lib/helpers");
@@ -41,13 +42,13 @@ ctrlProfesores.getCount = async (req, res) => {
 
 //.get("/:id")
 ctrlProfesores.getProfesorById = async (req, res) => {
-  if (!req.user) return res.json({ error: "Necesitas una cuenta" });
-  if (req.user.id_rango === 2) {
-    let datosSQL = `id_usuario,nombre,apellido,url_foto_usuario`;
-    const rows = await pool.query(`SELECT ${datosSQL} FROM usuario WHERE id_usuario = ? ORDER BY id_usuario DESC`, [req.params.id]);
-    if (rows.length === 0) return res.json({ error: "No existe al profesor" });
-    return res.json(rows[0]);
-  }
+  // if (!req.user) return res.json({ error: "Necesitas una cuenta" });
+  // if (req.user.id_rango === 2) {
+  //   let datosSQL = `id_usuario,nombre,apellido,url_foto_usuario`;
+  //   const rows = await pool.query(`SELECT ${datosSQL} FROM usuario WHERE id_usuario = ? ORDER BY id_usuario DESC`, [req.params.id]);
+  //   if (rows.length === 0) return res.json({ error: "No existe al profesor" });
+  //   return res.json(rows[0]);
+  // }
   let datosSQL = `id_usuario,nombre,apellido,profesion,correo,telefono,rut,habilitado_u,url_foto_usuario, id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
   let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
 
@@ -84,14 +85,17 @@ ctrlProfesores.createProfesor = async (req, res) => {
 //.put("/:id")
 ctrlProfesores.updateProfesor = async (req, res) => {
   const newProfesor = req.body;
-
+  delete newProfesor.nombre_pais_nacimiento;
+  delete newProfesor.nombre_pais_residencia;
+  delete newProfesor.url_foto_nacimiento;
+  delete newProfesor.url_foto_residencia;
   try {
     const rows = await pool.query("UPDATE usuario set ? WHERE id_usuario = ?", [newProfesor, req.params.id]);
-
     if (rows.affectedRows === 1) return res.json({ success: "Profesor actualizado" }); //Se logró actualizar
 
     res.json({ error: "Ocurrió un error" });
   } catch (error) {
+    console.log(error);
     if (error.code === "ECONNREFUSED") return res.json({ error: "Base de datos desconectada" });
     if (error.code === "ER_DUP_ENTRY") return res.json({ error: "Ese correo ya está registrado" });
   }

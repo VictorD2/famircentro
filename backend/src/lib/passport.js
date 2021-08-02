@@ -15,12 +15,17 @@ passport.use('local.signin', new LocalStrategy({
     let datosSQL = `id_usuario,password,nombre,apellido,correo,telefono,rut,habilitado_u,url_foto_usuario,profesion , id_rango, pais_n.nombre_pais AS nombre_pais_nacimiento, pais_r.nombre_pais AS nombre_pais_residencia,pais_r.url_foto_pais AS url_foto_residencia,pais_n.url_foto_pais AS url_foto_nacimiento,pais_n.id_pais AS id_pais_nacimiento, pais_r.id_pais AS id_pais_residencia`;
     let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
     const rows = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE correo = ?`,[email]);
+
     if (!rows.length > 0) return done(null, false); //El usuario no existe
+
+    if(rows[0].habilitado_u === 0) return done('Usuario inhabilitado', false, { message:'Usuario inhabilitado'});  //El usuario está inhabilitado
+    
     const validPassword = await helpers.matchPassword(password, rows[0].password); //<- Verificando la contraseña
     delete rows[0].password;
+    
     if (validPassword) return done(null, rows[0]); //<- Contraseña correcta
     
-    done(null, false, { error: "Contraseña o Correo inválidos" }); //<-Contraseña incorrecta
+    done("Contraseña o Correo inválidos", false, { message: "Contraseña o Correo inválidos" }); //<-Contraseña incorrecta
 
 }));
 
@@ -31,7 +36,6 @@ passport.use('local.signup', new LocalStrategy({
     passReqToCallback: true
 }, async(req, user, pass, done) => {
     const { name, surname, email, password, rut, telefono, id_pais_nacimiento,id_pais_residencia, profesion } = req.body;
-    console.log(req.body);
     const newUser = {
         nombre: name,
         apellido: surname,
@@ -107,7 +111,8 @@ passport.use(new GoogleStrategy({
         telefono: "",
         rut: "",
         habilitado_u: 1,
-        id_pais: 1,
+        id_pais_nacimiento: "AF",
+        id_pais_residencia: "AF",
         password: "",
         url_foto_usuario: profile.photos[0].value
     }

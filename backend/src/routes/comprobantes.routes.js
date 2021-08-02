@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const ctrlComprobantes = require('../controllers/comprobantes.controllers');
-const { isAdmin, typePetition } = require('../lib/auth');
+const { isAdmin } = require('../lib/auth');
 const upload = require('../lib/multer');
 
 router.get('/count/:estado', ctrlComprobantes.getCount);
-router.get('/:estado/:page', [typePetition], ctrlComprobantes.getComprobantes);
+router.get('/:estado/:page',  ctrlComprobantes.getComprobantes);
 router.get('/:id', ctrlComprobantes.getComprobanteById);
 router.post('/', function(req, res, next) {
     upload.fotosComprobantes.single('fotoComprobante')(req, res, function(err) {

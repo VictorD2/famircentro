@@ -14,7 +14,7 @@ import * as cursosServices from "../Compobantes/ComprobanteServices";
 import { Curso } from "../CursosDash/Curso";
 
 function CardCursosPerfil() {
-  const { usuario } = useUsuario();
+  const { usuario, loadUser } = useUsuario();
   const [cursos, setCursos] = useState<Curso[]>([]);
 
   const getCursosByEstudiante = async () => {
@@ -23,12 +23,11 @@ function CardCursosPerfil() {
   };
 
   useEffect(() => {
-    
-    getCursosByEstudiante();
+    if (loadUser) getCursosByEstudiante();
     return () => {
-      setCursos([]);
+      if (loadUser) setCursos([]);
     };
-  }, []);
+  }, [loadUser]);
 
   const showInfoFirst = () => {
     document.getElementById("body-2")?.classList.add("d-none");

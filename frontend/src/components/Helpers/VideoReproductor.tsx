@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs, { VideoJsPlayerOptions, VideoJsPlayer } from "video.js";
 import "video.js/dist/video-js.css";
-
+// import '@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm.js';
 // Interfaces
 interface Props {
   settings: VideoJsPlayerOptions;
@@ -13,6 +13,7 @@ const VideoReproductor = (props: Props) => {
   const refVideo = useRef<VideoJsPlayer>();
 
   useEffect(() => {
+    // console.log(props.settings);
     refVideo.current = videojs(refContainer.current, props.settings);
     return () => {
       // Para resetear el videojs
@@ -28,7 +29,7 @@ const VideoReproductor = (props: Props) => {
   return (
     <div>
       <div data-vjs-player>
-        <video onContextMenu={noClick} className="video-js vjs-default-skin vjs-fluid" ref={(node) => (refContainer.current = node)} />
+        <video onContextMenu={noClick} className="video-js vjs-default-skin vjs-fluid"  ref={(node) => (refContainer.current = node)} />
       </div>
     </div>
   );

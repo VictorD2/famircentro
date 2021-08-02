@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Vimeo } from "vimeo";
 
 //
 import * as temaServices from "./TemaServices";
@@ -40,6 +41,26 @@ const ModalTema = (props: Props) => {
 
   //Submit
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    let client = new Vimeo("72c9aa8a9e250995e93ecaa6a674f4be900f94d5", "CN9HBV8c4SysOm9ClGhvRWgYkPTph/dRjEjGfX7mdQHxcC37En73pNO1gOyxRA9WKI2EN+tihBVDl65bn0iT3rjk4JAuQWMjVNwQa75HkcpBliSDn/awvZgCWDGXNXo2", "1d13a3b866c5ce6c46d8ff02cf2202ed");
+    let file_name = new File([""], "filename");
+    if (tema.video) file_name = tema.video[0];
+    client.upload(
+      file_name,
+      {
+        name: "Untitled",
+        description: "The description goes here.",
+      },
+      function (uri) {
+        console.log("Your video URI is: " + uri);
+      },
+      function (bytes_uploaded, bytes_total) {
+        var percentage = ((bytes_uploaded / bytes_total) * 100).toFixed(2);
+        console.log(bytes_uploaded, bytes_total, percentage + "%");
+      },
+      function (error) {
+        console.log("Failed because: " + error);
+      }
+    );
     e.preventDefault();
     const form = new FormData();
     form.append("titulo", tema.titulo);

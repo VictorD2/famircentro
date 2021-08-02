@@ -18,9 +18,9 @@ import CursoFullPage from "../pages/Curso/CursoFullPage";
 import Profesores from "./ProfesoresDash/Profesores";
 import FormProfesor from "./ProfesoresDash/FormProfesor";
 
-import AdminRoute from "./ProtectedRoutes/AdminRoute";
-import LogRoute from "./ProtectedRoutes/LogRoute";
-import NoLogRoute from "./ProtectedRoutes/NoLogRoute";
+// import AdminRoute from "./ProtectedRoutes/AdminRoute";
+// import LogRoute from "./ProtectedRoutes/LogRoute";
+// import NoLogRoute from "./ProtectedRoutes/NoLogRoute";
 
 import Cursos from "./CursosDash/Cursos";
 import FormCurso from "./CursosDash/FormCurso";
@@ -35,7 +35,7 @@ import VerCurso from "./CursosDash/VerCurso";
 import ContactoDash from "../pages/Contacto/ContactoDash";
 import Tareas from "./CursosDash/Tareas/Tareas";
 import TareaFullPage from "../pages/TareaFullPage";
-
+import LayoutDash from "../pages/DashBoard/LayoutDash";
 function App() {
   const { loadUser } = useUsuario();
   const [loading, setLoading] = useState(false);
@@ -53,36 +53,37 @@ function App() {
           <Route exact path="/" component={Home} />
 
           {/* Dashboard */}
-          <LogRoute exact path="/Perfil" component={Perfil} />
-          <LogRoute exact path="/Perfil/Editar" component={EditPerfil} />
-          <AdminRoute exact path="/DashBoard" component={DashBoard} />
+          <Route exact path="/Perfil" component={Perfil} />
+          <Route exact path="/Perfil/Editar" component={EditPerfil} />
+
+          <LayoutDash exact path="/DashBoard" component={DashBoard} />
 
           {/* Usuarios */}
-          <AdminRoute exact path="/DashBoard/Usuarios" component={Usuarios} />
+          <LayoutDash exact path="/DashBoard/Usuarios" component={Usuarios} />
 
           {/* Profesores */}
-          <AdminRoute exact path="/DashBoard/Profesores" component={Profesores} />
-          <AdminRoute exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
-          <AdminRoute exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
+          <LayoutDash exact path="/DashBoard/Profesores" component={Profesores} />
+          <LayoutDash exact path="/DashBoard/Profesores/nuevo" component={FormProfesor} />
+          <LayoutDash exact path="/DashBoard/Profesores/update/:id" component={FormProfesor} />
 
           {/* Comprobantes */}
-          <AdminRoute exact path="/DashBoard/Comprobantes" component={Comprobantes} />
+          <LayoutDash exact path="/DashBoard/Comprobantes" component={Comprobantes} />
 
           {/* Contactos */}
-          <AdminRoute exact path="/DashBoard/Contacto" component={ContactoDash} />
+          <LayoutDash exact path="/DashBoard/Contacto" component={ContactoDash} />
 
           {/* Cursos */}
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id/Tarea/:idTarea" component={Tareas} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id" component={MaterialCurso} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/material/:id/:idTema" component={VerTema} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/nuevo" component={FormCurso} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/update/:id" component={FormCurso} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />
-          <AdminRoute exact path="/DashBoard/:tipo/:modalidad/:idCurso" component={VerCurso} />
+          <LayoutDash exact path="/DashBoard/:tipo/:modalidad/material/:id/Tarea/:idTarea" component={Tareas} />
+          <LayoutDash exact path="/DashBoard/:tipo/:modalidad/material/:id" component={MaterialCurso} />
+          <LayoutDash exact path="/DashBoard/:tipo/:modalidad/material/:id/:idTema" component={VerTema} />
+          <LayoutDash exact path="/DashBoard/:tipo/:modalidad/nuevo" component={FormCurso} />
+          <LayoutDash exact path="/DashBoard/:tipo/:modalidad/update/:id" component={FormCurso} />
+          <LayoutDash exact path="/DashBoard/:tipo/:modalidad" component={Cursos} />
+          <LayoutDash exact path="/DashBoard/:tipo/:modalidad/:idCurso" component={VerCurso} />
 
           {/* Vistas */}
-          <NoLogRoute exact component={Login} path="/Iniciar" />
-          <NoLogRoute exact component={Register} path="/Registrarse" />
+          <Route exact component={Login} path="/Iniciar" />
+          <Route exact component={Register} path="/Registrarse" />
           <Route exact path="/Nosotros" component={AboutUs} />
           <Route exact path="/Contactanos" component={Contact} />
           <Route exact path="/Clases/:tipo/:modalidad" component={Programa} />

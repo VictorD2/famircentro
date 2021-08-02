@@ -10,7 +10,7 @@ import Footer from "../components/Helpers/Footer";
 import NavBar from "../components/Helpers/NavBar";
 import { MaterialTarea } from "../components/CursosDash/Tareas/MaterialTarea";
 import swal from "sweetalert";
-import {API} from '../config/config';
+import { API } from "../config/config";
 interface Params {
   idTarea: string;
   idCurso: string;
@@ -70,19 +70,11 @@ const TareaFullPage = () => {
     const res = await tareaServices.crearMaterialTarea(form);
     if (res.data.success) {
       borrarInputFile(); //Borrando el valor del input file
-      swal({
-        title: "Hecho",
-        text: res.data.success,
-        icon: "success",
-      });
+      swal({ title: "Hecho", text: res.data.success, icon: "success" });
       return;
     }
     if (res.data.error) {
-      swal({
-        title: "Ups!",
-        text: res.data.error,
-        icon: "error",
-      });
+      swal({ title: "Ups!", text: res.data.error, icon: "error" });
       return;
     }
   };

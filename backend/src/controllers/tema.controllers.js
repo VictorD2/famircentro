@@ -76,7 +76,6 @@ ctrlTema.getVideo = async (req, res) => {
   if (req.query.key !== "1v4g8h6vcesm") return res.json({ error: "Wrong key" });
 
   if (!range) return res.json({ error: "Requires Range header" });
-
   const videoPath = path.join(__dirname, `..//${req.query.Tema}`);
   const videoSize = fs.statSync(videoPath).size;
   const CHUNK_SIZE = 0.6 * 10 ** 6; // 0.5MB

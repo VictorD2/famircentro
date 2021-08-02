@@ -3,9 +3,6 @@ import React, { useRef } from "react";
 import { useState } from "react";
 
 //Iconos
-import { faFileAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Navigation from "../../pages/DashBoard/Navigation";
 
 //Toastify
 import { toast, ToastContainer } from "react-toastify";
@@ -26,6 +23,7 @@ import { Comprobante } from "./Comprobante";
 import { Curso } from "../CursosDash/Curso";
 import { Estudiante } from "../EstudiantesDash/Estudiante";
 import { FaEdit, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const initialStateComprobante: Comprobante = {
   fecha_enviado: "",
@@ -153,18 +151,51 @@ const Comprobantes = () => {
 
   return (
     <React.Fragment>
-      <Navigation />
       <ToastContainer />
-      <div className="contenido-principal p-4">
-        <div className="d-flex flex-row bg-white efecto_titulo">
-          <FontAwesomeIcon className="me-3 fs-3" icon={faFileAlt} />
-          <h6 className="m-0 text-uppercase fs-3">COMPROBANTES</h6>
+      <div className="content-wrapper" style={{ minHeight: 643 }}>
+        {/* Content Header (Page header) */}
+        <div className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                <h1 className="m-0 efecto_titulo">
+                  <i className="nav-icon fas fa-file me-3" />
+                  Comprobantes
+                </h1>
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/">
+                      Inicio
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item active">Comprobantes</li>
+                </ol>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="d-flex flex-row p-2 mt-4 flex-wrap justify-content-between">
-          <div className="mx-4 my-2">{/* <BuscadorProfesor funcion={buscar} /> */}</div>
-        </div>
-        <div className="py-4 mt-4">
-          <ul className="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+        {/* /.content-header */}
+
+        {/* Main content */}
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-4 col-md-6">
+                
+              </div>
+              <div className="col-lg-3 col-md-3 ms-auto">
+                 
+              </div>
+            </div>
+            <div className="row mt-5">
+              <ul className="nav nav-tabs mb-3" id="pills-tab" role="tablist">
             <li className="nav-item" role="presentation">
               <button className="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-noVistos" type="button" role="tab" aria-controls="pills-noVistos" aria-selected="true">
                 Nuevos
@@ -192,9 +223,9 @@ const Comprobantes = () => {
               <ListaComprobante estado="Rechazado" setPage={setPageRechazados} page={pageRechazados} comprobantes={comprobantesRechazados} cambiarDatosModal={cambiarDatosModal} />
             </div>
           </div>
-        </div>
-        {/* Modal */}
-        <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            </div>
+            {/* Modal */}
+            <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-xl">
             <div className="modal-content">
               <div className="modal-header btn__blue">
@@ -283,6 +314,8 @@ const Comprobantes = () => {
             </div>
           </div>
         </div>
+          </div>
+        </section>
       </div>
     </React.Fragment>
   );

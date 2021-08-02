@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FormEvent, useEffect, useRef, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 
 //Icons
-import { FaEdit, FaPlus, FaRegEdit } from "react-icons/fa";
+import { FaPlus, FaRegEdit } from "react-icons/fa";
 
 //Toastify
 import { toast, ToastContainer } from "react-toastify";
 
 //Components
-import Navigation from "../../pages/DashBoard/Navigation";
 
 //Services
 import * as CursosServices from "./CursosServices";
@@ -138,109 +137,144 @@ const FormCurso = () => {
 
   return (
     <React.Fragment>
-      <Navigation />
       <ToastContainer />
-      <div className="contenido-principal p-4">
-        <div className="d-flex flex-row bg-white mb-5">
-          {params.id ? ( //Editar o crear
-            <h4 className="mb-0 text-uppercase fs-3">
-              <FaEdit className="fs-3 mb-2 " /> Actualizar {tipo} {modalidad}
-            </h4>
-          ) : (
-            <h4 className="m-0 text-uppercase fs-3">
-              <FaPlus className="fs-3 mb-1 " /> Crear {tipo} {modalidad}
-            </h4>
-          )}
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <form onSubmit={handleFormSubmit}>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputNombre" className="form-control" type="text" placeholder="Nombre del Taller" name="nombre_curso" required value={curso.nombre_curso} />
-                  <label htmlFor="floatingInputNombre">
-                    Nombre del {tipo} {modalidad}
-                  </label>
-                </div>
-                <div className="form-floating mb-3">
-                  <textarea onChange={handleInputChange} className="form-control" placeholder="Descripción" name="descripcion" required value={curso.descripcion} />
-                  <label htmlFor="floatingInputDescripcion">Descripción</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputPrecio" className="form-control" type="text" placeholder="Precio" name="precio" required value={curso.precio} />
-                  <label htmlFor="floatingInputPrecio">Precio</label>
-                </div>
-
-                {/* En caso de que sean sincronos */}
-                {modalidad === "Sincrónico" ? (
-                  <>
-                    <div className="form-floating mb-3">
-                      <input onChange={handleInputChange} id="floatingInputDuracion" className="form-control" type="number" placeholder="Duración" name="duracion" required value={curso.duracion} />
-                      <label htmlFor="floatingInputDuracion">Duración (Horas)</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                      <input onChange={handleInputChange} id="floatingInputCapacidad" className="form-control" type="number" placeholder="Capacidad" name="capacidad" required value={curso.capacidad} />
-                      <label htmlFor="floatingInputCapacidad">Capacidad</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                      <input onChange={handleInputChange} id="floatingInputHorario" className="form-control" type="datetime-local" placeholder="Horario" name="horario" required value={curso.horario} />
-                      <label htmlFor="floatingInputHorario">Horario</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                      <input onChange={handleInputChange} id="floatingInputEnlace" className="form-control" type="text" placeholder="Enlace de Zoom" name="enlace" required value={curso.enlace} />
-                      <label htmlFor="floatingInputEnlace">Enlace de Zoom</label>
-                    </div>
-                  </>
+      <div className="content-wrapper" style={{ minHeight: 643 }}>
+        {/* Content Header (Page header) */}
+        <div className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                {params.id ? (
+                  <h1 className="m-0 efecto_titulo">
+                    <i className="nav-icon fas fa-edit" /> Actualizar {tipo} {modalidad}
+                  </h1>
                 ) : (
-                  <></>
+                  <h1 className="m-0 efecto_titulo">
+                    <i className="nav-icon fas fa-plus" /> Crear {tipo} {modalidad}
+                  </h1>
                 )}
-                <div className="form-floating mb-3">
-                  <select value={curso.id_usuario} onChange={handleInputChange} id="floatingInputProfesor" className="form-control" name="id_usuario" required>
-                    {profesores.map((profesor) => {
-                      return (
-                        <option key={profesor.id_usuario} value={profesor.id_usuario}>
-                          {profesor.nombre} {profesor.apellido} - {profesor.correo}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <label htmlFor="floatingInputProfesor">Profesor</label>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="exampleFormControlFile" className="form-label">
-                    Foto del Curso
-                  </label>
-                  {curso.id_curso ? (
-                    <>
-                      <input ref={(node) => (refInput.current = node)} onChange={handleInputFileChange} className="form-control" id="exampleFormControlFile" type="file" placeholder="Foto del curso" name="foto_curso" />
-                    </>
-                  ) : (
-                    <>
-                      <input ref={(node) => (refInput.current = node)} onChange={handleInputFileChange} className="form-control" id="exampleFormControlFile" type="file" placeholder="Foto del curso" name="foto_curso" required />
-                    </>
-                  )}
-                  <div className="progress">
-                    <div className="progress-bar" ref={(node) => (refProgresss.current = node)} role="progressbar" style={{ width: "0%" }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}>
-                      0%
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-3">
-                  {params.id ? ( //Editar o Crear
-                    <button className="btn btn__amarillo">
-                      <FaRegEdit className="fs-5 mb-1" /> Actualizar{" "}
-                    </button>
-                  ) : (
-                    <button className="btn btn__blue">
-                      <FaPlus className="fs-5 mb-1" /> Crear{" "}
-                    </button>
-                  )}
-                </div>
-              </form>
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/">
+                      Inicio
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to={`/Dashboard/${params.tipo}/${params.modalidad}`}>
+                      {params.tipo} {params.modalidad}
+                    </Link>
+                  </li>
+                  {params.id ? <li className="breadcrumb-item active">Actualizar</li> : <li className="breadcrumb-item active">Nuevo</li>}
+                </ol>
+              </div>
             </div>
-            <div className="col-md-6"></div>
           </div>
         </div>
+        {/* /.content-header */}
+
+        {/* Main content */}
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-4 col-md-6"></div>
+              <div className="col-lg-3 col-md-3 ms-auto"></div>
+            </div>
+            <div className="row mt-5">
+              <div className="col-md-6 ms-0 ms-lg-3">
+                <form onSubmit={handleFormSubmit}>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputNombre" className="form-control" type="text" placeholder="Nombre del Taller" name="nombre_curso" required value={curso.nombre_curso} />
+                    <label htmlFor="floatingInputNombre">
+                      Nombre del {tipo} {modalidad}
+                    </label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <textarea cols={30} rows={10} onChange={handleInputChange} className="form-control h-50" placeholder="Descripción" name="descripcion" required value={curso.descripcion} />
+                    <label htmlFor="floatingInputDescripcion">Descripción</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputPrecio" className="form-control" type="text" placeholder="Precio" name="precio" required value={curso.precio} />
+                    <label htmlFor="floatingInputPrecio">Precio</label>
+                  </div>
+
+                  {/* En caso de que sean sincronos */}
+                  {modalidad === "Sincrónico" ? (
+                    <>
+                      <div className="form-floating mb-3">
+                        <input onChange={handleInputChange} id="floatingInputDuracion" className="form-control" type="number" placeholder="Duración" name="duracion" required value={curso.duracion} />
+                        <label htmlFor="floatingInputDuracion">Duración (Horas)</label>
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input onChange={handleInputChange} id="floatingInputCapacidad" className="form-control" type="number" placeholder="Capacidad" name="capacidad" required value={curso.capacidad} />
+                        <label htmlFor="floatingInputCapacidad">Capacidad</label>
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input onChange={handleInputChange} id="floatingInputHorario" className="form-control" type="datetime-local" placeholder="Horario" name="horario" required value={curso.horario} />
+                        <label htmlFor="floatingInputHorario">Horario</label>
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input onChange={handleInputChange} id="floatingInputEnlace" className="form-control" type="text" placeholder="Enlace de Zoom" name="enlace" required value={curso.enlace} />
+                        <label htmlFor="floatingInputEnlace">Enlace de Zoom</label>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  <div className="form-floating mb-3">
+                    <select value={curso.id_usuario} onChange={handleInputChange} id="floatingInputProfesor" className="form-control" name="id_usuario" required>
+                      {profesores.map((profesor) => {
+                        return (
+                          <option key={profesor.id_usuario} value={profesor.id_usuario}>
+                            {profesor.nombre} {profesor.apellido} - {profesor.correo}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <label htmlFor="floatingInputProfesor">Profesor</label>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="exampleFormControlFile" className="form-label">
+                      Foto del Curso
+                    </label>
+                    {curso.id_curso ? (
+                      <>
+                        <input ref={(node) => (refInput.current = node)} onChange={handleInputFileChange} className="form-control" id="exampleFormControlFile" type="file" placeholder="Foto del curso" name="foto_curso" />
+                      </>
+                    ) : (
+                      <>
+                        <input ref={(node) => (refInput.current = node)} onChange={handleInputFileChange} className="form-control" id="exampleFormControlFile" type="file" placeholder="Foto del curso" name="foto_curso" required />
+                      </>
+                    )}
+                    <div className="progress">
+                      <div className="progress-bar" ref={(node) => (refProgresss.current = node)} role="progressbar" style={{ width: "0%" }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}>
+                        0%
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mb-3">
+                    {params.id ? ( //Editar o Crear
+                      <button className="btn btn__amarillo">
+                        <FaRegEdit className="fs-5 mb-1" /> Actualizar{" "}
+                      </button>
+                    ) : (
+                      <button className="btn btn__blue">
+                        <FaPlus className="fs-5 mb-1" /> Crear{" "}
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+              <div className="col-md-6"></div>
+            </div>
+          </div>
+        </section>
       </div>
     </React.Fragment>
   );

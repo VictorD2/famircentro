@@ -85,7 +85,7 @@ const ModalTarea = (props: Props) => {
                 <label htmlFor="floatingInputTitulo1">Título de la tarea</label>
               </div>
               <div className="form-floating mb-3">
-                <textarea onChange={handleInputChange} cols={30} rows={10} id="floatingInputTitulo1" className="form-control" placeholder="Descripción" name="descripcion_tarea" required value={tarea.descripcion_tarea} />
+                <textarea onChange={handleInputChange} cols={30} rows={10} id="floatingInputTitulo1" className="form-control h-25" placeholder="Descripción" name="descripcion_tarea" required value={tarea.descripcion_tarea} />
                 <label htmlFor="floatingInputTitulo1">Descripción de la tarea</label>
               </div>
             </div>

@@ -2,20 +2,18 @@
 import React, { useEffect, useRef, useState } from "react";
 
 // Componentes
-import Navigation from "../DashBoard/Navigation";
 import ContactoItem from "./ContactoItem";
 import Buscador from "../../components/Buscador/Buscador";
 
 // Icons
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaTrashAlt } from "react-icons/fa";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Toastify
 import { ToastContainer } from "react-toastify";
 
 // Services
 import * as contactoServices from "./ContactoServices";
+import { Link } from "react-router-dom";
 
 // Interfaces
 interface Contacto {
@@ -90,111 +88,142 @@ const ContactoDash = () => {
 
   return (
     <React.Fragment>
-      <Navigation />
       <ToastContainer />
-      <div className="contenido-principal p-4">
-        <div className="d-flex flex-row bg-white efecto_titulo">
-          <FontAwesomeIcon className="me-3 fs-3" icon={faEnvelope} />
-          <h6 className="m-0 text-uppercase fs-3">Mensajes de Contacto</h6>
-        </div>
-        <div className="d-flex flex-row p-2 mt-4 flex-wrap justify-content-between">
-          <div className="ms-auto">
-            <Buscador placeholder={`Buscar contacto`} funcion={buscar} />
+      <div className="content-wrapper" style={{ minHeight: 643 }}>
+        {/* Content Header (Page header) */}
+        <div className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                <h1 className="m-0 efecto_titulo">
+                  <i className="nav-icon fas fa-envelope me-3" />
+                  Mensajes de Contacto
+                </h1>
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/">
+                      Inicio
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item active">Mensajes de Contacto</li>
+                </ol>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="py-4 mt-4">
-          <div className="table-responsive">
-            <table className="table table-striped table-light-gray table-bordered table-hover">
-              <caption>Cantidad de mensajes de contacto: {cantidad}</caption>
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th style={{ minWidth: "500px" }}>Correo</th>
-                  <th className="text-center">
-                    <FaEye className="mb-1" /> VER MÁS
-                  </th>
-                  <th className="text-center">
-                    <FaTrashAlt className="mb-1" /> ELIMINAR
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {contactos.length === 0 ? (
-                  <>
+        {/* /.content-header */}
+
+        {/* Main content */}
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-4 col-md-6"></div>
+              <div className="col-lg-3 col-md-3 ms-auto">
+                <Buscador placeholder={`Buscar contacto`} funcion={buscar} />
+              </div>
+            </div>
+            <div className="row mt-5">
+              <div className="table-responsive">
+                <table className="table table-striped table-light-gray table-bordered table-hover">
+                  <caption>Cantidad de mensajes de contacto: {cantidad}</caption>
+                  <thead>
                     <tr>
-                      <td>No hay mensajes aún</td>
+                      <th>Nombre</th>
+                      <th style={{ minWidth: "500px" }}>Correo</th>
+                      <th className="text-center">
+                        <FaEye className="mb-1" /> VER MÁS
+                      </th>
+                      <th className="text-center">
+                        <FaTrashAlt className="mb-1" /> ELIMINAR
+                      </th>
                     </tr>
-                  </>
-                ) : (
-                  <>
-                    {contactos.map((contacto) => {
-                      return <ContactoItem getCantidad={getCantidad} page={page} getAllContactos={getAllContactos} changeModalContent={changeModalContent} contacto={contacto} key={contacto.id_contacto} />;
-                    })}
-                  </>
-                )}
-              </tbody>
-            </table>
-            <div className="d-flex justify-content-between">
-              {page === 1 ? (
-                <></>
-              ) : (
-                <>
-                  <button
-                    onClick={() => {
-                      paginaAnterior();
-                    }}
-                    className="btn btn__blue"
-                  >
-                    <span aria-hidden="true">&laquo; Página Anterior</span>
-                  </button>
-                </>
-              )}
-              {page === cantidadPaginas ? (
-                <></>
-              ) : (
-                <>
-                  <button
-                    onClick={() => {
-                      paginaSiguiente();
-                    }}
-                    className="btn btn__blue ms-auto"
-                  >
-                    <span aria-hidden="true">Página Siguiente &raquo;</span>
-                  </button>
-                </>
-              )}
+                  </thead>
+                  <tbody>
+                    {contactos.length === 0 ? (
+                      <>
+                        <tr>
+                          <td>No hay mensajes aún</td>
+                        </tr>
+                      </>
+                    ) : (
+                      <>
+                        {contactos.map((contacto) => {
+                          return <ContactoItem getCantidad={getCantidad} page={page} getAllContactos={getAllContactos} changeModalContent={changeModalContent} contacto={contacto} key={contacto.id_contacto} />;
+                        })}
+                      </>
+                    )}
+                  </tbody>
+                </table>
+                <div className="d-flex justify-content-between">
+                  {page === 1 ? (
+                    <></>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          paginaAnterior();
+                        }}
+                        className="btn btn__blue"
+                      >
+                        <span aria-hidden="true">&laquo; Página Anterior</span>
+                      </button>
+                    </>
+                  )}
+                  {page === cantidadPaginas ? (
+                    <></>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          paginaSiguiente();
+                        }}
+                        className="btn btn__blue ms-auto"
+                      >
+                        <span aria-hidden="true">Página Siguiente &raquo;</span>
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      {/* Modal */}
-      <div className="modal fade" id="modalContacto" aria-labelledby="modalContactoLabel" aria-hidden="true">
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header btn__blue">
-              <h5 className="modal-title" id="modalContactoLabel">
-                {contacto.nombre}
-              </h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <div className="card mb-3">
-                <div className="g-0">
-                  <div className="card-body">
-                    <div className="d-flex">
-                      <p className="m-0 text-uppercase fw-bold">Correo:</p>
-                      <p className="ms-4">{contacto.correo}</p>
-                    </div>
-                    <div className="d-flex flex-column">
-                      <p className="m-0 text-uppercase fw-bold">Mensaje:</p>
-                      <p className="mt-2 px-5" ref={(node) => (refMensaje.current = node)} style={{ textAlign: "justify" }}></p>
+            {/* Modal */}
+            <div className="modal fade" id="modalContacto" aria-labelledby="modalContactoLabel" aria-hidden="true">
+              <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                  <div className="modal-header btn__blue">
+                    <h5 className="modal-title" id="modalContactoLabel">
+                      {contacto.nombre}
+                    </h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body">
+                    <div className="card mb-3">
+                      <div className="g-0">
+                        <div className="card-body">
+                          <div className="d-flex">
+                            <p className="m-0 text-uppercase fw-bold">Correo:</p>
+                            <p className="ms-4">{contacto.correo}</p>
+                          </div>
+                          <div className="d-flex flex-column">
+                            <p className="m-0 text-uppercase fw-bold">Mensaje:</p>
+                            <p className="mt-2 px-5" ref={(node) => (refMensaje.current = node)} style={{ textAlign: "justify" }}></p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </React.Fragment>
   );

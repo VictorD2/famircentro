@@ -7,7 +7,7 @@ ctrlEstudiantes.getEstudiantes = async (req, res) => {
   let Joins = `JOIN pais AS pais_r ON pais_r.id_pais = usuario.id_pais_residencia JOIN pais AS pais_n ON pais_n.id_pais = usuario.id_pais_nacimiento`;
   if (req.query.keyword && req.query.page) {
     const data = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_rango = 2 AND (nombre LIKE '%${req.query.keyword}%' OR apellido LIKE '%${req.query.keyword}%' OR correo LIKE '%${req.query.keyword}%') ORDER BY id_usuario DESC`);
-    const cantidadDatos = 1;
+    const cantidadDatos = 12;
     const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
     return res.json(data.splice(pagina, cantidadDatos));
   }
@@ -19,7 +19,7 @@ ctrlEstudiantes.getEstudiantes = async (req, res) => {
 
   if (req.query.page) {
     const data = await pool.query(`SELECT ${datosSQL} FROM usuario ${Joins} WHERE id_rango = '2' ORDER BY id_usuario DESC`);
-    const cantidadDatos = 1;
+    const cantidadDatos = 12;
     const pagina = (parseInt(req.query.page) - 1) * cantidadDatos;
     return res.json(data.splice(pagina, cantidadDatos));
   }

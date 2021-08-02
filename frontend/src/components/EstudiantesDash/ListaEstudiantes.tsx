@@ -42,7 +42,7 @@ const ListaEstudiantes = (props: Props) => {
   const getCantidad = async () => {
     const res = await estudianteServices.getCount(props.filtro);
     setCantidad(res.data);
-    setCantidadPaginas(Math.ceil(res.data / 3));
+    setCantidadPaginas(Math.ceil(res.data / 12));
   };
   const limpieza = () => {
     setEstudiantes([]);
@@ -69,7 +69,7 @@ const ListaEstudiantes = (props: Props) => {
   // Estudiantes
   return (
     <React.Fragment>
-      <table className="table table-bordered table-hover table-responsive">
+      <table className="table table-bordered table-hover">
         <caption>Cantidad de estudiantes: {cantidad}</caption>
         <thead>
           <tr>

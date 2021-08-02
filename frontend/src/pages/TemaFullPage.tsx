@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import {API} from '../config/config';
+import { API } from "../config/config";
 
 //Iconos
 import { FaDownload } from "react-icons/fa";
@@ -70,6 +70,7 @@ const TemaFullPage = () => {
     res.data.descripcion = newDescripcion;
     if (refDesc.current) refDesc.current.innerHTML = res.data.descripcion;
     setTema(res.data);
+    // setSettings({ ...settings, sources: [{ src: res.data.url_video, type: "video/mp4" }] });
     setSettings({ ...settings, sources: [{ src: `${API}/video-lock?key=1v4g8h6vcesm&Tema=${res.data.url_video}`, type: "video/mp4" }] });
     setLoadingVideo(true);
   };
@@ -126,16 +127,14 @@ const TemaFullPage = () => {
               </li>
             </ul>
             <div className="tab-content" id="pills-tabContent">
-              <div style={{ textAlign: "justify" }} ref={(node) => (refDesc.current = node)} className="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-home-tab">
-              
-              </div>
+              <div style={{ textAlign: "justify" }} ref={(node) => (refDesc.current = node)} className="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-home-tab"></div>
               <div className="tab-pane fade" id="pills-material" role="tabpanel" aria-labelledby="pills-profile-tab">
                 {material.map((material) => {
                   return (
                     <div key={material.id_material_clase} className="d-flex my-1">
                       <div className="list-group-item list-group-item-action btn__blue">
-                        <a className="text-decoration-none d-flex justify-content-between" rel="noreferrer" href={material.url_material} target="_blank" download>
-                          <p className="text-nowrap text-truncate text-white m-0">{material.url_material?.slice(18, material.url_material.length)}</p>
+                        <a className="text-decoration-none d-flex justify-content-between" rel="noreferrer" href={material.url_material} target="_blank" download={material.nombre_material}>
+                          <p className="text-nowrap text-truncate text-white m-0">{material.nombre_material}</p>
                           <FaDownload className="mt-1 text-white" />
                         </a>
                       </div>

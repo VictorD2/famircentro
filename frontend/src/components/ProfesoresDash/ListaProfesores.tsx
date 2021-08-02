@@ -67,52 +67,59 @@ const ListaProfesores = (props: Props) => {
   // Profesores
   return (
     <>
-      <table className="table table-light-gray table-bordered table-hover table-responsive">
-        <caption>Cantidad de profesores: {cantidad}</caption>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>NOMBRE</th>
-            <th>APELLIDOS</th>
-            <th>CORREO</th>
-            <th>PROFESION</th>
-            <th className="text-center">EDITAR</th>
-            <th className="text-center">VER MÁS</th>
-            <th className="text-center">DESHABILITAR</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!loading ? (
-            <>
-              <tr>
-                <td>Cargando datos...</td>
-              </tr>
-            </>
-          ) : (
-            <>
-              {profesores.length === 0 ? (
-                <>
-                  <tr>
-                    <td>No hay profesores registrados aún</td>
-                  </tr>
-                </>
-              ) : (
-                <>
-                  {profesores.map((profesor) => {
-                    return <ProfesorItem cargaDatos={loadProfesores} funcion={props.funcion} profesor={profesor} key={profesor.id_usuario} />;
-                  })}
-                </>
-              )}
-            </>
-          )}
-        </tbody>
-      </table>
+      <div className="table-responsive">
+        <table className="table table-light-gray table-bordered table-hover">
+          <caption>Cantidad de profesores: {cantidad}</caption>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NOMBRE</th>
+              <th>APELLIDOS</th>
+              <th>CORREO</th>
+              <th>PROFESION</th>
+              <th className="text-center">EDITAR</th>
+              <th className="text-center">VER MÁS</th>
+              <th className="text-center">DESHABILITAR</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!loading ? (
+              <>
+                <tr>
+                  <td>Cargando datos...</td>
+                </tr>
+              </>
+            ) : (
+              <>
+                {profesores.length === 0 ? (
+                  <>
+                    <tr>
+                      <td>No hay profesores registrados aún</td>
+                    </tr>
+                  </>
+                ) : (
+                  <>
+                    {profesores.map((profesor) => {
+                      return <ProfesorItem cargaDatos={loadProfesores} funcion={props.funcion} profesor={profesor} key={profesor.id_usuario} />;
+                    })}
+                  </>
+                )}
+              </>
+            )}
+          </tbody>
+        </table>
+      </div>
       <div className="d-flex justify-content-between">
         {page === 1 ? (
           <></>
         ) : (
           <>
-            <button onClick={() => { paginaAnterior(); }} className="btn btn__blue" >
+            <button
+              onClick={() => {
+                paginaAnterior();
+              }}
+              className="btn btn__blue"
+            >
               <span aria-hidden="true">&laquo; Página Anterior</span>
             </button>
           </>
@@ -121,7 +128,12 @@ const ListaProfesores = (props: Props) => {
           <></>
         ) : (
           <>
-            <button onClick={() => { paginaSiguiente(); }} className="btn btn__blue ms-auto" >
+            <button
+              onClick={() => {
+                paginaSiguiente();
+              }}
+              className="btn btn__blue ms-auto"
+            >
               <span aria-hidden="true">Página Siguiente &raquo;</span>
             </button>
           </>

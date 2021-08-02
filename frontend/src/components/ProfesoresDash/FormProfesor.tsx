@@ -1,9 +1,8 @@
 import React, { useState, useEffect, FormEvent } from "react";
-import { useParams } from "react-router-dom";
-import {API} from '../../config/config'
-import axios from 'axios';
+import { Link, useParams } from "react-router-dom";
+import { API } from "../../config/config";
+import axios from "axios";
 //Components
-import Navigation from "../../pages/DashBoard/Navigation";
 
 //Services
 import * as profesorServices from "./ProfesoresServices";
@@ -79,88 +78,123 @@ const FormProfesor = () => {
 
   return (
     <React.Fragment>
-      <Navigation />
       <ToastContainer />
-      <div className="contenido-principal p-4">
-        <div className="d-flex flex-row bg-white mb-5">
-          {params.id ? (
-            <h4 className="m-0 text-uppercase fs-3">
-              <FaPlus className="fs-3 mb-1 " /> Actualizar Profesor
-            </h4>
-          ) : (
-            <h4 className="m-0 text-uppercase fs-3">
-              <FaPlus className="fs-3 mb-1 " /> Crear Profesor
-            </h4>
-          )}
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <form onSubmit={handleFormSubmit}>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputNombre" className="form-control" type="text" placeholder="Nombre" name="nombre" required value={profesor.nombre} />
-                  <label htmlFor="floatingInputNombre">Nombre Profesor</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputApellido" className="form-control" type="text" placeholder="Apellidos" name="apellido" required value={profesor.apellido} />
-                  <label htmlFor="floatingInputApellido">Apellido Profesor</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputEmail" className="form-control" type="email" placeholder="Email" name="correo" required value={profesor.correo} />
-                  <label htmlFor="floatingInputEmail">Correo Electrónico</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <select value={profesor.id_pais_nacimiento} id="floatingInputPais1" onChange={handleInputChange} className="form-control" name="id_pais_nacimiento">
-                  {paises.map((pais) => {
-                          return (
-                            <option key={pais.id_pais} value={pais.id_pais}>
-                              {pais.nombre_pais}
-                            </option>
-                          );
-                        })}
-                  </select>
-                  <label htmlFor="floatingInputPais1">Pais de Nacimiento</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <select value={profesor.id_pais_residencia} id="floatingInputPais" onChange={handleInputChange} className="form-control" name="id_pais_residencia">
-                  {paises.map((pais) => {
-                          return (
-                            <option key={pais.id_pais} value={pais.id_pais}>
-                              {pais.nombre_pais}
-                            </option>
-                          );
-                        })}
-                  </select>
-                  <label htmlFor="floatingInputPais">Pais de Residencia</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputProfesion" className="form-control" type="text" placeholder="Profesión" name="profesion" required value={profesor.profesion} />
-                  <label htmlFor="floatingInputProfesion">Profesión</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputTelefono" className="form-control" type="text" placeholder="Telefono" name="telefono" required value={profesor.telefono} />
-                  <label htmlFor="floatingInputTelefono">Teléfono</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input onChange={handleInputChange} id="floatingInputRUT" className="form-control" type="text" placeholder="RUT" name="rut" required value={profesor.rut} />
-                  <label htmlFor="floatingInputRUT">RUT</label>
-                </div>
-                <div className="mb-3">
-                  {params.id ? (
-                    <button className="btn btn__blue">
-                      <FaRegEdit className="fs-5 mb-1" /> Actualizar{" "}
-                    </button>
-                  ) : (
-                    <button className="btn btn__blue">
-                      <FaPlus className="fs-5 mb-1" /> Crear{" "}
-                    </button>
-                  )}
-                </div>
-              </form>
+      <div className="content-wrapper" style={{ minHeight: 643 }}>
+        {/* Content Header (Page header) */}
+        <div className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                {params.id ? (
+                  <h1 className="m-0 efecto_titulo">
+                    <i className="nav-icon fas fa-edit" /> Actualizar Profesor
+                  </h1>
+                ) : (
+                  <h1 className="m-0 efecto_titulo">
+                    <i className="nav-icon fas fa-plus" /> Crear Profesor
+                  </h1>
+                )}
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/">
+                      Inicio
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard/Profesores">
+                      Profesores
+                    </Link>
+                  </li>
+                  {params.id ? <li className="breadcrumb-item active">Actualizar</li> : <li className="breadcrumb-item active">Nuevo</li>}
+                </ol>
+              </div>
             </div>
-            <div className="col-md-6"></div>
           </div>
         </div>
+        {/* /.content-header */}
+
+        {/* Main content */}
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-4 col-md-6"></div>
+              <div className="col-lg-3 col-md-3 ms-auto"></div>
+            </div>
+            <div className="row mt-5">
+              <div className="col-md-6 ms-0 ms-lg-3">
+                <form onSubmit={handleFormSubmit}>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputNombre" className="form-control" type="text" placeholder="Nombre" name="nombre" required value={profesor.nombre} />
+                    <label htmlFor="floatingInputNombre">Nombre Profesor</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputApellido" className="form-control" type="text" placeholder="Apellidos" name="apellido" required value={profesor.apellido} />
+                    <label htmlFor="floatingInputApellido">Apellido Profesor</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputEmail" className="form-control" type="email" placeholder="Email" name="correo" required value={profesor.correo} />
+                    <label htmlFor="floatingInputEmail">Correo Electrónico</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <select value={profesor.id_pais_nacimiento} id="floatingInputPais1" onChange={handleInputChange} className="form-select" name="id_pais_nacimiento">
+                      {paises.map((pais) => {
+                        return (
+                          <option key={pais.id_pais} value={pais.id_pais}>
+                            {pais.nombre_pais}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <label htmlFor="floatingInputPais1">Pais de Nacimiento</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <select value={profesor.id_pais_residencia} id="floatingInputPais" onChange={handleInputChange} className="form-select" name="id_pais_residencia">
+                      {paises.map((pais) => {
+                        return (
+                          <option key={pais.id_pais} value={pais.id_pais}>
+                            {pais.nombre_pais}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <label htmlFor="floatingInputPais">Pais de Residencia</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputProfesion" className="form-control" type="text" placeholder="Profesión" name="profesion" required value={profesor.profesion} />
+                    <label htmlFor="floatingInputProfesion">Profesión</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputTelefono" className="form-control" type="text" placeholder="Telefono" name="telefono" required value={profesor.telefono} />
+                    <label htmlFor="floatingInputTelefono">Teléfono</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange={handleInputChange} id="floatingInputRUT" className="form-control" type="text" placeholder="RUT" name="rut" required value={profesor.rut} />
+                    <label htmlFor="floatingInputRUT">RUT</label>
+                  </div>
+                  <div className="mb-3">
+                    {params.id ? (
+                      <button className="btn btn__blue">
+                        <FaRegEdit className="fs-5 mb-1" /> Actualizar{" "}
+                      </button>
+                    ) : (
+                      <button className="btn btn__blue">
+                        <FaPlus className="fs-5 mb-1" /> Crear{" "}
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+              <div className="col-md-6"></div>
+            </div>
+          </div>
+        </section>
       </div>
     </React.Fragment>
   );

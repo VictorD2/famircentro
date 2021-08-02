@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 //components
-import Navigation from "../../pages/DashBoard/Navigation";
 
 //Services
 import * as cursoServices from "./CursosServices";
@@ -22,8 +21,6 @@ import { Estudiante } from "../EstudiantesDash/Estudiante";
 import { GiTeacher } from "react-icons/gi";
 import { CgMail } from "react-icons/cg";
 import { FaDollarSign, FaCalendarAlt, FaCheck, FaTimes, FaRegImage, FaPhoneAlt } from "react-icons/fa";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FiClock } from "react-icons/fi";
 
 const initialState: Curso = {
@@ -104,118 +101,152 @@ const VerCurso = () => {
 
   return (
     <React.Fragment>
-      <Navigation />
-      <div className="contenido-principal p-4">
-        <div className="d-flex efecto_titulo">
-          <FontAwesomeIcon className="me-3 fs-3" icon={faBars} />
-          <h4 className="text-uppercase">
-            {tipo} {modalidad} {curso.nombre_curso}
-          </h4>
+      <div className="content-wrapper" style={{ minHeight: 643 }}>
+        {/* Content Header (Page header) */}
+        <div className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                <h1 className="m-0 efecto_titulo">
+                  <i className="nav-icon fas fa-book me-3" />
+                  {tipo} {modalidad} {curso.nombre_curso}
+                </h1>
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/">
+                      Inicio
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to="/Dashboard">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="link-normal" to={`/Dashboard/${params.tipo}/${params.modalidad}`}>
+                      {params.tipo} {params.modalidad}
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item active">{curso.nombre_curso}</li>
+                </ol>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="row mt-4">
-          <div className="col-12 col-sm-6 text-center">
-            <img src={curso.url_foto_curso} className="img-fluid" alt="" />
-          </div>
-          <div className="col-12 col-sm-6">
-            <div className="d-flex align-items-center mb-3">
-              <p className="m-0 card-text fw-bold">
-                <GiTeacher className="mb-1" /> Docente:{" "}
-              </p>
-              <p className="m-0 ms-2 fw-normal">
-                {profesor.nombre} {profesor.apellido}
-              </p>
-            </div>
-            <div className="d-flex align-items-center mb-3">
-              <p className="m-0 card-text fw-bold">
-                <FaDollarSign className="mb-1" /> Precio:{" "}
-              </p>
-              <p className="m-0 ms-2 fw-normal">{curso.precio}</p>
-            </div>
-            {params.modalidad === "Sincronicos" ? (
-              <>
+        {/* /.content-header */}
+        {/* Main content */}
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row mt-4">
+              <div className="col-12 col-sm-6 text-center">
+                <img src={curso.url_foto_curso} className="img-fluid" alt="" />
+              </div>
+              <div className="col-12 col-sm-6">
                 <div className="d-flex align-items-center mb-3">
-                  <p className="m-0 card-text fw-bold">Enlace: </p>
-                  <a href={curso.enlace} className="m-0 ms-2 fw-normal text-decoration-none" target="_BLANK" rel="noreferrer">
-                    {curso.enlace}
-                  </a>
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                  <p className="m-0 card-text fw-bold">Capacidad: </p>
-                  <p className="m-0 ms-2 fw-normal">{curso.capacidad} estudiantes</p>
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                  <p className="m-0 card-text fw-bold">Cantidad de estudiantes inscritos: </p>
-                  <p className="m-0 ms-2 fw-normal">{inscritos} estudiantes</p>
+                  <p className="m-0 card-text fw-bold">
+                    <GiTeacher className="mb-1" /> Docente:
+                  </p>
+                  <p className="m-0 ps-2 fw-normal">
+                    {profesor.nombre} {profesor.apellido}
+                  </p>
                 </div>
                 <div className="d-flex align-items-center mb-3">
                   <p className="m-0 card-text fw-bold">
-                    <FiClock className="mb-1" /> Duración:{" "}
+                    <FaDollarSign className="mb-1" /> Precio:
                   </p>
-                  <p className="m-0 ms-2 fw-normal">{curso.duracion} horas</p>
+                  <p className="m-0 ps-2 fw-normal">{curso.precio}</p>
                 </div>
-                <div className="d-flex align-items-center mb-3">
-                  <p className="m-0 card-text fw-bold">
-                    <FaCalendarAlt className="mb-1" /> Horario:{" "}
-                  </p>
-                  <p className="m-0 ms-2 fw-normal">{curso.horario}</p>
-                </div>
-              </>
-            ) : (
-              <></>
-            )}
-            <p className="card-text">Habilitado : {curso.habilitado === 1 ? <FaCheck className="text-success mb-1 ms-1" /> : <FaTimes className="text-danger mb-1 ms-1" />}</p>
-          </div>
-          <div className="col-12 col-sm-12 mt-3">
-            <p className="m-0 card-text fw-bold text-uppercase">Descripción: </p>
-            <p ref={(node) => (refDescripcion.current = node)} style={{ textAlign: "justify" }}></p>
-          </div>
-
-          <div className="col-12 col-sm-12 mt-3">
-            <p className="m-0 card-text fw-bold text-uppercase">Lista de Estudiantes Inscritos: </p>
-            <table className="table table-light-gray table-bordered table-hover table-responsive mt-3">
-              <thead>
-                <tr>
-                  <th>
-                    <FaRegImage /> Foto
-                  </th>
-                  <th>Nombre del Estudiante</th>
-                  <th>
-                    <CgMail /> Correo Electrónico
-                  </th>
-                  <th>
-                    <FaPhoneAlt /> Número de Teléfono
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {estudiantes.length === 0 ? (
+                {params.modalidad === "Sincronicos" ? (
                   <>
-                    <tr>
-                      <td>No hay estudiantes inscritos aún</td>
-                    </tr>
+                    <div className="d-flex align-items-center mb-3">
+                      <p className="m-0 card-text fw-bold">Enlace: </p>
+                      <a href={curso.enlace} className="m-0 ps-3 fw-normal text-decoration-none w-100" target="_BLANK" rel="noreferrer">
+                        {curso.enlace}
+                      </a>
+                    </div>
+                    <div className="d-flex align-items-center mb-3">
+                      <p className="m-0 card-text fw-bold">Capacidad: </p>
+                      <p className="m-0 ps-2 fw-normal">{curso.capacidad} estudiantes</p>
+                    </div>
+                    <div className="d-flex align-items-center mb-3">
+                      <p className="m-0 card-text fw-bold">Cantidad de estudiantes inscritos: </p>
+                      <p className="m-0 ps-2 fw-normal">{inscritos} estudiantes</p>
+                    </div>
+                    <div className="d-flex align-items-center mb-3">
+                      <p className="m-0 card-text fw-bold">
+                        <FiClock className="mb-1" /> Duración:
+                      </p>
+                      <p className="m-0 ps-2 fw-normal">{curso.duracion} horas</p>
+                    </div>
+                    <div className="d-flex align-items-center mb-3">
+                      <p className="m-0 card-text fw-bold">
+                        <FaCalendarAlt className="mb-1" /> Horario:
+                      </p>
+                      <p className="m-0 ps-2 fw-normal">{curso.horario}</p>
+                    </div>
                   </>
                 ) : (
-                  <>
-                    {estudiantes.map((estudiante) => {
-                      return (
-                        <tr>
-                          <td style={{ width: "100px", height: "100%" }}>
-                            <img alt="Foto Perfil" className="img-fluid" src={estudiante.url_foto_usuario} />
-                          </td>
-                          <td className="py-auto">
-                            {estudiante.nombre} {estudiante.apellido}
-                          </td>
-                          <td className="py-auto">{estudiante.correo}</td>
-                          <td className="py-auto">{estudiante.telefono}</td>
-                        </tr>
-                      );
-                    })}
-                  </>
+                  <></>
                 )}
-              </tbody>
-            </table>
+                <p className="card-text">Habilitado : {curso.habilitado === 1 ? <FaCheck className="text-success mb-1 ms-1" /> : <FaTimes className="text-danger mb-1 ms-1" />}</p>
+              </div>
+              <div className="col-12 col-sm-12 mt-3">
+                <p className="m-0 card-text fw-bold text-uppercase">Descripción: </p>
+                <p ref={(node) => (refDescripcion.current = node)} style={{ textAlign: "justify" }}></p>
+              </div>
+
+              <div className="col-12 col-sm-12 mt-3">
+                <p className="m-0 card-text fw-bold text-uppercase">Lista de Estudiantes Inscritos: </p>
+                <div className="table-responsive">
+                  <table className="table table-light-gray table-bordered table-hover mt-3">
+                    <thead>
+                      <tr>
+                        <th>
+                          <FaRegImage /> Foto
+                        </th>
+                        <th>Nombre del Estudiante</th>
+                        <th>
+                          <CgMail /> Correo Electrónico
+                        </th>
+                        <th>
+                          <FaPhoneAlt /> Número de Teléfono
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {estudiantes.length === 0 ? (
+                        <>
+                          <tr>
+                            <td>No hay estudiantes inscritos aún</td>
+                          </tr>
+                        </>
+                      ) : (
+                        <>
+                          {estudiantes.map((estudiante) => {
+                            return (
+                              <tr key={estudiante.id_usuario}>
+                                <td style={{ width: "100px", height: "100%" }}>
+                                  <img alt="Foto Perfil" className="img-fluid" src={estudiante.url_foto_usuario} />
+                                </td>
+                                <td className="py-auto">
+                                  {estudiante.nombre} {estudiante.apellido}
+                                </td>
+                                <td className="py-auto">{estudiante.correo}</td>
+                                <td className="py-auto">{estudiante.telefono}</td>
+                              </tr>
+                            );
+                          })}
+                        </>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </React.Fragment>
   );

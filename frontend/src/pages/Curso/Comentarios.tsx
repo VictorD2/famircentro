@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useUsuario } from "../../context-user/UsuarioProvider";
+import malasPalabras from "naughty-words/es.json";
 
 //Iconos
 import { FaEnvelope, FaTimes } from "react-icons/fa";
@@ -23,6 +24,7 @@ import CajaComentario from "./CajaComentario";
 import TimeAgo from "timeago-react";
 import * as timeago from "timeago.js";
 import vi from "timeago.js/lib/lang/es";
+import swal from "sweetalert";
 timeago.register("vi", vi);
 
 const initialState: Comentario = {
@@ -68,20 +70,29 @@ const Comentarios = () => {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comentario.comentario === "") return toast.warning("No ha escrito un comentario");
+    const vocales = ["a", "e", "i", "o", "u"];
+    for (let i = 0; i < malasPalabras.length; i++) {
+      const element = malasPalabras[i];
+      let elemento = element;
+      if (vocales.includes(elemento.charAt(elemento.length - 1))) elemento = element.slice(0, element.length - 1);
+      if (comentario.comentario.toLowerCase().includes(element.toLowerCase()) || comentario.comentario.toLowerCase().includes(elemento.toLowerCase())) {
+        return swal({ title: "Advertencia", text: `No se permiten este tipo de comentarios: ${element}`, icon: "warning" });
+      }
+    }
     const res = await comentariosServices.crearComentario(comentario, params.idCurso, params.idTema);
     if (res.data.success) {
+      swal({ title: "Hecho!", text: `${res.data.success}`, icon: "success" });
       toast.success(res.data.success);
       getComentarios();
       setTrigger(trigger + 1);
       setComentario(initialState);
       return;
     }
-    toast.error(res.data.error);
+    swal({ title: "Ups!", text: `${res.data.error}`, icon: "error" });
   };
 
   const getCantidad = async () => {
     const res = await comentariosServices.getCount(params.idCurso, params.idTema);
-    console.log(Math.ceil(res.data / 4));
     setCantidad(res.data);
     setCantidad(Math.ceil(res.data / 4));
   };
@@ -117,7 +128,7 @@ const Comentarios = () => {
           <FaEnvelope className="mb-1" /> Enviar
         </button>
       </form>
-      <div className="">
+      <div className="m-2 pe-4" style={{ minHeight: "550px", maxHeight: "550px", overflowX: "hidden" }}>
         {comentarios.map((comentarioItem) => {
           return (
             <div className="card my-3" key={comentarioItem.id_comentario}>
@@ -172,7 +183,8 @@ const Comentarios = () => {
             </div>
           );
         })}
-        {cantidad === page || cantidad === 0 ? (
+      </div>
+      {cantidad === page || cantidad === 0 ? (
           <></>
         ) : (
           <>
@@ -188,7 +200,6 @@ const Comentarios = () => {
             </div>
           </>
         )}
-      </div>
     </div>
   );
 };

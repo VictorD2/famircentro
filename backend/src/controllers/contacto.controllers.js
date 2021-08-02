@@ -1,7 +1,8 @@
 const pool = require("../database");
 const ctrlContacto = {};
 const nodemailer = require("nodemailer");
-
+const mail = require("../lib/mail");
+const llaves = require("../config");
 //.get("/")
 ctrlContacto.getContactos = async (req, res) => {
   if (req.query.keyword && req.query.page) {
@@ -35,7 +36,7 @@ ctrlContacto.getCount = async (req, res) => {
   }
   const rows = await pool.query("SELECT COUNT(*) FROM contactos");
   if (rows[0]["COUNT(*)"]) return res.json(rows[0]["COUNT(*)"]);
-  return res.json({ error: "Ocurrió un error" });
+  return res.json(0);
 };
 
 // .get("/:id")
@@ -53,38 +54,26 @@ ctrlContacto.createContacto = async (req, res) => {
     correo: email,
     mensaje: message,
   };
-  // let contentHTML = `
-  //     <h1>User Information</h1>
-  //     <ul>
-  //         <li>Username: ${newContacto.nombre}</li>
-  //         <li>User Email: ${newContacto.correo}</li>
-  //     </ul>
-  //     <p>${newContacto.mensaje}</p>`;
-  // let transporter = nodemailer.createTransport({
-  //     host: 'mail.fazttech.net',
-  //     port: 587,
-  //     secure: false,
-  //     auth: {
-  //         user: 'testtwo@fazttech.net',
-  //         pass: 'testtwocontraseña'
-  //     },
-  //     tls: {
-  //         rejectUnauthorized: false
-  //     }
-  // });
+  let contentHTML = `
+      <h1>User Information</h1>
+      <ul>
+          <li>Nombre: ${newContacto.nombre}</li>
+          <li>Correo: ${newContacto.correo}</li>
+      </ul>
+      <p>${newContacto.mensaje}</p>`;
 
-  // let info = await transporter.sendMail({
-  //     from: `<${newContacto.correo}>`, // sender address,
-  //     to: 'victorhv2729@gmail.com',
-  //     subject: 'Mensaje Web de contacto',
-  //     // text: 'Hello World'
-  //     html: contentHTML
-  // })
-  // console.log('Message sent: %s', info.messageId);
-  // // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-  // // Preview only available when sending through an Ethereal account
-  // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  let info = await mail.sendMail({
+    from: `Famir Web <${llaves.USER_EMAIL}>`, // sender address,
+    to: "victorhv2729@gmail.com",
+    subject: "Mensaje de Contacto",
+    html: contentHTML,
+  });
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
   const rows = await pool.query("INSERT INTO contactos SET ?", [newContacto]);

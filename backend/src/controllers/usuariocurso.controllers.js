@@ -1,8 +1,9 @@
 const pool = require("../database");
 const helpers = require("../lib/helpers");
 const ctrlUsuariocurso = {};
-const fs = require("fs-extra");
-const path = require("path");
+const nodemailer = require("nodemailer");
+const mail = require("../lib/mail");
+const llaves = require("../config");
 
 //.get("/estudiante/:idEstudiante")
 ctrlUsuariocurso.getUsuariocursoByIdEstudiante = async (req, res) => {
@@ -35,6 +36,21 @@ ctrlUsuariocurso.createUsuariocurso = async (req, res) => {
   const newComprobante = {
     estado: "Aceptado",
   };
+  const estudiante = await pool.query("SELECT * FROM usuario WHERE id_usuario = ?", [id_usuario]);
+  const curso = await pool.query("SELECT * FROM curso WHERE id_curso = ?", [id_curso]);
+  console.log(curso, estudiante);
+  let contentHTML = `
+  <h1>Se ha aceptado su comprobante</h1>
+  <p>Bienvenido al ${curso[0].tipo} ${curso[0].modalidad} ${curso[0].nombre_curso}</p>
+  `;
+  let info = await mail.sendMail({
+    from: `Inscripción a ${curso[0].tipo} ${curso[0].modalidad} ${curso[0].nombre_curso} <${llaves.USER_EMAIL}>`, // sender address,
+    to: estudiante[0].correo,
+    subject: "Inscripción al Curso",
+    html: contentHTML,
+  });
+  console.log("Message sent: %s", info.messageId);
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   const data = await pool.query("INSERT INTO usuario_curso set ?", [newUsuariocurso]);
   await pool.query("UPDATE comprobante set ? WHERE id_comprobante = ?", [newComprobante, id_comprobante]);
   if (data.affectedRows === 1) return res.json({ success: `Inscripción realizada` }); //Se logró actualizar

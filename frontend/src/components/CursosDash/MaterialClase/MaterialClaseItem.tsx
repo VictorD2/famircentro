@@ -25,8 +25,6 @@ const MaterialClaseItem = (props: Props) => {
 
   const setNombre = (material: MaterialClase) => {
     setMaterial(material);
-    const nombre = material.url_material?.slice(18, material.url_material.length);
-    setMaterial({ ...material, nombre: nombre });
   };
 
   const eliminarMaterial = async () => {
@@ -37,8 +35,8 @@ const MaterialClaseItem = (props: Props) => {
   return (
     <>
       <div className="d-flex my-1">
-        <a download className="list-group-item list-group-item-action list-group-item-primary text-nowrap text-truncate" target="__blank" href={props.material_clase.url_material}>
-          {material?.nombre}
+        <a download={material?.nombre_material} className="list-group-item list-group-item-action list-group-item-primary text-nowrap text-truncate" target="__blank" href={props.material_clase.url_material}>
+          {material?.nombre_material}
         </a>
         <button onClick={() => eliminarMaterial()} className="btn btn-danger bg-gradient ms-1">
           <FaTimes className="fs-4" />

@@ -6,11 +6,11 @@ const path = require("path");
 
 //.get('/:tipo/:modalidad')
 ctrlCursos.getCursos = async (req, res) => {
-  if (!req.user) return res.json({ error: "Necesitas una cuenta" });
   const tipo = req.params.tipo == "Talleres" ? "Taller" : "Curso";
   const modalidad = req.params.modalidad == "Asincronicos" ? "Asincrónico" : "Sincrónico";
   let datosSQL = "*";
-  if (req.user.id_rango === 2) datosSQL = "nombre,apellido,descripcion,duracion,enlace,horario,id_curso,modalidad,precio,tipo,url_foto_curso";
+  datosSQL = "nombre,apellido,descripcion,duracion,enlace,horario,id_curso,modalidad,precio,tipo,capacidad,url_foto_curso,nombre_curso,habilitado";
+
   if (req.query.keyword && req.query.page) {
     const data = await pool.query(`SELECT ${datosSQL} FROM curso JOIN usuario ON usuario.id_usuario = curso.id_usuario WHERE (tipo = '${tipo}' AND modalidad = '${modalidad}') AND (nombre_curso LIKE '%${req.query.keyword}%')`);
     for (let i = 0; i < data.length; i++) delete data[i].password;
@@ -62,7 +62,7 @@ ctrlCursos.getCursoById = async (req, res) => {
 //.get('/sub/:id_curso')
 ctrlCursos.verificarSub = async (req, res) => {
   if (!req.user) return res.json(false);
-  if (req.user.id_rango === 1) return res.json(true);
+  if (req.user.id_rango === 1 || req.user.id_rango === 3) return res.json(true);
   const rows = await pool.query("SELECT * FROM usuario_curso WHERE id_curso = ? AND id_usuario = ?", [req.params.id_curso, req.user.id_usuario]);
   if (rows[0]) return res.json(true);
   return res.json(false);
@@ -113,7 +113,7 @@ ctrlCursos.updateCurso = async (req, res) => {
     if (req.file) {
       const curso = await pool.query("SELECT * FROM curso WHERE id_curso = ?", [req.params.id]);
 
-      if (curso[0].url_foto_curso.search(`/uploads/fotosCursos/${req.file.filename}`) == -1) await fs.unlink(path.join(__dirname, "../build" + curso[0].url_foto_curso));
+      await fs.unlink(path.join(__dirname, "../build" + curso[0].url_foto_curso));
 
       newCurso.url_foto_curso = `/uploads/fotosCursos/${req.file.filename}`;
     }
@@ -130,10 +130,12 @@ ctrlCursos.updateCurso = async (req, res) => {
 // .delete('/:id')
 ctrlCursos.deleteCurso = async (req, res) => {
   const rows = await pool.query("SELECT * FROM curso WHERE id_curso = ?", [req.params.id]);
+  let estado = "";
   rows[0].habilitado == 0 ? (rows[0].habilitado = 1) : (rows[0].habilitado = 0);
+  rows[0].habilitado == 0 ? (estado = "inhabilitado") : (estado = "habilitado");
   const data = await pool.query("UPDATE curso set ? WHERE id_curso = ?", [rows[0], req.params.id]);
-
-  if (data.affectedRows === 1) return res.json({ success: `Curso ${rows[0].nombre_curso} deshabilidato / habilitado` }); //Se logró actualizar
+  
+  if (data.affectedRows === 1) return res.json({ success: `Curso ${rows[0].nombre_curso} ${estado}` }); //Se logró actualizar
 
   return res.json({ error: "Ocurrió un error" });
 };

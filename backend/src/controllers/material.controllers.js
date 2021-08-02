@@ -18,11 +18,11 @@ ctrlEstudiantes.createMaterial = async (req, res) => {
 
   for (let i = 0; i < req.files.material.length; i++) {
     const url_material_clase = `/uploads/material/${req.files.material[i].filename}`;
-    values += ` (NULL, '${url_material_clase}', '${id_tema}'),`;
+    values += ` (NULL, '${url_material_clase}','${req.files.material[i].originalname}', '${id_tema}'),`;
   }
 
   const sqlValues = values.slice(0, values.length - 1);
-  const rows = await pool.query(`INSERT INTO material_clase (id_material_clase, url_material, id_tema) ${sqlValues};`);
+  const rows = await pool.query(`INSERT INTO material_clase (id_material_clase, url_material,nombre_material, id_tema) ${sqlValues};`);
 
   if (rows.affectedRows > 0) return res.json({ success: "Material agregado." }); //Se logró registrar
 

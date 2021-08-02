@@ -3,7 +3,7 @@ module.exports = {
     if (req.isAuthenticated()) {
       return next();
     }
-    return res.redirect("/Login");
+    return res.redirect("/Iniciar");
   },
 
   isNotLoggedIn(req, res, next) {
@@ -13,15 +13,8 @@ module.exports = {
     return res.redirect("/");
   },
 
-  typePetition(req, res, next) {
-    const datos = JSON.stringify(req.headers);
-    const respuesta = datos.search("cors");
-    if (respuesta === -1) return res.redirect("/");
-    return next();
-  },
-
   isAdmin(req, res, next) {
-    if (req.user.Rango == "user") return res.redirect("/");
+    if (req.user.id_rango != 1) return res.redirect("/");
 
     return next();
   },
